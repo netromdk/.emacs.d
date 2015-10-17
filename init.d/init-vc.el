@@ -12,5 +12,8 @@
 
     (global-set-key (kbd "C-x g") 'magit-status)))
 
+(req-package gitignore-mode)
+(req-package gitconfig-mode)
 
-(provide 'init-magit)
+
+(provide 'init-vc)
