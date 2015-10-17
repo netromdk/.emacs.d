@@ -309,6 +309,7 @@
     (setq display-time-day-and-date nil)
     (setq display-time-default-load-average nil)
     (setq display-time-interval 30)
+    (setq display-time-mail-face (quote mu4e-unread-face))
     (setq display-time-mail-directory "~/Maildir/INBOX/new")
     (display-time-mode t)))
 
