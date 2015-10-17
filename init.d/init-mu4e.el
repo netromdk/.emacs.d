@@ -1,7 +1,7 @@
 (require 'req-package)
 
 (req-package mu4e
-  :require org-mu4e
+  :require (org-mu4e ispell)
   :config
   (progn
     ;; Activate mode with keybinding that is bound by default to compose-mail.
