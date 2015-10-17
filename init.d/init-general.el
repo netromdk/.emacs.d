@@ -12,6 +12,7 @@
 (global-font-lock-mode t)               ;; syntax highlight
 (setq-default indent-tabs-mode nil)     ;; use spaces instead of tabs
 (fset 'yes-or-no-p 'y-or-n-p)           ;; use 'y' instead of 'yes' etc.
+(setq message-log-max 10000)            ;; extend message buffer
 
 ;; Prefer newest version of a file, especially for compiled files this is
 ;; useful.
