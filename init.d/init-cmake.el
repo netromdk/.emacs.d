@@ -10,4 +10,3 @@
 
 
 (provide 'init-cmake)
-
