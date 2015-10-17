@@ -37,16 +37,16 @@
            (set-face-foreground 'default (face-background 'default))
            (set-face-foreground 'default old))))
 
-;;;;;;;;; Scratch buffer
-
+;; Scratch buffer
 (setq initial-major-mode 'lisp-interaction-mode)
 (setq initial-scratch-message ";; Scratch buffer..
 
 ")
 
-;;;;;;;;; EMAIL
-
-(setq user-mail-address "msk@nullpointer.dk")
+;; Cursor
+(setq-default cursor-type '(bar . 2))
+(setq blink-cursor-blinks 50)
+(blink-cursor-mode 1)
 
 
 (provide 'init-general)
