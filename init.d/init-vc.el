@@ -15,5 +15,9 @@
 (req-package gitignore-mode)
 (req-package gitconfig-mode)
 
+(req-package helm-ls-git
+  :require helm
+  :bind ("M-+" . helm-ls-git-ls))
+
 
 (provide 'init-vc)
