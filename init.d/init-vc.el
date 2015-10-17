@@ -19,5 +19,12 @@
   :require helm
   :bind ("M-+" . helm-ls-git-ls))
 
+;; Show git commit at line.
+(req-package git-messenger
+  :bind ("C-x v p" . git-messenger:popup-message)
+  :config
+  (progn
+    (setq git-messenger:show-detail t)))
+
 
 (provide 'init-vc)
