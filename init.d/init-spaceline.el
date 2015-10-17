@@ -4,12 +4,12 @@
   :config
   (progn
     (window-numbering-mode t)
-    
+
     (require 'spaceline-config)
     (spaceline-spacemacs-theme)
 
-    ;; Don't show unicode window numbers because they are too small to be seen fast
-    ;; and clearly.
+    ;; Don't show unicode window numbers because they are too small to be seen
+    ;; fast and clearly.
     (setq spaceline-window-numbers-unicode nil)
 
     (setq spaceline-minor-modes-separator " ")
