@@ -4,8 +4,15 @@
             (setq c-basic-offset tab-width)
             (setq indent-tabs-mode nil)))
 
-;; Open .h files in c++ mode.
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(setq auto-mode-alist
+      (append '(("\\.c$"  . c-mode)
+                ("\\.C$"  . c++-mode)
+                ("\\.h$"  . c++-mode)
+                ("\\.hpp$" . c++-mode)
+                ("\\.cpp$" . c++-mode)
+                ("\\.hh$" . c++-mode)
+                ("\\.cc$" . c++-mode))
+              auto-mode-alist))
 
 
 (provide 'init-c-cpp)
