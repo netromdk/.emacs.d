@@ -48,5 +48,8 @@
 (setq blink-cursor-blinks 50)
 (blink-cursor-mode 1)
 
+;; Set title including name of currently active buffer.
+(setq frame-title-format "Emacs: %b")
+
 
 (provide 'init-general)
