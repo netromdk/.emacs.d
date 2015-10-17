@@ -26,5 +26,10 @@
   (progn
     (setq git-messenger:show-detail t)))
 
+(req-package git-timemachine
+  :config
+  (progn
+    (defalias 'tm 'git-timemachine)))
+
 
 (provide 'init-vc)
