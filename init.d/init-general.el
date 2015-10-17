@@ -1,3 +1,5 @@
+(require 'req-package)
+
 ;;;;;;;;; COMMON CONFIGURATIONS
 
 (column-number-mode t)                  ;; show current column
@@ -43,13 +45,21 @@
 
 ")
 
-;; Cursor
-(setq-default cursor-type 'box)
-(setq blink-cursor-blinks 50)
-(blink-cursor-mode 1)
-
 ;; Set title including name of currently active buffer.
 (setq frame-title-format "Emacs: %b")
+
+;; Configure the cursor to use a bar when editable and a box when read-only. And
+;; after idling 5 seconds it will show as a box to more easily spot it.
+(req-package cursor-chg
+  :config
+  (progn
+    (blink-cursor-mode t)
+    (setq blink-cursor-blinks 50)
+
+    (setq curchg-default-cursor-color (face-attribute 'cursor :background))
+    (change-cursor-mode t)
+    (curchg-change-cursor-when-idle-interval 5)
+    (toggle-cursor-type-when-idle t)))
 
 
 (provide 'init-general)
