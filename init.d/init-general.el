@@ -44,7 +44,7 @@
 ")
 
 ;; Cursor
-(setq-default cursor-type '(bar . 2))
+(setq-default cursor-type 'box)
 (setq blink-cursor-blinks 50)
 (blink-cursor-mode 1)
 
