@@ -66,7 +66,7 @@
     (helm-flx-mode +1)))
 
 (req-package helm-ag
-  :require (helm ag)
+  :require helm
   :config
   (progn
     (setq helm-ag-base-command "ag --nocolor --nogroup --smart-case --stats")))
