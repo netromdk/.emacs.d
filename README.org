@@ -1,0 +1,3 @@
+* Emacs Configurations
+- Just clone into "~/.emacs.d".
+- It is self-contained.
