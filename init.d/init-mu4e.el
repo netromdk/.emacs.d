@@ -301,5 +301,16 @@
   (progn
     (mu4e-maildirs-extension)))
 
+(req-package timeclock
+  :require mu4e
+  :config
+  (progn
+    (setq display-time-24hr-format t)
+    (setq display-time-day-and-date nil)
+    (setq display-time-default-load-average nil)
+    (setq display-time-interval 30)
+    (setq display-time-mail-directory "~/Maildir/INBOX/new")
+    (display-time-mode t)))
+
 
 (provide 'init-mu4e)

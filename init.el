@@ -7,19 +7,24 @@
 
 ;; Custom.
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (mustang-netrom)))
  '(custom-safe-themes
    (quote
-    ("980f08fa0417c3a9cc5ada212bdf5de7b16fc3b499295d100a2277ce46f2e2a2"
-     default)))
+    ("980f08fa0417c3a9cc5ada212bdf5de7b16fc3b499295d100a2277ce46f2e2a2" default)))
  '(recentf-exclude
    (quote
     ("ido.last" ".emacs.d/saveplace.txt" "/var/folders/" "~/Maildir")))
- '(uniquify-buffer-name-style
-   (quote post-forward-angle-brackets) nil (uniquify)))
+ '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 
 ;; Recompile all configurations when closing emacs.
