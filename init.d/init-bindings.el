@@ -1,6 +1,8 @@
 ;; General bindings.
 (global-set-key (kbd "M-n") 'scroll-up-one-line)
 (global-set-key (kbd "M-p") 'scroll-down-one-line)
+(global-set-key (kbd "C-M-p") 'move-line-up)
+(global-set-key (kbd "C-M-n") 'move-line-down)
 (global-set-key (kbd "M-P") 'previous-user-buffer)
 (global-set-key (kbd "M-N") 'next-user-buffer)
 (global-set-key (kbd "C-c o") 'ff-find-other-file)
