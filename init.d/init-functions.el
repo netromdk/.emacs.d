@@ -42,16 +42,15 @@
   (interactive)
   (find-file-existing "~/.emacs.d/init.el"))
 
-;; Scroll one line up / down
-(defun scroll-down-one-line ()
+(defun scroll-line-up ()
   "Scrolls down one line"
   (interactive)
-  (scroll-down 2))
+  (scroll-down 1))
 
-(defun scroll-up-one-line ()
+(defun scroll-line-down ()
   "Scrolls up one line"
   (interactive)
-  (scroll-up 2))
+  (scroll-up 1))
 
 (defun move-line-up ()
   "Move up the current line."
