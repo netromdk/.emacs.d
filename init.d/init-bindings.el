@@ -11,5 +11,9 @@
 (global-set-key (kbd "M-SPC")
                 '(lambda () (interactive) (cycle-spacing +1 t)))
 
+;; Make font bigger/smaller.
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+
 
 (provide 'init-bindings)
