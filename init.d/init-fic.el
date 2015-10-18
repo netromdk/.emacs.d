@@ -1,13 +1,15 @@
 (require 'req-package)
 
+;; Marks TODO, FIXME etc. clearly.
 (req-package fic-mode
-  :config
+  :init
   (progn
-    ;; Marks TODO, FIXME etc. clearly.
     (setq fic-background-color "#ff9800")
     (setq fic-foreground-color "#000000")
-    (setq fic-highlighted-words (quote ("FIXME" "TODO" "BUG" "KLUDGE" "TEMP")))
+    (setq fic-highlighted-words (quote ("FIXME" "TODO" "BUG" "KLUDGE" "TEMP"))))
 
+  :config
+  (progn
     (add-hook 'prog-mode-hook 'fic-mode)))
 
 
