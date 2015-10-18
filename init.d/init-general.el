@@ -3,6 +3,7 @@
 ;;;;;;;;; COMMON CONFIGURATIONS
 
 (column-number-mode t)                  ;; show current column
+(size-indication-mode t)                ;; show current buffer size
 (setq inhibit-startup-message t)        ;; don't show the GNU splash screen
 (transient-mark-mode t)                 ;; show selection from mark
 (mouse-avoidance-mode 'jump)            ;; jump mouse away when typing
@@ -21,6 +22,10 @@
   (scroll-bar-mode -1))
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
+
+;; Set fringe size to 4 instead of the default of 8.
+(when (fboundp 'fringe-mode)
+    (fringe-mode 4))
 
 ;; Make scrolling less extreme.
 (setq scroll-margin 0)
