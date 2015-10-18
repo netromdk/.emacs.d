@@ -6,14 +6,6 @@
     (set-buffer-file-coding-system 'unix) ; or 'mac or 'dos
     (save-buffer)))
 
-(defun open-with-finder ()
-  "Show current buffer-file, or directory if in Dired-mode, in
-  Finder (OSX specific)."
-  (interactive)
-  (if (eq 'dired-mode major-mode)
-      (shell-command "open .")
-    (shell-command (concat "open -R '" (concat buffer-file-name "'")))))
-
 ;; goto next user buffer (no *Messages*, *eshell* etc.)
 (defun next-user-buffer ()
   "Switch to next buffer in cyclic order. User buffers are those
@@ -45,7 +37,7 @@
   (load-file "~/.emacs.d/init.el"))
 
 ;; Opens (finds) ~/.emacs.d/init.el in current buffer.
-(defun open-conf () 
+(defun open-conf ()
   "Opens ~/.emacs.d/init.el for editing"
   (interactive)
   (find-file-existing "~/.emacs.d/init.el"))
