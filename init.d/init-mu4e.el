@@ -226,12 +226,13 @@
     (define-key mu4e-headers-mode-map (kbd "2") 'my/mu4e-ontherenth)
     (define-key mu4e-headers-mode-map (kbd "3") 'my/mu4e-luxion)
 
-    ;; Check if addresses are used in to, cc or bcc fields.
-    (defun my/mu4e-is-message-to (msg rx)
-      "Check if to, cc or bcc field in MSG has any address in RX."
+    ;; Check if addresses are used in to, cc, bcc or from fields.
+    (defun my/mu4e-is-message-to-from (msg rx)
+      "Check if to, cc, bcc or from field in MSG has any address in RX."
       (or (mu4e-message-contact-field-matches msg :to rx)
           (mu4e-message-contact-field-matches msg :cc rx)
-          (mu4e-message-contact-field-matches msg :bcc rx)))
+          (mu4e-message-contact-field-matches msg :bcc rx)
+          (mu4e-message-contact-field-matches msg :from rx)))
 
     ;; Set replying identity from to, cc or bcc fields.
     (defun my/mu4e-set-from-address ()
@@ -239,15 +240,16 @@
       (let ((msg mu4e-compose-parent-message))
         (if msg
             (cond
-             ((my/mu4e-is-message-to msg (list "msk@nullpointer.dk"))
+             ((my/mu4e-is-message-to-from msg (list "msk@nullpointer.dk"))
               (my/mu4e-msk))
-             ((my/mu4e-is-message-to msg (list "ontherenth@gmail.com"))
+             ((my/mu4e-is-message-to-from msg (list "ontherenth@gmail.com"))
               (my/mu4e-ontherenth))
-             ((my/mu4e-is-message-to msg (list "morten@luxion.com"
-                                                "cloud@luxion.com"
-                                                "all@luxion.com"
-                                                "dev@luxion.com"
-                                                "aarhus@luxion.com"))
+             ((my/mu4e-is-message-to-from msg (list "morten@luxion.com"
+                                                    "cloud@luxion.com"
+                                                    "all@luxion.com"
+                                                    "dev@luxion.com"
+                                                    "aarhus@luxion.com"
+                                                    "tracker@luxion.com"))
               (my/mu4e-luxion))))))
 
     (add-hook 'mu4e-compose-pre-hook 'my/mu4e-set-from-address)
