@@ -12,13 +12,6 @@
           (setq mac-command-modifier 'meta)
           (setq mac-option-modifier nil)))
 
-    (defun open-with-finder ()
-      "Show current buffer-file, or directory if in Dired-mode, in Finder."
-      (interactive)
-      (if (eq 'dired-mode major-mode)
-          (shell-command "open .")
-        (shell-command (concat "open -R '" (concat buffer-file-name "'")))))
-
     (defun remove-dos-eol ()
       "Do not show ^M in files containing mixed UNIX and DOS line endings."
       (interactive)
@@ -26,7 +19,21 @@
       (aset buffer-display-table ?\^M []))
 
     ;; ..and run it on all files.
-    (add-hook 'find-file-hook 'remove-dos-eol)))
+    (add-hook 'find-file-hook 'remove-dos-eol)
+
+    (defun open-with-finder ()
+      "Show current buffer-file, or directory if in Dired-mode, in Finder."
+      (interactive)
+      (if (eq 'dired-mode major-mode)
+          (shell-command "open .")
+        (shell-command (concat "open -R '" (concat buffer-file-name "'")))))
+
+    (defun toggle-fullscreen ()
+      "Toggle full screen."
+      (interactive)
+      (set-frame-parameter
+       nil 'fullscreen
+       (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))))
 
 
 (provide 'init-mac)
