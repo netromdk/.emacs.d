@@ -25,7 +25,7 @@
 
 ;; Set fringe size to 4 instead of the default of 8.
 (when (fboundp 'fringe-mode)
-    (fringe-mode 4))
+  (fringe-mode 4))
 
 ;; Make scrolling less extreme.
 (setq scroll-margin 0)
@@ -60,8 +60,12 @@
 (setq initial-scratch-message ";; Scratch buffer..
 ")
 
-;; Set title including name of currently active buffer.
-(setq frame-title-format "Emacs: %b")
+;; Set title including name and path of current buffer.
+(setq frame-title-format
+      '("" invocation-name ":   "
+        (:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
 
 ;; Configure the cursor to use a bar when editable and a box when read-only. And
 ;; after idling 5 seconds it will show as a box to more easily spot it.
