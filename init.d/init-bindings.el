@@ -18,5 +18,8 @@
 ;; Indent, untabify and clean whitespace of entire buffer.
 (global-set-key (kbd "C-c c") 'cleanup-buffer)
 
+;; Using hippie-expand instead of dabbrev-expand.
+(global-set-key (kbd "M-/") 'hippie-expand)
+
 
 (provide 'init-bindings)
