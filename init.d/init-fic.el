@@ -6,7 +6,8 @@
   (progn
     (setq fic-background-color "#ff9800")
     (setq fic-foreground-color "#000000")
-    (setq fic-highlighted-words (quote ("FIXME" "TODO" "BUG" "KLUDGE" "TEMP"))))
+    (setq fic-highlighted-words
+          (quote ("FIX" "FIXME" "TODO" "BUG" "KLUDGE" "TMP" "TEMP"))))
 
   :config
   (progn
