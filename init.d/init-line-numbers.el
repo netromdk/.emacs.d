@@ -15,7 +15,10 @@
           (when line-numbers-off-p
             (linum-mode -1)))))
 
-    (global-set-key [remap goto-line] 'goto-line-with-feedback)))
+    ;; Since M-g is a prefix and hardly used it is mapped to
+    ;; goto-line-with-feedback directly. If only wanting to remap the normal
+    ;; binding then use [remap goto-line] instead of (kbd "M-g").
+    (global-set-key (kbd "M-g") 'goto-line-with-feedback)))
 
 (req-package hlinum
   :config
