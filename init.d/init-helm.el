@@ -9,6 +9,7 @@
     (setq helm-exit-idle-delay 0)
     (setq helm-full-frame nil)
     (setq helm-buffers-fuzzy-matching t)
+    (setq helm-M-x-fuzzy-match t)
     (setq helm-ff-file-name-history-use-recentf t)
     (setq helm-split-window-default-side (quote below))
     (setq helm-reuse-last-window-split-state nil)
