@@ -1,6 +1,7 @@
 (require 'req-package)
 
 (req-package helm
+  :require recentf
   :config
   (progn
     (setq helm-candidate-number-limit 100)
@@ -17,6 +18,9 @@
     (global-set-key (kbd "M-x") 'helm-M-x)
     (global-set-key (kbd "M-y") 'helm-show-kill-ring)
     (global-set-key (kbd "C-x b") 'helm-mini)
+
+    ;; Cycle through sources. C-o calls helm-next-source.
+    (define-key helm-map (kbd "M-o") 'helm-previous-source)
 
     ;; Enhance the help menu using helm functionality.
     (define-key 'help-command (kbd "a") 'helm-apropos)
