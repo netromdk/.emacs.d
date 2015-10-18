@@ -16,12 +16,10 @@
 
 ;; Don't show menu bar, scroll bar, and tool bar. In TTY they are not
 ;; defined.
-(when (fboundp 'menu-bar-mode)
-  (menu-bar-mode -1))
-(when (fboundp 'scroll-bar-mode)
+(when window-system
+  (tool-bar-mode -1)
+  (menu-bar-mode 1)
   (scroll-bar-mode -1))
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
 
 ;; Set fringe size to 4 instead of the default of 8.
 (when (fboundp 'fringe-mode)
