@@ -1,6 +1,6 @@
 ;; General bindings.
-(global-set-key (kbd "M-n") 'scroll-line-up)
-(global-set-key (kbd "M-p") 'scroll-line-down)
+(global-set-key (kbd "M-n") 'scroll-line-down)
+(global-set-key (kbd "M-p") 'scroll-line-up)
 (global-set-key (kbd "C-M-p") 'move-line-up)
 (global-set-key (kbd "C-M-n") 'move-line-down)
 (global-set-key (kbd "M-P") 'previous-user-buffer)
