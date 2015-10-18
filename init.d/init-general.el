@@ -5,8 +5,8 @@
 (column-number-mode t)                  ;; show current column
 (menu-bar-mode -1)                      ;; don't show menu-bar
 (tool-bar-mode -1)                      ;; same for the toolbar
-(scroll-bar-mode -1)                    ;; .. and for the scrollbar
-(setq inhibit-startup-message t)        ;; dont show the GNU splash screen
+(scroll-bar-mode -1)                    ;; .. and for the scroll bar
+(setq inhibit-startup-message t)        ;; don't show the GNU splash screen
 (transient-mark-mode t)                 ;; show selection from mark
 (mouse-avoidance-mode 'jump)            ;; jump mouse away when typing
 (auto-compression-mode t)               ;; browse compressed archives
