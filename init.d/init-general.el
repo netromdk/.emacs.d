@@ -42,7 +42,6 @@
 ;; Scratch buffer
 (setq initial-major-mode 'lisp-interaction-mode)
 (setq initial-scratch-message ";; Scratch buffer..
-
 ")
 
 ;; Set title including name of currently active buffer.
@@ -53,8 +52,8 @@
 (req-package cursor-chg
   :config
   (progn
-    (blink-cursor-mode t)
     (setq blink-cursor-blinks 50)
+    (blink-cursor-mode t)
 
     (setq curchg-default-cursor-color (face-attribute 'cursor :background))
     (change-cursor-mode t)
