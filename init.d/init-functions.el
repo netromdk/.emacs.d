@@ -53,6 +53,34 @@
   (interactive)
   (scroll-up 2))
 
+(defun indent-buffer ()
+  "Indents the entire buffer."
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+(defun indent-region-or-buffer ()
+  "Indents a region if selected, otherwise the whole buffer."
+  (interactive)
+  (save-excursion
+    (if (region-active-p)
+        (progn
+          (indent-region (region-beginning) (region-end))
+          (message "Indented selected region."))
+      (progn
+        (indent-buffer)
+        (message "Indented buffer.")))))
+
+(defun untabify-buffer ()
+  (interactive)
+  (untabify (point-min) (point-max)))
+
+(defun cleanup-buffer ()
+  "Perform a bunch of operations on the whitespace content of a buffer."
+  (interactive)
+  (indent-buffer)
+  (untabify-buffer)
+  (whitespace-cleanup))
+
 ;; Set exec path to be the same as the one from the shell
 (defun set-exec-path-from-shell-path()
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
