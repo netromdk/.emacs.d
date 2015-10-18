@@ -134,7 +134,7 @@
     (setq message-signature-insert-empty-line t)
 
     ;; Insert signature at point while preserving buffer position.
-    (defun msk-mu4e-insert-signature-at-point()
+    (defun my/mu4e-insert-signature-at-point()
       "Insert mail signature at point."
       (interactive)
       (save-excursion
@@ -145,12 +145,15 @@
 
     ;; Override to insert at point instead of at the end.
     (define-key mu4e-compose-mode-map
-      (kbd "C-c C-w") 'msk-mu4e-insert-signature-at-point)
+      (kbd "C-c C-w") 'my/mu4e-insert-signature-at-point)
+
+    ;; Dictionary to use when going into compose mode. Is changed by the
+    ;; accounts beneath.
+    (setq my/spell-lang "english")
 
     ;; Define each account.
-    (defun msk-mu4e-msk()
+    (defun my/mu4e-msk()
       (interactive)
-      (da-spell)
       (message "Personal account: msk@nullpointer.dk")
       (setq user-mail-address "msk@nullpointer.dk"
             user-full-name "Morten Kristensen"
@@ -167,11 +170,11 @@
               ("/me.receipts" . ?r)
               ("/bujinkan.dojo" . ?d)
               ("/bujinkan.e-boks" . ?b)
-              ("/bujinkan.kenkon" . ?k))))
+              ("/bujinkan.kenkon" . ?k))
+            my/spell-lang "dansk"))
 
-    (defun msk-mu4e-ontherenth()
+    (defun my/mu4e-ontherenth()
       (interactive)
-      (da-spell)
       (message "Personal account: ontherenth@gmail.com")
       (setq user-mail-address "ontherenth@gmail.com"
             user-full-name "Morten Kristensen"
@@ -188,11 +191,11 @@
               ("/me.receipts" . ?r)
               ("/bujinkan.dojo" . ?d)
               ("/bujinkan.e-boks" . ?b)
-              ("/bujinkan.kenkon" . ?k))))
+              ("/bujinkan.kenkon" . ?k))
+            my/spell-lang "dansk"))
 
-    (defun msk-mu4e-luxion()
+    (defun my/mu4e-luxion()
       (interactive)
-      (en-spell)
       (message "Work account: morten@luxion.com")
       (setq user-mail-address "morten@luxion.com"
             user-full-name "Morten Kristensen"
@@ -212,41 +215,42 @@
               ("/lux.@dev" . ?d)
               ("/lux.@aarhus" . ?å)
               ("/lux.@all" . ?a)
-              ("/lux.@cloud" . ?u))))
+              ("/lux.@cloud" . ?u))
+            my/spell-lang "english"))
 
     ;; Switch between active accounts.
-    (define-key mu4e-main-mode-map (kbd "1") 'msk-mu4e-msk)
-    (define-key mu4e-main-mode-map (kbd "2") 'msk-mu4e-ontherenth)
-    (define-key mu4e-main-mode-map (kbd "3") 'msk-mu4e-luxion)
-    (define-key mu4e-headers-mode-map (kbd "1") 'msk-mu4e-msk)
-    (define-key mu4e-headers-mode-map (kbd "2") 'msk-mu4e-ontherenth)
-    (define-key mu4e-headers-mode-map (kbd "3") 'msk-mu4e-luxion)
+    (define-key mu4e-main-mode-map (kbd "1") 'my/mu4e-msk)
+    (define-key mu4e-main-mode-map (kbd "2") 'my/mu4e-ontherenth)
+    (define-key mu4e-main-mode-map (kbd "3") 'my/mu4e-luxion)
+    (define-key mu4e-headers-mode-map (kbd "1") 'my/mu4e-msk)
+    (define-key mu4e-headers-mode-map (kbd "2") 'my/mu4e-ontherenth)
+    (define-key mu4e-headers-mode-map (kbd "3") 'my/mu4e-luxion)
 
     ;; Check if addresses are used in to, cc or bcc fields.
-    (defun msk-mu4e-is-message-to (msg rx)
+    (defun my/mu4e-is-message-to (msg rx)
       "Check if to, cc or bcc field in MSG has any address in RX."
       (or (mu4e-message-contact-field-matches msg :to rx)
           (mu4e-message-contact-field-matches msg :cc rx)
           (mu4e-message-contact-field-matches msg :bcc rx)))
 
     ;; Set replying identity from to, cc or bcc fields.
-    (defun msk-mu4e-set-from-address ()
+    (defun my/mu4e-set-from-address ()
       "Set current identity based on to, cc, bcc of original."
       (let ((msg mu4e-compose-parent-message))
         (if msg
             (cond
-             ((msk-mu4e-is-message-to msg (list "msk@nullpointer.dk"))
-              (msk-mu4e-msk))
-             ((msk-mu4e-is-message-to msg (list "ontherenth@gmail.com"))
-              (msk-mu4e-ontherenth))
-             ((msk-mu4e-is-message-to msg (list "morten@luxion.com"
+             ((my/mu4e-is-message-to msg (list "msk@nullpointer.dk"))
+              (my/mu4e-msk))
+             ((my/mu4e-is-message-to msg (list "ontherenth@gmail.com"))
+              (my/mu4e-ontherenth))
+             ((my/mu4e-is-message-to msg (list "morten@luxion.com"
                                                 "cloud@luxion.com"
                                                 "all@luxion.com"
                                                 "dev@luxion.com"
                                                 "aarhus@luxion.com"))
-              (msk-mu4e-luxion))))))
+              (my/mu4e-luxion))))))
 
-    (add-hook 'mu4e-compose-pre-hook 'msk-mu4e-set-from-address)
+    (add-hook 'mu4e-compose-pre-hook 'my/mu4e-set-from-address)
 
     ;; When composing: enable flyspell, orgstruct++, orgtbl, auto-fill-mode,
     ;; visual-line-mode, and disable auto-saving so it doesn't create unwanted
@@ -259,7 +263,8 @@
                 (orgstruct++-mode t)
                 (orgtbl-mode t)
                 (auto-save-mode -1)
-                (flyspell-mode t)))
+                (flyspell-mode t)
+                (ispell-change-dictionary my/spell-lang)))
 
     ;; When viewing emails: turn on visual-line-mode.
     (add-hook 'mu4e-view-mode-hook
@@ -290,7 +295,7 @@
     (setq message-citation-line-format "On %a, %b %d %Y, %f wrote:\n")
 
     ;; Choose default account.
-    (msk-mu4e-msk)
+    (my/mu4e-msk)
 
     ;; Start mu4e in the background.
     (mu4e t)))
