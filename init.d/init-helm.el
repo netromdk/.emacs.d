@@ -30,6 +30,9 @@
     ;; Cycle through sources. C-o calls helm-next-source.
     (define-key helm-map (kbd "M-o") 'helm-previous-source)
 
+    ;; Use ag instead of grep as normal ff search.
+    (define-key helm-find-files-map (kbd "C-s") 'helm-ff-run-grep-ag)
+
     ;; Enhance the help menu using helm functionality.
     (define-key 'help-command (kbd "a") 'helm-apropos)
     (define-key 'help-command (kbd "r") 'helm-info-emacs)
