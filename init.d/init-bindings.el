@@ -23,5 +23,9 @@
 ;; Using hippie-expand instead of dabbrev-expand.
 (global-set-key (kbd "M-/") 'hippie-expand)
 
+;; Jump to last mark and pop the mark (does not affect the mark ring). Easy way
+;; to get back to a mark.
+(global-set-key (kbd "C-x p") 'pop-to-mark-command)
+
 
 (provide 'init-bindings)

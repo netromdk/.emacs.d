@@ -13,6 +13,7 @@
 (setq-default indent-tabs-mode nil)     ;; use spaces instead of tabs
 (fset 'yes-or-no-p 'y-or-n-p)           ;; use 'y' instead of 'yes' etc.
 (setq message-log-max 10000)            ;; extend message buffer
+(setq set-mark-command-repeat-pop t)    ;; pop repeat marks
 
 ;; Don't show menu bar, scroll bar, and tool bar. In TTY they are not
 ;; defined.
