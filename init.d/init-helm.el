@@ -15,6 +15,11 @@
     (setq helm-split-window-in-side-p t) ;; split in same window
     (setq helm-quick-update t) ;; don't show invisible candidates
 
+    ;; Resize helm according to number of results within min/max height.
+    (setq helm-autoresize-min-height 10)
+    (setq helm-autoresize-max-height 40)
+    (helm-autoresize-mode t)
+
     (global-set-key (kbd "M-x") 'helm-M-x)
     (global-set-key (kbd "M-y") 'helm-show-kill-ring)
     (global-set-key (kbd "C-x b") 'helm-mini)
