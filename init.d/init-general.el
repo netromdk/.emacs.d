@@ -3,9 +3,6 @@
 ;;;;;;;;; COMMON CONFIGURATIONS
 
 (column-number-mode t)                  ;; show current column
-(menu-bar-mode -1)                      ;; don't show menu-bar
-(tool-bar-mode -1)                      ;; same for the toolbar
-(scroll-bar-mode -1)                    ;; .. and for the scroll bar
 (setq inhibit-startup-message t)        ;; don't show the GNU splash screen
 (transient-mark-mode t)                 ;; show selection from mark
 (mouse-avoidance-mode 'jump)            ;; jump mouse away when typing
@@ -15,6 +12,15 @@
 (setq-default indent-tabs-mode nil)     ;; use spaces instead of tabs
 (fset 'yes-or-no-p 'y-or-n-p)           ;; use 'y' instead of 'yes' etc.
 (setq message-log-max 10000)            ;; extend message buffer
+
+;; Don't show menu bar, scroll bar, and tool bar. In TTY they are not
+;; defined.
+(when (fboundp 'menu-bar-mode)
+  (menu-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
 
 ;; Prefer newest version of a file, especially for compiled files this is
 ;; useful.
