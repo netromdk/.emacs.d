@@ -35,7 +35,8 @@
     ;;  (add-hook hook (lambda () (flyspell-mode -1))))
 
     ;; Flyspell comments and strings in programming modes.
-    (add-hook 'prog-mode-hook 'flyspell-prog-mode)))
+    ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+    ))
 
 
 (provide 'init-spelling)
