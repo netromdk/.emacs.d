@@ -65,18 +65,10 @@
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
 
-;; Configure the cursor to use a bar when editable and a box when read-only. And
-;; after idling 5 seconds it will show as a box to more easily spot it.
-(req-package cursor-chg
-  :config
-  (progn
-    (setq blink-cursor-blinks 50)
-    (blink-cursor-mode t)
-
-    (setq curchg-default-cursor-color (face-attribute 'cursor :background))
-    (change-cursor-mode t)
-    (curchg-change-cursor-when-idle-interval 5)
-    (toggle-cursor-type-when-idle t)))
+;; Cursor setup.
+(setq cursor-type 'box)
+(setq blink-cursor-blinks 50)
+(blink-cursor-mode t)
 
 
 (provide 'init-general)
