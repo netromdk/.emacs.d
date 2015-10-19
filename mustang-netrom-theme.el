@@ -20,7 +20,7 @@
         '(hl-line ((t (:background "#393939"))))
         '(fringe ((t (:background "#232323" :foreground "#cfbfad"))))
         ;;'(cursor ((t (:background "#626262"))))
-        '(cursor ((t (:background "#bb7600"))))
+        '(cursor ((t (:background "#b1d631"))))
         '(show-paren-match-face ((t (:background "#ff9800" :foreground "#000000"))))
         '(isearch ((t (:bold t :foreground "#202020" :background "#e2e2e5"))))
         '(mode-line ((t (:background "#151515" :foreground "#808080" :box (:line-width 1 :color "#000000" :style released-button) :weight bold))))
