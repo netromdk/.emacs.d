@@ -74,6 +74,7 @@
         '(sml/position-percentage ((t (:foreground "#df9f2d" :weight normal))))
         '(powerline-active1 ((t (:inherit mode-line :background "#6D6D6D" :foreground "#D0D0D0"))))
         '(powerline-active2 ((t (:inherit mode-line :background "#9E9E9E"))))
+        '(diff-hl-change ((t (:background "#444422" :foreground "#ff9800"))))
         '(diff-added ((t (:background "#224422"))))
         '(diff-removed ((t (:background "#442222"))))
         '(diff-file-header ((t (:foreground "#ff9800"))))
