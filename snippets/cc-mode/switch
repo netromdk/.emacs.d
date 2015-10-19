@@ -6,6 +6,6 @@ switch (${1:expr}) {
 case ${2:constexpr}:${3: \{}
   $0
   break;
-${3:$(if (string-match "\{" yas-text) "\}\n" "")}
+${3:$(if (string-match "\{" yas-text) "\}\n" (progn (cycle-spacing 0) ""))}
 default: break;
 }
