@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ranged for
+# key: forr
+# --
+for (${1:const}${1:$(if (> (string-width yas-text) 0) " " "")}${2:auto}${2:$(if (> (string-width yas-text) 0) " " "")}${3:&val} : ${4:container}) {
+  $0
+}
