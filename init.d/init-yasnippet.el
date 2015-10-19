@@ -4,7 +4,7 @@
   :config
   (progn
     ;; Add local snippets to override some of the defaults in elpa folder.
-    (add-to-list 'yas-snippet-dirs (concat user-emacs-directory "snippets"))
+    (add-to-list 'yas-snippet-dirs yas-dir)
 
     ;; Use fixed indentation so the snippets look as they were typed!
     (setq yas-indent-line 'fixed)

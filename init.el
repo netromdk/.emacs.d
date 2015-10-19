@@ -5,6 +5,7 @@
 ;; Constants.
 (defconst init-dir "~/.emacs.d/init.d")
 (defconst backup-dir (concat temporary-file-directory "emacs"))
+(defconst yas-dir (concat user-emacs-directory "snippets"))
 
 ;; Custom.
 (custom-set-variables
