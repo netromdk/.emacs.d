@@ -76,25 +76,35 @@
   (save-excursion
     (if (region-active-p)
         (progn
-          (indent-region (region-beginning) (region-end))
-          (message "Indented selected region."))
+          (indent-region (region-beginning) (region-end)))
       (progn
-        (indent-buffer)
-        (message "Indented buffer.")))))
+        (indent-buffer)))))
 
 (defun untabify-buffer ()
+  "Untabifies the entire buffer."
   (interactive)
   (untabify (point-min) (point-max)))
 
-(defun cleanup-buffer ()
-  "Perform a bunch of operations on the whitespace content of a buffer."
+(defun untabify-region-or-buffer ()
+  "Untabifies a region if selected, otherwise the whole buffer."
   (interactive)
-  (indent-buffer)
-  (untabify-buffer)
+  (save-excursion
+    (if (region-active-p)
+        (progn
+          (untabify (region-beginning) (region-end)))
+      (progn
+        (untabify-buffer)))))
+
+(defun cleanup-region-or-buffer ()
+  "Perform cleanup operations on the whitespace content of a region or buffer."
+  (interactive)
+  (indent-region-or-buffer)
+  (untabify-region-or-buffer)
+  ;; Also works on region or buffer.
   (whitespace-cleanup))
 
 ;; Set exec path to be the same as the one from the shell
-(defun set-exec-path-from-shell-path()
+(defun set-exec-path-from-shell-path ()
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
   This is particularly useful under Mac OSX, where GUI apps are not started from a shell."
   (interactive)

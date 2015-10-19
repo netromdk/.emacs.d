@@ -17,8 +17,8 @@
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
-;; Indent, untabify and clean whitespace of entire buffer.
-(global-set-key (kbd "C-c c") 'cleanup-buffer)
+;; Indent, untabify and clean whitespace of region or buffer.
+(global-set-key (kbd "C-c c") 'cleanup-region-or-buffer)
 
 ;; Using hippie-expand instead of dabbrev-expand.
 (global-set-key (kbd "M-/") 'hippie-expand)
