@@ -37,17 +37,15 @@
     ;; Redefine "C-x 2" (vertical split) and "C-x 3" (horizontal split) to be
     ;; more useful by switching to the new buffer and running helm-mini in it.
     (defun my/vsplit-helm (prefix)
-      "Split the window vertically and display the previous buffer."
+      "Split the window vertically and display helm-mini in calling buffer."
       (interactive "p")
       (split-window-vertically)
-      (other-window 1 nil)
       (helm-mini))
 
     (defun my/hsplit-helm (prefix)
-      "Split the window horizontally and display the previous buffer."
+      "Split the window horizontally and display helm-mini in calling buffer."
       (interactive "p")
       (split-window-horizontally)
-      (other-window 1 nil)
       (helm-mini))
 
     (global-set-key (kbd "C-x 2") 'my/vsplit-helm)
