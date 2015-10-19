@@ -4,8 +4,8 @@
 # a bit too intrusive now still, not always I want to do this
 # --
 try {
-    $2
+  $2
 }
 catch (${1:type}) {
-    $0
+  $0
 }

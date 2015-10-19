@@ -6,6 +6,9 @@
     ;; Add local snippets to override some of the defaults in elpa folder.
     (add-to-list 'yas-snippet-dirs (concat user-emacs-directory "snippets"))
 
+    ;; Use fixed indentation so the snippets look as they were typed!
+    (setq yas-indent-line 'fixed)
+
     (yas-global-mode 1)
 
     ;; Disable normal tab expansion because it often interferes with
