@@ -3,7 +3,7 @@
 # key: qcls
 # --
 class ${1:Name}${2: : public QObject} {
-${2:$(if (string-match " : public QObject" yas-text) "  Q_OBJECT\n\n" "")}public:
+${2:$(if (string-match " : public QObject" yas-text) "  Q_OBJECT\n\n" "")$(cycle-spacing 0)}public:
   ${1:$(yas/substr yas-text "[^: ]*")}();
   ${3:virtual ~${1:$(yas/substr yas-text "[^: ]*")}();}
 };$0
