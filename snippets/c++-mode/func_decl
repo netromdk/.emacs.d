@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: funtion declaration
+# key: fnd
+# --
+${1:type} ${2:name}(${3:args})${4: const};
