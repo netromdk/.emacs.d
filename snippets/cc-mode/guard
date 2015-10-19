@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name : #ifndef XXX; #define XXX; #endif
-# key: guard
+# key: grd
 # --
 #ifndef ${1:`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`_H}
 #define $1
