@@ -3,6 +3,9 @@
 (req-package yasnippet
   :config
   (progn
+    ;; Add local snippets to override some of the defaults in elpa folder.
+    (add-to-list 'yas-snippet-dirs (concat user-emacs-directory "snippets"))
+
     (yas-global-mode 1)
 
     ;; Disable normal tab expansion because it often interferes with
