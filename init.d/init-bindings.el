@@ -27,27 +27,5 @@
 ;; to get back to a mark.
 (global-set-key (kbd "C-x p") 'pop-to-mark-command)
 
-;; Redefine "C-x 2" (vertical split) and "C-x 3" (horizontal split) to be more
-;; useful by showing the previous buffer in the newly shown buffer after
-;; splitting.
-(defun my/vsplit-last-buffer (prefix)
-  "Split the window vertically and display the previous buffer."
-  (interactive "p")
-  (split-window-vertically)
-  (other-window 1 nil)
-  (if (= prefix 1)
-      (switch-to-next-buffer)))
-
-(defun my/hsplit-last-buffer (prefix)
-  "Split the window horizontally and display the previous buffer."
-  (interactive "p")
-  (split-window-horizontally)
-  (other-window 1 nil)
-  (if (= prefix 1)
-      (switch-to-next-buffer)))
-
-(global-set-key (kbd "C-x 2") 'my/vsplit-last-buffer)
-(global-set-key (kbd "C-x 3") 'my/hsplit-last-buffer)
-
 
 (provide 'init-bindings)

@@ -32,7 +32,26 @@
     (define-key 'help-command (kbd "a") 'helm-apropos)
     (define-key 'help-command (kbd "r") 'helm-info-emacs)
     (define-key 'help-command (kbd "C-l") 'helm-locate-library)
-    (define-key 'help-command (kbd "SPC") 'helm-all-mark-rings)))
+    (define-key 'help-command (kbd "SPC") 'helm-all-mark-rings)
+
+    ;; Redefine "C-x 2" (vertical split) and "C-x 3" (horizontal split) to be
+    ;; more useful by switching to the new buffer and running helm-mini in it.
+    (defun my/vsplit-helm (prefix)
+      "Split the window vertically and display the previous buffer."
+      (interactive "p")
+      (split-window-vertically)
+      (other-window 1 nil)
+      (helm-mini))
+
+    (defun my/hsplit-helm (prefix)
+      "Split the window horizontally and display the previous buffer."
+      (interactive "p")
+      (split-window-horizontally)
+      (other-window 1 nil)
+      (helm-mini))
+
+    (global-set-key (kbd "C-x 2") 'my/vsplit-helm)
+    (global-set-key (kbd "C-x 3") 'my/hsplit-helm)))
 
 (req-package helm-swoop
   :require helm
