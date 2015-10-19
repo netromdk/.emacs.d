@@ -31,7 +31,10 @@
       '(diminish 'rainbow-mode))
 
     (eval-after-load "helm-gtags"
-      '(diminish 'helm-gtags-mode "HGt"))))
+      '(diminish 'helm-gtags-mode "HGt"))
+
+    (eval-after-load "yasnippet"
+      '(diminish 'yas-minor-mode))))
 
 
 (provide 'init-diminish)
