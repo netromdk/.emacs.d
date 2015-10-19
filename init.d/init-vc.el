@@ -12,6 +12,13 @@
 
     (global-set-key (kbd "C-x g") 'magit-status)))
 
+;; Highlight uncommitted changes/additions/deletions in the fringe.
+(req-package diff-hl
+  :config
+  (progn
+    (global-diff-hl-mode 1)
+    (diff-hl-flydiff-mode 1)))
+
 (req-package gitignore-mode)
 (req-package gitconfig-mode)
 
