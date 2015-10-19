@@ -26,11 +26,6 @@
 (when (fboundp 'fringe-mode)
   (fringe-mode 4))
 
-;; Make scrolling less extreme.
-(setq scroll-margin 0)
-(setq scroll-conservatively 100000)
-(setq scroll-preserve-screen-position 1)
-
 ;; Prefer newest version of a file, especially for compiled files this is
 ;; useful.
 (setq load-prefer-newer t)
