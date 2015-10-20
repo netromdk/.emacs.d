@@ -2,4 +2,6 @@
 # name: QObject::connect
 # key: connect
 # --
-${1:QObject::}connect(${2:Instance}, ${3:&Class}::${4:Signal}, ${5:[]{ $0 }}${5:$(if (= 0 (string-width yas-text)) "this, &Class::Slot" "")});
+${1:QObject::}connect(${2:this}, &${3:Class}::${4:Signal}, ${5:[]{
+  $0
+}}${5:$(if (= 0 (string-width yas-text)) "this, &Class::Slot" "")});
