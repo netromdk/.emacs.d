@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: qCritical() << "";
+# key: qc
+# --
+qCritical() << ${1:"$0"};

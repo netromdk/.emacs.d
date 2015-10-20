@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: qDebug() << "";
+# key: qd
+# --
+qDebug() << ${1:"$0"};
