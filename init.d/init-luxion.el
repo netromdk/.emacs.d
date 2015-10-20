@@ -15,7 +15,9 @@
         (goto-char start)
         (insert str)))))
 
-(global-set-key (kbd "C-M-l") 'wrap-luxion-function)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (local-set-key (kbd "C-M-l") 'wrap-luxion-function)))
 
 
 (provide 'init-luxion)
