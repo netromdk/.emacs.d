@@ -2,4 +2,4 @@
 # name: qCritical() << "";
 # key: qc
 # --
-qCritical() << ${1:"$0"};
+qCritical() << "${1:$0}";

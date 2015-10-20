@@ -2,4 +2,4 @@
 # name: qDebug() << "";
 # key: qd
 # --
-qDebug() << ${1:"$0"};
+qDebug() << "${1:$0}";

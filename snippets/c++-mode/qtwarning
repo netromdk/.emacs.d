@@ -2,4 +2,4 @@
 # name: qWarning() << "";
 # key: qw
 # --
-qWarning() << ${1:"$0"};
+qWarning() << "${1:$0}";
