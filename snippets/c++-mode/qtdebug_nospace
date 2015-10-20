@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: qDebug().nospace() << "";
+# key: qdn
+# --
+qDebug().nospace() << "${1:$0}";

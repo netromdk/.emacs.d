@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: qWarning().nospace() << "";
+# key: qwn
+# --
+qWarning().nospace() << "${1:$0}";
