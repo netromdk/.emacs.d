@@ -19,7 +19,7 @@
 ;; defined.
 (when window-system
   (tool-bar-mode -1)
-  (menu-bar-mode 1)
+  (menu-bar-mode -1)
   (scroll-bar-mode -1))
 
 ;; Set fringe size to 4 instead of the default of 8.
