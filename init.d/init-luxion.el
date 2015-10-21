@@ -108,8 +108,8 @@
 (defun lux-fix-buffer ()
   (interactive)
   (lux-fix-function-curls)
-  (lux-fix-function-comments)
-  (cleanup-region-or-buffer))
+  (cleanup-region-or-buffer)
+  (lux-fix-function-comments))
 
 ;; Bindings
 (add-hook 'c-mode-common-hook
