@@ -128,6 +128,3 @@
   (unless (and (eq type 'initialization)
                (string-starts-with message "Your `load-path' seems to contain\nyour `.emacs.d' directory"))
     ad-do-it))
-
-
-(provide 'init-functions)

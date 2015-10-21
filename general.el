@@ -1,5 +1,3 @@
-(require 'req-package)
-
 ;;;;;;;;; COMMON CONFIGURATIONS
 
 (column-number-mode t)                  ;; show current column
@@ -69,6 +67,3 @@
 (setq cursor-type 'box)
 (setq blink-cursor-blinks 50)
 (blink-cursor-mode t)
-
-
-(provide 'init-general)

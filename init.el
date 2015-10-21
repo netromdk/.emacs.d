@@ -3,10 +3,16 @@
 ;; ------------------------
 
 ;; Constants.
-(defconst init-dir "~/.emacs.d/init.d")
+(defconst init-dir (concat user-emacs-directory "init.d"))
 (defconst backup-dir (concat temporary-file-directory "emacs"))
 (defconst yas-dir (concat user-emacs-directory "snippets"))
-(make-directory backup-dir)
+
+;; TODO: create if not exists..
+;;(make-directory backup-dir)
+
+;; These are without .el because `load` ill add these as appropriately when using them.
+(defconst general-file (concat user-emacs-directory "general"))
+(defconst functions-file (concat user-emacs-directory "functions"))
 
 ;; Custom.
 (custom-set-variables
@@ -30,9 +36,15 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; Load general stuff that other init.d things might use.
+(load general-file)
+(load functions-file)
+
 ;; Recompile all configurations when closing emacs.
 (add-hook 'kill-emacs-hook
           (lambda ()
+            (byte-compile-file (concat general-file ".el") t)
+            (byte-compile-file (concat functions-file ".el") t)
             (byte-recompile-directory init-dir 0 t)))
 
 ;; Backups cleanup.
