@@ -7,10 +7,7 @@
 (defconst backup-dir (concat temporary-file-directory "emacs"))
 (defconst yas-dir (concat user-emacs-directory "snippets"))
 
-;; TODO: create if not exists..
-;;(make-directory backup-dir)
-
-;; These are without .el because `load` ill add these as appropriately when using them.
+;; These are without .el because `load` will add these as appropriately when using them.
 (defconst general-file (concat user-emacs-directory "general"))
 (defconst functions-file (concat user-emacs-directory "functions"))
 
@@ -48,6 +45,8 @@
             (byte-recompile-directory init-dir 0 t)))
 
 ;; Backups cleanup.
+(unless (file-exists-p backup-dir)
+  (make-directory backup-dir))
 (message "Deleting backup files older than a week...")
 (let ((week (* 60 60 24 7))
       (current (float-time (current-time))))
