@@ -17,9 +17,9 @@
             (local-set-key (kbd "C-M-l") 'wrap-luxion-function)))
 
 (defun fix-luxion-buffer ()
-  "Fix all functions with an incorrect number of '// ***..' around them."
+  "Fix all functions with an incorrect number of '// ***..' (or '=' or '-') around them."
   (interactive)
-  (let* ((regexp "[ ]*\/\/[ ]*[\*]+")
+  (let* ((regexp "[ ]*\/\/[ ]*[\*\=\-]+")
          (line-width global-fill-column)
          (str (concat "// " (make-string (- line-width 3) ?*)))
          (old-line)
