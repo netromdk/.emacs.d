@@ -48,5 +48,64 @@
           (goto-line old-line))
         (forward-line))))) ;; Search next line.
 
+(defun fix-luxion-incorrect-functions ()
+  "Fix all functions with '// ***..' around it to have it's '{' be put after the second '//***..'."
+  (interactive)
+  (let* ((regexp-line "[ ]*\/\/[ ]*[\*]+")
+         (regexp-curl "{")
+         (line-width global-fill-column)
+         (str (concat "// " (make-string (- line-width 3) ?*)))
+         (line-one)
+         (line-two)
+         (flag nil))
+    (save-excursion
+      (goto-char (point-min))
+      (while (and (not (eobp))
+                  (not flag))
+        ;; Find line one.
+        (while (and (not (eobp))
+                    (not flag))
+          (when (looking-at regexp-line)
+            (setq line-one (line-number-at-pos))
+            (setq flag t))
+          (forward-line))
+
+        (unless (eobp)
+          (setq flag nil)
+          (forward-line)
+
+          ;; Find line two.
+          (while (and (not (eobp))
+                      (not flag))
+            (when (looking-at regexp-line)
+              (setq line-two (line-number-at-pos))
+              (setq flag t))
+            (forward-line))
+
+          (unless (eobp)
+            (setq flag nil)
+            (goto-line line-one)
+
+            ;; Find and remove the '{'.
+            (while (and (<= (line-number-at-pos) line-two)
+                        (not flag))
+              (when (looking-at regexp-curl)
+                (delete-char 1)
+                (cycle-spacing 0) ;; Remove any whitespace
+                (setq flag t))
+              (forward-char 1))
+
+            (unless (eobp)
+              (goto-line line-two)
+
+              ;; If deleted '{' then insert on new line after `line-two`.
+              (when flag
+                (end-of-line)
+                (insert "\n")
+                (insert regexp-curl))
+
+              (setq flag nil)
+              (forward-line))))))))
+
 
 (provide 'init-luxion)
