@@ -1,8 +1,10 @@
 ;;;;;;;;; Luxion related
 
+;; Note: bindings are at the bottom of this file!
+
 ;; Wraps a function with // ***.. before and after (the region selected). Both
 ;; inserted lines with have a length fo 80 characters.
-(defun wrap-luxion-function (start end)
+(defun lux-wrap-function (start end)
   "Put comments around Luxion function."
   (interactive "r")
   (let ((str (concat "// " (make-string (- global-fill-column 3) ?*) "\n")))
@@ -12,11 +14,7 @@
       (goto-char start)
       (insert str))))
 
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (local-set-key (kbd "C-M-l") 'wrap-luxion-function)))
-
-(defun fix-luxion-buffer ()
+(defun lux-fix-function-comments ()
   "Fix all functions with an incorrect number of '// ***..' (or '=' or '-') around them."
   (interactive)
   (let* ((regexp "[ ]*\/\/[ ]*[\*\=\-]+")
@@ -48,7 +46,7 @@
           (goto-line old-line))
         (forward-line))))) ;; Search next line.
 
-(defun fix-luxion-incorrect-functions ()
+(defun lux-fix-function-curls ()
   "Fix all functions with '// ***..' around it to have it's '{' be put after the second '//***..'."
   (interactive)
   (let* ((regexp-line "[ ]*\/\/[ ]*[\*]+")
@@ -106,6 +104,18 @@
 
               (setq flag nil)
               (forward-line))))))))
+
+(defun lux-fix-buffer ()
+  (interactive)
+  (lux-fix-function-curls)
+  (lux-fix-function-comments)
+  (cleanup-region-or-buffer))
+
+;; Bindings
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (local-set-key (kbd "C-M-l") 'lux-wrap-function)
+            (local-set-key (kbd "C-c l") 'lux-fix-buffer)))
 
 
 (provide 'init-luxion)
