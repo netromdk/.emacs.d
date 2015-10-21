@@ -38,10 +38,10 @@
 (setq backup-directory-alist `((".*" . ,backup-dir)))
 (setq auto-save-file-name-transforms `((".*" ,backup-dir t)))
 
-;; Set fill column to 80.
-(setq-default fill-column 80)
+;; Set fill column to 100.
+(setq-default fill-column 100)
 (add-hook 'auto-fill-mode-hook
-          (lambda () (set-fill-column 80)))
+          (lambda () (set-fill-column 100)))
 
 ;; Disable visible bell because it looks ugly, but that makes the
 ;; audible bell and therefore we replace it with a
