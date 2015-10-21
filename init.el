@@ -44,19 +44,6 @@
             (byte-compile-file (concat functions-file ".el") t)
             (byte-recompile-directory init-dir 0 t)))
 
-;; Backups cleanup.
-(unless (file-exists-p backup-dir)
-  (make-directory backup-dir))
-(message "Deleting backup files older than a week...")
-(let ((week (* 60 60 24 7))
-      (current (float-time (current-time))))
-  (dolist (file (directory-files backup-dir t))
-    (when (and (backup-file-name-p file)
-               (> (- current (float-time (nth 5 (file-attributes file))))
-                  week))
-      (message "%s" file)
-      (delete-file file))))
-
 ;; Packages setup.
 (require 'package)
 (setq package-enable-at-startup nil)

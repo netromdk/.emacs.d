@@ -32,7 +32,21 @@
 ;; speeds up various things.
 (setq gc-cons-threshold 20000000)
 
-;; Save all backups and auto-saves to a temporary directory.
+;; Save all backups and auto-saves to a temporary directory. And clean it for all files older than a
+;; week.
+(unless (file-exists-p backup-dir)
+  (make-directory backup-dir))
+
+(message "Deleting backup files older than a week...")
+(let ((week (* 60 60 24 7))
+      (current (float-time (current-time))))
+  (dolist (file (directory-files backup-dir t))
+    (when (and (backup-file-name-p file)
+               (> (- current (float-time (nth 5 (file-attributes file))))
+                  week))
+      (message "%s" file)
+      (delete-file file))))
+
 (setq backup-directory-alist `((".*" . ,backup-dir)))
 (setq auto-save-file-name-transforms `((".*" ,backup-dir t)))
 
