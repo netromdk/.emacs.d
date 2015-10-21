@@ -5,7 +5,7 @@
 (defun wrap-luxion-function (start end)
   "Put comments around Luxion function."
   (interactive "r")
-  (let ((str (concat "// " (make-string (- fill-column 3) ?*) "\n")))
+  (let ((str (concat "// " (make-string (- global-fill-column 3) ?*) "\n")))
     (save-excursion
       (goto-char end)
       (insert str)
@@ -20,7 +20,7 @@
   "Fix all functions with an incorrect number of '// ***..' around them."
   (interactive)
   (let* ((regexp "[ ]*\/\/[ ]*[\*]+")
-         (line-width fill-column)
+         (line-width global-fill-column)
          (str (concat "// " (make-string (- line-width 3) ?*)))
          (old-line)
          (line-end))
