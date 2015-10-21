@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: cerr
-# key: cerr
+# name: endl
+# key: el
 # --
 `(progn (save-excursion) (goto-char (point-min)) (unless (re-search-forward
 "^using\\s-+namespace std;" nil 'no-errer) "std::"))
-`cerr << "$0\n";
+`endl
