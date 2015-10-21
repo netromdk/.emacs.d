@@ -37,9 +37,11 @@
 (setq auto-save-file-name-transforms `((".*" ,backup-dir t)))
 
 ;; Set fill column to 100.
-(setq-default fill-column 100)
-(add-hook 'auto-fill-mode-hook
-          (lambda () (set-fill-column 100)))
+(defconst global-fill-column 100)
+(setq-default fill-column global-fill-column)
+(dolist (hook '(auto-fill-mode-hook
+                prog-mode-hook))
+  (add-hook hook (lambda () (setq fill-column global-fill-column))))
 
 ;; Disable visible bell because it looks ugly, but that makes the
 ;; audible bell and therefore we replace it with a
