@@ -14,7 +14,7 @@
                   (setq flycheck-clang-standard-library "libc++")
                   (setq flycheck-gcc-language-standard "c++11"))))
 
-    (add-hook 'prog-mode-hook 'global-flycheck-mode)))
+    (add-hook 'prog-mode-hook 'flycheck-mode)))
 
 
 (provide 'init-flycheck)
