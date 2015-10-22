@@ -260,7 +260,7 @@
     ;; chosen dicitonary is shown in the message line.
     (add-hook 'mu4e-compose-mode-hook
               (lambda ()
-                (auto-fill-mode 1)
+                (auto-fill-mode 0)
                 (visual-line-mode t)
                 (orgstruct++-mode t)
                 (orgtbl-mode t)
