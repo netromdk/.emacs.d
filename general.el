@@ -24,10 +24,6 @@
 (when (fboundp 'fringe-mode)
   (fringe-mode 4))
 
-;; Prefer newest version of a file, especially for compiled files this is
-;; useful.
-(setq load-prefer-newer t)
-
 ;; Garbage collect at every 20 MB allocated instead of the default 8 MB. This
 ;; speeds up various things.
 (setq gc-cons-threshold 20000000)

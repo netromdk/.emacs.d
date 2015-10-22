@@ -33,6 +33,10 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; Prefer newest version of a file, especially for compiled files this is
+;; useful.
+(setq load-prefer-newer t)
+
 ;; Load general stuff that other init.d things might use.
 (load general-file)
 (load functions-file)
