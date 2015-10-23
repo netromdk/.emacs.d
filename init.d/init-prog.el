@@ -1,5 +1,12 @@
 (require 'req-package)
 
+;; General compilation settings.
+(setq compilation-scroll-output t)
+
+(global-set-key [(C-f5)] 'compile)
+(global-set-key [(f5)] 'recompile)
+(global-set-key [(f6)] 'next-error)
+
 ;; C/C++
 (add-hook 'c-mode-common-hook
           (lambda ()
