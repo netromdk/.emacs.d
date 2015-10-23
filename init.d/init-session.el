@@ -1,8 +1,8 @@
 (require 'req-package)
 
-;; Saves mini buffer history including search and kill ring values.
+;; Saves mini buffer history including search and kill ring values, and compile history.
 (setq savehist-additional-variables
-      '(search-ring regexp-search-ring kill-ring))
+      '(search-ring regexp-search-ring kill-ring compile-history))
 (setq savehist-autosave-interval 60)
 (setq savehist-file (concat user-emacs-directory "savehist"))
 (savehist-mode t)
