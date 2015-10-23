@@ -20,7 +20,7 @@
  '(custom-enabled-themes (quote (mustang-netrom)))
  '(custom-safe-themes
    (quote
-    ("f2e05195669230a1d91401a1c3eea679ee8a89f6237e7dba62ddef14518b90f9" default)))
+    ("c324fcb70bacd7b42b46d90ddae5d9286734d2a97b545e28cdcecd91aea3288f" default)))
  '(recentf-exclude
    (quote
     ("ido.last" ".emacs.d/saveplace.txt" "/var/folders/" "~/Maildir")))
