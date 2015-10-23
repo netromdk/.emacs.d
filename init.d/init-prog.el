@@ -2,6 +2,7 @@
 
 ;; General compilation settings.
 (setq compilation-scroll-output t)
+(setq compilation-window-height 30)
 
 (global-set-key [(C-f5)] 'compile)
 (global-set-key [(f5)] 'recompile)
