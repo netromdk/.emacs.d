@@ -4,9 +4,17 @@
 (setq compilation-scroll-output t)
 (setq compilation-window-height 30)
 
+(defun next-error-skip-warnings ()
+  (interactive)
+  (let (threshold compilation-skip-threshold)
+    (setq compilation-skip-threshold 2)
+    (next-error)
+    (setq compilation-skip-threshold threshold)))
+
 (global-set-key [(C-f5)] 'compile)
 (global-set-key [(f5)] 'recompile)
 (global-set-key [(f6)] 'next-error)
+(global-set-key [(C-f6)] 'next-error-skip-warnings)
 
 ;; C/C++
 (add-hook 'c-mode-common-hook
