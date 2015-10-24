@@ -28,6 +28,13 @@
 ;; speeds up various things.
 (setq gc-cons-threshold 20000000)
 
+;; Use utf-8 for everything!
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
 ;; Save all backups and auto-saves to a temporary directory. And clean it for all files older than a
 ;; week.
 (unless (file-exists-p backup-dir)
