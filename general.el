@@ -79,3 +79,6 @@
 (setq cursor-type 'box)
 (setq blink-cursor-blinks 50)
 (blink-cursor-mode t)
+
+;; Recompile all configurations when closing emacs.
+(add-hook 'kill-emacs-hook 'byte-compile-confs)

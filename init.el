@@ -38,15 +38,8 @@
 (setq load-prefer-newer t)
 
 ;; Load general stuff that other init.d things might use.
-(load general-file)
 (load functions-file)
-
-;; Recompile all configurations when closing emacs.
-(add-hook 'kill-emacs-hook
-          (lambda ()
-            (byte-compile-file (concat general-file ".el") t)
-            (byte-compile-file (concat functions-file ".el") t)
-            (byte-recompile-directory init-dir 0 t)))
+(load general-file)
 
 ;; Packages setup.
 (require 'package)

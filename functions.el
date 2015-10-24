@@ -1,3 +1,10 @@
+(defun byte-compile-confs ()
+  "Byte-compiles all configuration files."
+  (interactive)
+  (byte-compile-file (concat general-file ".el") t)
+  (byte-compile-file (concat functions-file ".el") t)
+  (byte-recompile-directory init-dir 0 t))
+
 ;; convert current buffer to unix EOLs
 (defun to-unix-eol ()
   "Change current buffer's line ending to unix convention."
