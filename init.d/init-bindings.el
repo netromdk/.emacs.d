@@ -7,6 +7,7 @@
 (global-set-key (kbd "M-N") 'next-user-buffer)
 (global-set-key (kbd "C-c o") 'ff-find-other-file)
 (global-set-key (kbd "C-c w") 'whitespace-mode)
+(global-set-key (kbd "C-.") 'repeat)
 
 ;; Cycle through "just one space", "no spaces" and original number of spaces,
 ;; instead of just "just one space". It does not delete newlines, too.
