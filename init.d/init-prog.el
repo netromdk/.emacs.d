@@ -57,6 +57,12 @@
                 ("\\.cc$" . c++-mode))
               auto-mode-alist))
 
+;; Elisp
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c b") 'eval-buffer)
+            (local-set-key (kbd "C-c r") 'eval-region)))
+
 ;; Shell script
 (add-hook 'sh-mode-hook
           (lambda ()
