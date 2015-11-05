@@ -10,6 +10,10 @@
     (setq magit-last-seen-setup-instructions "1.4.0") ;; Silence latest info.
     (setq magit-push-always-verify nil) ;; Only ask when upstream is not conf'ed!
 
+    ;; Set defaults used by specific operations.
+    (setq magit-merge-arguments '("--no-ff"))
+    (setq magit-pull-arguments '("--rebase"))
+
     (global-set-key (kbd "C-x g") 'magit-status)))
 
 ;; Highlight uncommitted changes/additions/deletions in the fringe.
