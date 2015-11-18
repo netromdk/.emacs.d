@@ -16,13 +16,6 @@
     (recentf-mode 1)
     (global-set-key "\C-xr" 'recentf-open-files)))
 
-(req-package init-open-recentf
-  :require recentf helm
-  :config
-  (progn
-    (setq init-open-recentf-function 'helm-mini)
-    (init-open-recentf)))
-
 ;; Saves cursor positions of visited files.
 (req-package saveplace
   :config
