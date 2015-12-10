@@ -13,6 +13,7 @@
     ;; Set defaults used by specific operations.
     (setq magit-merge-arguments '("--no-ff"))
     (setq magit-pull-arguments '("--rebase"))
+    (setq magit-cherry-pick-arguments '("-x"))
 
     (global-set-key (kbd "C-x g") 'magit-status)))
 
