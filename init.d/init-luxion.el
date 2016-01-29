@@ -109,7 +109,8 @@
   (interactive)
   (lux-fix-function-curls)
   (cleanup-region-or-buffer)
-  (lux-fix-function-comments))
+  (lux-fix-function-comments)
+  (clang-format-buffer))
 
 ;; Bindings
 (add-hook 'c-mode-common-hook
