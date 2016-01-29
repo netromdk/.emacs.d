@@ -110,6 +110,15 @@
   ;; Also works on region or buffer.
   (whitespace-cleanup))
 
+(defun cleanup-region-or-buffer-clang ()
+  "Perform cleanup operations on the whitespace content of a region or buffer using clang-format."
+  (interactive)
+  (indent-region-or-buffer)
+  (untabify-region-or-buffer)
+  ;; Also works on region or buffer.
+  (whitespace-cleanup)
+  (clang-format-region))
+
 ;; Set exec path to be the same as the one from the shell
 (defun set-exec-path-from-shell-path ()
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.

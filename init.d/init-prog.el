@@ -40,6 +40,9 @@
   (progn
     (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
 
+;; Formatting code via clang-format-region.
+(req-package clang-format)
+
 ;; C/C++
 (add-hook 'c-mode-common-hook
           (lambda ()
