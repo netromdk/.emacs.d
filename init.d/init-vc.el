@@ -11,7 +11,6 @@
     (setq magit-push-always-verify nil) ;; Only ask when upstream is not conf'ed!
 
     ;; Set defaults used by specific operations.
-    (setq magit-merge-arguments '("--no-ff"))
     (setq magit-pull-arguments '("--rebase"))
     (setq magit-cherry-pick-arguments '("-x"))
 
