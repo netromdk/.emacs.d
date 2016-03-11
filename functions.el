@@ -133,3 +133,10 @@
   "Returns non-nil if string STRING starts with PREFIX, otherwise nil."
   (and (>= (length string) (length prefix))
        (string-equal (substring string 0 (length prefix)) prefix)))
+
+(defun kill-other-buffers ()
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer
+        (delq (current-buffer)
+              (remove-if-not 'buffer-file-name (buffer-list)))))
