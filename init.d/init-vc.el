@@ -6,6 +6,7 @@
     ;; Set defaults used by specific operations.
     (setq magit-pull-arguments '("--rebase"))
     (setq magit-cherry-pick-arguments '("-x"))
+    (setq magit-log-arguments '("-n256" "--graph" "--decorate" "--color"))
 
     (global-set-key (kbd "C-x g") 'magit-status)))
 
