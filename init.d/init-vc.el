@@ -7,6 +7,7 @@
     (setq magit-pull-arguments '("--rebase"))
     (setq magit-cherry-pick-arguments '("-x"))
     (setq magit-log-arguments '("-n256" "--graph" "--decorate" "--color"))
+    (setq magit-diff-arguments '("-U3" "--stat" "--no-ext-diff"))
 
     (global-set-key (kbd "C-x g") 'magit-status)))
 
