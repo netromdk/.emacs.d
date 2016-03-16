@@ -11,7 +11,14 @@
     (next-error)
     (setq compilation-skip-threshold threshold)))
 
-(global-set-key [(C-f5)] 'compile)
+(defun compile-from-buffer-folder (cmd)
+  (interactive
+   (list
+    (read-string "Compile command (pwd): ")))
+  (compile (format "cd `dirname '%s'` && %s" (buffer-file-name) cmd)))
+
+(global-set-key [(S-f5)] 'compile)
+(global-set-key [(C-f5)] 'compile-from-buffer-folder)
 (global-set-key [(f5)] 'recompile)
 (global-set-key [(f6)] 'next-error)
 (global-set-key [(C-f6)] 'next-error-skip-warnings)
