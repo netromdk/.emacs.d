@@ -110,6 +110,14 @@
   ;; Also works on region or buffer.
   (whitespace-cleanup))
 
+(defun clang-format-region-or-buffer ()
+  "Perform clang-format on region or buffer."
+  (interactive)
+  (save-excursion
+    (if (region-active-p)
+        (clang-format-region (region-beginning) (region-end))
+      (clang-format-buffer))))
+
 (defun cleanup-region-or-buffer-clang ()
   "Perform cleanup operations on the whitespace content of a region or buffer using clang-format."
   (interactive)
@@ -117,7 +125,7 @@
   (untabify-region-or-buffer)
   ;; Also works on region or buffer.
   (whitespace-cleanup)
-  (clang-format-region))
+  (clang-format-region-or-buffer))
 
 ;; Set exec path to be the same as the one from the shell
 (defun set-exec-path-from-shell-path ()
