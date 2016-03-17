@@ -56,7 +56,10 @@
           (lambda ()
             (setq tab-width 2)
             (setq c-basic-offset tab-width)
-            (setq indent-tabs-mode nil)))
+            (setq indent-tabs-mode nil)
+
+            ;; Run clang-format on region or buffer.
+            (local-set-key (kbd "C-c f") 'clang-format-region-or-buffer)))
 
 (setq auto-mode-alist
       (append '(("\\.c$"  . c-mode)
