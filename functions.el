@@ -148,3 +148,11 @@
   (mapc 'kill-buffer
         (delq (current-buffer)
               (remove-if-not 'buffer-file-name (buffer-list)))))
+
+(defun ask-to-kill-emacs (bool)
+  "Ask before killing emacs."
+  (interactive
+   (list (y-or-n-p "Do you really want to kill emacs? ")))
+  (if bool
+      (kill-emacs)
+      (message "Phew!")))

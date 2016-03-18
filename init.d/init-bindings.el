@@ -24,6 +24,9 @@
 ;; Using hippie-expand instead of dabbrev-expand.
 (global-set-key (kbd "M-/") 'hippie-expand)
 
+;; Ask before killing emacs!
+(global-set-key (kbd "C-x C-c") 'ask-to-kill-emacs)
+
 ;; Put dabbrev expansions first because it's most often what's expected.
 (setq hippie-expand-try-functions-list
       '(try-expand-dabbrev
