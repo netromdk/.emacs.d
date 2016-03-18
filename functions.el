@@ -152,7 +152,7 @@
 (defun ask-to-kill-emacs (bool)
   "Ask before killing emacs."
   (interactive
-   (list (y-or-n-p "Do you really want to kill emacs? ")))
+   (list (y-or-n-p "Do you really want to save buffers and kill emacs? ")))
   (if bool
-      (kill-emacs)
+      (save-buffers-kill-terminal)
       (message "Phew!")))
