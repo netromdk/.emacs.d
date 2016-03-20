@@ -148,7 +148,8 @@
  '(rainbow-delimiters-depth-9-face ((t (:foreground "#6CA0A3" :weight bold))))
  '(rainbow-delimiters-unmatched-face ((t (:foreground "#88090B" :weight bold))))
  '(compilation-error ((t (:inherit error :foreground "Red"))))
- '(compilation-line-number ((t (:inherit font-lock-keyword-face :foreground "#b1d631")))))
+ '(compilation-line-number ((t (:inherit font-lock-keyword-face :foreground "#b1d631"))))
+ '(highlight-numbers-number ((t (:foreground "#df9f2d")))))
 
 ;;;###autoload
 (when load-file-name

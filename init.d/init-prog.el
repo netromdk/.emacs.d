@@ -48,6 +48,12 @@
   (progn
     (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
 
+;; Highlights numbers with another color so they are easier to spot.
+(req-package highlight-numbers
+  :config
+  (progn
+    (add-hook 'prog-mode-hook 'highlight-numbers-mode)))
+
 ;; Formatting code via clang-format-region.
 (req-package clang-format)
 
