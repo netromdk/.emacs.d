@@ -14,6 +14,8 @@
 
     (setq spaceline-minor-modes-separator " ")
 
+    (spaceline-helm-mode)
+
     (spaceline-toggle-process-on)
     (spaceline-toggle-selection-info-on)
     (spaceline-toggle-hud-off)))
