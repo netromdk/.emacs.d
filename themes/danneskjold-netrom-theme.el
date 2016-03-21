@@ -12,8 +12,8 @@
 ;;; Code:
 (deftheme danneskjold-netrom "Port of danneskjold.")
 
-(let ((bg "#000000")
-      (fg "#ffffff")
+(let ((bg "#202020")
+      (fg "#e2e2e2")
 
       ;; Shades of grey
       (black "#000000")
@@ -41,8 +41,7 @@
       (santa "#F34A4A")
       (red-forest "#330006"))
 
-  (custom-theme-set-faces
-   'danneskjold-netrom
+  (custom-theme-set-faces 'danneskjold-netrom
    `(default ((t (:foreground ,fg :background ,bg))))
    `(fringe ((t (:background ,bg))))
    `(region ((t (:background ,anthracite))))
@@ -55,7 +54,7 @@
    `(font-lock-variable-name-face ((t (:foreground ,sunrise))))
    `(font-lock-keyword-face ((t (:foreground ,frost))))
    `(font-lock-comment-face ((t (:foreground ,comment))))
-   `(font-lock-comment-delimiter-face ((t (:foreground ,anthracite))))
+   `(font-lock-comment-delimiter-face ((t (:foreground ,comment))))
    `(font-lock-function-name-face ((t (:foreground ,fg))))
    `(font-lock-type-face ((t (:foreground ,saffron))))
    `(font-lock-constant-face ((t (:foreground ,fg))))
@@ -75,8 +74,7 @@
                                     :color slightly-brighter-than-midnight)))))
    `(mode-line-buffer-id ((t (:foreground ,fg))))
 
-
-   `(font-lock-warning-face ((t (:foreground ,santa))))  
+   `(font-lock-warning-face ((t (:foreground ,santa))))
    `(highlight ((t (:background ,as-dark-as-midnight :foreground ,frost))))
 
    `(linum ((t (:foreground ,anthracite))))
@@ -145,17 +143,6 @@
 
    ;; Flycheck
    `(flycheck-warning ((t (:foreground ,santa :underline t))))
-
-   ;; js2-mode
-   `(js2-function-param ((t (:foreground ,saffron))))
-
-   ;; Erc
-   `(erc-timestamp-face ((t (:foreground ,santa))))
-   `(erc-prompt-face ((t (:foreground ,spring-flower))))
-   `(erc-nick-default-face ((t (:foreground ,frost))))
-   `(erc-notice-face ((t (:foreground ,waddles))))
-   `(erc-button ((t (:foreground ,frost))))
-   `(erc-current-nick-face ((t (:foreground ,santa))))
 
    ;; Eshell
    `(eshell-prompt ((t (:foreground ,santa))))
