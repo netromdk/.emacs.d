@@ -203,6 +203,9 @@
    ;; Whitespace
    `(whitespace-line ((t (:background "gray20" :foreground "#DD5542"))))
 
+   ;; Highlight-thing
+   `(hi-yellow ((t (:background ,anthracite :foreground ,fg :weight bold))))
+
    ;; Compilation-mode
    `(compilation-warning ((t (:foreground ,sunrise))))
    `(compilation-info ((t (:foreground ,spring-flower))))
