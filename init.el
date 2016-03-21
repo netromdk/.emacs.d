@@ -6,10 +6,13 @@
 (defconst init-dir (concat user-emacs-directory "init.d"))
 (defconst backup-dir (concat temporary-file-directory "emacs"))
 (defconst yas-dir (concat user-emacs-directory "snippets"))
+(defconst themes-dir (concat user-emacs-directory "themes"))
 
 ;; These are without .el because `load` will add these as appropriately when using them.
 (defconst general-file (concat user-emacs-directory "general"))
 (defconst functions-file (concat user-emacs-directory "functions"))
+
+(setq custom-theme-directory themes-dir)
 
 ;; Custom.
 (custom-set-variables
@@ -17,10 +20,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (mustang-netrom)))
+ '(custom-enabled-themes (quote (danneskjold-netrom)))
  '(custom-safe-themes
    (quote
-    ("6f2bf2787ce7e1dbbff1dce04a6338e0bb383af8a2e85e873fb216eae9cc76c3" default)))
+    ("373621c297a2e658cde2eaa9d3b77fb24ac2ed4e021635383f254d04f6718aa8" default)))
  '(recentf-exclude
    (quote
     ("ido.last" ".emacs.d/saveplace.txt" "/var/folders/" "~/Maildir")))
