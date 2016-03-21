@@ -19,7 +19,10 @@
       (interactive)
       (ispell-change-dictionary "english"))
 
-    (defalias 'sb 'ispell-buffer)))
+    (defalias 'sb 'ispell-buffer)
+
+    ;; Default to english dictionary.
+    (en-spell)))
 
 (req-package flyspell
   :require ispell
@@ -37,6 +40,12 @@
     ;; Flyspell comments and strings in programming modes.
     ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
     ))
+
+(req-package helm-flyspell
+  :require helm flyspell
+  :config
+  (progn
+    (global-set-key (kbd "C-;") 'helm-flyspell-correct)))
 
 
 (provide 'init-spelling)
