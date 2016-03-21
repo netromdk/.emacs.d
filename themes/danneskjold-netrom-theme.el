@@ -83,7 +83,7 @@
    `(widget-button ((t (:foreground ,saffron))))
 
    ;; Highlight current line
-   `(highlight-current-line-face ((t (:background ,as-dark-as-midnight))))
+   `(highlight-current-line-face ((t (:background ,slightly-brighter-than-midnight))))
 
    ;; Highlight numbers
    `(highlight-numbers-number ((t (:foreground ,saffron))))
@@ -92,8 +92,8 @@
    `(highlight-quoted-symbol ((t (:foreground ,waddles))))
 
    ;; Hl-line and hlinum-activate
-   `(linum-highlight-face ((t (:foreground ,anthracite :background ,as-dark-as-midnight :weight bold))))
-   `(hl-line ((t (:background ,as-dark-as-midnight))))
+   `(linum-highlight-face ((t (:foreground ,anthracite :background ,slightly-brighter-than-midnight :weight bold))))
+   `(hl-line ((t (:background ,slightly-brighter-than-midnight))))
 
    ;; Magit
    `(magit-diff-added ((t (:background ,summer-flower :foreground ,fg))))
