@@ -9,6 +9,9 @@
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 (global-set-key (kbd "C-.") 'repeat)
 
+;; Ask before killing emacs!
+(global-set-key (kbd "C-x C-c") 'ask-to-kill-emacs)
+
 ;; Cycle through "just one space", "no spaces" and original number of spaces,
 ;; instead of just "just one space". It does not delete newlines, too.
 (global-set-key (kbd "M-SPC")
@@ -17,15 +20,13 @@
 ;; Make font bigger/smaller.
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "C-0") 'text-scale-adjust)
 
 ;; Indent, untabify and clean whitespace of region or buffer.
 (global-set-key (kbd "C-c c") 'cleanup-region-or-buffer)
 
 ;; Using hippie-expand instead of dabbrev-expand.
 (global-set-key (kbd "M-/") 'hippie-expand)
-
-;; Ask before killing emacs!
-(global-set-key (kbd "C-x C-c") 'ask-to-kill-emacs)
 
 ;; Put dabbrev expansions first because it's most often what's expected.
 (setq hippie-expand-try-functions-list
