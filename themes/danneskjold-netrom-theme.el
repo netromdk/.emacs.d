@@ -34,6 +34,7 @@
 
       ;; Shades of blue
       (twitter "#4CB5F5")
+      (dark-twitter "#202060")
 
       ;; Shades of red
       (waddles "#FF87BA")
@@ -108,6 +109,11 @@
    `(magit-section-heading ((t (:foreground ,sunrise :inherit nil))))
    `(magit-diff-hunk-heading ((t (:foreground ,frost :background ,slightly-brighter-than-midnight))))
    `(magit-diff-lines-heading ((t (:foreground ,frost :background ,slightly-brighter-than-midnight))))
+
+   ;; Diff-hl
+   `(diff-hl-insert ((t (:inherit magit-diff-added :foreground ,spring-flower ))))
+   `(diff-hl-change ((t (:background ,dark-twitter :foreground ,twitter))))
+   `(diff-hl-delete ((t (:background ,red-forest :foreground ,santa))))
 
    ;; Org
    `(org-todo ((t (:foreground ,santa))))
