@@ -39,7 +39,8 @@
       (waddles "#FF87BA")
       (krayola "#E38B75")
       (santa "#F34A4A")
-      (red-forest "#330006"))
+      (red-forest "#330006")
+      (redder-forest "#aa0006"))
 
   (custom-theme-set-faces 'danneskjold-netrom
    `(default ((t (:foreground ,fg :background ,bg))))
@@ -99,7 +100,7 @@
    `(magit-diff-added ((t (:background ,summer-flower :foreground ,fg))))
    `(magit-diff-added-highlight ((t (:background ,summer-flower :foreground ,fg))))
    `(magit-diff-removed ((t (:background ,red-forest :foreground ,fg))))
-   `(magit-diff-removed-highlight ((t (:background ,red-forest :foreground ,fg))))
+   `(magit-diff-removed-highlight ((t (:background ,redder-forest :foreground ,fg))))
    `(magit-diff-context ((t (:background ,bg :foreground ,comment))))
    `(magit-diff-context-highlight ((t (:background ,bg :foreground ,frost))))
    `(magit-section-highlight ((t (:background ,as-dark-as-midnight))))
