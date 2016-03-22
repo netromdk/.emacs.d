@@ -134,7 +134,7 @@
    ;; Company-mode
    `(company-tooltip ((t (:foreground ,fg :background ,anthracite))))
    `(company-tooltip-selection ((t (:foreground ,fg :background ,slightly-brighter-than-midnight))))
-   `(company-scrollbar-fg ((t (:background ,as-dark-as-midnight))))
+   `(company-scrollbar-fg ((t (:background ,anthracite))))
    `(company-scrollbar-bg ((t (:background ,slightly-brighter-than-midnight))))
    `(company-tooltip-common ((t (:foreground ,saffron))))
    `(company-preview ((t (:background ,slightly-brighter-than-midnight))))
