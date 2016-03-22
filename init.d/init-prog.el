@@ -54,6 +54,17 @@
   (progn
     (add-hook 'prog-mode-hook 'highlight-numbers-mode)))
 
+;; Highlights thing at point.
+(req-package highlight-thing
+  :config
+  (progn
+    (setq highlight-thing-delay-seconds 0.8)
+    (setq highlight-thing-limit-to-defun t) ;; Limit to current function.
+    (setq highlight-thing-what-thing 'symbol)
+    (setq highlight-thing-case-sensitive-p t)
+
+    (add-hook 'prog-mode-hook 'highlight-thing-mode)))
+
 ;; Formatting code via clang-format-region.
 (req-package clang-format)
 
