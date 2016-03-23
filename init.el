@@ -71,10 +71,13 @@
 ;; The "backbone" uses req-package.
 (require-package 'req-package)
 (require 'req-package)
+(random t)
 (req-package-force load-dir
   :defer 1
-  :init (progn (setq force-load-messages nil)
-               (setq load-dir-debug nil)
-               (setq load-dir-recursive t))
-  :config (progn (load-dir-one init-dir)
-                 (req-package-finish)))
+  :init
+  (setq force-load-messages nil)
+  (setq load-dir-debug nil)
+  (setq load-dir-recursive t)
+  :config
+  (load-dir-one init-dir)
+  (req-package-finish))
