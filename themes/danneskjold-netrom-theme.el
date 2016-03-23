@@ -211,7 +211,7 @@
    `(whitespace-line ((t (:background "gray20" :foreground "#DD5542"))))
 
    ;; Highlight-thing
-   `(hi-yellow ((t (:background ,anthracite :foreground ,fg :weight bold))))
+   `(hi-yellow ((t (:foreground ,spring-flower :weight bold :underline t))))
 
    ;; Compilation-mode
    `(compilation-warning ((t (:foreground ,sunrise))))
