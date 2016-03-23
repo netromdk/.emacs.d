@@ -37,7 +37,10 @@
       '(diminish 'yas-minor-mode))
 
     (eval-after-load "highlight-thing"
-      '(diminish 'highlight-thing-mode))))
+      '(diminish 'highlight-thing-mode))
+
+    (eval-after-load "hi-lock"
+      '(diminish 'hi-lock-mode))))
 
 
 (provide 'init-diminish)
