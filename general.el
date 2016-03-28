@@ -30,6 +30,9 @@
 ;; speeds up various things.
 (setq gc-cons-threshold 20000000)
 
+;; Change warning to appear at 100+ MB instead of 10 MB.
+(setq large-file-warning-threshold 100000000)
+
 ;; Use utf-8 for everything!
 (setq locale-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
