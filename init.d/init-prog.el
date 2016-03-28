@@ -1,7 +1,7 @@
 (require 'req-package)
 
 ;; General compilation settings.
-(setq compilation-scroll-output t)
+(setq compilation-scroll-output 'first-error)
 (setq compilation-window-height 30)
 
 (defun next-error-skip-warnings ()
