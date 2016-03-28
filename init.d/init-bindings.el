@@ -25,6 +25,10 @@
 ;; Indent, untabify and clean whitespace of region or buffer.
 (global-set-key (kbd "C-c c") 'cleanup-region-or-buffer)
 
+;; Intelligent line opening that also places cursor on new line.
+(global-set-key (kbd "C-o") 'prelude-smart-open-line)
+(global-set-key (kbd "M-o") 'open-line) ;; Default way.
+
 ;; Using hippie-expand instead of dabbrev-expand.
 (global-set-key (kbd "M-/") 'hippie-expand)
 
