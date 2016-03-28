@@ -1,17 +1,19 @@
 ;;;;;;;;; COMMON CONFIGURATIONS
 
-(column-number-mode t)                  ;; show current column
-(size-indication-mode t)                ;; show current buffer size
-(setq inhibit-startup-message t)        ;; don't show the GNU splash screen
-(transient-mark-mode t)                 ;; show selection from mark
-(mouse-avoidance-mode 'jump)            ;; jump mouse away when typing
-(auto-compression-mode t)               ;; browse compressed archives
-(put 'upcase-region 'disabled nil)      ;; enable ``upcase-region''
-(global-font-lock-mode t)               ;; syntax highlight
-(setq-default indent-tabs-mode nil)     ;; use spaces instead of tabs
-(fset 'yes-or-no-p 'y-or-n-p)           ;; use 'y' instead of 'yes' etc.
-(setq message-log-max 10000)            ;; extend message buffer
-(setq set-mark-command-repeat-pop t)    ;; pop repeat marks
+(column-number-mode t)               ;; Show current column
+(size-indication-mode t)             ;; Show current buffer size
+(setq inhibit-startup-message t)     ;; Don't show the GNU splash screen
+(transient-mark-mode t)              ;; Show selection from mark
+(mouse-avoidance-mode 'jump)         ;; Jump mouse away when typing
+(auto-compression-mode t)            ;; Browse compressed archives
+(put 'upcase-region 'disabled nil)   ;; Enable ``upcase-region''
+(global-font-lock-mode t)            ;; Syntax highlight
+(setq-default indent-tabs-mode nil)  ;; Use spaces instead of tabs
+(fset 'yes-or-no-p 'y-or-n-p)        ;; Use 'y' instead of 'yes' etc.
+(setq message-log-max 10000)         ;; Extend message buffer
+(setq set-mark-command-repeat-pop t) ;; Pop repeat marks
+(delete-selection-mode t)            ;; Delete selection when typing.
+(setq kill-whole-line t)             ;; Kill whole line and move next line up.
 
 ;; Don't show menu bar, scroll bar, and tool bar. In TTY they are not
 ;; defined.
@@ -33,6 +35,7 @@
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
+(set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 
 ;; Save all backups and auto-saves to a temporary directory. And clean it for all files older than a
