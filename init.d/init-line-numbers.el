@@ -20,11 +20,12 @@
     ;; binding then use [remap goto-line] instead of (kbd "M-g").
     (global-set-key (kbd "M-g") 'goto-line-with-feedback)))
 
-(req-package hlinum
-  :config
-  (progn
-    ;; highlights current line number in margin
-    (hlinum-activate)))
+;; Disable right now because the line numbers are only shown when using M-g.
+;; (req-package hlinum
+;;   :config
+;;   (progn
+;;     ;; highlights current line number in margin
+;;     (hlinum-activate)))
 
 (req-package highlight-current-line
   :config
