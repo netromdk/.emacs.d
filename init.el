@@ -26,8 +26,7 @@
     ("ff531c9015fdf81bacbc1e29686dba68d049bd049cedff6f58c1672ec1f3dad3" default)))
  '(recentf-exclude
    (quote
-    ("ido.last" ".emacs.d/saveplace.txt" "/var/folders/" "~/Maildir")))
- '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify)))
+    ("ido.last" ".emacs.d/saveplace.txt" "/var/folders/" "~/Maildir"))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
