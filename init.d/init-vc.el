@@ -12,13 +12,17 @@
     (global-set-key (kbd "C-x g") 'magit-status)))
 
 ;; Highlight uncommitted changes/additions/deletions in the fringe.
- (req-package diff-hl
-   :config
-   (progn
-     (global-diff-hl-mode 1)
-     ;; Disabled flydiff mode because it somehow exceeds eval depth when used with magit...
-     ;;(diff-hl-flydiff-mode 1)
-     ))
+(req-package diff-hl
+  :require magit
+  :init
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+
+  :config
+  ;; Disabled flydiff mode because it somehow exceeds eval depth when used with magit...
+  ;;(diff-hl-flydiff-mode 1)
+
+  (global-diff-hl-mode 1))
 
 (req-package gitignore-mode)
 (req-package gitconfig-mode)
