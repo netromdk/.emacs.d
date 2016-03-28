@@ -4,10 +4,16 @@
   :config
   (progn
     ;; Set defaults used by specific operations.
-    (setq magit-pull-arguments '("--rebase"))
-    (setq magit-cherry-pick-arguments '("-x"))
-    (setq magit-log-arguments '("-n256" "--graph" "--decorate" "--color"))
-    (setq magit-diff-arguments '("-U3" "--stat" "--no-ext-diff"))
+    (setq magit-pull-arguments '("--rebase")
+          magit-cherry-pick-arguments '("-x")
+          magit-log-arguments '("-n256" "--graph" "--decorate" "--color")
+          magit-diff-arguments '("-U3" "--stat" "--no-ext-diff"))
+
+    ;; Show status full screen.
+    (defadvice magit-status (around magit-fullscreen activate)
+      (window-configuration-to-register :magit-fullscreen)
+      ad-do-it
+      (delete-other-windows))
 
     (global-set-key (kbd "C-x g") 'magit-status)))
 
