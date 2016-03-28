@@ -9,9 +9,6 @@
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 (global-set-key (kbd "C-.") 'repeat)
 
-;; Ask before killing emacs!
-(global-set-key (kbd "C-x C-c") 'ask-to-kill-emacs)
-
 ;; Cycle through "just one space", "no spaces" and original number of spaces,
 ;; instead of just "just one space". It does not delete newlines, too.
 (global-set-key (kbd "M-SPC")

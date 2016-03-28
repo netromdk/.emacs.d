@@ -149,14 +149,6 @@
         (delq (current-buffer)
               (remove-if-not 'buffer-file-name (buffer-list)))))
 
-(defun ask-to-kill-emacs (bool)
-  "Ask before killing emacs."
-  (interactive
-   (list (y-or-n-p "Do you really want to save buffers and kill emacs? ")))
-  (if bool
-      (save-buffers-kill-terminal)
-    (message "Phew!")))
-
 (defun prelude-smart-open-line (arg)
   "Insert an empty line after the current line.
 Position the cursor at its beginning, according to the current mode.
