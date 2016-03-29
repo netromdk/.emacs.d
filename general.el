@@ -12,7 +12,6 @@
 (fset 'yes-or-no-p 'y-or-n-p)        ;; Use 'y' instead of 'yes' etc.
 (setq message-log-max 10000)         ;; Extend message buffer
 (setq set-mark-command-repeat-pop t) ;; Pop repeat marks
-(delete-selection-mode t)            ;; Delete selection when typing.
 (setq kill-whole-line t)             ;; Kill whole line and move next line up.
 (setq confirm-kill-emacs 'y-or-n-p)  ;; Confirm killing emacs (might not be on purpose..).
 
