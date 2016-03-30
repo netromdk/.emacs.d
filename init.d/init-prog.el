@@ -100,10 +100,8 @@
 
 ;; JavaScript
 (req-package js
-  :config
-  (progn
-    (add-hook 'js-mode-hook
-              (lambda () (setq js-indent-level 2)))))
+  :init
+  (setq js-indent-level 2))
 
 ;; Objective-C
 (setq auto-mode-alist
