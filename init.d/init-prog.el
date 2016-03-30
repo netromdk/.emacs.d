@@ -82,6 +82,18 @@
                 ("\\.cc$" . c++-mode))
               auto-mode-alist))
 
+;; Detect if .h file is actually c-mode instead of c++-mode that I default them to be.
+(req-package dummy-h-mode
+  :commands dummy-h-mode
+  :mode ("\\.h$" . dummy-h-mode)
+
+  :init
+  ;; Avoid error: "Variable binding depth exceeds max-specpdl-size".
+  (setq max-specpdl-size 10000)
+
+  :config
+  (setq dummy-h-mode-default-major-mode 'c++-mode))
+
 ;; Elisp
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
