@@ -11,5 +11,13 @@
   ;; Automatically refresh dired buffer on changes.
   (add-hook 'dired-mode-hook 'auto-revert-mode))
 
+;; dired-k makes directory listings more readable, adding a bit of color and some git status
+;; information on files and directories.
+(req-package dired-k
+  :require dired
+  :config
+  ;; Run dired-k when dired buffer is opened.
+  (add-hook 'dired-initial-position-hook 'dired-k))
+
 
 (provide 'init-dired)
