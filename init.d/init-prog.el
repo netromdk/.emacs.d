@@ -96,10 +96,7 @@
             (local-set-key (kbd "C-c r") 'eval-region)))
 
 ;; Shell script
-(add-hook 'sh-mode-hook
-          (lambda ()
-            (setq sh-basic-offset 2)
-            (setq sh-indentation 2)))
+(setq sh-indentation 2)
 
 ;; JavaScript
 (req-package js
