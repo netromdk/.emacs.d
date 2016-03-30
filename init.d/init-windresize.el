@@ -2,8 +2,7 @@
 
 (req-package windresize
   :config
-  (progn
-    (defalias 'wr 'windresize)))
+  (defalias 'wr 'windresize))
 
 
 (provide 'init-windresize)

@@ -2,29 +2,27 @@
 
 (req-package magit
   :config
-  (progn
-    ;; Set defaults used by specific operations.
-    (setq magit-pull-arguments '("--rebase")
-          magit-cherry-pick-arguments '("-x")
-          magit-log-arguments '("-n256" "--graph" "--decorate" "--color")
-          magit-diff-arguments '("-U3" "--stat" "--no-ext-diff"))
+  ;; Set defaults used by specific operations.
+  (setq magit-pull-arguments '("--rebase")
+        magit-cherry-pick-arguments '("-x")
+        magit-log-arguments '("-n256" "--graph" "--decorate" "--color")
+        magit-diff-arguments '("-U3" "--stat" "--no-ext-diff"))
 
-    ;; Show status full screen.
-    (defadvice magit-status (around magit-fullscreen activate)
-      (window-configuration-to-register :magit-fullscreen)
-      ad-do-it
-      (delete-other-windows))
+  ;; Show status full screen.
+  (defadvice magit-status (around magit-fullscreen activate)
+    (window-configuration-to-register :magit-fullscreen)
+    ad-do-it
+    (delete-other-windows))
 
-    (global-set-key (kbd "C-x g") 'magit-status)))
+  (global-set-key (kbd "C-x g") 'magit-status))
 
 ;; Highlight uncommitted changes/additions/deletions in the fringe.
 (req-package diff-hl
   :require magit
-  :init
+  :config
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 
-  :config
   ;; Disabled flydiff mode because it somehow exceeds eval depth when used with magit...
   ;;(diff-hl-flydiff-mode 1)
 
@@ -41,13 +39,11 @@
 (req-package git-messenger
   :bind ("C-x v p" . git-messenger:popup-message)
   :config
-  (progn
-    (setq git-messenger:show-detail t)))
+  (setq git-messenger:show-detail t))
 
 (req-package git-timemachine
   :config
-  (progn
-    (defalias 'tm 'git-timemachine)))
+  (defalias 'tm 'git-timemachine))
 
 
 (provide 'init-vc)

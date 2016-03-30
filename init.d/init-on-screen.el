@@ -3,9 +3,8 @@
 
 (req-package on-screen
   :config
-  (progn
-    (setq on-screen-highlight-method (quote fringe))
-    (global-on-screen-mode 1)))
+  (setq on-screen-highlight-method (quote fringe))
+  (global-on-screen-mode 1))
 
 
 (provide 'init-on-screen)

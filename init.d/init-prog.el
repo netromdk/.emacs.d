@@ -27,44 +27,37 @@
 
 (req-package dash-at-point
   :config
-  (progn
-    (global-set-key "\C-cd" 'dash-at-point)
-
-    (add-to-list 'dash-at-point-mode-alist '(c-mode . "c,manpages"))
-    (add-to-list 'dash-at-point-mode-alist '(c++-mode . "cpp,qt,c,manpages,lux"))
-    (add-to-list 'dash-at-point-mode-alist '(python-mode . "py,flask"))
-    (add-to-list 'dash-at-point-mode-alist '(cmake-mode . "cmake"))
-    (add-to-list 'dash-at-point-mode-alist '(js-mode . "js"))))
+  (global-set-key "\C-cd" 'dash-at-point)
+  (add-to-list 'dash-at-point-mode-alist '(c-mode . "c,manpages"))
+  (add-to-list 'dash-at-point-mode-alist '(c++-mode . "cpp,qt,c,manpages,lux"))
+  (add-to-list 'dash-at-point-mode-alist '(python-mode . "py,flask"))
+  (add-to-list 'dash-at-point-mode-alist '(cmake-mode . "cmake"))
+  (add-to-list 'dash-at-point-mode-alist '(js-mode . "js")))
 
 ;; Highlights hexcolors, like #aabbcc and Red.
 (req-package rainbow-mode
   :config
-  (progn
-    (add-hook 'prog-mode-hook 'rainbow-mode)))
+  (add-hook 'prog-mode-hook 'rainbow-mode))
 
 ;; For programming modes, show delimiters with variying colors to easily
 ;; distinguish between them.
 (req-package rainbow-delimiters
   :config
-  (progn
-    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 ;; Highlights numbers with another color so they are easier to spot.
 (req-package highlight-numbers
   :config
-  (progn
-    (add-hook 'prog-mode-hook 'highlight-numbers-mode)))
+  (add-hook 'prog-mode-hook 'highlight-numbers-mode))
 
 ;; Highlights thing at point.
 (req-package highlight-thing
   :config
-  (progn
-    (setq highlight-thing-delay-seconds 0.8)
-    (setq highlight-thing-limit-to-defun t) ;; Limit to current function.
-    (setq highlight-thing-what-thing 'symbol)
-    (setq highlight-thing-case-sensitive-p t)
-
-    (add-hook 'prog-mode-hook 'highlight-thing-mode)))
+  (setq highlight-thing-delay-seconds 0.8)
+  (setq highlight-thing-limit-to-defun t) ;; Limit to current function.
+  (setq highlight-thing-what-thing 'symbol)
+  (setq highlight-thing-case-sensitive-p t)
+  (add-hook 'prog-mode-hook 'highlight-thing-mode))
 
 ;; Formatting code via clang-format-region.
 (req-package clang-format)
@@ -99,9 +92,7 @@
 (setq sh-indentation 2)
 
 ;; JavaScript
-(req-package js
-  :init
-  (setq js-indent-level 2))
+(setq js-indent-level 2)
 
 ;; Objective-C
 (setq auto-mode-alist

@@ -9,19 +9,17 @@
 
 (req-package recentf
   :config
-  (progn
-    (setq recentf-max-saved-items 200)
-    (setq recentf-max-menu-items 15)
-    (setq recentf-save-file (concat user-emacs-directory "recentf"))
-    (recentf-mode 1)
-    (global-set-key "\C-xr" 'recentf-open-files)))
+  (setq recentf-max-saved-items 200)
+  (setq recentf-max-menu-items 15)
+  (setq recentf-save-file (concat user-emacs-directory "recentf"))
+  (recentf-mode 1)
+  (global-set-key "\C-xr" 'recentf-open-files))
 
 ;; Saves cursor positions of visited files.
 (req-package saveplace
   :config
-  (progn
-    (setq save-place-file (concat user-emacs-directory "saveplace"))
-    (setq-default save-place t)))
+  (setq save-place-file (concat user-emacs-directory "saveplace"))
+  (setq-default save-place t))
 
 
 (provide 'init-session)

@@ -6,9 +6,8 @@
 (req-package flx-isearch
   :require flx
   :config
-  (progn
-    (global-set-key (kbd "C-M-s") 'flx-isearch-forward)
-    (global-set-key (kbd "C-M-r") 'flx-isearch-backward)))
+  (global-set-key (kbd "C-M-s") 'flx-isearch-forward)
+  (global-set-key (kbd "C-M-r") 'flx-isearch-backward))
 
 
 (provide 'init-search)

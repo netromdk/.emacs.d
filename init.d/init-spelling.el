@@ -2,50 +2,47 @@
 
 (req-package ispell
   :config
-  (progn
-    ;; Set aspell as spell program
-    (setq ispell-program-name "aspell")
+  ;; Set aspell as spell program
+  (setq ispell-program-name "aspell")
 
-    ;; Speed up aspell: ultra | fast | normal
-    (setq ispell-extra-args '("--sug-mode=normal"))
+  ;; Speed up aspell: ultra | fast | normal
+  (setq ispell-extra-args '("--sug-mode=normal"))
 
-    (defun da-spell ()
-      "Set ispell to use Danish dictionary (locally)"
-      (interactive)
-      (ispell-change-dictionary "dansk"))
+  (defun da-spell ()
+    "Set ispell to use Danish dictionary (locally)"
+    (interactive)
+    (ispell-change-dictionary "dansk"))
 
-    (defun en-spell ()
-      "Set ispell to use English dictionary (locally)"
-      (interactive)
-      (ispell-change-dictionary "english"))
+  (defun en-spell ()
+    "Set ispell to use English dictionary (locally)"
+    (interactive)
+    (ispell-change-dictionary "english"))
 
-    (defalias 'sb 'ispell-buffer)
+  (defalias 'sb 'ispell-buffer)
 
-    ;; Default to english dictionary.
-    (en-spell)))
+  ;; Default to english dictionary.
+  (en-spell))
 
 (req-package flyspell
   :require ispell
   :config
-  (progn
-    ;; Flyspell activation for text mode
-    ;;(add-hook 'text-mode-hook
-    ;;          (lambda () (flyspell-mode t)))
+  ;; Flyspell activation for text mode
+  ;;(add-hook 'text-mode-hook
+  ;;          (lambda () (flyspell-mode t)))
 
-    ;; Remove Flyspell from some sub modes of text mode
-    ;;(dolist (hook '(change-log-mode-hook
-    ;;                log-edit-mode-hook))
-    ;;  (add-hook hook (lambda () (flyspell-mode -1))))
+  ;; Remove Flyspell from some sub modes of text mode
+  ;;(dolist (hook '(change-log-mode-hook
+  ;;                log-edit-mode-hook))
+  ;;  (add-hook hook (lambda () (flyspell-mode -1))))
 
-    ;; Flyspell comments and strings in programming modes.
-    ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-    ))
+  ;; Flyspell comments and strings in programming modes.
+  ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  )
 
 (req-package helm-flyspell
   :require helm flyspell
   :config
-  (progn
-    (global-set-key (kbd "C-;") 'helm-flyspell-correct)))
+  (global-set-key (kbd "C-;") 'helm-flyspell-correct))
 
 
 (provide 'init-spelling)
