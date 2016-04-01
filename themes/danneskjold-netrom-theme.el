@@ -128,15 +128,15 @@
 
    ;; Rainbow-delimiters
    `(rainbow-delimiters-depth-1-face ((t (:foreground ,spring-flower))))
-   `(rainbow-delimiters-depth-2-face ((t (:foreground ,santa))))
-   `(rainbow-delimiters-depth-3-face ((t (:foreground ,frost))))
-   `(rainbow-delimiters-depth-4-face ((t (:foreground ,saffron))))
+   `(rainbow-delimiters-depth-2-face ((t (:foreground ,twitter))))
+   `(rainbow-delimiters-depth-3-face ((t (:foreground ,sunrise))))
    `(rainbow-delimiters-depth-5-face ((t (:foreground ,waddles))))
-   `(rainbow-delimiters-depth-6-face ((t (:foreground ,frost))))
+   `(rainbow-delimiters-depth-4-face ((t (:foreground ,saffron))))
+   `(rainbow-delimiters-depth-6-face ((t (:foreground ,sunrise))))
    `(rainbow-delimiters-depth-7-face ((t (:foreground ,spring-flower))))
-   `(rainbow-delimiters-depth-8-face ((t (:foreground ,santa))))
-   `(rainbow-delimiters-depth-9-face ((t (:foreground ,frost))))
-   `(rainbow-delimiters-depth-10-face ((t (:foreground ,saffron))))
+   `(rainbow-delimiters-depth-8-face ((t (:foreground ,twitter))))
+   `(rainbow-delimiters-depth-9-face ((t (:foreground ,sunrise))))
+   `(rainbow-delimiters-depth-10-face ((t (:foreground ,waddles))))
 
    ;; Company-mode
    `(company-tooltip ((t (:foreground ,fg :background ,anthracite))))
