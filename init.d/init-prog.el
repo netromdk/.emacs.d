@@ -103,6 +103,11 @@
 ;; Shell script
 (setq sh-indentation 2)
 
+(setq auto-mode-alist
+      (append '(("\\.sh$"  . sh-mode)
+                ("\\.zsh$"  . sh-mode))
+              auto-mode-alist))
+
 ;; JavaScript
 (setq js-indent-level 2)
 
