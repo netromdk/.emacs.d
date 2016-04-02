@@ -23,7 +23,7 @@
  '(custom-enabled-themes (quote (danneskjold-netrom)))
  '(custom-safe-themes
    (quote
-    ("4a40d7e7b27e393eef93d53a6b535a87619efacf659f8ac6294806713aff35a1" default)))
+    ("20c089ce2f44063c6fd200b6724c5274ef3eee0a8e19edfae5271513418efc05" default)))
  '(recentf-exclude
    (quote
     ("ido.last" ".emacs.d/saveplace.txt" "/var/folders/" "~/Maildir"))))

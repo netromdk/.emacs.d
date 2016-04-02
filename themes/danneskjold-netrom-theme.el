@@ -217,7 +217,12 @@
    `(compilation-warning ((t (:foreground ,sunrise))))
    `(compilation-info ((t (:foreground ,spring-flower))))
    `(compilation-error ((t (:inherit error :foreground ,santa))))
-   `(compilation-line-number ((t (:inherit font-lock-keyword-face :foreground ,spring-flower))))))
+   `(compilation-line-number ((t (:inherit font-lock-keyword-face :foreground ,spring-flower))))
+
+   ;; Man
+   `(Man-overstrike ((t (:inherit bold :foreground ,spring-flower))))
+   `(Man-underline ((t (:inherit underline :weight bold :foreground ,frost))))
+   ))
 
 ;;;###autoload
 (when load-file-name
