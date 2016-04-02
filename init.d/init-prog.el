@@ -115,6 +115,9 @@
 ;; JavaScript
 (setq js-indent-level 2)
 
+(req-package json-mode
+  :mode ("\\.json$" . json-mode))
+
 ;; Objective-C
 (setq auto-mode-alist
       (append '(("\\.mm$" . objc-mode))
