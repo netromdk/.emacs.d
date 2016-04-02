@@ -59,6 +59,10 @@
   (setq highlight-thing-case-sensitive-p t)
   (add-hook 'prog-mode-hook 'highlight-thing-mode))
 
+;; Avoid escape nightmares by editing string in separate buffer.
+(req-package string-edit
+  :bind ("C-c e" . string-edit-at-point))
+
 ;; Formatting code via clang-format-region.
 (req-package clang-format)
 
