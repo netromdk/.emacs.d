@@ -14,6 +14,7 @@
 (setq set-mark-command-repeat-pop t) ;; Pop repeat marks
 (setq kill-whole-line t)             ;; Kill whole line and move next line up.
 (setq confirm-kill-emacs 'y-or-n-p)  ;; Confirm killing emacs (might not be on purpose..).
+(setq echo-keystrokes 0.2)           ;; Echo keystrokes quicker.
 
 ;; Don't show menu bar, scroll bar, and tool bar. In TTY they are not
 ;; defined.
