@@ -55,5 +55,15 @@
 
   (define-key dired-mode-map "K" 'dired-k))
 
+(req-package dired-sort
+  :require dired
+  :config
+  (key-chord-define dired-mode-map "ss" 'dired-sort-size)
+  (key-chord-define dired-mode-map "se" 'dired-sort-extension)
+  (key-chord-define dired-mode-map "sc" 'dired-sort-ctime)
+  (key-chord-define dired-mode-map "su" 'dired-sort-utime)
+  (key-chord-define dired-mode-map "st" 'dired-sort-time)
+  (key-chord-define dired-mode-map "sn" 'dired-sort-name))
+
 
 (provide 'init-dired)
