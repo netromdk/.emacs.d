@@ -12,7 +12,13 @@
   ;; Automatically refresh dired buffer on changes.
   (add-hook 'dired-mode-hook 'auto-revert-mode)
 
-  (key-chord-define dired-mode-map "qq" 'dired-up-directory))
+  (key-chord-define dired-mode-map "qq" 'dired-up-directory)
+
+  (define-key dired-mode-map (kbd "M-o") 'dired-omit-mode)
+
+  ;; Unwanted files to be flagged for deletion on dired-flag-garbage-files or "%&".
+  (setq dired-garbage-files-regexp
+        "\\(?:\\.\\(?:aux\\|bak\\|dvi\\|log\\|orig\\|rej\\|toc\\|elc\\)\\)\\'"))
 
 ;; dired-k makes directory listings more readable, adding a bit of color and some git status
 ;; information on files and directories.
