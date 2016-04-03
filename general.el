@@ -67,15 +67,12 @@
                 prog-mode-hook))
   (add-hook hook (lambda () (setq fill-column global-fill-column))))
 
-;; Disable visible bell because it looks ugly, but that makes the
-;; audible bell and therefore we replace it with a
-;; background/foreground color "flash".
+;; Disable visible bell because it looks ugly, but that makes the audible bell and therefore we
+;; "flash" the mode line by double-inverting instead.
 (setq visible-bell nil)
-(setq ring-bell-function
-      `(lambda ()
-         (let ((old (face-foreground 'default)))
-           (set-face-foreground 'default (face-background 'default))
-           (set-face-foreground 'default old))))
+(setq ring-bell-function (lambda ()
+                           (invert-face 'mode-line)
+                           (run-with-timer 0.05 nil 'invert-face 'mode-line)))
 
 ;; Scratch buffer
 (setq initial-major-mode 'lisp-interaction-mode)
