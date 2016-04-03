@@ -27,11 +27,13 @@
     (backward-char (- (current-column) 2)))
   (define-key dired-mode-map (kbd "C-a") 'dired-back-to-start-of-files)
 
-  ;; M-< goes to first file, the fourth line.
+  ;; M-< goes to first file, the fourth line unless in omit mode then second line.
   (defun dired-back-to-top ()
     (interactive)
     (beginning-of-buffer)
-    (dired-next-line 4))
+    (if (bound-and-true-p dired-omit-mode)
+        (dired-next-line 2)
+      (dired-next-line 4)))
   (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
 
   ;; M-> goes to last file.
