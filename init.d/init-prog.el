@@ -1,5 +1,8 @@
 (require 'req-package)
 
+;; Comment/uncomment region in all prog modes. Cycling the command will cycle comment/uncomment.
+(define-key prog-mode-map (kbd "\C-c\C-c") 'comment-or-uncomment-region)
+
 ;; General compilation settings.
 (setq compilation-window-height 30
       compilation-scroll-output t
