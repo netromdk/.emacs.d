@@ -12,6 +12,8 @@
         c-electric-star
         c-fill-paragraph
         c-indent-line-or-region
+        dired-do-delete
+        dired-flag-file-deletion
         electric-newline-and-maybe-indent
         indent-for-tab-command
         isearch-forward-regexp
@@ -21,4 +23,8 @@
         markdown-exdent-or-delete
         orgtbl-self-insert-command
         yaml-electric-backspace
+        ))
+
+(setq mc/cmds-to-run-once
+      '(
         ))
