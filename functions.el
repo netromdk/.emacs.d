@@ -168,3 +168,13 @@ Position the cursor at it's beginning, according to the current mode."
   (newline-and-indent)
   (forward-line -1)
   (indent-according-to-mode))
+
+(defun indent-for-comment-and-indent ()
+  "Indent for comment and indent again afterwards. This is to
+ensure the indentation level. For instance, in C++ it will insert
+comment to the far right of the line but if used to start a
+comment on a line of its own then it will be to the far right,
+and the extra indentation fixes that."
+  (interactive)
+  (indent-for-comment)
+  (indent-for-tab-command))

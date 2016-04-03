@@ -1,6 +1,7 @@
 (require 'req-package)
 
-(req-package ls-lisp
+(req-package dired
+  :require (ls-lisp key-chord)
   :config
   (setq dired-listing-switches "-lha") ;; Show human-readable sizes.
 
@@ -9,7 +10,9 @@
   (setq ls-lisp-use-insert-directory-program nil)
 
   ;; Automatically refresh dired buffer on changes.
-  (add-hook 'dired-mode-hook 'auto-revert-mode))
+  (add-hook 'dired-mode-hook 'auto-revert-mode)
+
+  (key-chord-define dired-mode-map "qq" 'dired-up-directory))
 
 ;; dired-k makes directory listings more readable, adding a bit of color and some git status
 ;; information on files and directories.

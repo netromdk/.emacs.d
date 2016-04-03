@@ -83,6 +83,12 @@
             ;; Run clang-format on region or buffer.
             (local-set-key (kbd "C-c f") 'clang-format-region-or-buffer)))
 
+(req-package cc-mode
+  :require key-chord
+  :config
+  (key-chord-define c-mode-base-map ";;"  "\C-e;")
+  (key-chord-define c-mode-base-map "{}"  "{\n\n}\C-p\t"))
+
 (setq auto-mode-alist
       (append '(("\\.c$"  . c-mode)
                 ("\\.C$"  . c++-mode)
