@@ -35,13 +35,15 @@
         (dired-next-line 2)
       (dired-next-line 4)))
   (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+  (define-key dired-mode-map (kbd "M-p") 'dired-back-to-top)
 
   ;; M-> goes to last file.
   (defun dired-jump-to-bottom ()
     (interactive)
     (end-of-buffer)
     (dired-next-line -1))
-  (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom))
+  (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
+  (define-key dired-mode-map (kbd "M-n") 'dired-jump-to-bottom))
 
 ;; dired-k makes directory listings more readable, adding a bit of color and some git status
 ;; information on files and directories.
