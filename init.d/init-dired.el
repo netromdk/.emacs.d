@@ -17,7 +17,10 @@
   :require dired
   :config
   ;; Run dired-k when dired buffer is opened.
-  (add-hook 'dired-initial-position-hook 'dired-k))
+  (add-hook 'dired-initial-position-hook 'dired-k)
+
+  ;; (Re-)apply k mode.
+  (local-set-key "K" 'dired-k))
 
 
 (provide 'init-dired)
