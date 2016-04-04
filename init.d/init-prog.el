@@ -56,7 +56,7 @@
 ;; Highlights thing at point.
 (req-package highlight-thing
   :config
-  (setq highlight-thing-delay-seconds 0.8)
+  (setq highlight-thing-delay-seconds 1.5)
   (setq highlight-thing-limit-to-defun t) ;; Limit to current function.
   (setq highlight-thing-what-thing 'symbol)
   (setq highlight-thing-case-sensitive-p t)
