@@ -3,11 +3,19 @@
 (req-package dired
   :require (ls-lisp key-chord)
   :config
-  (setq dired-listing-switches "-lha") ;; Show human-readable sizes.
+
+  ;; Show human-readable sizes and show folders with "/" at the end.
+  (setq dired-listing-switches "-lhaF")
 
   ;; In dired mode, use Emacs's emulation of "ls" because the system one most
   ;; often doesn't support the "--dired" argument.
   (setq ls-lisp-use-insert-directory-program nil)
+
+  ;; Show directories first.
+  (setq ls-lisp-dirs-first t)
+
+  ;; Don't show link count but uid+gid.
+  (setq ls-lisp-verbosity '(uid gid))
 
   ;; Automatically refresh dired buffer on changes.
   (add-hook 'dired-mode-hook 'auto-revert-mode)
