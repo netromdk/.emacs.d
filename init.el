@@ -49,10 +49,6 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 ;;(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 
-;; Aliases for viewing packages.
-(defalias 'lp 'package-list-packages)
-(defalias 'lpn 'package-list-packages-no-fetch)
-
 (eval-when-compile (package-initialize))
 
 (defun require-package (package)

@@ -22,6 +22,10 @@
   (setq helm-autoresize-max-height 40)
   (helm-autoresize-mode t)
 
+  ;; Aliases for viewing packages.
+  (defalias 'lp 'helm-list-elisp-packages)
+  (defalias 'lpn 'helm-list-elisp-packages-no-fetch)
+
   (global-set-key (kbd "M-x") 'helm-M-x)
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
   (global-set-key (kbd "C-x b") 'helm-mini)
