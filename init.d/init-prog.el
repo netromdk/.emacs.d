@@ -66,6 +66,12 @@
 (req-package string-edit
   :bind ("C-c e" . string-edit-at-point))
 
+;; Make symbols pretty by using certain unicode symbols instead of multi-char values. For instance,
+;; '->' becomes '→' in C++ mode.
+(use-package pretty-mode
+  :config
+  (add-hook 'prog-mode-hook 'turn-on-pretty-mode))
+
 ;; Visualize certain like space at end of line and trailing characters after
 ;; fill column.
 (setq whitespace-style '(face empty tabs lines-tail trailing tab-mark))
