@@ -98,5 +98,4 @@
 (add-hook 'kill-emacs-hook 'byte-compile-confs)
 
 ;; Uniquify buffer names.
-(setq uniquify-buffer-name-style 'post-forward
-      uniquify-separator "|")
+(setq uniquify-buffer-name-style 'forward)
