@@ -89,7 +89,13 @@
 (req-package cc-mode
   :require key-chord
   :config
-  (key-chord-define c-mode-base-map ";;" "\C-e;")
+  (defun my-colon-at-the-end ()
+    (interactive)
+    (progn
+      (move-end-of-line nil)
+      (cycle-spacing 0)                 ; Remove all spaces.
+      (insert ";")))
+  (key-chord-define c-mode-base-map ";;" 'my-colon-at-the-end)
   (key-chord-define c-mode-base-map "{}" "{\n\n}\C-p\t"))
 
 (setq auto-mode-alist
