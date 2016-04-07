@@ -7,6 +7,7 @@
     (error "Emacs v. %s+ is required for this configuration!" version)))
 
 ;; Constants.
+(defconst emacs-start-time (current-time))
 (defconst init-dir (concat user-emacs-directory "init.d"))
 (defconst backup-dir (concat temporary-file-directory "emacs"))
 (defconst yas-dir (concat user-emacs-directory "snippets"))
@@ -47,6 +48,8 @@
 (load functions-file)
 (load general-file)
 
+(show-elapsed-time "Loaded initial configuration in")
+
 ;; Packages setup.
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -79,4 +82,5 @@
   (setq load-dir-recursive t)
   :config
   (load-dir-one init-dir)
-  (req-package-finish))
+  (req-package-finish)
+  (show-elapsed-time "Loaded packages in"))

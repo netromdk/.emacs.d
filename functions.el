@@ -184,3 +184,7 @@ and the extra indentation fixes that."
   (interactive)
   (indent-for-comment)
   (indent-for-tab-command))
+
+(defun show-elapsed-time (msg)
+  (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time))))
+    (message "%s %.3fs" msg elapsed)))
