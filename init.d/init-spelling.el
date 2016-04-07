@@ -20,27 +20,26 @@
 
   (defalias 'sb 'ispell-buffer))
 
-(req-package auto-dictionary)
-
 (req-package flyspell
-  :require ispell auto-dictionary
+  :require ispell
   :config
-  ;; Flyspell activation for text mode, and try to automatically detect the language of the buffer.
-  (add-hook 'text-mode-hook
-            (lambda ()
-              (flyspell-mode)
-              (auto-dictionary-mode)))
+  ;; Flyspell activation for text mode.
+  (add-hook 'text-mode-hook 'flyspell-mode)
 
   ;; Remove Flyspell from some sub modes of text mode
   (dolist (hook '(change-log-mode-hook
                   log-edit-mode-hook))
-    (add-hook hook (lambda ()
-                     (flyspell-mode -1)
-                     (auto-dictionary-mode -1))))
+    (add-hook hook (lambda () (flyspell-mode -1))))
 
   ;; Flyspell comments and strings in programming modes.
   ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
   )
+
+;; Tries to automatically detect the language of the buffer and setting the dictionary accordingly.
+(req-package auto-dictionary
+  :require ispell
+  :config
+  (add-hook 'text-mode-hook 'auto-dictionary-mode))
 
 
 (provide 'init-spelling)
