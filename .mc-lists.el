@@ -9,6 +9,7 @@
         c-electric-lt-gt
         c-electric-paren
         c-electric-semi&comma
+        c-electric-slash
         c-electric-star
         c-fill-paragraph
         c-indent-line-or-region
