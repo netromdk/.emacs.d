@@ -18,31 +18,29 @@
     (interactive)
     (ispell-change-dictionary "english"))
 
-  (defalias 'sb 'ispell-buffer)
+  (defalias 'sb 'ispell-buffer))
 
-  ;; Default to english dictionary.
-  (en-spell))
+(req-package auto-dictionary)
 
 (req-package flyspell
-  :require ispell
+  :require ispell auto-dictionary
   :config
-  ;; Flyspell activation for text mode
-  ;;(add-hook 'text-mode-hook
-  ;;          (lambda () (flyspell-mode t)))
+  ;; Flyspell activation for text mode, and try to automatically detect the language of the buffer.
+  (add-hook 'text-mode-hook
+            (lambda ()
+              (flyspell-mode)
+              (auto-dictionary-mode)))
 
   ;; Remove Flyspell from some sub modes of text mode
-  ;;(dolist (hook '(change-log-mode-hook
-  ;;                log-edit-mode-hook))
-  ;;  (add-hook hook (lambda () (flyspell-mode -1))))
+  (dolist (hook '(change-log-mode-hook
+                  log-edit-mode-hook))
+    (add-hook hook (lambda ()
+                     (flyspell-mode -1)
+                     (auto-dictionary-mode -1))))
 
   ;; Flyspell comments and strings in programming modes.
   ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
   )
-
-(req-package helm-flyspell
-  :require helm flyspell
-  :config
-  (global-set-key (kbd "C-;") 'helm-flyspell-correct))
 
 
 (provide 'init-spelling)
