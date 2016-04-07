@@ -90,8 +90,7 @@
   :require key-chord
   :config
   (key-chord-define c-mode-base-map ";;" "\C-e;")
-  (key-chord-define c-mode-base-map "{}" "{\n\n}\C-p\t")
-  (key-chord-define c-mode-base-map "#i" "#include <>\C-b"))
+  (key-chord-define c-mode-base-map "{}" "{\n\n}\C-p\t"))
 
 (setq auto-mode-alist
       (append '(("\\.c$"  . c-mode)
