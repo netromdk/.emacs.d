@@ -2,6 +2,10 @@
 ;;   Emacs Configurations
 ;; ------------------------
 
+(let ((version 24))
+  (unless (>= emacs-major-version version)
+    (error "Emacs v. %s+ is required for this configuration!" version)))
+
 ;; Constants.
 (defconst init-dir (concat user-emacs-directory "init.d"))
 (defconst backup-dir (concat temporary-file-directory "emacs"))
