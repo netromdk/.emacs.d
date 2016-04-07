@@ -9,6 +9,10 @@
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 (global-set-key (kbd "C-.") 'repeat)
 
+;; Move to first whitespace or begninning of line if none. Pressing again goes to the beginning if
+;; there was whitespace.
+(global-set-key [remap move-beginning-of-line] 'smarter-move-beginning-of-line)
+
 ;; Cycle through "just one space", "no spaces" and original number of spaces,
 ;; instead of just "just one space". It does not delete newlines, too.
 (global-set-key (kbd "M-SPC")
