@@ -185,10 +185,6 @@ and the extra indentation fixes that."
   (indent-for-comment)
   (indent-for-tab-command))
 
-(defun show-elapsed-time (msg)
-  (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time))))
-    (message "%s %.3fs" msg elapsed)))
-
 (defun smarter-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
 

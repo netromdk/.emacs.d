@@ -48,8 +48,6 @@
 (load functions-file)
 (load general-file)
 
-(show-elapsed-time "Loaded initial configuration in")
-
 ;; Packages setup.
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -70,6 +68,21 @@
                    (package-install package)))
              (require package))))
 
+;; Timing.
+(setq initial-done-time (current-time))
+
+(defun show-elapsed-time (msg start end)
+  (let ((elapsed (float-time (time-subtract end start))))
+    (message "%s %.3fs" msg elapsed)))
+
+(defun show-loading-info ()
+  (let ((cur (current-time)))
+    (message "============================")
+    (show-elapsed-time "Initial setup:  " emacs-start-time initial-done-time)
+    (show-elapsed-time "Loaded packages:" initial-done-time cur)
+    (show-elapsed-time "Total:          " emacs-start-time cur)
+    (message "============================")))
+
 ;; The "backbone" uses req-package.
 (require-package 'req-package)
 (require 'req-package)
@@ -83,4 +96,4 @@
   :config
   (load-dir-one init-dir)
   (req-package-finish)
-  (show-elapsed-time "Loaded packages in"))
+  (show-loading-info))
