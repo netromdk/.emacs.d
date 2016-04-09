@@ -5,8 +5,9 @@
 
 ;; General compilation settings.
 (setq compilation-window-height 30
-      compilation-scroll-output t
-      compilation-always-kill t) ;; Don't ask, just start new compilation.
+      compilation-scroll-output 'first-error ; Scroll but stop at first error.
+      compilation-skip-threshold 2           ; Skip anything less than errors.
+      compilation-always-kill t)             ; Don't ask, just start new compilation.
 
 (defun next-error-skip-warnings ()
   (interactive)
