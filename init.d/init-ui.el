@@ -38,31 +38,40 @@
     '(diminish 'vim-empty-lines-mode))
 
   (eval-after-load "abbrev"
-    '(diminish 'abbrev-mode "Abv"))
+    '(diminish 'abbrev-mode))
 
   (eval-after-load "fic-mode"
     '(diminish 'fic-mode))
 
+  (eval-after-load "flyspell"
+    '(diminish 'flyspell-mode "Ϝσ"))
+
   (eval-after-load "company"
-    '(diminish 'company-mode "Comp"))
+    '(diminish 'company-mode "κ"))
+
+  (eval-after-load "whitespace"
+    '(diminish 'whitespace-mode "ω"))
 
   (eval-after-load "smartparens"
     '(diminish 'smartparens-mode))
 
+  (eval-after-load "autorevert"
+    '(diminish 'auto-revert-mode "αρ"))
+
   (eval-after-load "org-table"
-    '(diminish 'orgtbl-mode "OrgT"))
+    '(diminish 'orgtbl-mode "ꙮτ"))
 
   (eval-after-load "org"
-    '(diminish 'orgstruct-mode "OrgS"))
+    '(diminish 'orgstruct-mode "ꙮσ"))
 
   (eval-after-load "rainbow-mode"
     '(diminish 'rainbow-mode))
 
   (eval-after-load "helm-gtags"
-    '(diminish 'helm-gtags-mode "HGt"))
+    '(diminish 'helm-gtags-mode "τ"))
 
   (eval-after-load "yasnippet"
-    '(diminish 'yas-minor-mode))
+    '(diminish 'yas-minor-mode "γ"))
 
   (eval-after-load "highlight-thing"
     '(diminish 'highlight-thing-mode))
