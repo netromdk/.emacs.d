@@ -193,5 +193,9 @@
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   (define-key yas-minor-mode-map (kbd "C-M-y") 'yas-expand))
 
+(req-package helm-c-yasnippet
+  :require yasnippet
+  :bind ("C-c y" . helm-yas-complete))
+
 
 (provide 'init-prog)
