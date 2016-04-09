@@ -21,10 +21,12 @@
   (defalias 'sb 'ispell-buffer))
 
 (req-package flyspell
-  :require ispell
+  :require ispell flyspell-lazy
   :config
   ;; Flyspell activation for text mode.
-  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'text-mode-hook (lambda ()
+                              (flyspell-lazy-mode)
+                              (flyspell-mode)))
 
   ;; Remove Flyspell from some sub modes of text mode
   (dolist (hook '(change-log-mode-hook
@@ -34,6 +36,9 @@
   ;; Flyspell comments and strings in programming modes.
   ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
   )
+
+;; Improve flyspell responsiveness using idle timers.
+(req-package flyspell-lazy)
 
 ;; Tries to automatically detect the language of the buffer and setting the dictionary accordingly.
 (req-package auto-dictionary
