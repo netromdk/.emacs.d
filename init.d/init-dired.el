@@ -17,6 +17,9 @@
   ;; Don't show link count but uid+gid.
   (setq ls-lisp-verbosity '(uid gid))
 
+  ;; Updated dired buffers on file system changes.
+  (add-hook 'dired-mode-hook 'auto-revert-mode)
+
   (key-chord-define dired-mode-map "qq" 'dired-up-directory)
 
   ;; Unwanted files to be flagged for deletion on dired-flag-garbage-files or "%&".
