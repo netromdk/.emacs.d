@@ -56,7 +56,9 @@
     '(diminish 'smartparens-mode))
 
   (eval-after-load "autorevert"
-    '(diminish 'auto-revert-mode "αr"))
+    (progn
+      '(diminish 'auto-revert-mode "αr")
+      '(diminish 'global-auto-revert-mode "αr")))
 
   (eval-after-load "org-table"
     '(diminish 'orgtbl-mode "ꙮτ"))
