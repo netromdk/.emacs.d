@@ -44,10 +44,10 @@
     '(diminish 'fic-mode))
 
   (eval-after-load "flyspell"
-    '(diminish 'flyspell-mode "Ϝσ"))
+    '(diminish 'flyspell-mode "ᚨ"))
 
   (eval-after-load "company"
-    '(diminish 'company-mode "κ"))
+    '(diminish 'company-mode "ç"))
 
   (eval-after-load "whitespace"
     '(diminish 'whitespace-mode "ω"))
@@ -56,7 +56,7 @@
     '(diminish 'smartparens-mode))
 
   (eval-after-load "autorevert"
-    '(diminish 'auto-revert-mode "αρ"))
+    '(diminish 'auto-revert-mode "αr"))
 
   (eval-after-load "org-table"
     '(diminish 'orgtbl-mode "ꙮτ"))
