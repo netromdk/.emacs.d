@@ -96,7 +96,7 @@
         (when line-numbers-off-p
           (linum-mode -1)))))
 
-  (global-set-key [remap goto-line] 'goto-line-with-feedback))
+  (global-set-key (kbd "M-g l") 'goto-line-with-feedback))
 
 ;; Disable right now because the line numbers are only shown when using M-g.
 ;; (req-package hlinum
