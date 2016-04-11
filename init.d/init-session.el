@@ -14,7 +14,7 @@
   (setq recentf-save-file (concat user-emacs-directory "recentf"))
   (setq recentf-exclude
         '("ido.last"
-          ".emacs.d/saveplace.txt"
+          ".emacs.d/saveplace"
           ".emacs.d/savehist"
           ".emacs.d/recentf"
           ".git/COMMIT_EDITMSG"))
