@@ -46,7 +46,7 @@
   (custom-theme-set-faces 'danneskjold-netrom
    `(default ((t (:foreground ,fg :background ,bg))))
    `(fringe ((t (:background ,bg))))
-   `(region ((t (:background ,anthracite))))
+   `(region ((t (:background ,dark-twitter))))
    `(button ((t (:foreground ,frost :underline t))))
    `(link ((t (:foreground ,frost :underline t))))
    `(menu ((t (:foreground ,fg :background ,as-dark-as-midnight))))
