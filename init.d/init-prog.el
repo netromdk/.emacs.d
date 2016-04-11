@@ -69,7 +69,7 @@
 
 ;; Make symbols pretty by using certain unicode symbols instead of multi-char values. For instance,
 ;; '->' becomes '→' in C++ mode.
-(use-package pretty-mode
+(req-package pretty-mode
   :config
   (add-hook 'prog-mode-hook 'turn-on-pretty-mode))
 
