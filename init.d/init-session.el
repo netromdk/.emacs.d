@@ -12,6 +12,12 @@
   (setq recentf-max-saved-items 200)
   (setq recentf-max-menu-items 15)
   (setq recentf-save-file (concat user-emacs-directory "recentf"))
+  (setq recentf-exclude
+        '("ido.last"
+          ".emacs.d/saveplace.txt"
+          ".emacs.d/savehist"
+          ".emacs.d/recentf"
+          ".git/COMMIT_EDITMSG"))
   (recentf-mode 1)
   (global-set-key "\C-xr" 'recentf-open-files))
 

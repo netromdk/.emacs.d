@@ -28,10 +28,7 @@
  '(custom-enabled-themes (quote (danneskjold-netrom)))
  '(custom-safe-themes
    (quote
-    ("08cf15b7518af1e1030d43c394b96a44c405ae242fbbf65edecc6a21b3815e2a" default)))
- '(recentf-exclude
-   (quote
-    ("ido.last" ".emacs.d/saveplace.txt" "/var/folders/" "~/Maildir"))))
+    ("08cf15b7518af1e1030d43c394b96a44c405ae242fbbf65edecc6a21b3815e2a" default))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
