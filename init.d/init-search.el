@@ -18,8 +18,11 @@
 
 (req-package avy
   :config
-  (global-set-key (kbd "C-c 1") 'avy-goto-char)
-  (global-set-key (kbd "C-c 2") 'avy-goto-char-2))
+  (global-set-key (kbd "C-;") 'avy-goto-char)
+  (global-set-key (kbd "C-,") 'avy-goto-char-2)
+  (global-set-key (kbd "M-g a") 'avy-goto-line)
+  (global-set-key (kbd "M-g p") 'avy-goto-line-above)
+  (global-set-key (kbd "M-g n") 'avy-goto-line-below))
 
 
 (provide 'init-search)
