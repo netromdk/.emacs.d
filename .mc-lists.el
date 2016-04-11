@@ -13,6 +13,7 @@
         c-electric-star
         c-fill-paragraph
         c-indent-line-or-region
+        clang-format-region-or-buffer
         dired-do-delete
         dired-flag-file-deletion
         electric-newline-and-maybe-indent
@@ -23,6 +24,7 @@
         lux-wrap-function
         markdown-exdent-or-delete
         orgtbl-self-insert-command
+        smarter-move-beginning-of-line
         yaml-electric-backspace
         ))
 
