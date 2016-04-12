@@ -12,6 +12,7 @@
         c-electric-slash
         c-electric-star
         c-fill-paragraph
+        c-forward-conditional
         c-indent-line-or-region
         clang-format-region-or-buffer
         dired-do-delete
