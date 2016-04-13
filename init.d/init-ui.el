@@ -143,13 +143,6 @@
   :config
   (defalias 'wr 'windresize))
 
-;; Use smartparens only to highlight matches of parens/blocks. No extra
-;; insertion because it's annoying!
-(req-package smartparens
-  :config
-  (require 'smartparens-config)
-  (show-smartparens-global-mode +1))
-
 ;; Show one buffer and hiding all others, do again to restore buffers.
 (req-package zygospore
   :config

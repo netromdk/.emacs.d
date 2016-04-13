@@ -102,8 +102,7 @@
       (move-end-of-line nil)
       (cycle-spacing 0)                 ; Remove all spaces.
       (insert ";")))
-  (key-chord-define c-mode-base-map ";;" 'my-colon-at-the-end)
-  (key-chord-define c-mode-base-map "{}" "{\n\n}\C-p\t"))
+  (key-chord-define c-mode-base-map ";;" 'my-colon-at-the-end))
 
 (setq auto-mode-alist
       (append '(("\\.c$"  . c-mode)
@@ -249,6 +248,53 @@
 (req-package helm-c-yasnippet
   :require yasnippet
   :bind ("C-c y" . helm-yas-complete))
+
+(req-package smartparens
+  :config
+  (require 'smartparens-config)
+  (smartparens-global-mode t)
+  (show-smartparens-global-mode t)
+
+  ;; Bindings
+  (define-key smartparens-mode-map (kbd "C-M-f") 'sp-forward-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-b") 'sp-backward-sexp)
+
+  (define-key smartparens-mode-map (kbd "C-M-d") 'sp-down-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-a") 'sp-backward-down-sexp)
+  (define-key smartparens-mode-map (kbd "C-S-d") 'sp-beginning-of-sexp)
+  (define-key smartparens-mode-map (kbd "C-S-a") 'sp-end-of-sexp)
+
+  (define-key smartparens-mode-map (kbd "C-M-e") 'sp-up-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-u") 'sp-backward-up-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
+
+  (define-key smartparens-mode-map (kbd "C-M-n") 'sp-next-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-p") 'sp-previous-sexp)
+
+  (define-key smartparens-mode-map (kbd "C-M-k") 'sp-kill-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-w") 'sp-copy-sexp)
+
+  (define-key smartparens-mode-map (kbd "C-M-<backspace>") 'sp-splice-sexp-killing-backward)
+  (define-key smartparens-mode-map (kbd "C-S-<backspace>") 'sp-splice-sexp-killing-around)
+
+  ;; C/C++
+  (sp-with-modes '(c-mode c++-mode)
+    (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET"))))
+
+  ;; Markdown modes
+  (sp-with-modes '(markdown-mode gfm-mode rst-mode)
+    (sp-local-pair "**" "**")
+    (sp-local-pair "_" "_" :wrap "C-_" :unless '(sp-point-after-word-p)))
+
+  ;; Lisp modes
+  (sp-with-modes sp--lisp-modes
+    (sp-local-pair "(" nil :wrap "C-("))
+
+  (bind-key ";" 'sp-comment emacs-lisp-mode-map)
+
+  ;; PHP
+  (sp-with-modes '(php-mode)
+    (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))))
 
 
 (provide 'init-prog)
