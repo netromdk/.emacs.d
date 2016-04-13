@@ -284,7 +284,7 @@
   ;; Markdown modes
   (sp-with-modes '(markdown-mode gfm-mode rst-mode)
     (sp-local-pair "**" "**")
-    (sp-local-pair "_" "_" :wrap "C-_" :unless '(sp-point-after-word-p)))
+    (sp-local-pair "_" "_"))
 
   ;; Lisp modes
   (sp-with-modes sp--lisp-modes
