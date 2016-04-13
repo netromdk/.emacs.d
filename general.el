@@ -15,6 +15,7 @@
 (setq kill-whole-line t)             ;; Kill whole line and move next line up.
 (setq confirm-kill-emacs 'y-or-n-p)  ;; Confirm killing emacs (might not be on purpose..).
 (setq echo-keystrokes 0.2)           ;; Echo keystrokes quicker.
+(setq-default major-mode 'text-mode) ;; Set default major mode to text instead of fundamental.
 
 ;; Don't show menu bar, scroll bar, and tool bar. In TTY they are not
 ;; defined.
