@@ -10,6 +10,25 @@
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 
+(defun zap-to-isearch (beg end)
+  "Kill the region between the mark and the closest portion of
+the isearch match string."
+  (interactive "r")
+  (when (not mark-active)
+    (error "Mark is not active"))
+  (save-excursion
+    (let* ((isearch-bounds (list isearch-other-end (point)))
+           (ismin (apply 'min isearch-bounds))
+           (ismax (apply 'max isearch-bounds)))
+      (if (< (mark) ismin)
+          (kill-region (mark) ismin)
+        (if (> (mark) ismax)
+            (kill-region ismax (mark))
+          (error "Internal error in isearch kill function.")))
+      (isearch-exit))))
+
+(define-key isearch-mode-map (kbd "M-z") 'zap-to-isearch)
+
 (req-package flx-isearch
   :require flx
   :config
