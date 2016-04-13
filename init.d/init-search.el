@@ -22,7 +22,9 @@
   (global-set-key (kbd "C-,") 'avy-goto-char-2)
   (global-set-key [remap goto-line] 'avy-goto-line) ; Enter 1-9 for line mode.
   (global-set-key (kbd "M-g p") 'avy-goto-line-above)
-  (global-set-key (kbd "M-g n") 'avy-goto-line-below))
+  (global-set-key (kbd "M-g n") 'avy-goto-line-below)
+  (global-set-key (kbd "M-g c") 'avy-goto-char-in-line)
+  (global-set-key (kbd "M-g w") 'avy-goto-word-1))
 
 
 (provide 'init-search)
