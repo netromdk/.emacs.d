@@ -28,7 +28,7 @@
  '(custom-enabled-themes (quote (danneskjold-netrom)))
  '(custom-safe-themes
    (quote
-    ("08cf15b7518af1e1030d43c394b96a44c405ae242fbbf65edecc6a21b3815e2a" default))))
+    ("893b1319f3acdb2c49e882cf0752e79ee6bbecc1204051938e78196d809e8384" default))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

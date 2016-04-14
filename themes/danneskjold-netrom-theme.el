@@ -222,6 +222,11 @@
    ;; Man
    `(Man-overstrike ((t (:inherit bold :foreground ,spring-flower))))
    `(Man-underline ((t (:inherit underline :weight bold :foreground ,frost))))
+
+   ;; Smartparens
+   `(sp-pair-overlay-face ((t (:background ,anthracite))))
+   `(sp-show-pair-match-face ((t (:background ,twitter))))
+   `(sp-show-pair-mismatch-face ((t (:background ,santa))))
    ))
 
 ;;;###autoload
