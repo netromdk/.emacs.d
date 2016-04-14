@@ -277,8 +277,8 @@
   (define-key smartparens-mode-map (kbd "C-M-<backspace>") 'sp-splice-sexp-killing-backward)
   (define-key smartparens-mode-map (kbd "C-S-<backspace>") 'sp-splice-sexp-killing-around)
 
-  ;; C/C++
-  (sp-with-modes '(c-mode c++-mode)
+  ;; General prog mode handling of "{}" to indent after hitting RET.
+  (sp-with-modes '(c-mode c++-mode php-mode java-mode js-mode)
     (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET"))))
 
   ;; Markdown modes
@@ -288,13 +288,16 @@
 
   ;; Lisp modes
   (sp-with-modes sp--lisp-modes
-    (sp-local-pair "(" nil :wrap "C-("))
+    (sp-local-pair "(" nil :wrap "C-(")
+    (sp-local-pair "`" "'" :when '(sp-in-string-p)))
 
   (bind-key ";" 'sp-comment emacs-lisp-mode-map)
 
-  ;; PHP
-  (sp-with-modes '(php-mode)
-    (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))))
+  ;; LaTeX modes
+  (sp-with-modes '(tex-mode plain-tex-mode latex-mode)
+    (sp-local-pair "$" "$")
+    (sp-local-pair "\\[" "\\]")
+    (sp-local-pair "`" "'")))
 
 
 (provide 'init-prog)
