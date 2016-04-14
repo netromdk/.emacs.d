@@ -5,6 +5,15 @@
   (byte-compile-file (concat functions-file ".el") t)
   (byte-recompile-directory init-dir 0 t))
 
+(defun byte-compile-confs-if-not-present ()
+  "If the .elc files are not there then compile all configuration
+files (I just assume all are not there if 'general.elc' is not
+there). This is necessary because the auto-compile feature won't
+compile to .elc if not already present first."
+  (interactive)
+  (if (not(file-exists-p (concat general-file ".elc")))
+      (byte-compile-confs)))
+
 ;; convert current buffer to unix EOLs
 (defun to-unix-eol ()
   "Change current buffer's line ending to unix convention."

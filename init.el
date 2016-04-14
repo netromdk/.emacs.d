@@ -1,6 +1,4 @@
-;; ------------------------
-;;   Emacs Configurations
-;; ------------------------
+;;; Emacs Configurations                              -*- no-byte-compile: t -*-
 
 (let ((version 24))
   (unless (>= emacs-major-version version)
@@ -80,6 +78,12 @@
     (show-elapsed-time "Total:          " emacs-start-time cur)
     (message "============================")))
 
+;; First install the auto-compile package and enable it.
+(require-package 'auto-compile)
+(require 'auto-compile)
+(auto-compile-on-load-mode)
+(auto-compile-on-save-mode)
+
 ;; The "backbone" uses req-package.
 (require-package 'req-package)
 (require 'req-package)
@@ -93,4 +97,5 @@
   :config
   (load-dir-one init-dir)
   (req-package-finish)
-  (show-loading-info))
+  (show-loading-info)
+  (byte-compile-confs-if-not-present))
