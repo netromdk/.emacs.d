@@ -297,7 +297,8 @@
   (sp-with-modes '(tex-mode plain-tex-mode latex-mode)
     (sp-local-pair "$" "$")
     (sp-local-pair "\\[" "\\]")
-    (sp-local-pair "`" "'")))
+    (sp-local-pair "`" "'")
+    (sp-local-tag "\"" "``" "''" :actions '(wrap))))
 
 
 (provide 'init-prog)
