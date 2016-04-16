@@ -65,9 +65,6 @@
 (setq save-abbrevs 'silently)
 (setq-default abbrev-mode t)
 
-;; Save all buffers when emacs loses focus.
-(add-hook 'focus-out-hook (lambda () (save-some-buffers t)))
-
 ;; Set fill column to 100.
 (defconst global-fill-column 100)
 (setq-default fill-column global-fill-column)
