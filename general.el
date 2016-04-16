@@ -61,6 +61,10 @@
 (setq backup-directory-alist `((".*" . ,backup-dir)))
 (setq auto-save-file-name-transforms `((".*" ,backup-dir t)))
 
+;; Enable abbrev-mode on default and save new abbrevs silently to "~/.emacs.d/abbrev_defs".
+(setq save-abbrevs 'silently)
+(setq-default abbrev-mode t)
+
 ;; Save all buffers when emacs loses focus.
 (add-hook 'focus-out-hook (lambda () (save-some-buffers t)))
 
