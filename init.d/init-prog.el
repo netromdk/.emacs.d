@@ -277,6 +277,11 @@
   (define-key smartparens-mode-map (kbd "C-M-<backspace>") 'sp-splice-sexp-killing-backward)
   (define-key smartparens-mode-map (kbd "C-S-<backspace>") 'sp-splice-sexp-killing-around)
 
+  (define-key smartparens-mode-map (kbd "C-M-S-k") 'sp-kill-hybrid-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-S-t") 'sp-transpose-hybrid-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-S-s") 'sp-slurp-hybrid-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-S-p") 'sp-push-hybrid-sexp)
+
   ;; General prog mode handling of "{}" to indent after hitting RET.
   (sp-with-modes '(c-mode c++-mode php-mode java-mode js-mode)
     (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET"))))
