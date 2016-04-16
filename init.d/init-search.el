@@ -1,11 +1,15 @@
 (require 'req-package)
 
-;; Searching with isearch will put cursor at the beginning of match, when done searching, instead of
-;; the end.
-(defun my-isearch-goto-match-beginning ()
-  (when (and isearch-forward (not isearch-mode-end-hook-quit))
-    (goto-char isearch-other-end)))
-(add-hook 'isearch-mode-end-hook 'my-isearch-goto-match-beginning)
+;; Sometimes the cursor should be at the opposite end of the search match, e.g. when searching
+;; forward the cursor will be at the end of the match, but if the opposite is intended then exit
+;; isearch mode using C-RET. Same thing for searching backwards where it puts the cursor at the end
+;; of the match instead.
+(defun isearch-exit-other-end ()
+  "Exit isearch, at the opposite end of the string."
+  (interactive)
+  (isearch-exit)
+  (goto-char isearch-other-end))
+(define-key isearch-mode-map [(control return)] 'isearch-exit-other-end)
 
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
