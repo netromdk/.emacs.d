@@ -33,12 +33,6 @@ the isearch match string."
 
 (define-key isearch-mode-map (kbd "M-z") 'zap-to-isearch)
 
-(req-package flx-isearch
-  :require flx
-  :config
-  (global-set-key (kbd "C-M-s") 'flx-isearch-forward)
-  (global-set-key (kbd "C-M-r") 'flx-isearch-backward))
-
 (req-package avy
   :config
   (global-set-key (kbd "C-;") 'avy-goto-char)
