@@ -303,6 +303,7 @@
   :init
   (setq projectile-keymap-prefix (kbd "C-x p"))
   (setq projectile-mode-line "ρ")
+  (setq projectile-enable-caching t)
   :config
   (add-hook 'prog-mode-hook 'projectile-mode))
 
