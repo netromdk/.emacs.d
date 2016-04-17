@@ -305,7 +305,7 @@
   (setq projectile-mode-line "ρ")
   (setq projectile-enable-caching t)
   :config
-  (add-hook 'prog-mode-hook 'projectile-mode))
+  (projectile-global-mode))
 
 (req-package helm-projectile
   :require projectile
