@@ -311,6 +311,7 @@
   :require projectile
   :config
   (setq helm-projectile-fuzzy-match t)
+  (setq projectile-switch-project-action 'helm-projectile-find-file)
 
   ;; Use helm-projectile alternatives.
   (define-key projectile-mode-map
@@ -320,7 +321,9 @@
   (define-key projectile-mode-map
     (kbd (concat projectile-keymap-prefix "o")) 'helm-projectile-find-other-file)
   (define-key projectile-mode-map
-    (kbd (concat projectile-keymap-prefix "a")) 'helm-projectile-ag))
+    (kbd (concat projectile-keymap-prefix "a")) 'helm-projectile-ag)
+  (define-key projectile-mode-map
+    (kbd (concat projectile-keymap-prefix "p")) 'helm-projectile-switch-project))
 
 
 (provide 'init-prog)
