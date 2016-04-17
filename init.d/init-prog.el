@@ -299,5 +299,27 @@
     (sp-local-pair "`" "'")
     (sp-local-tag "\"" "``" "''" :actions '(wrap))))
 
+(req-package projectile
+  :init
+  (setq projectile-keymap-prefix (kbd "C-x p"))
+  (setq projectile-mode-line "ρ")
+  :config
+  (add-hook 'prog-mode-hook 'projectile-mode))
+
+(req-package helm-projectile
+  :require projectile
+  :config
+  (setq helm-projectile-fuzzy-match t)
+
+  ;; Use helm-projectile alternatives.
+  (define-key projectile-mode-map
+    (kbd (concat projectile-keymap-prefix "f")) 'helm-projectile-find-file)
+  (define-key projectile-mode-map
+    (kbd (concat projectile-keymap-prefix "d")) 'helm-projectile-find-dir)
+  (define-key projectile-mode-map
+    (kbd (concat projectile-keymap-prefix "o")) 'helm-projectile-find-other-file)
+  (define-key projectile-mode-map
+    (kbd (concat projectile-keymap-prefix "a")) 'helm-projectile-ag))
+
 
 (provide 'init-prog)
