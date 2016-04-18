@@ -26,7 +26,7 @@
  '(custom-enabled-themes (quote (mustang-netrom)))
  '(custom-safe-themes
    (quote
-    ("d51130e97009b7ac79a7dd0bc52c231e3793a70ff676f3301c7cbfad83894464" default))))
+    ("34bc7232ae4711830f60b2526289597749753ff5e4f3caca15a8e1340a223a94" default))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
