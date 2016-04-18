@@ -4,14 +4,13 @@
   :init
   (setq projectile-keymap-prefix (kbd "C-x p"))
   (setq projectile-enable-caching t)
-
-  ;; If remote folder then show "rρ", if not a projectile project then "!ρ", otherwise simply "ρ".
-  (setq projectile-mode-line '(:eval
-                               (if (file-remote-p default-directory)
-                                   "rρ"
-                                 (if (string-equal "-" (projectile-project-name))
-                                     "!ρ"
-                                   "ρ"))))
+  (setq projectile-mode-line
+        '(:eval
+          (if (file-remote-p default-directory)
+              "rρ"
+            (if (string-equal "-" (projectile-project-name))
+                "!ρ"
+              "ρ"))))
   :config
   (projectile-global-mode))
 
@@ -22,18 +21,16 @@
   (setq projectile-switch-project-action 'helm-projectile-find-file)
 
   ;; Use helm-projectile alternatives.
-  (define-key projectile-mode-map
-    (kbd (concat projectile-keymap-prefix "f")) 'helm-projectile-find-file)
-  (define-key projectile-mode-map
-    (kbd (concat projectile-keymap-prefix "d")) 'helm-projectile-find-dir)
-  (define-key projectile-mode-map
-    (kbd (concat projectile-keymap-prefix "o")) 'helm-projectile-find-other-file)
-  (define-key projectile-mode-map
-    (kbd (concat projectile-keymap-prefix "a")) 'helm-projectile-ag)
-  (define-key projectile-mode-map
-    (kbd (concat projectile-keymap-prefix "p")) 'helm-projectile-switch-project)
-  (define-key projectile-mode-map
-    (kbd (concat projectile-keymap-prefix "b")) 'helm-projectile-switch-to-buffer))
+  (defun msk/projectile-define-prefix-key (key func)
+    (define-key projectile-mode-map
+      (kbd (concat projectile-keymap-prefix key)) func))
+  (msk/projectile-define-prefix-key "f" 'helm-projectile-find-file)
+  (msk/projectile-define-prefix-key "d" 'helm-projectile-find-dir)
+  (msk/projectile-define-prefix-key "o" 'helm-projectile-find-other-file)
+  (msk/projectile-define-prefix-key "a" 'helm-projectile-ag)
+  (msk/projectile-define-prefix-key "p" 'helm-projectile-switch-project)
+  (msk/projectile-define-prefix-key "b" 'helm-projectile-switch-to-buffer)
+  (msk/projectile-define-prefix-key "r" 'helm-projectile-recentf))
 
 
 (provide 'init-projectile)
