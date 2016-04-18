@@ -323,7 +323,9 @@
   (define-key projectile-mode-map
     (kbd (concat projectile-keymap-prefix "a")) 'helm-projectile-ag)
   (define-key projectile-mode-map
-    (kbd (concat projectile-keymap-prefix "p")) 'helm-projectile-switch-project))
+    (kbd (concat projectile-keymap-prefix "p")) 'helm-projectile-switch-project)
+  (define-key projectile-mode-map
+    (kbd (concat projectile-keymap-prefix "b")) 'helm-projectile-switch-to-buffer))
 
 
 (provide 'init-prog)
