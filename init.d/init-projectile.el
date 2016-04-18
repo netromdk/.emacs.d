@@ -15,7 +15,7 @@
   (projectile-global-mode))
 
 (req-package helm-projectile
-  :require projectile helm
+  :require projectile helm helm-gtags
   :config
   (setq helm-projectile-fuzzy-match t)
   (setq projectile-switch-project-action 'helm-projectile-find-file)
@@ -30,7 +30,17 @@
   (msk/projectile-define-prefix-key "a" 'helm-projectile-ag)
   (msk/projectile-define-prefix-key "p" 'helm-projectile-switch-project)
   (msk/projectile-define-prefix-key "b" 'helm-projectile-switch-to-buffer)
-  (msk/projectile-define-prefix-key "r" 'helm-projectile-recentf))
+  (msk/projectile-define-prefix-key "r" 'helm-projectile-recentf)
+
+  ;; Update gtags for all files or create if it doesn't already exist.
+  (defun msk/helm-update-gtags ()
+    (interactive)
+    (if (file-exists-p (concat (projectile-project-root) "GTAGS"))
+        (progn
+          (universal-argument)
+          (helm-gtags-update-tags))
+      (helm-gtags-create-tags (projectile-project-root) "default")))
+  (msk/projectile-define-prefix-key "R" 'msk/helm-update-gtags))
 
 
 (provide 'init-projectile)
