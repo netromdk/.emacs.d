@@ -23,10 +23,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (danneskjold-netrom)))
+ '(custom-enabled-themes (quote (mustang-netrom)))
  '(custom-safe-themes
    (quote
-    ("893b1319f3acdb2c49e882cf0752e79ee6bbecc1204051938e78196d809e8384" default))))
+    ("d51130e97009b7ac79a7dd0bc52c231e3793a70ff676f3301c7cbfad83894464" default))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
