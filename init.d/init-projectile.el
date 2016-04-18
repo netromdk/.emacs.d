@@ -3,8 +3,15 @@
 (req-package projectile
   :init
   (setq projectile-keymap-prefix (kbd "C-x p"))
-  (setq projectile-mode-line "ρ")
   (setq projectile-enable-caching t)
+
+  ;; If remote folder then show "rρ", if not a projectile project then "!ρ", otherwise simply "ρ".
+  (setq projectile-mode-line '(:eval
+                               (if (file-remote-p default-directory)
+                                   "rρ"
+                                 (if (string-equal "-" (projectile-project-name))
+                                     "!ρ"
+                                   "ρ"))))
   :config
   (projectile-global-mode))
 
