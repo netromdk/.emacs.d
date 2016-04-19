@@ -32,14 +32,28 @@
   (msk/projectile-define-prefix-key "b" 'helm-projectile-switch-to-buffer)
   (msk/projectile-define-prefix-key "r" 'helm-projectile-recentf)
 
-  ;; Update gtags for all files or create if it doesn't already exist.
-  (defun msk/helm-update-gtags ()
-    (interactive)
-    (if (file-exists-p (concat (projectile-project-root) "GTAGS"))
-        (progn
-          (universal-argument)
-          (helm-gtags-update-tags))
-      (helm-gtags-create-tags (projectile-project-root) "default")))
+  (defun msk/helm-update-gtags (arg)
+    "Update gtags for all files or create if they don't already
+exist. When given the prefix argument present gtags will be
+removed and then recreated."
+    (interactive "P")
+    (let ((gtags-file (concat (projectile-project-root) "GTAGS"))
+          (grtags-file (concat (projectile-project-root) "GRTAGS"))
+          (gpath-file (concat (projectile-project-root) "GPATH")))
+      (progn
+        (when arg
+          (message "Removing gtags..")
+          (delete-file gtags-file)
+          (delete-file grtags-file)
+          (delete-file gpath-file))
+        (if (file-exists-p gtags-file)
+            (progn
+              (message "Updating gtags..")
+              (universal-argument)
+              (helm-gtags-update-tags))
+          (progn
+            (message "Creating gtags..")
+            (helm-gtags-create-tags (projectile-project-root) "default"))))))
   (msk/projectile-define-prefix-key "R" 'msk/helm-update-gtags))
 
 
