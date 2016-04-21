@@ -99,13 +99,11 @@
         '(eshell-mode
           compilation-mode
           magit-status-mode
-          magit-popup-mode
-          ))
+          magit-popup-mode))
   (define-globalized-minor-mode msk/global-nlinum-mode
     nlinum-mode
     (lambda ()
       (progn
-        ;;(message "%1" (fboundp helm-mode))
         (unless (or (minibufferp)
                     (member major-mode msk/nlinum-disabled-modes-list))
           (nlinum-mode 1)))))
