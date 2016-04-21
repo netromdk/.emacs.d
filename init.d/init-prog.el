@@ -229,9 +229,15 @@
   (defun my/change-cursor-color-when-can-expand (&optional field)
     (interactive)
     (when (eq last-command 'self-insert-command)
-      (set-cursor-color (if (my/can-expand)
-                            yasnippet-can-fire-cursor-color
-                          default-cursor-color))))
+      (if (my/can-expand)
+          (progn
+            (set-cursor-color yasnippet-can-fire-cursor-color)
+            ;; Change back 5 seconds afterwards to avoid border cases where it stays in the "can
+            ;; expand" color when actually it can't.
+            (run-at-time "5 sec" nil
+                         (lambda ()
+                           (set-cursor-color default-cursor-color))))
+        (set-cursor-color default-cursor-color))))
 
   (defun my/can-expand ()
     "Return true if right after an expandable thing."
