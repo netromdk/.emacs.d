@@ -81,28 +81,36 @@
   (eval-after-load "hi-lock"
     '(diminish 'hi-lock-mode)))
 
-;; Line numbers.
-(req-package linum
+;; Line numbers. Is faster than the built-in linum mode.
+(req-package nlinum
+  :require linum magit
   :config
-  ;; Show line number mode only while using goto-line.
-  (defun goto-line-with-feedback ()
-    "Show line numbers temporarily, while prompting for the line number input"
-    (interactive)
-    (let ((line-numbers-off-p (not linum-mode)))
-      (unwind-protect
-          (progn (when line-numbers-off-p
-                   (linum-mode 1))
-                 (call-interactively 'goto-line))
-        (when line-numbers-off-p
-          (linum-mode -1)))))
+  ;; Precalculate the line number width to avoid horizontal jumps on scrolling.
+  (add-hook 'nlinum-mode-hook
+            (lambda ()
+              (when nlinum-mode
+                (setq nlinum--width
+                      (length (number-to-string
+                               (count-lines (point-min) (point-max)))))
+                (nlinum--flush))))
 
-  (global-set-key (kbd "M-g l") 'goto-line-with-feedback))
+  ;; Enable line numbers but disable for certain modes and minibuffer.
+  (setq msk/nlinum-disabled-modes-list
+        '(eshell-mode
+          compilation-mode
+          magit-status-mode
+          magit-popup-mode
+          ))
+  (define-globalized-minor-mode msk/global-nlinum-mode
+    nlinum-mode
+    (lambda ()
+      (progn
+        ;;(message "%1" (fboundp helm-mode))
+        (unless (or (minibufferp)
+                    (member major-mode msk/nlinum-disabled-modes-list))
+          (nlinum-mode 1)))))
 
-;; Disable right now because the line numbers are only shown when using M-g.
-;; (req-package hlinum
-;;   :config
-;;   ;; highlights current line number in margin
-;;   (hlinum-activate))
+  (msk/global-nlinum-mode))
 
 (req-package highlight-current-line
   :config
