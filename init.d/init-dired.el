@@ -28,7 +28,6 @@
 
   (define-key dired-mode-map "k" 'dired-do-delete)
   (define-key dired-mode-map (kbd "M-o") 'dired-omit-mode)
-  (define-key dired-mode-map "F" 'find-name-dired)
 
   ;; Enter editable (wdired) mode where file and folder names can be changed directly as a buffer.
   (define-key dired-mode-map "E" 'wdired-change-to-wdired-mode)
