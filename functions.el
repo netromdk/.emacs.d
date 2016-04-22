@@ -216,3 +216,9 @@ point reaches the beginning or end of the buffer, stop there."
     (back-to-indentation)
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
+
+(defun add-to-multiple-hooks (function hooks)
+  "Run `function' for each hook in `hooks'."
+  (mapc (lambda (hook)
+          (add-hook hook function))
+        hooks))

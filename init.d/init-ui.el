@@ -83,7 +83,7 @@
 
 ;; Line numbers. Is faster than the built-in linum mode.
 (req-package nlinum
-  :require linum magit
+  :require linum
   :config
   ;; Precalculate the line number width to avoid horizontal jumps on scrolling.
   (add-hook 'nlinum-mode-hook
@@ -94,21 +94,10 @@
                                (count-lines (point-min) (point-max)))))
                 (nlinum--flush))))
 
-  ;; Enable line numbers but disable for certain modes and minibuffer.
-  (setq msk/nlinum-disabled-modes-list
-        '(eshell-mode
-          compilation-mode
-          magit-status-mode
-          magit-popup-mode))
-  (define-globalized-minor-mode msk/global-nlinum-mode
-    nlinum-mode
-    (lambda ()
-      (progn
-        (unless (or (minibufferp)
-                    (member major-mode msk/nlinum-disabled-modes-list))
-          (nlinum-mode 1)))))
-
-  (msk/global-nlinum-mode))
+  (add-to-multiple-hooks
+   'nlinum-mode
+   '(prog-mode-hook
+     text-mode-hook)))
 
 (req-package highlight-current-line
   :config
