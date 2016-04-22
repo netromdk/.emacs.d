@@ -1,5 +1,3 @@
-(require 'req-package)
-
 ;; Using hippie-expand instead of dabbrev-expand.
 (global-set-key (kbd "M-/") 'hippie-expand)
 
