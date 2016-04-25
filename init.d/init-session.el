@@ -18,15 +18,17 @@
 
 (req-package recentf
   :config
-  (setq recentf-max-saved-items 200)
-  (setq recentf-max-menu-items 15)
-  (setq recentf-save-file (concat user-emacs-directory "recentf"))
-  (setq recentf-exclude
-        '("ido.last"
-          ".emacs.d/saveplace"
-          ".emacs.d/savehist"
-          ".emacs.d/recentf"
-          ".git/COMMIT_EDITMSG"))
+  (setq recentf-max-saved-items 200
+        recentf-max-menu-items 15
+        recentf-save-file (concat user-emacs-directory "recentf")
+        recentf-auto-cleanup 300        ; Cleanup every 5 minutes of idle time.
+        recentf-exclude '("ido\\.last"
+                          "\\.emacs\\.d/saveplace"
+                          "\\.emacs\\.d/savehist"
+                          "\\.emacs\\.d/recentf"
+                          "\\.git/COMMIT_EDITMSG"
+                          ".*-autoloads\\.el"
+                          "/elpa/.*"))
   (recentf-mode 1)
   (global-set-key "\C-xr" 'recentf-open-files))
 
