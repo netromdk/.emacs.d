@@ -103,7 +103,10 @@
 (setq auto-revert-verbose nil)            ; Don't announce when buffer is reverted.
 (global-auto-revert-mode t)
 
-;; Log files should automatically update on changes.
+;; Log files should automatically update on changes and be interpreted as text file.
 (setq auto-mode-alist
-      (append '(("\\.log$" . auto-revert-tail-mode))
+      (append '(("\\.log$" .
+                 (lambda ()
+                   (text-mode)
+                   (auto-revert-tail-mode))))
               auto-mode-alist))
