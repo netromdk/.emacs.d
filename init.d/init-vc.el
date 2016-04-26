@@ -31,17 +31,6 @@
 (req-package gitignore-mode)
 (req-package gitconfig-mode)
 
-(req-package git-commit
-  :config
-  (add-hook 'git-commit-mode-hook
-            '(lambda ()
-               (setq git-commit-fill-column global-fill-column)
-               ;; Make sure it's run as the absolute last. Something else was turning it on anyways.
-               (run-at-time "1 sec" nil
-                            (lambda ()
-                              (auto-fill-mode 0)
-                              (visual-line-mode t))))))
-
 (req-package helm-ls-git
   :require helm
   :bind ("M-+" . helm-ls-git-ls))
