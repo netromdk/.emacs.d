@@ -85,14 +85,20 @@
 (req-package nlinum
   :require linum
   :config
-  ;; Precalculate the line number width to avoid horizontal jumps on scrolling.
+  ;; Precalculate the line number width to avoid horizontal jumps on scrolling. Or it disables the
+  ;; mode if there are too many lines (10000 currently) because it will make them look wrong, like
+  ;; having multiple lines with the same line number.
   (add-hook 'nlinum-mode-hook
             (lambda ()
               (when nlinum-mode
-                (setq nlinum--width
-                      (length (number-to-string
-                               (count-lines (point-min) (point-max)))))
-                (nlinum--flush))))
+                (let ((lines (count-lines (point-min) (point-max))))
+                  (if (> lines 10000)
+                      (progn
+                        (message "Disabling nlinum-mode because there are too many lines.")
+                        (nlinum-mode -1))
+                    (progn
+                      (setq nlinum--width (length (number-to-string lines)))
+                      (nlinum--flush)))))))
 
   (add-to-multiple-hooks
    'nlinum-mode
