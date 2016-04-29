@@ -11,9 +11,6 @@
   (goto-char isearch-other-end))
 (define-key isearch-mode-map [(control return)] 'isearch-exit-other-end)
 
-(global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-r") 'isearch-backward-regexp)
-
 (defun zap-to-isearch (beg end)
   "Kill the region between the mark and the closest portion of
 the isearch match string."
