@@ -76,5 +76,9 @@
   (key-chord-define dired-mode-map "st" 'dired-sort-time)
   (key-chord-define dired-mode-map "sn" 'dired-sort-name))
 
+(req-package dired-narrow
+  :require dired
+  :bind (:map dired-mode-map ("/" . dired-narrow)))
+
 
 (provide 'init-dired)
