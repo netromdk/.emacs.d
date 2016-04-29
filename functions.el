@@ -222,3 +222,15 @@ point reaches the beginning or end of the buffer, stop there."
   (mapc (lambda (hook)
           (add-hook hook function))
         hooks))
+
+(defun sudo-find-file (file)
+  "Find file with sudo/tramp."
+  (interactive
+   (list
+    (read-file-name "sudo find file: ")))
+  (find-file (format "/sudo::%s" file)))
+
+(defun sudo-find-current ()
+  "Find current buffer file with sudo/tramp."
+  (interactive)
+  (sudo-find-file (buffer-file-name)))
