@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        c-backward-conditional
         c-electric-brace
         c-electric-colon
         c-electric-delete-forward
