@@ -36,5 +36,10 @@
   :config
   (add-hook 'flycheck-mode-hook 'flycheck-irony-setup))
 
+(req-package irony-eldoc
+  :require irony
+  :config
+  (add-hook 'irony-mode-hook 'irony-eldoc))
+
 
 (provide 'init-irony)
