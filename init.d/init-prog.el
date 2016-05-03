@@ -123,6 +123,7 @@
 ;; Elisp
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
+            (eldoc-mode)
             (local-set-key (kbd "C-c b") 'eval-buffer)
             (local-set-key (kbd "C-c r") 'eval-region)))
 

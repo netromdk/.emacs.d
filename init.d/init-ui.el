@@ -82,7 +82,10 @@
     '(diminish 'hi-lock-mode))
 
   (eval-after-load "irony"
-    '(diminish 'irony-mode "i")))
+    '(diminish 'irony-mode "i"))
+
+  (eval-after-load "eldoc"
+    '(diminish 'eldoc-mode)))
 
 ;; Line numbers. Is faster than the built-in linum mode.
 (req-package nlinum
