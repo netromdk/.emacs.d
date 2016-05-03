@@ -79,7 +79,10 @@
     '(diminish 'highlight-thing-mode))
 
   (eval-after-load "hi-lock"
-    '(diminish 'hi-lock-mode)))
+    '(diminish 'hi-lock-mode))
+
+  (eval-after-load "irony"
+    '(diminish 'irony-mode "i")))
 
 ;; Line numbers. Is faster than the built-in linum mode.
 (req-package nlinum
