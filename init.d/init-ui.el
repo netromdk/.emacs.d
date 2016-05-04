@@ -85,7 +85,11 @@
     '(diminish 'irony-mode "i"))
 
   (eval-after-load "eldoc"
-    '(diminish 'eldoc-mode)))
+    '(diminish 'eldoc-mode))
+
+  ;; Diminish because the errors, warnings and info counts are shown in spaceline.
+  (eval-after-load "flycheck"
+    '(diminish 'flycheck-mode "ᚨç")))
 
 ;; Line numbers. Is faster than the built-in linum mode.
 (req-package nlinum
