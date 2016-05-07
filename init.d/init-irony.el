@@ -30,13 +30,14 @@
   ;;     std::|
   ;;(add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 
-  (defun irony-cdb-json-select-helm ()
+  ;; Put advice around `irony-cdb-json-select' to use a helm prompt.
+  (defadvice irony-cdb-json-select (around advice-irony-cdb-json-select activate)
     "Select CDB using helm prompt."
     (interactive)
     (let ((on (bound-and-true-p helm-mode)))
       (when (not on) (helm-mode 1))
       (unwind-protect
-          (irony-cdb-json-select)
+          ad-do-it
         (when (not on) (helm-mode -1))))))
 
 (req-package flycheck-irony
