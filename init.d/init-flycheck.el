@@ -17,6 +17,8 @@
     ;; Disable elisp checkdoc because it's annoying!
     (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
 
+    (defalias 'fcn 'flycheck-next-error)
+
     (add-hook 'prog-mode-hook 'flycheck-mode)))
 
 (provide 'init-flycheck)
