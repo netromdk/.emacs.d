@@ -166,6 +166,11 @@
  '(sp-pair-overlay-face ((t (:background "#3A3F4B"))))
  '(sp-show-pair-match-face ((t (:background "#4CB5F5"))))
  '(sp-show-pair-mismatch-face ((t (:background "#F34A4A"))))
+
+ ;; Flycheck
+ '(flycheck-error ((t (:foreground "#FF0000"
+                       :underline (:color "#FF0000" :style wave)
+                       :weight bold))))
  )
 
 ;;;###autoload
