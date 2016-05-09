@@ -3,4 +3,4 @@
 -/.mc-lists.el
 -/abbrev_defs
 -/tramp
--*autoloads.el
+-/*autoloads.el
