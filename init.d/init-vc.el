@@ -23,9 +23,7 @@
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 
-  ;; Disabled flydiff mode because it somehow exceeds eval depth when used with magit...
-  ;;(diff-hl-flydiff-mode 1)
-
+  (diff-hl-flydiff-mode 1)
   (global-diff-hl-mode 1))
 
 (req-package gitignore-mode)
