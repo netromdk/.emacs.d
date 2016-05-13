@@ -4,6 +4,9 @@
   :require (ls-lisp key-chord)
   :config
 
+  (defalias 'qrd 'find-name-dired)
+  (defalias 'qrrd 'find-name-dired)
+
   ;; Show human-readable sizes and show folders with "/" at the end.
   (setq dired-listing-switches "-lhaF")
 

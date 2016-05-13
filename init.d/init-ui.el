@@ -128,6 +128,7 @@
 ;; Shows the number of matches for searches.
 (req-package anzu
   :config
+  (defalias 'qr 'anzu-query-replace)
   (defalias 'qrr 'anzu-query-replace-regexp)
 
   ;; Don't add to modeline because spaceline will show anzu.
