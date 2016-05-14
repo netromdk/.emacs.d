@@ -11,16 +11,23 @@
   (add-hook 'c-mode-hook 'irony-mode)
   (add-hook 'objc-mode-hook 'irony-mode)
 
-  ;; Replace the `completion-at-point' and `complete-symbol' bindings in irony-mode's buffers by
-  ;; irony-mode's function.
+  (setq my-irony-cdb-loaded-time nil)
   (defun my-irony-mode-hook ()
-    (define-key irony-mode-map [remap completion-at-point]
-      'irony-completion-at-point-async)
-    (define-key irony-mode-map [remap complete-symbol]
-      'irony-completion-at-point-async))
-  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+    ;; Replace the `completion-at-point' and `complete-symbol' bindings in irony-mode's buffers by
+    ;; irony-mode's function.
+    (define-key irony-mode-map [remap completion-at-point] 'irony-completion-at-point-async)
+    (define-key irony-mode-map [remap complete-symbol] 'irony-completion-at-point-async)
 
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+    ;; Only run auto-setup first time to be faster. However, it's not perfect because if opening a
+    ;; file in a different project root it will not auto-setup for the new CDB. But then use
+    ;; `irony-cdb-json-select'.
+    (when (not my-irony-cdb-loaded-time)
+      (setq my-irony-cdb-loaded-time (current-time))
+      (message "Irony CDB auto-setup...")
+      (irony-cdb-autosetup-compile-options)
+      (show-elapsed-time "Irony CDB auto-setup done in" my-irony-cdb-loaded-time (current-time))))
+
+  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
 
   (eval-after-load 'company
     '(add-to-list 'company-backends 'company-irony))
