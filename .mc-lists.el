@@ -32,4 +32,5 @@
 
 (setq mc/cmds-to-run-once
       '(
+        cleanup-region-or-buffer
         ))
