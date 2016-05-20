@@ -19,6 +19,7 @@
         dired-do-delete
         dired-flag-file-deletion
         electric-newline-and-maybe-indent
+        fill-paragraph
         indent-for-tab-command
         isearch-forward-regexp
         kill-region
