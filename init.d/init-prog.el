@@ -128,14 +128,14 @@
             (local-set-key (kbd "C-c r") 'eval-region)))
 
 ;; Shell script
-(setq sh-indentation 2)
+(add-hook 'sh-mode (lambda () (setq-local sh-indentation 2)))
 
 (setq auto-mode-alist
       (append '(("\\.[z]?sh$"  . sh-mode))
               auto-mode-alist))
 
 ;; JavaScript
-(setq js-indent-level 2)
+(add-hook 'js-mode (lambda () (setq-local js-indent-level 2)))
 
 (req-package json-mode
   :mode ("\\.json$" . json-mode))
