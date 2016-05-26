@@ -163,7 +163,7 @@
  '(Man-underline ((t (:inherit underline :weight bold :foreground "#D0E1F9"))))
 
  ;; Smartparens
- '(sp-pair-overlay-face ((t (:background "#3A3F4B"))))
+ '(sp-pair-overlay-face ((t (:background "#282828"))))
  '(sp-show-pair-match-face ((t (:background "#4CB5F5"))))
  '(sp-show-pair-mismatch-face ((t (:background "#F34A4A"))))
 
