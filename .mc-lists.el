@@ -14,12 +14,12 @@
         c-electric-star
         c-fill-paragraph
         c-forward-conditional
+        c-hungry-delete-backwards
         c-indent-line-or-region
         clang-format-region-or-buffer
         dired-do-delete
         dired-flag-file-deletion
         electric-newline-and-maybe-indent
-        fill-paragraph
         indent-for-tab-command
         isearch-forward-regexp
         kill-region
@@ -34,4 +34,7 @@
 (setq mc/cmds-to-run-once
       '(
         cleanup-region-or-buffer
+        recompile
+        select-window-1
+        select-window-2
         ))
