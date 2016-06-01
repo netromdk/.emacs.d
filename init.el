@@ -26,7 +26,7 @@
  '(custom-enabled-themes (quote (mustang-netrom)))
  '(custom-safe-themes
    (quote
-    ("ff4b891e8b05c653989d72da1eaeb84c53416bc9a68f027a3ae91221200027f0" default))))
+    ("48aecc412d713f5b088212ffae0b9c61c66df3b2eb17983b6a2049089ee7c1ba" default))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -88,7 +88,9 @@
 (require-package 'req-package)
 (require 'req-package)
 (random t)
-(req-package-force load-dir
+
+(req-package load-dir
+  :force t ; Load immediately!
   :defer 1
   :init
   (setq force-load-messages nil)
