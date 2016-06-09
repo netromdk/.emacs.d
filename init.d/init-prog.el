@@ -86,7 +86,7 @@
               (if (equal major-mode 'emacs-lisp-mode)
                   (setq-local annotate-depth-threshold 10)
                 (when (equal major-mode 'c++-mode)
-                  (setq-local annotate-depth-threshold 4))))))
+                  (setq-local annotate-depth-threshold 5))))))
 
 ;; C/C++
 (add-hook 'c-mode-common-hook
