@@ -131,6 +131,11 @@
   :config
   (setq dummy-h-mode-default-major-mode 'c++-mode))
 
+;; Swift
+(req-package swift-mode
+  :config
+  (setq swift-indent-offset 2))
+
 ;; Elisp
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
