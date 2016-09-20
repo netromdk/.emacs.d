@@ -16,10 +16,12 @@
         c-forward-conditional
         c-hungry-delete-backwards
         c-indent-line-or-region
+        c-indent-new-comment-line
         clang-format-region-or-buffer
         dired-do-delete
         dired-flag-file-deletion
         electric-newline-and-maybe-indent
+        helm-show-kill-ring
         indent-for-tab-command
         isearch-forward-regexp
         kill-region
@@ -28,12 +30,18 @@
         markdown-exdent-or-delete
         orgtbl-self-insert-command
         smarter-move-beginning-of-line
+        sp-backward-sexp
+        sp-forward-sexp
+        sp-remove-active-pair-overlay
         yaml-electric-backspace
         ))
 
 (setq mc/cmds-to-run-once
       '(
+        c-toggle-auto-newline
         cleanup-region-or-buffer
+        helm-M-x
+        next-error
         recompile
         select-window-1
         select-window-2
