@@ -22,6 +22,7 @@
         dired-flag-file-deletion
         electric-newline-and-maybe-indent
         helm-show-kill-ring
+        end-of-visual-line
         indent-for-tab-command
         isearch-forward-regexp
         kill-region
