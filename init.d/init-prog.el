@@ -77,16 +77,16 @@
 ;; Formatting code via clang-format-region.
 (req-package clang-format)
 
-;; Annotate depth when it gets too deep.
-(req-package annotate-depth
-  :config
-  (add-hook 'prog-mode-hook 'annotate-depth-mode)
-  (add-hook 'annotate-depth-mode-hook
-            (lambda ()
-              (if (equal major-mode 'emacs-lisp-mode)
-                  (setq-local annotate-depth-threshold 10)
-                (when (equal major-mode 'c++-mode)
-                  (setq-local annotate-depth-threshold 5))))))
+;; ;; Annotate depth when it gets too deep.
+;; (req-package annotate-depth
+;;   :config
+;;   (add-hook 'prog-mode-hook 'annotate-depth-mode)
+;;   (add-hook 'annotate-depth-mode-hook
+;;             (lambda ()
+;;               (if (equal major-mode 'emacs-lisp-mode)
+;;                   (setq-local annotate-depth-threshold 10)
+;;                 (when (equal major-mode 'c++-mode)
+;;                   (setq-local annotate-depth-threshold 5))))))
 
 ;; C/C++
 (add-hook 'c-mode-common-hook
