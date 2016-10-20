@@ -6,7 +6,8 @@
   (setq magit-pull-arguments '("--rebase")
         magit-cherry-pick-arguments '("-x")
         magit-log-arguments '("-n256" "--graph" "--decorate" "--color")
-        magit-diff-arguments '("-U3" "--stat" "--no-ext-diff"))
+        magit-diff-arguments '("-U3" "--stat" "--no-ext-diff")
+        magit-fetch-arguments '("--prune"))
 
   ;; Show status full screen.
   (defadvice magit-status (around magit-fullscreen activate)
