@@ -29,6 +29,12 @@
 (global-set-key [(f6)] 'next-error)
 (global-set-key [(C-f6)] 'next-error-skip-warnings)
 
+;; Closes *compilation* buffer after successful compilation, and otherwise when the failure was
+;; fixed to compile, it restores the original window configuration.
+(req-package bury-successful-compilation
+  :config
+  (add-hook 'prog-mode-hook 'bury-successful-compilation))
+
 (req-package dash-at-point
   :config
   (global-set-key "\C-cd" 'dash-at-point)
