@@ -9,6 +9,16 @@
       compilation-skip-threshold 2           ; Skip anything less than errors.
       compilation-always-kill t)             ; Don't ask, just start new compilation.
 
+;; Turn off adaptive process buffering when using compilation mode because it speeds up immensely
+;; when there is a lot of output in the buffer.
+(add-hook 'compilation-mode-hook
+          (lambda () (setq process-adaptive-read-buffering nil)))
+
+;; Turn it back on again when finished.
+(add-hook 'compilation-finish-functions
+          (lambda (buffer string)
+            (setq process-adaptive-read-buffering t)))
+
 (defun next-error-skip-warnings ()
   (interactive)
   (let (threshold compilation-skip-threshold)
