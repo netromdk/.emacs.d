@@ -46,8 +46,11 @@
 (req-package ace-isearch
   :require helm-swoop avy ace-jump-mode
   :config
-  (setq ace-isearch-function 'avy-goto-word-1)
-  (setq ace-isearch-function-from-isearch 'ace-isearch-helm-swoop-from-isearch)
+  (setq ace-isearch-input-idle-jump-delay 0.5
+        ace-isearch-function 'avy-goto-char
+        ace-isearch-input-length 6 ; Invoke helm-swoop when >= 6.
+        ace-isearch-function-from-isearch 'ace-isearch-helm-swoop-from-isearch
+        ace-isearch-use-jump 'printing-char)
   (global-ace-isearch-mode +1))
 
 (provide 'init-search)
