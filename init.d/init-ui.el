@@ -89,7 +89,10 @@
 
   ;; Diminish because the errors, warnings and info counts are shown in spaceline.
   (eval-after-load "flycheck"
-    '(diminish 'flycheck-mode "ᚨç")))
+    '(diminish 'flycheck-mode "ᚨç"))
+
+  (eval-after-load "ace-isearch"
+    '(diminish 'ace-isearch-mode)))
 
 ;; Line numbers. Is faster than the built-in linum mode.
 (req-package nlinum
