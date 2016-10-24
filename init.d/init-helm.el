@@ -44,6 +44,12 @@
   (setq helm-swoop-split-direction (quote split-window-vertically))
   (setq helm-swoop-split-with-multiple-windows t)
 
+  ;; Use isearch bindings to move up and down.
+  (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+  (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+  (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
+  (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
+
   ;; Activate helm-swoop on isearch results.
   (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
   (define-key isearch-mode-map (kbd "M-I") 'helm-multi-swoop-all-from-isearch))
