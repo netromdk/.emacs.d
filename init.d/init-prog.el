@@ -1,8 +1,5 @@
 (require 'req-package)
 
-;; Comment/uncomment region in all prog modes. Cycling the command will cycle comment/uncomment.
-(define-key prog-mode-map (kbd "\C-c\C-c") 'comment-or-uncomment-region)
-
 ;; General compilation settings.
 (setq compilation-window-height 30
       compilation-scroll-output 'first-error ; Scroll but stop at first error.
@@ -38,6 +35,12 @@
 (global-set-key [(f5)] 'recompile)
 (global-set-key [(f6)] 'next-error)
 (global-set-key [(C-f6)] 'next-error-skip-warnings)
+
+;; Use C-cC-c to recompile and C-cC-f to goto next error.
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (define-key prog-mode-map "\C-c\C-c" 'recompile)
+            (define-key prog-mode-map "\C-c\C-f" 'next-error)))
 
 ;; Closes *compilation* buffer after successful compilation, and otherwise when the failure was
 ;; fixed to compile, it restores the original window configuration.
