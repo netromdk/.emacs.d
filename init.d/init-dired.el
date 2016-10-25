@@ -59,16 +59,6 @@
   (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
   (define-key dired-mode-map (kbd "M-n") 'dired-jump-to-bottom))
 
-;; dired-k makes directory listings more readable, adding a bit of color and some git status
-;; information on files and directories.
-(req-package dired-k
-  :require dired
-  :config
-  ;; Run dired-k when dired buffer is opened.
-  (add-hook 'dired-initial-position-hook 'dired-k)
-
-  (define-key dired-mode-map "K" 'dired-k))
-
 (req-package dired-sort
   :require dired
   :config
