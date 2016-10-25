@@ -39,8 +39,10 @@
 ;; Use C-cC-c to recompile and C-cC-f to goto next error.
 (add-hook 'prog-mode-hook
           (lambda ()
-            (define-key prog-mode-map "\C-c\C-c" 'recompile)
-            (define-key prog-mode-map "\C-c\C-f" 'next-error)))
+            ;; Using local-set-key because defining the bindings in prog-mode-map will get
+            ;; overridden by c++-mode bindings, for instance. This shadows them instead.
+            (local-set-key "\C-c\C-c" 'recompile)
+            (local-set-key "\C-c\C-f" 'next-error)))
 
 ;; Closes *compilation* buffer after successful compilation, and otherwise when the failure was
 ;; fixed to compile, it restores the original window configuration.
