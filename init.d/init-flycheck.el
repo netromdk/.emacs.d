@@ -1,25 +1,25 @@
 ;;; init-flycheck --- Summary
 ;;; Commentary:
 ;;; Code:
-(require 'req-package)
+;; (require 'req-package)
 
-(req-package flycheck
-  :config
-  (progn
-    ;; C++11
-    (add-hook 'c++-mode-hook
-              (lambda ()
-                (progn
-                  (setq flycheck-clang-language-standard "c++11")
-                  (setq flycheck-clang-standard-library "libc++")
-                  (setq flycheck-gcc-language-standard "c++11"))))
+;; (req-package flycheck
+;;   :config
+;;   (progn
+;;     ;; C++11
+;;     (add-hook 'c++-mode-hook
+;;               (lambda ()
+;;                 (progn
+;;                   (setq flycheck-clang-language-standard "c++11")
+;;                   (setq flycheck-clang-standard-library "libc++")
+;;                   (setq flycheck-gcc-language-standard "c++11"))))
 
-    ;; Disable elisp checkdoc because it's annoying!
-    (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+;;     ;; Disable elisp checkdoc because it's annoying!
+;;     (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
 
-    (defalias 'fcn 'flycheck-next-error)
+;;     (defalias 'fcn 'flycheck-next-error)
 
-    (add-hook 'prog-mode-hook 'flycheck-mode)))
+;;     (add-hook 'prog-mode-hook 'flycheck-mode)))
 
-(provide 'init-flycheck)
+;; (provide 'init-flycheck)
 ;;; init-flycheck.el ends here
