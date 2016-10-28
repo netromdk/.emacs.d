@@ -110,3 +110,6 @@
                    (text-mode)
                    (auto-revert-tail-mode))))
               auto-mode-alist))
+
+;; I hate trailing whitespace so remove it before saving.
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
