@@ -26,7 +26,7 @@
  '(custom-enabled-themes (quote (mustang-netrom)))
  '(custom-safe-themes
    (quote
-    ("48aecc412d713f5b088212ffae0b9c61c66df3b2eb17983b6a2049089ee7c1ba" default)))
+    ("6da7591d72fa65964cfa2c58ba69ae8068e38175ab05d37ebd20e29b70e2a9ab" default)))
  '(package-selected-packages
    (quote
     (ace-isearch bury-successful-compilation zygospore windresize window-numbering vlf vkill vim-empty-lines-mode swift-mode string-edit spaceline smartparens req-package rainbow-mode rainbow-delimiters php-mode package-safe-delete on-screen nlinum multiple-cursors markdown-mode magit load-dir keyfreq key-chord json-mode highlight-thing highlight-numbers highlight-current-line helm-swoop helm-projectile helm-ls-git helm-gtags helm-flx helm-c-yasnippet helm-ag golden-ratio-scroll-screen gitignore-mode gitconfig-mode git-timemachine git-messenger flyspell-lazy flycheck flx-ido find-temp-file fic-mode expand-region dummy-h-mode discover-my-major dired-sort dired-narrow diff-hl describe-number dash-at-point company-c-headers cmake-mode clang-format avy auto-dictionary auto-compile anzu))))
