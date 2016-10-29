@@ -48,7 +48,7 @@
   :config
   (setq ace-isearch-input-idle-jump-delay 0.5
         ace-isearch-function 'avy-goto-char
-        ace-isearch-input-length 6 ; Invoke helm-swoop when >= 6.
+        ace-isearch-input-length 7 ; Invoke helm-swoop when >= 7.
         ace-isearch-function-from-isearch 'ace-isearch-helm-swoop-from-isearch
         ace-isearch-use-jump 'printing-char)
   (global-ace-isearch-mode +1))
