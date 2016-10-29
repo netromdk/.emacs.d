@@ -37,7 +37,7 @@
   :config
   (setq save-place-limit 400)
   (setq save-place-file (concat user-emacs-directory "saveplace"))
-  (setq-default save-place t))
+  (save-place-mode t))
 
 
 (provide 'init-session)
