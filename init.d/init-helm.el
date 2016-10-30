@@ -41,8 +41,10 @@
 (req-package helm-swoop
   :require helm
   :config
-  (setq helm-swoop-split-direction (quote split-window-vertically))
-  (setq helm-swoop-split-with-multiple-windows t)
+  (setq helm-swoop-split-direction (quote split-window-vertically)
+        helm-swoop-split-with-multiple-windows t
+        helm-swoop-candidate-number-limit 1000
+        helm-swoop-use-fuzzy-match t)
 
   ;; Use isearch bindings to move up and down.
   (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
