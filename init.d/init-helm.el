@@ -3,23 +3,23 @@
 (req-package helm
   :require recentf
   :config
-  (setq helm-candidate-number-limit 100)
-  (setq helm-display-source-at-screen-top t)
-  (setq helm-exit-idle-delay 0)
-  (setq helm-full-frame nil)
-  (setq helm-buffers-fuzzy-matching t)
-  (setq helm-M-x-fuzzy-match t)
-  (setq helm-recentf-fuzzy-match t)
-  (setq helm-apropos-fuzzy-match t)
-  (setq helm-ff-file-name-history-use-recentf t)
-  (setq helm-split-window-default-side (quote below))
-  (setq helm-reuse-last-window-split-state nil)
-  (setq helm-split-window-in-side-p t) ;; split in same window
-  (setq helm-quick-update t) ;; don't show invisible candidates
+  (setq helm-candidate-number-limit 100
+        helm-display-source-at-screen-top t
+        helm-exit-idle-delay 0
+        helm-full-frame nil
+        helm-buffers-fuzzy-matching t
+        helm-M-x-fuzzy-match t
+        helm-recentf-fuzzy-match t
+        helm-apropos-fuzzy-match t
+        helm-ff-file-name-history-use-recentf t
+        helm-split-window-default-side (quote below)
+        helm-reuse-last-window-split-state nil
+        helm-split-window-in-side-p t ;; split in same window
+        helm-quick-update t) ;; don't show invisible candidates
 
   ;; Resize helm according to number of results within min/max height.
-  (setq helm-autoresize-min-height 10)
-  (setq helm-autoresize-max-height 40)
+  (setq helm-autoresize-min-height 10
+        helm-autoresize-max-height 40)
   (helm-autoresize-mode t)
 
   ;; Aliases for viewing packages.
