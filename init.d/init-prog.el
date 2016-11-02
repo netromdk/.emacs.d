@@ -112,7 +112,7 @@
 ;; C/C++
 (add-hook 'c-mode-common-hook
           (lambda ()
-            (setq tab-width 2)
+            (setq tab-width general-tab-width)
             (setq c-basic-offset tab-width)
             (setq indent-tabs-mode nil)
 
@@ -155,7 +155,7 @@
 ;; Swift
 (req-package swift-mode
   :config
-  (setq swift-indent-offset 2))
+  (setq swift-indent-offset general-tab-width))
 
 ;; Elisp
 (add-hook 'emacs-lisp-mode-hook
@@ -165,14 +165,14 @@
             (local-set-key (kbd "C-c r") 'eval-region)))
 
 ;; Shell script
-(add-hook 'sh-mode (lambda () (setq-local sh-indentation 2)))
+(add-hook 'sh-mode (lambda () (setq-local sh-indentation general-tab-width)))
 
 (setq auto-mode-alist
       (append '(("\\.[z]?sh$"  . sh-mode))
               auto-mode-alist))
 
 ;; JavaScript
-(add-hook 'js-mode (lambda () (setq-local js-indent-level 2)))
+(add-hook 'js-mode (lambda () (setq-local js-indent-level general-tab-width)))
 
 (req-package json-mode
   :mode ("\\.json$" . json-mode))

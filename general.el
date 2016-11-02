@@ -8,7 +8,6 @@
 (auto-compression-mode t)            ;; Browse compressed archives
 (put 'upcase-region 'disabled nil)   ;; Enable ``upcase-region''
 (global-font-lock-mode t)            ;; Syntax highlight
-(setq-default indent-tabs-mode nil)  ;; Use spaces instead of tabs
 (fset 'yes-or-no-p 'y-or-n-p)        ;; Use 'y' instead of 'yes' etc.
 (setq message-log-max 10000)         ;; Extend message buffer
 (setq set-mark-command-repeat-pop t) ;; Pop repeat marks
@@ -71,6 +70,10 @@
 (dolist (hook '(auto-fill-mode-hook
                 prog-mode-hook))
   (add-hook hook (lambda () (setq fill-column global-fill-column))))
+
+;; Set default tab width to 2 spaces.
+(defconst general-tab-width 2)
+(setq-default indent-tabs-mode nil)  ;; Use spaces instead of tabs
 
 ;; Disable visible bell because it looks ugly, but that makes the audible bell and therefore we
 ;; "flash" the mode line by double-inverting instead.
