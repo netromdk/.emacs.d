@@ -110,9 +110,25 @@
 ;;                   (setq-local annotate-depth-threshold 5))))))
 
 ;; C/C++
+
+(setq use-qt-tab-width nil)
+(defun turn-on-qt-tab-width ()
+  "Use Qt tab width (4 spaces)."
+  (interactive)
+  (setq use-qt-tab-width t)
+  (revert-buffer :ignore-auto :noconfirm))
+(defun turn-off-qt-tab-width ()
+  "Use general tab width."
+  (interactive)
+  (setq use-qt-tab-width nil)
+  (revert-buffer :ignore-auto :noconfirm))
+
 (add-hook 'c-mode-common-hook
           (lambda ()
-            (setq tab-width general-tab-width)
+            ;; If in Qt code then use 4 spaces as tabs, otherwise the general tab width.
+            (if (bound-and-true-p use-qt-tab-width)
+                (setq tab-width 4)
+              (setq tab-width general-tab-width))
             (setq c-basic-offset tab-width)
             (setq indent-tabs-mode nil)
 
