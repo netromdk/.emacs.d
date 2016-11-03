@@ -28,10 +28,10 @@
  '(custom-enabled-themes (quote (mustang-netrom)))
  '(custom-safe-themes
    (quote
-    ("6da7591d72fa65964cfa2c58ba69ae8068e38175ab05d37ebd20e29b70e2a9ab" default)))
+    ("99060a1937a91339f9faf89d71789c265d90708e29d53e7e402624d919275429" default)))
  '(package-selected-packages
    (quote
-    (ace-isearch bury-successful-compilation zygospore windresize window-numbering vlf vkill vim-empty-lines-mode swift-mode string-edit spaceline smartparens req-package rainbow-mode rainbow-delimiters php-mode package-safe-delete on-screen nlinum multiple-cursors markdown-mode magit load-dir keyfreq key-chord json-mode highlight-thing highlight-numbers highlight-current-line helm-swoop helm-projectile helm-ls-git helm-gtags helm-flx helm-c-yasnippet helm-ag golden-ratio-scroll-screen gitignore-mode gitconfig-mode git-timemachine git-messenger flyspell-lazy flycheck flx-ido find-temp-file fic-mode expand-region dummy-h-mode discover-my-major dired-sort dired-narrow diff-hl describe-number dash-at-point company-c-headers cmake-mode clang-format avy auto-dictionary auto-compile anzu))))
+    (highlight-escape-sequences ace-isearch bury-successful-compilation zygospore windresize window-numbering vlf vkill vim-empty-lines-mode swift-mode string-edit spaceline smartparens req-package rainbow-mode rainbow-delimiters php-mode package-safe-delete on-screen nlinum multiple-cursors markdown-mode magit load-dir keyfreq key-chord json-mode highlight-thing highlight-numbers highlight-current-line helm-swoop helm-projectile helm-ls-git helm-gtags helm-flx helm-c-yasnippet helm-ag golden-ratio-scroll-screen gitignore-mode gitconfig-mode git-timemachine git-messenger flyspell-lazy flycheck flx-ido find-temp-file fic-mode expand-region dummy-h-mode discover-my-major dired-sort dired-narrow diff-hl describe-number dash-at-point company-c-headers cmake-mode clang-format avy auto-dictionary auto-compile anzu))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

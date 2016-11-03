@@ -171,6 +171,12 @@
  '(flycheck-error ((t (:foreground "#FF0000"
                                    :underline (:color "#FF0000" :style wave)
                                    :weight bold))))
+
+ ;; highlight-escape-sequences
+ '(hes-escape-backslash-face ((t (:inherit font-lock-regexp-grouping-backslash
+                                           :foreground "#908080"))))
+ '(hes-escape-sequence-face ((t (:inherit font-lock-regexp-grouping-construct
+                                          :foreground "#908080" :weight bold))))
  )
 
 ;;;###autoload

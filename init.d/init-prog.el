@@ -98,6 +98,12 @@
 ;; Formatting code via clang-format-region.
 (req-package clang-format)
 
+;; Highlights escape sequences like \t, \n etc. in strings in programming modes.
+(req-package highlight-escape-sequences
+  :config
+  ;; Has its own `hes-mode-alist' that specifies which modes it supports.
+  (hes-mode))
+
 ;; ;; Annotate depth when it gets too deep.
 ;; (req-package annotate-depth
 ;;   :config
