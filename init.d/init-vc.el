@@ -5,7 +5,7 @@
   ;; Set defaults used by specific operations.
   (setq magit-pull-arguments '("--rebase")
         magit-cherry-pick-arguments '("-x")
-        magit-log-arguments '("-n256" "--graph" "--decorate" "--color")
+        magit-log-arguments '("-n100" "--graph" "--decorate" "--color")
         magit-diff-arguments '("-U3" "--stat" "--no-ext-diff")
         magit-fetch-arguments '("--prune"))
 
