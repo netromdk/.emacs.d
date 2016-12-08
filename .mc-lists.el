@@ -9,6 +9,7 @@
         c-electric-delete-forward
         c-electric-lt-gt
         c-electric-paren
+        c-electric-pound
         c-electric-semi&comma
         c-electric-slash
         c-electric-star
@@ -21,8 +22,8 @@
         dired-do-delete
         dired-flag-file-deletion
         electric-newline-and-maybe-indent
-        helm-show-kill-ring
         end-of-visual-line
+        helm-show-kill-ring
         indent-for-tab-command
         isearch-forward-regexp
         kill-region
