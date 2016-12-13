@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: const auto
+# key: ca
+# --
+const auto $0
