@@ -51,6 +51,12 @@
         ace-isearch-input-length 7 ; Invoke helm-swoop when >= 7.
         ace-isearch-function-from-isearch 'ace-isearch-helm-swoop-from-isearch
         ace-isearch-use-jump 'printing-char)
-  (global-ace-isearch-mode +1))
+  (global-ace-isearch-mode +1)
+
+  ;; Don't use ace-isearch when defining a macro because it triggers one-char ace mode immediately.
+  (defadvice ace-isearch--jumper-function (around ace-isearch--jumper-function-kmacro-advice)
+    (unless (or defining-kbd-macro executing-kbd-macro)
+      ad-do-it))
+  (ad-activate 'ace-isearch--jumper-function))
 
 (provide 'init-search)
