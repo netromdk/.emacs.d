@@ -46,7 +46,7 @@
 (req-package ace-isearch
   :require helm-swoop avy ace-jump-mode
   :config
-  (setq ace-isearch-input-idle-jump-delay 0.5
+  (setq ace-isearch-input-idle-jump-delay 1.0
         ace-isearch-function 'avy-goto-char
         ace-isearch-input-length 7 ; Invoke helm-swoop when >= 7.
         ace-isearch-function-from-isearch 'ace-isearch-helm-swoop-from-isearch
