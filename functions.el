@@ -234,3 +234,12 @@ point reaches the beginning or end of the buffer, stop there."
   "Find current buffer file with sudo/tramp."
   (interactive)
   (sudo-find-file (buffer-file-name)))
+
+(defun include-guard-header ()
+  "Generates an include guard header symbol using the path to the
+current file but only from the project root, which is determined
+by looking for a '.git'. The use case is in a C++/C include
+guard: #ifndef `(include-guard-header)`.."
+  (let ((project-root (expand-file-name (locate-dominating-file (buffer-file-name) ".git"))))
+    (replace-regexp-in-string "[\\.\\\\//]" "_"
+                              (upcase (substring (buffer-file-name) (length project-root))))))
