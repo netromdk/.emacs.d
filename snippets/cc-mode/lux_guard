@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name : copyright header + #ifndef XXX; #define XXX; #endif
+# key: lgrd
+# --
+// (c) Copyright 2003-`(format-time-string "%Y")` Luxion ApS - All Rights Reserved
+#ifndef ${1:`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`_H}
+#define $1
+
+$0
+
+#endif // $1
