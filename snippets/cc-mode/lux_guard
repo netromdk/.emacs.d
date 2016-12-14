@@ -3,7 +3,7 @@
 # key: lgrd
 # --
 // (c) Copyright 2003-`(format-time-string "%Y")` Luxion ApS - All Rights Reserved
-#ifndef ${1:`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`_H}
+#ifndef ${1:`(include-guard-header)`}
 #define $1
 
 $0
