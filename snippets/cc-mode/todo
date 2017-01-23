@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: todo with timestamp
+# key: t
+# --
+`(yas-with-comment (format-time-string "TODO <%Y-%m-%d>: " (current-time)))`
