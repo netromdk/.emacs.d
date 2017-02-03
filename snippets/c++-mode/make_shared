@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: std::make_shared
+# key: msh
+# --
+auto $1 = std::make_shared<$2>($3);
+$0
