@@ -366,4 +366,10 @@
     (sp-local-tag "\"" "``" "''" :actions '(wrap))))
 
 
+;; NSIS installer script file.
+(req-package conf-mode
+  :mode (("\\.nsi\\'" . conf-windows-mode)
+         ("\\.nsis\\'" . conf-windows-mode)))
+
+
 (provide 'init-prog)
