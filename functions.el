@@ -243,3 +243,9 @@ guard: #ifndef `(include-guard-header)`.."
   (let ((project-root (expand-file-name (locate-dominating-file (buffer-file-name) ".git"))))
     (replace-regexp-in-string "[\\.\\\\//]" "_"
                               (upcase (substring (buffer-file-name) (length project-root))))))
+
+(defmacro with-system (type &rest body)
+  "Evaluate BODY if `system-type' equals TYPE."
+  (declare (indent defun))
+  `(when (eq system-type ',type)
+     ,@body))
