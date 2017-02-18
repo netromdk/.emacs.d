@@ -8,6 +8,12 @@
         edit-server-url-major-mode-alist
         '(("github\\.com" . markdown-mode)
           ("git\\.luxion\\.dk" . markdown-mode)))
+
+  ;; Give focus back to Chrome when done editing.
+  (with-system darwin
+               (add-hook 'edit-server-done-hook
+                         (lambda () (shell-command "open -a \"Google Chrome\""))))
+
   (edit-server-start))
 
 
