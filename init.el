@@ -83,6 +83,17 @@
     (show-elapsed-time "Total:          " emacs-start-time cur)
     (message "============================")))
 
+;; Executed when loading is done.
+(defun loading-done ()
+  (show-loading-info)
+
+  ;; Start daemon server if not already running.
+  (require 'server)
+  (unless (server-running-p)
+    (server-start))
+
+  (byte-compile-confs-if-not-present))
+
 ;; First install the auto-compile package and enable it.
 (require-package 'auto-compile)
 (require 'auto-compile)
@@ -104,5 +115,4 @@
   :config
   (load-dir-one init-dir)
   (req-package-finish)
-  (show-loading-info)
-  (byte-compile-confs-if-not-present))
+  (loading-done))
