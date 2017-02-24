@@ -48,6 +48,11 @@
 (load functions-file)
 (load general-file)
 
+;; Speedup loading by removing handlers until finished. It contains a lot of regexps for matching
+;; handlers to file names but it is not necessary while loading.
+(setq file-name-handler-alist-old file-name-handler-alist)
+(setq file-name-handler-alist nil)
+
 ;; Packages setup.
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -86,6 +91,9 @@
 ;; Executed when loading is done.
 (defun loading-done ()
   (show-loading-info)
+
+  ;; Restore the file name handlers.
+  (setq file-name-handler-alist file-name-handler-alist-old)
 
   ;; Start daemon server if not already running.
   (require 'server)
