@@ -42,23 +42,9 @@
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 
-;; Save all backups and auto-saves to a temporary directory. And clean it for all files older than a
-;; week.
-(unless (file-exists-p backup-dir)
-  (make-directory backup-dir))
-
-(message "Deleting backup files older than a week...")
-(let ((week (* 60 60 24 7))
-      (current (float-time (current-time))))
-  (dolist (file (directory-files backup-dir t))
-    (when (and (backup-file-name-p file)
-               (> (- current (float-time (nth 5 (file-attributes file))))
-                  week))
-      (message "%s" file)
-      (delete-file file))))
-
-(setq backup-directory-alist `((".*" . ,backup-dir)))
-(setq auto-save-file-name-transforms `((".*" ,backup-dir t)))
+;; Stop creating backup~ and #autosave# files!
+(setq make-backup-files nil)
+(setq auto-save-default nil)
 
 ;; Enable abbrev-mode on default and save new abbrevs silently to "~/.emacs.d/abbrev_defs".
 (setq save-abbrevs 'silently)
