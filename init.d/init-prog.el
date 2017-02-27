@@ -371,5 +371,11 @@
   :mode (("\\.nsi\\'" . conf-windows-mode)
          ("\\.nsis\\'" . conf-windows-mode)))
 
+(req-package indent-guide
+  :config
+  (setq indent-guide-char "|"
+        indent-guide-delay nil)
+  (indent-guide-global-mode))
+
 
 (provide 'init-prog)
