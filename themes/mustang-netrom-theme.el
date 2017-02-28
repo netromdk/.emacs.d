@@ -177,6 +177,9 @@
                                            :foreground "#908080"))))
  '(hes-escape-sequence-face ((t (:inherit font-lock-regexp-grouping-construct
                                           :foreground "#908080" :weight bold))))
+
+ ;; indent-guide
+ '(indent-guide-face ((t (:foreground "#b1d613" :slant normal))))
  )
 
 ;;;###autoload
