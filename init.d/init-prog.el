@@ -369,7 +369,6 @@
     (sp-local-pair "`" "'")
     (sp-local-tag "\"" "``" "''" :actions '(wrap))))
 
-
 ;; NSIS installer script file.
 (req-package conf-mode
   :mode (("\\.nsi\\'" . conf-windows-mode)
@@ -378,7 +377,7 @@
 (req-package indent-guide
   :config
   (setq indent-guide-char "|"
-        indent-guide-delay nil)
+        indent-guide-delay 0.5)
   (indent-guide-global-mode))
 
 
