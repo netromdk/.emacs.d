@@ -28,7 +28,7 @@
  '(custom-enabled-themes (quote (mustang-netrom)))
  '(custom-safe-themes
    (quote
-    ("d179397d45e30bfb8e80f14156acafc74b79c241eea9b95846c1a4338dfa410a" default)))
+    ("ae7a4edb88a62fb60fc804dac4da77d79ecb3fc6fe06f504901445e07dc85ec3" default)))
  '(package-selected-packages
    (quote
     (company-statistics company-flx indent-guide async exec-path-from-shell esup edit-server copy-as-format highlight-escape-sequences ace-isearch bury-successful-compilation zygospore windresize window-numbering vlf vkill vim-empty-lines-mode swift-mode string-edit spaceline smartparens req-package rainbow-mode rainbow-delimiters php-mode package-safe-delete on-screen nlinum multiple-cursors markdown-mode magit load-dir keyfreq key-chord json-mode highlight-thing highlight-numbers highlight-current-line helm-swoop helm-projectile helm-ls-git helm-gtags helm-flx helm-c-yasnippet helm-ag golden-ratio-scroll-screen gitignore-mode gitconfig-mode git-timemachine git-messenger flyspell-lazy flycheck flx-ido find-temp-file fic-mode expand-region dummy-h-mode discover-my-major dired-sort dired-narrow diff-hl describe-number dash-at-point company-c-headers cmake-mode clang-format avy auto-dictionary auto-compile anzu))))

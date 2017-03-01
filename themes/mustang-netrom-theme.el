@@ -179,7 +179,7 @@
                                           :foreground "#908080" :weight bold))))
 
  ;; indent-guide
- '(indent-guide-face ((t (:foreground "#b1d613" :slant normal))))
+ '(indent-guide-face ((t (:foreground "gray27" :slant normal))))
  )
 
 ;;;###autoload
