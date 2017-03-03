@@ -180,6 +180,9 @@
 
  ;; indent-guide
  '(indent-guide-face ((t (:foreground "gray27" :slant normal))))
+
+ ;; auto-dim-other-buffers
+ '(auto-dim-other-buffers-face ((t (:background "gray12"))))
  )
 
 ;;;###autoload

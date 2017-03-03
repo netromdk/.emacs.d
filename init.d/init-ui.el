@@ -92,7 +92,10 @@
     '(diminish 'flycheck-mode "ᚨç"))
 
   (eval-after-load "ace-isearch"
-    '(diminish 'ace-isearch-mode)))
+    '(diminish 'ace-isearch-mode))
+
+  (eval-after-load "auto-dim-other-buffers"
+    '(diminish 'auto-dim-other-buffers-mode)))
 
 ;; Line numbers. Is faster than the built-in linum mode.
 (req-package nlinum
@@ -162,6 +165,11 @@
 (req-package zygospore
   :config
   (global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows))
+
+;; Visually makes non-current buffers less prominent.
+(req-package auto-dim-other-buffers
+  :config
+  (auto-dim-other-buffers-mode t))
 
 
 (provide 'init-ui)
