@@ -370,11 +370,12 @@
   :mode (("\\.nsi\\'" . conf-windows-mode)
          ("\\.nsis\\'" . conf-windows-mode)))
 
+;; Show vertical lines to guide indentation.
 (req-package indent-guide
   :config
   (setq indent-guide-char "|"
         indent-guide-delay 0.5)
-  (indent-guide-global-mode))
+  (add-hook 'prog-mode-hook 'indent-guide-mode))
 
 
 (provide 'init-prog)
