@@ -139,11 +139,7 @@
             (setq indent-tabs-mode nil)
 
             ;; Run clang-format on region or buffer.
-            (local-set-key (kbd "C-c f") 'clang-format-region-or-buffer)
-
-            ;; Jump forward/backward one subword at a time. For instance, EmacsFrameClass =>
-            ;; "Emacs", "Frame", and "Class".
-            (subword-mode 1)))
+            (local-set-key (kbd "C-c f") 'clang-format-region-or-buffer)))
 
 (req-package cc-mode
   :require key-chord
