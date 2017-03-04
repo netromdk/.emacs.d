@@ -168,5 +168,13 @@
   :config
   (auto-dim-other-buffers-mode t))
 
+;; Dashboard shows recent files and projects in a startup buffer.
+(req-package dashboard
+  :config
+  (setq dashboard-startup-banner 2 ; text "Emacs" banner
+        dashboard-items '((recents  . 10)
+                          (projects . 10)))
+  (dashboard-setup-startup-hook))
+
 
 (provide 'init-ui)
