@@ -44,10 +44,10 @@
     '(diminish 'fic-mode))
 
   (eval-after-load "flyspell"
-    '(diminish 'flyspell-mode "ᚨ"))
+    '(diminish 'flyspell-mode "fs"))
 
   (eval-after-load "company"
-    '(diminish 'company-mode "ç"))
+    '(diminish 'company-mode "c"))
 
   (eval-after-load "whitespace"
     '(diminish 'whitespace-mode "ω"))
@@ -57,23 +57,17 @@
 
   (eval-after-load "autorevert"
     (progn
-      '(diminish 'auto-revert-mode "αr")
-      '(diminish 'global-auto-revert-mode "αr")))
-
-  (eval-after-load "org-table"
-    '(diminish 'orgtbl-mode "ꙮτ"))
-
-  (eval-after-load "org"
-    '(diminish 'orgstruct-mode "ꙮσ"))
+      '(diminish 'auto-revert-mode "ar")
+      '(diminish 'global-auto-revert-mode "ar")))
 
   (eval-after-load "rainbow-mode"
     '(diminish 'rainbow-mode))
 
   (eval-after-load "helm-gtags"
-    '(diminish 'helm-gtags-mode "τ"))
+    '(diminish 'helm-gtags-mode))
 
   (eval-after-load "yasnippet"
-    '(diminish 'yas-minor-mode "γ"))
+    '(diminish 'yas-minor-mode "y"))
 
   (eval-after-load "highlight-thing"
     '(diminish 'highlight-thing-mode))
@@ -82,20 +76,23 @@
     '(diminish 'hi-lock-mode))
 
   (eval-after-load "irony"
-    '(diminish 'irony-mode "i"))
+    '(diminish 'irony-mode "ir"))
 
   (eval-after-load "eldoc"
     '(diminish 'eldoc-mode))
 
   ;; Diminish because the errors, warnings and info counts are shown in spaceline.
   (eval-after-load "flycheck"
-    '(diminish 'flycheck-mode "ᚨç"))
+    '(diminish 'flycheck-mode "fc"))
 
   (eval-after-load "ace-isearch"
     '(diminish 'ace-isearch-mode))
 
   (eval-after-load "auto-dim-other-buffers"
-    '(diminish 'auto-dim-other-buffers-mode)))
+    '(diminish 'auto-dim-other-buffers-mode))
+
+  (eval-after-load "indent-guide"
+    '(diminish 'indent-guide-mode)))
 
 ;; Line numbers. Is faster than the built-in linum mode.
 (req-package nlinum
