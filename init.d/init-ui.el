@@ -188,16 +188,18 @@
            (tabbar-buffer-mode-derived-p
             major-mode '(comint-mode compilation-mode)))
        "Process")
+
       ((member (buffer-name)
                '("*dashboard*" "*scratch*" "*Messages*"))
        "Common")
+
       ((eq major-mode 'dired-mode)
        "Dired")
-      ((or (memq major-mode
-                 '(help-mode apropos-mode Info-mode Man-mode completion-list-mode))
-           (member (buffer-name)
-                   '("*helm projectile*")))
+
+      ((memq major-mode
+             '(help-mode apropos-mode Info-mode Man-mode))
        "Help")
+
       ((memq major-mode
              '(rmail-mode
                rmail-edit-mode vm-summary-mode vm-mode mail-mode
@@ -205,12 +207,14 @@
                gnus-summary-mode message-mode gnus-group-mode
                gnus-article-mode score-mode gnus-browse-killed-mode))
        "Mail")
+
       ((memq major-mode
              '(compilation-mode))
        "Compilation")
+
       ((or (memq major-mode
                  '(magit-mode
-                   magit-log-mode magit-blob-mode magit-file-mode magit-diff-mode magit-refs-mode
+                   magit-blob-mode magit-file-mode  magit-refs-mode
                    magit-blame-mode magit-stash-mode magit-popup-mode magit-cherry-mode
                    magit-reflog-mode magit-process-mode magit-stashes-mode magit-revision-mode
                    magit-repolist-mode magit-popup-help-mode magit-merge-preview-mode
@@ -220,6 +224,13 @@
            (member (buffer-name)
                    '("COMMIT_EDITMSG")))
        "Magit")
+
+      ;; Buffers I don't want in other groups because they are either irrelevant or doesn't show the
+      ;; tabbar correctly at the top.
+      ((memq major-mode
+             '(completion-list-mode magit-log-mode magit-diff-mode))
+       "Unwanted Buffers")
+
       (t
        ;; Return `mode-name' if not blank, `major-mode' otherwise.
        (if (and (stringp mode-name)
