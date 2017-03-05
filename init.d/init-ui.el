@@ -193,8 +193,10 @@
        "Common")
       ((eq major-mode 'dired-mode)
        "Dired")
-      ((memq major-mode
-             '(help-mode apropos-mode Info-mode Man-mode completion-list-mode))
+      ((or (memq major-mode
+                 '(help-mode apropos-mode Info-mode Man-mode completion-list-mode))
+           (member (buffer-name)
+                   '("*helm projectile*")))
        "Help")
       ((memq major-mode
              '(rmail-mode
@@ -213,7 +215,8 @@
                    magit-reflog-mode magit-process-mode magit-stashes-mode magit-revision-mode
                    magit-repolist-mode magit-popup-help-mode magit-merge-preview-mode
                    magit-log-select-mode magit-auto-revert-mode magit-wip-after-save-mode
-                   magit-wip-after-apply-mode magit-wip-before-change-mode magit-wip-after-save-mode))
+                   magit-wip-after-apply-mode magit-wip-before-change-mode
+                   magit-wip-after-save-mode))
            (member (buffer-name)
                    '("COMMIT_EDITMSG")))
        "Magit")
