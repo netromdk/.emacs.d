@@ -176,5 +176,71 @@
                           (projects . 10)))
   (dashboard-setup-startup-hook))
 
+(req-package tabbar
+  :config
+  ;; Function that creates groups from buffer names/modes.
+  (defun my-groups ()
+    (list
+     (cond
+      ((or (get-buffer-process (current-buffer))
+           ;; Check if the major mode derives from `comint-mode' or
+           ;; `compilation-mode'.
+           (tabbar-buffer-mode-derived-p
+            major-mode '(comint-mode compilation-mode)))
+       "Process")
+      ((member (buffer-name)
+               '("*dashboard*" "*scratch*" "*Messages*"))
+       "Common")
+      ((eq major-mode 'dired-mode)
+       "Dired")
+      ((memq major-mode
+             '(help-mode apropos-mode Info-mode Man-mode completion-list-mode))
+       "Help")
+      ((memq major-mode
+             '(rmail-mode
+               rmail-edit-mode vm-summary-mode vm-mode mail-mode
+               mh-letter-mode mh-show-mode mh-folder-mode
+               gnus-summary-mode message-mode gnus-group-mode
+               gnus-article-mode score-mode gnus-browse-killed-mode))
+       "Mail")
+      ((memq major-mode
+             '(compilation-mode))
+       "Compilation")
+      ((or (memq major-mode
+                 '(magit-mode
+                   magit-log-mode magit-blob-mode magit-file-mode magit-diff-mode magit-refs-mode
+                   magit-blame-mode magit-stash-mode magit-popup-mode magit-cherry-mode
+                   magit-reflog-mode magit-process-mode magit-stashes-mode magit-revision-mode
+                   magit-repolist-mode magit-popup-help-mode magit-merge-preview-mode
+                   magit-log-select-mode magit-auto-revert-mode magit-wip-after-save-mode
+                   magit-wip-after-apply-mode magit-wip-before-change-mode magit-wip-after-save-mode))
+           (member (buffer-name)
+                   '("COMMIT_EDITMSG")))
+       "Magit")
+      (t
+       ;; Return `mode-name' if not blank, `major-mode' otherwise.
+       (if (and (stringp mode-name)
+                ;; Take care of preserving the match-data because this
+                ;; function is called when updating the header line.
+                (save-match-data (string-match "[^ ]" mode-name)))
+           mode-name
+         (symbol-name major-mode))
+       ))))
+
+  (setq tabbar-use-images nil
+        tabbar-background-color "#202020"
+        tabbar-separator-value #(" " 0 1
+                                 (display
+                                  (space :width 0.5)
+                                  pointer arrow face tabbar-separator))
+        tabbar-buffer-groups-function 'my-groups)
+
+  (define-key tabbar-mode-map (kbd "C-M-n") 'tabbar-forward-tab)
+  (define-key tabbar-mode-map (kbd "C-M-p") 'tabbar-backward-tab)
+  (define-key tabbar-mode-map (kbd "M-N") 'tabbar-forward-group)
+  (define-key tabbar-mode-map (kbd "M-P") 'tabbar-backward-group)
+
+  (tabbar-mode))
+
 
 (provide 'init-ui)

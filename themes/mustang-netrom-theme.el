@@ -183,6 +183,21 @@
 
  ;; auto-dim-other-buffers
  '(auto-dim-other-buffers-face ((t (:background "gray12"))))
+
+ ;; tabbar
+ '(tabbar-button ((t (:inherit tabbar-default :box
+                               (:line-width 1 :color "#232323" :style released-button)))))
+ '(tabbar-default
+   ((t (:inherit variable-pitch :background "#404040" :foreground "#e2e2e5" :height 0.8))))
+ '(tabbar-modified ((t (:inherit tabbar-default :foreground "#ff9800" :box
+                                 (:line-width 1 :color "#232323" :style released-button)))))
+ '(tabbar-selected ((t (:inherit tabbar-default :foreground "#b1d631" :box
+                                 (:line-width 1 :color "#232332" :style pressed-button)))))
+ '(tabbar-selected-modified
+   ((t (:inherit tabbar-default :foreground "red" :box
+                 (:line-width 1 :color "#232323" :style released-button)))))
+ '(tabbar-unselected ((t (:inherit tabbar-default :box
+                                   (:line-width 1 :color "#232323" :style released-button)))))
  )
 
 ;;;###autoload
