@@ -227,9 +227,16 @@
 
       ;; Buffers I don't want in other groups because they are either irrelevant or doesn't show the
       ;; tabbar correctly at the top.
-      ((memq major-mode
-             '(completion-list-mode magit-log-mode magit-diff-mode))
+      ((or (memq major-mode
+                 '(completion-list-mode magit-log-mode magit-diff-mode))
+           (member (buffer-name)
+                   '("*helm find files*" "*helm projectile*" "*helm mini*" "*Helm Swoop*"
+                     "*helm M-x*")))
        "Unwanted Buffers")
+
+      ;; Group buffers related to unique projectile groups, if any.
+      ((projectile-project-p)
+       (format "Projectile: %s" (projectile-project-name)))
 
       (t
        ;; Return `mode-name' if not blank, `major-mode' otherwise.
