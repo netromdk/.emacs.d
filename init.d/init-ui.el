@@ -219,7 +219,8 @@
                  '(completion-list-mode magit-log-mode magit-diff-mode))
            (member (buffer-name)
                    '("*helm find files*" "*helm projectile*" "*helm mini*" "*Helm Swoop*"
-                     "*helm M-x*" "*helm apropos*" "*clang-error*" "*clang-output*"))
+                     "*helm M-x*" "*helm apropos*" "*clang-error*" "*clang-output*"
+                     "*Magit Confirm*" "*Backtrace*"))
            )
        "Unwanted Buffers")
 
