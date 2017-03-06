@@ -220,8 +220,7 @@
            (member (buffer-name)
                    '("*helm find files*" "*helm projectile*" "*helm mini*" "*Helm Swoop*"
                      "*helm M-x*" "*helm apropos*" "*clang-error*" "*clang-output*"
-                     "*Magit Confirm*" "*Backtrace*"))
-           )
+                     "*Magit Confirm*" "*Backtrace*")))
        "Unwanted Buffers")
 
       ;; Group buffers with file names related to unique projectile groups.
@@ -254,5 +253,12 @@
 
   (tabbar-mode))
 
+;; A visual way to choose a window to switch to.
+(req-package switch-window
+  :config
+  (setq switch-window-increase 9
+        switch-window-shortcut-style 'qwerty
+        switch-window-qwerty-shortcuts '("a" "s" "d" "f" "j" "k" "l" "æ" "w" "e" "i" "o"))
+  (global-set-key (kbd "C-x o") 'switch-window))
 
 (provide 'init-ui)
