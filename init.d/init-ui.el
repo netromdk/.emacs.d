@@ -217,9 +217,9 @@
       ;; tabbar correctly at the top.
       ((or (memq major-mode
                  '(completion-list-mode magit-log-mode magit-diff-mode))
-           ;; (member (buffer-name)
-           ;;         '("*helm find files*" "*helm projectile*" "*helm mini*" "*Helm Swoop*"
-           ;;           "*helm M-x*" "*helm apropos*"))
+           (member (buffer-name)
+                   '("*helm find files*" "*helm projectile*" "*helm mini*" "*Helm Swoop*"
+                     "*helm M-x*" "*helm apropos*" "*clang-error*" "*clang-output*"))
            )
        "Unwanted Buffers")
 
@@ -239,7 +239,7 @@
        ))))
 
   (setq tabbar-use-images nil
-        tabbar-background-color "#202020"
+        tabbar-background-color "#252525"
         tabbar-separator-value #(" " 0 1
                                  (display
                                   (space :width 0.5)

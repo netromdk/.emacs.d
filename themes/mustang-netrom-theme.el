@@ -198,6 +198,7 @@
                  (:line-width 1 :color "#232323" :style released-button)))))
  '(tabbar-unselected ((t (:inherit tabbar-default :box
                                    (:line-width 1 :color "#232323" :style released-button)))))
+ '(tabbar-button-highlight ((t (:inherit tabbar-default :foreground "#cccc00"))))
  )
 
 ;;;###autoload
