@@ -179,7 +179,7 @@
 (req-package tabbar
   :config
   ;; Function that creates groups from buffer names/modes.
-  (defun my-groups ()
+  (defun my-tabbar-group-for-buffer ()
     (list
      (cond
       ((or (get-buffer-process (current-buffer))
@@ -212,30 +212,19 @@
              '(compilation-mode))
        "Compilation")
 
-      ((or (memq major-mode
-                 '(magit-mode
-                   magit-blob-mode magit-file-mode  magit-refs-mode
-                   magit-blame-mode magit-stash-mode magit-popup-mode magit-cherry-mode
-                   magit-reflog-mode magit-process-mode magit-stashes-mode magit-revision-mode
-                   magit-repolist-mode magit-popup-help-mode magit-merge-preview-mode
-                   magit-log-select-mode magit-auto-revert-mode magit-wip-after-save-mode
-                   magit-wip-after-apply-mode magit-wip-before-change-mode
-                   magit-wip-after-save-mode))
-           (member (buffer-name)
-                   '("COMMIT_EDITMSG")))
-       "Magit")
-
       ;; Buffers I don't want in other groups because they are either irrelevant or doesn't show the
       ;; tabbar correctly at the top.
       ((or (memq major-mode
                  '(completion-list-mode magit-log-mode magit-diff-mode))
-           (member (buffer-name)
-                   '("*helm find files*" "*helm projectile*" "*helm mini*" "*Helm Swoop*"
-                     "*helm M-x*")))
+           ;; (member (buffer-name)
+           ;;         '("*helm find files*" "*helm projectile*" "*helm mini*" "*Helm Swoop*"
+           ;;           "*helm M-x*" "*helm apropos*"))
+           )
        "Unwanted Buffers")
 
-      ;; Group buffers related to unique projectile groups, if any.
-      ((projectile-project-p)
+      ;; Group buffers with file names related to unique projectile groups.
+      ((and (projectile-project-p)
+            (buffer-file-name))
        (format "Projectile: %s" (projectile-project-name)))
 
       (t
@@ -254,7 +243,7 @@
                                  (display
                                   (space :width 0.5)
                                   pointer arrow face tabbar-separator))
-        tabbar-buffer-groups-function 'my-groups)
+        tabbar-buffer-groups-function 'my-tabbar-group-for-buffer)
 
   (define-key tabbar-mode-map (kbd "C-M-n") 'tabbar-forward-tab)
   (define-key tabbar-mode-map (kbd "C-M-p") 'tabbar-backward-tab)
