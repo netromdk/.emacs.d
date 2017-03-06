@@ -177,6 +177,7 @@
   (dashboard-setup-startup-hook))
 
 (req-package tabbar
+  :require projectile
   :config
   ;; Function that creates groups from buffer names/modes.
   (defun my-tabbar-group-for-buffer ()
