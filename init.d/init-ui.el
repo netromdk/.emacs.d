@@ -253,12 +253,4 @@
 
   (tabbar-mode))
 
-;; A visual way to choose a window to switch to.
-(req-package switch-window
-  :config
-  (setq switch-window-increase 9
-        switch-window-shortcut-style 'qwerty
-        switch-window-qwerty-shortcuts '("a" "s" "d" "f" "j" "k" "l" "æ" "w" "e" "i" "o"))
-  (global-set-key (kbd "C-x o") 'switch-window))
-
 (provide 'init-ui)
