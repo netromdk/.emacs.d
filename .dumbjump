@@ -1,0 +1,7 @@
+-.projectile
+-.gitignore
+-.mc-lists.el
+-abbrev_defs
+-tramp
+-*autoloads.el
+-elpa

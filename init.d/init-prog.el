@@ -375,7 +375,17 @@
   :config
   (setq indent-guide-char "|"
         indent-guide-delay 0.5)
-  (add-hook 'prog-mode-hook 'indent-guide-mode))
+  (add-hook 'prog-mode-hook 'indent-guide-Mode))
+
+;; Jump to definition for multiple languages without configuration.
+(req-package dumb-jump
+  :require helm
+  :bind (("M-g j" . dumb-jump-go)
+         ("M-g o" . dumb-jump-go-other-window)
+         ("M-g b" . dumb-jump-back))
+  :config
+  (setq dumb-jump-selector 'helm
+        dump-jump-max-time 5))
 
 
 (provide 'init-prog)
