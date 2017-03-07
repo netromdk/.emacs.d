@@ -219,8 +219,8 @@
                  '(completion-list-mode magit-log-mode magit-diff-mode))
            (member (buffer-name)
                    '("*helm find files*" "*helm projectile*" "*helm mini*" "*Helm Swoop*"
-                     "*helm M-x*" "*helm apropos*" "*clang-error*" "*clang-output*"
-                     "*Magit Confirm*" "*Backtrace*")))
+                     "*helm M-x*" "*helm apropos*" "*helm kill ring*" "*Helm file completions*"
+                     "*helm-ag*" "*clang-error*" "*clang-output*" "*Magit Confirm*" "*Backtrace*")))
        "Unwanted Buffers")
 
       ;; Group buffers with file names related to unique projectile groups.
