@@ -382,6 +382,7 @@
   :require helm
   :bind (("M-g j" . dumb-jump-go)
          ("M-g o" . dumb-jump-go-other-window)
+         ("M-g q" . dumb-jump-quick-look)
          ("M-g b" . dumb-jump-back))
   :config
   (setq dumb-jump-selector 'helm
