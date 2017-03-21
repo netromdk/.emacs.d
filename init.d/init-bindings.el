@@ -1,7 +1,8 @@
 ;; General bindings.
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-n") 'forward-paragraph)
-(global-set-key (kbd "C-c o") 'ff-find-other-file)
+(global-set-key (kbd "C-c o")
+                '(lambda () (interactive) (ff-find-other-file nil t)))
 (global-set-key (kbd "C-.") 'repeat)
 
 ;; Move to first whitespace or begninning of line if none. Pressing again goes to the beginning if
