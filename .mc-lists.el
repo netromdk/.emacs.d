@@ -23,6 +23,9 @@
         dired-flag-file-deletion
         electric-newline-and-maybe-indent
         end-of-visual-line
+        fix-word-capitalize
+        fix-word-downcase
+        fix-word-upcase
         helm-show-kill-ring
         indent-for-tab-command
         isearch-forward-regexp
