@@ -38,6 +38,7 @@
         sp-backward-sexp
         sp-forward-sexp
         sp-remove-active-pair-overlay
+        transpose-words
         yaml-electric-backspace
         ))
 
