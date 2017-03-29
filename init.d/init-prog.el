@@ -388,7 +388,8 @@
          ("M-g b" . dumb-jump-back))
   :config
   (setq dumb-jump-selector 'helm
-        dumb-jump-max-find-time 5))
+        dumb-jump-max-find-time 5
+        dumb-jump-aggressive nil))
 
 
 (provide 'init-prog)
