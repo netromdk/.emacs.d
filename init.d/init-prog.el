@@ -384,6 +384,7 @@
          ("M-g o" . dumb-jump-go-other-window)
          ("M-g e" . dumb-jump-go-prefer-external)
          ("M-g x" . dumb-jump-go-prefer-external-other-window)
+         ("M-g i" . dumb-jump-go-prompt)
          ("M-g q" . dumb-jump-quick-look)
          ("M-g b" . dumb-jump-back))
   :config
