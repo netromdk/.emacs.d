@@ -213,6 +213,15 @@
                 ("\\.style$" . css-mode))
               auto-mode-alist))
 
+;; C#
+(req-package csharp-mode
+  :mode (("\\.cs$" . csharp-mode))
+
+  :config
+  (add-hook 'csharp-mode-hook
+            (lambda ()
+              (setq c-basic-offset general-tab-width))))
+
 ;; Markdown
 (req-package markdown-mode
   :mode (("\\.markdown\\'" . markdown-mode)
