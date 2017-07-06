@@ -15,7 +15,11 @@
                         flycheck-gcc-language-standard "c++11"
                         flycheck-cppcheck-standards '("c++11")
                         flycheck-cppcheck-inconclusive t
-                        flycheck-cppcheck-checks '("all")))))
+                        flycheck-cppcheck-checks '("all")
+
+                        ;; Ignore "no explicit constructor" because often you don't want it to be
+                        ;; explicit and in general it's annoying.
+                        flycheck-cppcheck-suppressions '("noExplicitConstructor")))))
 
     ;; Disable elisp checkdoc because it's annoying, and clang/gcc because they never know the
     ;; includes anyway!
