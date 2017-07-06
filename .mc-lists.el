@@ -4,6 +4,7 @@
 (setq mc/cmds-to-run-for-all
       '(
         c-backward-conditional
+        c-beginning-of-statement
         c-electric-brace
         c-electric-colon
         c-electric-delete-forward
@@ -13,6 +14,7 @@
         c-electric-semi&comma
         c-electric-slash
         c-electric-star
+        c-end-of-statement
         c-fill-paragraph
         c-forward-conditional
         c-hungry-delete-backwards
