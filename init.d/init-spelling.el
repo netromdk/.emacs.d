@@ -70,8 +70,11 @@ don't want to fix with `SPC', and you can abort completely with
 
   ;; Remove Flyspell from some sub modes of text mode
   (dolist (hook '(change-log-mode-hook
-                  log-edit-mode-hook))
-    (add-hook hook (lambda () (flyspell-mode -1))))
+                  log-edit-mode-hook
+                  nxml-mode-hook))
+    (add-hook hook (lambda ()
+                     (flyspell-lazy-mode -1)
+                     (flyspell-mode -1))))
 
   ;; Flyspell comments and strings in programming modes.
   ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
