@@ -4,6 +4,7 @@
 (require 'req-package)
 
 (req-package flycheck
+  :require helm-flycheck
   :config
   (progn
     ;; C++11
@@ -27,6 +28,7 @@
                   '(emacs-lisp-checkdoc c/c++-clang c/c++-gcc))
 
     (defalias 'fcn 'flycheck-next-error)
+    (defalias 'hf 'helm-flycheck)
 
     (add-hook 'prog-mode-hook 'flycheck-mode)))
 
