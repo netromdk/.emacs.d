@@ -1,4 +1,5 @@
 (
+ (:id "sha1:cd9fdc5da495d8bc71204a20d3ba9972aa93b080" :fingerprint "sha1:a3:d1:e5:ea:a7:89:d9:e8:a2:cf:73:44:3d:7e:8c:03:a9:d5:42:4e" :host "files.slack.com:443" :conditions (:unknown-ca :invalid))
  (:id "sha1:85b31c268009209a8d3c5387033b219264f7e62b" :fingerprint "sha1:61:c7:72:3a:09:bf:cb:31:2e:b3:a1:63:65:74:9c:6f:f8:20:0d:f2" :host "melpa.org:443" :conditions (:unknown-ca :invalid))
  (:id "sha1:ccfd2cc2a08c89a9b10969be8c1e926954d53e28" :fingerprint "sha1:5a:6b:b0:ab:48:93:8d:06:0d:70:e1:3a:a9:76:57:32:f8:88:9d:4b" :host "stable.melpa.org:443" :conditions (:unknown-ca :invalid))
  (:id "sha1:6d4eb958390599243ba9f5035cb671fa8dd6a93a" :fingerprint "sha1:80:c7:6f:6c:86:a8:21:3f:ca:b8:fd:51:2a:b2:bb:9b:34:99:05:4e" :host "elpa.gnu.org:443" :conditions (:unknown-ca :invalid))
