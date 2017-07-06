@@ -171,6 +171,8 @@
  '(flycheck-error ((t (:foreground "#FF0000"
                                    :underline (:color "#FF0000" :style wave)
                                    :weight bold))))
+ '(flycheck-info ((t (:underline (:color "green yellow" :style wave)))))
+ '(flycheck-warning ((t (:underline (:color "orange1" :style wave)))))
 
  ;; highlight-escape-sequences
  '(hes-escape-backslash-face ((t (:inherit font-lock-regexp-grouping-backslash
