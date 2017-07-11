@@ -34,9 +34,6 @@
   (eval-after-load "anzu"
     '(diminish 'anzu-mode))
 
-  (eval-after-load "vim-empty-lines-mode"
-    '(diminish 'vim-empty-lines-mode))
-
   (eval-after-load "abbrev"
     '(diminish 'abbrev-mode))
 
@@ -122,11 +119,6 @@
   :config
   (highlight-current-line-minor-mode)
   (highlight-current-line-on t))
-
-;; Show vim-like ~ at the end of buffers to show end-of-file.
-(req-package vim-empty-lines-mode
-  :config
-  (global-vim-empty-lines-mode))
 
 ;; Shows the number of matches for searches.
 (req-package anzu
