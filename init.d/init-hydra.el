@@ -1,8 +1,8 @@
 (require 'req-package)
 
 ;; Lots of inspiration found here: https://github.com/abo-abo/hydra/wiki/
-(req-package hydra flycheck
-  :require helm
+(req-package hydra
+  :require helm flycheck multiple-cursors
   :config
 
   ;; Easier cycling of yanking.
