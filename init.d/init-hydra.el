@@ -1,7 +1,7 @@
 (require 'req-package)
 
 ;; Lots of inspiration found here: https://github.com/abo-abo/hydra/wiki/
-(req-package hydra
+(req-package hydra flycheck
   :require helm
   :config
 
@@ -108,6 +108,19 @@ T - tag prefix
     ("q" nil)
     ("." nil :color blue))
 
-  (define-key dired-mode-map "." 'hydra-dired/body))
+  (define-key dired-mode-map "." 'hydra-dired/body)
+
+  ;; Navigate flycheck errors more easily.
+  (defhydra hydra-flycheck
+    (:pre  (flycheck-list-errors)
+     :post (quit-windows-on "*Flycheck errors*")
+     :hint nil)
+    "Errors"
+    ("f"  flycheck-error-list-set-filter                            "Filter")
+    ("j"  flycheck-next-error                                       "Next")
+    ("k"  flycheck-previous-error                                   "Previous")
+    ("gg" flycheck-first-error                                      "First")
+    ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
+    ("q"  nil)))
 
 (provide 'init-hydra)
