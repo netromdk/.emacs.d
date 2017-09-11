@@ -29,12 +29,31 @@
         fix-word-downcase
         fix-word-upcase
         helm-show-kill-ring
+        hydra-move/backward-char
+        hydra-move/backward-paragraph
+        hydra-move/backward-word
+        hydra-move/forward-char
+        hydra-move/forward-paragraph
+        hydra-move/forward-word
+        hydra-move/move-end-of-line
+        hydra-move/next-line
+        hydra-move/previous-line
+        hydra-move/smarter-move-beginning-of-line
         indent-for-tab-command
         isearch-forward-regexp
         kill-region
         lux-fix-buffer
         lux-wrap-function
         markdown-exdent-or-delete
+        multiple-cursors-hydra/mc/edit-lines
+        multiple-cursors-hydra/mc/edit-lines-and-exit
+        multiple-cursors-hydra/mc/mark-all-like-this-and-exit
+        multiple-cursors-hydra/mc/mark-all-like-this-dwim
+        multiple-cursors-hydra/mc/mark-all-like-this-dwim-and-exit
+        multiple-cursors-hydra/mc/mark-previous-like-this
+        multiple-cursors-hydra/mc/skip-to-previous-like-this
+        multiple-cursors-hydra/mc/unmark-next-like-this
+        multiple-cursors-hydra/mc/unmark-previous-like-this
         orgtbl-self-insert-command
         smarter-move-beginning-of-line
         sp-backward-sexp
@@ -49,6 +68,8 @@
         c-toggle-auto-newline
         cleanup-region-or-buffer
         helm-M-x
+        multiple-cursors-hydra/mc/mark-next-like-this
+        multiple-cursors-hydra/mc/skip-to-next-like-this
         next-error
         recompile
         select-window-1
