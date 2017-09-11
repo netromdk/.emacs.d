@@ -2,7 +2,7 @@
 
 ;; Lots of inspiration found here: https://github.com/abo-abo/hydra/wiki/
 (req-package hydra
-  :require helm flycheck multiple-cursors
+  :require helm flycheck
   :config
 
   ;; Easier cycling of yanking.
@@ -41,12 +41,10 @@
   (global-set-key (kbd "C-f") #'hydra-move/forward-char)
   (global-set-key (kbd "M-f") #'hydra-move/forward-word)
   (global-set-key (kbd "C-n") #'hydra-move/next-line)
-  (global-set-key (kbd "M-n") #'hydra-move/forward-paragraph)
 
   (global-set-key (kbd "C-b") #'hydra-move/backward-char)
   (global-set-key (kbd "M-b") #'hydra-move/backward-word)
   (global-set-key (kbd "C-p") #'hydra-move/previous-line)
-  (global-set-key (kbd "M-p") #'hydra-move/backward-paragraph)
 
   (global-set-key (kbd "C-a") #'hydra-move/smarter-move-beginning-of-line)
   (global-set-key (kbd "C-e") #'hydra-move/move-end-of-line)

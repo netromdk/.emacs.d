@@ -1,6 +1,6 @@
 ;; General bindings.
-(global-set-key (kbd "M-p") 'backward-paragraph)
-(global-set-key (kbd "M-n") 'forward-paragraph)
+;; (global-set-key (kbd "M-p") 'backward-paragraph)
+;; (global-set-key (kbd "M-n") 'forward-paragraph)
 (global-set-key (kbd "C-c o")
                 '(lambda () (interactive) (ff-find-other-file nil t)))
 (global-set-key (kbd "C-.") 'repeat)
