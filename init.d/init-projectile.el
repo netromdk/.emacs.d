@@ -15,7 +15,7 @@
   (projectile-global-mode))
 
 (req-package helm-projectile
-  :require projectile helm helm-gtags
+  :require projectile helm helm-gtags hydra
   :config
   (setq helm-projectile-fuzzy-match t)
   (setq projectile-switch-project-action 'helm-projectile-find-file)
@@ -54,7 +54,31 @@ removed and then recreated."
           (progn
             (message "Creating gtags..")
             (helm-gtags-create-tags (projectile-project-root) "default"))))))
-  (msk/projectile-define-prefix-key "R" 'msk/helm-update-gtags))
+  (msk/projectile-define-prefix-key "R" 'msk/helm-update-gtags)
+
+  ;; Show hydra on "C-x p H".
+  (defhydra hydra-projectile (:columns 4)
+    "Projectile/Helm"
+    ("f" helm-projectile-find-file "Find File")
+    ("F" helm-projectile-find-file-dwim "Find File Dwim")
+    ("o" helm-projectile-find-o "Find Other File")
+    ("r" helm-projectile-recentf "Recent Files")
+    ("d" helm-projectile-find-dir "Find Directory")
+
+    ("a" helm-projectile-ag "Search with Ag")
+    ("R" msk/helm-update-gtags "Update Gtags")
+
+    ("s" helm-projectile-switch-project "Switch Project")
+    ("c" projectile-invalidate-cache "Clear Cache")
+    ("z" projectile-cache-current-file "Cache Current File")
+    ("x" projectile-remove-known-project "Remove Known Project")
+    ("X" projectile-cleanup-known-projects "Cleanup Known Projects")
+
+    ("b" projectile-switch-to-buffer "Switch to Buffer")
+    ("k" projectile-kill-buffers "Kill Buffers")
+
+    ("q" nil "Cancel" :color blue))
+  (msk/projectile-define-prefix-key "H" 'hydra-projectile/body))
 
 
 (provide 'init-projectile)
