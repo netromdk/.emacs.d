@@ -2,7 +2,7 @@
 
 ;; Lots of inspiration found here: https://github.com/abo-abo/hydra/wiki/
 (req-package hydra
-  :require helm flycheck
+  :require helm
   :config
 
   ;; Easier cycling of yanking.
@@ -52,19 +52,6 @@
   (global-set-key (kbd "M->") #'hydra-move/end-of-buffer)
   (global-set-key (kbd "C-v") #'hydra-move/scroll-up-command)
   (global-set-key (kbd "M-v") #'hydra-move/scroll-down-command)
-  (global-set-key (kbd "C-l") #'hydra-move/recenter-top-bottom)
-
-  ;; Navigate flycheck errors more easily.
-  (defhydra hydra-flycheck
-    (:pre  (flycheck-list-errors)
-     :post (quit-windows-on "*Flycheck errors*")
-     :hint nil)
-    "Errors"
-    ("f"  flycheck-error-list-set-filter                            "Filter")
-    ("j"  flycheck-next-error                                       "Next")
-    ("k"  flycheck-previous-error                                   "Previous")
-    ("gg" flycheck-first-error                                      "First")
-    ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
-    ("q"  nil)))
+  (global-set-key (kbd "C-l") #'hydra-move/recenter-top-bottom))
 
 (provide 'init-hydra)
