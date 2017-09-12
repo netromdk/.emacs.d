@@ -34,6 +34,7 @@
   :config
   (global-set-key (kbd "C-;") 'avy-goto-char)
   (global-set-key (kbd "C-,") 'avy-goto-char-2)
+  (global-set-key (kbd "M-,") 'avy-pop-mark)
   (global-set-key [remap goto-line] 'avy-goto-line) ; Enter 1-9 for line mode.
   (global-set-key (kbd "M-g l") 'goto-line)         ; Keep the old one..
   (global-set-key (kbd "M-g p") 'avy-goto-line-above)
