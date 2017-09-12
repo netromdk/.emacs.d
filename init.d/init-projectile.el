@@ -15,22 +15,10 @@
   (projectile-global-mode))
 
 (req-package helm-projectile
-  :require projectile helm helm-gtags hydra
+  :require (projectile helm helm-gtags hydra)
   :config
   (setq helm-projectile-fuzzy-match t)
   (setq projectile-switch-project-action 'helm-projectile-find-file)
-
-  ;; Use helm-projectile alternatives.
-  (defun msk/projectile-define-prefix-key (key func)
-    (define-key projectile-mode-map
-      (kbd (concat projectile-keymap-prefix key)) func))
-  (msk/projectile-define-prefix-key "f" 'helm-projectile-find-file)
-  (msk/projectile-define-prefix-key "d" 'helm-projectile-find-dir)
-  (msk/projectile-define-prefix-key "o" 'helm-projectile-find-other-file)
-  (msk/projectile-define-prefix-key "a" 'helm-projectile-ag)
-  (msk/projectile-define-prefix-key "p" 'helm-projectile-switch-project)
-  (msk/projectile-define-prefix-key "b" 'helm-projectile-switch-to-buffer)
-  (msk/projectile-define-prefix-key "r" 'helm-projectile-recentf)
 
   (defun msk/helm-update-gtags (arg)
     "Update gtags for all files or create if they don't already
@@ -54,11 +42,10 @@ removed and then recreated."
           (progn
             (message "Creating gtags..")
             (helm-gtags-create-tags (projectile-project-root) "default"))))))
-  (msk/projectile-define-prefix-key "R" 'msk/helm-update-gtags)
 
-  ;; Show hydra on "C-x p H".
+  ;; Show hydra on "C-x p .".
   (defhydra hydra-projectile (:columns 4)
-    "Projectile/Helm"
+    "Projectile"
     ("f" helm-projectile-find-file "Find File")
     ("F" helm-projectile-find-file-dwim "Find File Dwim")
     ("o" helm-projectile-find-o "Find Other File")
@@ -78,7 +65,20 @@ removed and then recreated."
     ("k" projectile-kill-buffers "Kill Buffers")
 
     ("q" nil "Cancel" :color blue))
-  (msk/projectile-define-prefix-key "H" 'hydra-projectile/body))
+
+  ;; Use helm-projectile alternatives.
+  (defun msk/projectile-define-prefix-key (key func)
+    (define-key projectile-mode-map
+      (kbd (concat projectile-keymap-prefix key)) func))
+  (msk/projectile-define-prefix-key "f" 'helm-projectile-find-file)
+  (msk/projectile-define-prefix-key "d" 'helm-projectile-find-dir)
+  (msk/projectile-define-prefix-key "o" 'helm-projectile-find-other-file)
+  (msk/projectile-define-prefix-key "a" 'helm-projectile-ag)
+  (msk/projectile-define-prefix-key "p" 'helm-projectile-switch-project)
+  (msk/projectile-define-prefix-key "b" 'helm-projectile-switch-to-buffer)
+  (msk/projectile-define-prefix-key "r" 'helm-projectile-recentf)
+  (msk/projectile-define-prefix-key "R" 'msk/helm-update-gtags)
+  (msk/projectile-define-prefix-key "." 'hydra-projectile/body))
 
 
 (provide 'init-projectile)
