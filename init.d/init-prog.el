@@ -117,6 +117,10 @@
 
 ;; C/C++
 
+(req-package modern-cpp-font-lock
+  :config
+  (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode))
+
 (setq use-qt-tab-width nil)
 (defun turn-on-qt-tab-width ()
   "Use Qt tab width (4 spaces)."
