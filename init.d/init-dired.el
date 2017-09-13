@@ -60,7 +60,7 @@
   (define-key dired-mode-map (kbd "M-n") 'dired-jump-to-bottom)
 
   ;; Easier usage of dired by using "." in dired buffer.
-  (defhydra hydra-dired (:hint nil)
+  (defhydra dired-hydra (:hint nil)
     "
 _+_ mkdir          _v_iew           _m_ark             _(_ details        _i_nsert-subdir    wdired
 _C_opy             _O_ view other   _U_nmark all       _)_ omit-mode      _$_ hide-subdir    C-x C-q : edit
@@ -111,7 +111,7 @@ T - tag prefix
     ("q" nil)
     ("." nil :color blue))
 
-  (define-key dired-mode-map "." 'hydra-dired/body))
+  (define-key dired-mode-map "." 'dired-hydra/body))
 
 (req-package dired-sort
   :require dired

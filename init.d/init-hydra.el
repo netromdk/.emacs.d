@@ -6,7 +6,7 @@
   :config
 
   ;; Easier cycling of yanking.
-  (defhydra hydra-yank-pop ()
+  (defhydra yank-pop-hydra ()
     "yank"
     ("C-y" yank nil)
     ("M-y" yank-pop nil)
@@ -14,7 +14,7 @@
     ("Y" (yank-pop -1) "prev")
     ("l" helm-show-kill-ring "list" :color blue))
 
-  (global-set-key (kbd "M-y") #'hydra-yank-pop/yank-pop)
-  (global-set-key (kbd "C-y") #'hydra-yank-pop/yank))
+  (global-set-key (kbd "M-y") #'yank-pop-hydra/yank-pop)
+  (global-set-key (kbd "C-y") #'yank-pop-hydra/yank))
 
 (provide 'init-hydra)

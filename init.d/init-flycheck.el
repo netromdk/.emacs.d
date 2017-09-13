@@ -33,7 +33,7 @@
     (add-hook 'prog-mode-hook 'flycheck-mode)
 
     ;; Navigate flycheck errors more easily.
-    (defhydra hydra-flycheck
+    (defhydra flycheck-hydra
       (:pre  (flycheck-list-errors)
              :post (quit-windows-on "*Flycheck errors*")
              :hint nil)
