@@ -84,6 +84,7 @@ Projectile: %(projectile-project-root)
     ("x" projectile-remove-known-project)
     ("X" projectile-cleanup-known-projects)
 
+    ("M" magit-status "Magit" :color blue)
     ("q" nil "Cancel" :color blue))
 
   (define-key projectile-mode-map projectile-keymap-prefix 'projectile-hydra/body))
