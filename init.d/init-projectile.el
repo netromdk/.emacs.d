@@ -2,9 +2,9 @@
 
 (req-package projectile
   :init
-  (setq projectile-keymap-prefix (kbd "C-x p"))
-  (setq projectile-enable-caching t)
-  (setq projectile-mode-line
+  (setq projectile-keymap-prefix (kbd "C-x p")
+        projectile-enable-caching t
+        projectile-mode-line
         '(:eval
           (if (file-remote-p default-directory)
               "rρ"
@@ -15,10 +15,10 @@
   (projectile-global-mode))
 
 (req-package helm-projectile
-  :require (projectile helm helm-gtags hydra)
+  :require (projectile helm helm-gtags hydra magit)
   :config
-  (setq helm-projectile-fuzzy-match t)
-  (setq projectile-switch-project-action 'helm-projectile-find-file)
+  (setq helm-projectile-fuzzy-match t
+        projectile-switch-project-action 'helm-projectile-find-file)
 
   (defun msk/helm-update-gtags (arg)
     "Update gtags for all files or create if they don't already
@@ -43,42 +43,44 @@ removed and then recreated."
             (message "Creating gtags..")
             (helm-gtags-create-tags (projectile-project-root) "default"))))))
 
-  ;; Show hydra on "C-x p .".
-  (defhydra hydra-projectile (:columns 4)
-    "Projectile"
-    ("f" helm-projectile-find-file "Find File")
-    ("F" helm-projectile-find-file-dwim "Find File Dwim")
-    ("o" helm-projectile-find-o "Find Other File")
-    ("r" helm-projectile-recentf "Recent Files")
-    ("d" helm-projectile-find-dir "Find Directory")
+  (defhydra projectile-hydra (:idle 1 :hint nil)
+    "
+Projectile: %(projectile-project-root)
 
-    ("a" helm-projectile-ag "Search with Ag")
-    ("R" msk/helm-update-gtags "Update Gtags")
+     Find               Search/Tags          Buffers                Cache/Project
+------------------------------------------------------------------------------------------
+  _f_: File            _a_: Ag                _b_: Switch to buffer    _p_: Switch project
+  _F_: File dwim       _g_: Update gtags      _k_: Kill all buffers    _c_: Cache clear
+  _o_: Other file      _O_: Multi-occur                              ^^_x_: Remove known project
+  _r_: Recent file                                                 ^^^^_X_: Cleanup non-existing
+  _d_: Dir                                                         ^^^^_z_: Cache current file
+  _w_: File other win
 
-    ("s" helm-projectile-switch-project "Switch Project")
-    ("c" projectile-invalidate-cache "Clear Cache")
-    ("z" projectile-cache-current-file "Cache Current File")
-    ("x" projectile-remove-known-project "Remove Known Project")
-    ("X" projectile-cleanup-known-projects "Cleanup Known Projects")
+"
+    ("f" helm-projectile-find-file)
+    ("F" helm-projectile-find-file-dwim)
+    ("o" helm-projectile-find-other-file)
+    ("r" helm-projectile-recentf)
+    ("d" helm-projectile-find-dir)
+    ("w" projectile-find-file-other-window)
 
-    ("b" projectile-switch-to-buffer "Switch to Buffer")
-    ("k" projectile-kill-buffers "Kill Buffers")
+    ("a" helm-projectile-ag)
+    ("g" msk/helm-update-gtags)
+    ("O" projectile-multi-occur :color blue)
 
+    ("b" helm-projectile-switch-to-buffer)
+    ("k" projectile-kill-buffers)
+
+    ("p" helm-projectile-switch-project)
+    ("c" projectile-invalidate-cache)
+    ("z" projectile-cache-current-file)
+    ("x" projectile-remove-known-project)
+    ("X" projectile-cleanup-known-projects)
+
+    ("m" magit-status "Magit" :color blue)
     ("q" nil "Cancel" :color blue))
 
-  ;; Use helm-projectile alternatives.
-  (defun msk/projectile-define-prefix-key (key func)
-    (define-key projectile-mode-map
-      (kbd (concat projectile-keymap-prefix key)) func))
-  (msk/projectile-define-prefix-key "f" 'helm-projectile-find-file)
-  (msk/projectile-define-prefix-key "d" 'helm-projectile-find-dir)
-  (msk/projectile-define-prefix-key "o" 'helm-projectile-find-other-file)
-  (msk/projectile-define-prefix-key "a" 'helm-projectile-ag)
-  (msk/projectile-define-prefix-key "p" 'helm-projectile-switch-project)
-  (msk/projectile-define-prefix-key "b" 'helm-projectile-switch-to-buffer)
-  (msk/projectile-define-prefix-key "r" 'helm-projectile-recentf)
-  (msk/projectile-define-prefix-key "R" 'msk/helm-update-gtags)
-  (msk/projectile-define-prefix-key "." 'hydra-projectile/body))
+  (define-key projectile-mode-map projectile-keymap-prefix 'projectile-hydra/body))
 
 
 (provide 'init-projectile)
