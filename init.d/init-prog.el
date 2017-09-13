@@ -392,18 +392,21 @@
 
 ;; Jump to definition for multiple languages without configuration.
 (req-package dumb-jump
-  :require helm
-  :bind (("M-g j" . dumb-jump-go)
-         ("M-g o" . dumb-jump-go-other-window)
-         ("M-g e" . dumb-jump-go-prefer-external)
-         ("M-g x" . dumb-jump-go-prefer-external-other-window)
-         ("M-g i" . dumb-jump-go-prompt)
-         ("M-g q" . dumb-jump-quick-look)
-         ("M-g b" . dumb-jump-back))
+  :require (helm hydra)
   :config
   (setq dumb-jump-selector 'helm
         dumb-jump-max-find-time 5
-        dumb-jump-aggressive nil))
+        dumb-jump-aggressive nil)
+  (defhydra dumb-jump-hydra (:columns 3 :idle 1)
+    "Dumb Jump"
+    ("j" dumb-jump-go "Go")
+    ("o" dumb-jump-go-other-window "Other window")
+    ("e" dumb-jump-go-prefer-external "Go external")
+    ("x" dumb-jump-go-prefer-external-other-window "Go external other window")
+    ("i" dumb-jump-go-prompt "Prompt")
+    ("l" dumb-jump-quick-look "Quick look")
+    ("b" dumb-jump-back "Back"))
+  (global-set-key (kbd "M-g d") 'dumb-jump-hydra/body))
 
 
 (provide 'init-prog)
