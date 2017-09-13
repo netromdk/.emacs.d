@@ -43,18 +43,24 @@ removed and then recreated."
             (message "Creating gtags..")
             (helm-gtags-create-tags (projectile-project-root) "default"))))))
 
+  (defun msk/projectile-switch-project-magit (args)
+    "Switch to project using projectile and run `magit-status'."
+    (interactive "P")
+    (let ((projectile-switch-project-action 'magit-status))
+      (helm-projectile-switch-project)))
+
   (defhydra projectile-hydra (:idle 1 :hint nil)
     "
 Projectile: %(projectile-project-root)
 
      Find               Search/Tags          Buffers                Cache/Project
 ------------------------------------------------------------------------------------------
-  _f_: File            _a_: Ag                _b_: Switch to buffer    _p_: Switch project
-  _F_: File dwim       _g_: Update gtags      _k_: Kill all buffers    _c_: Cache clear
-  _o_: Other file      _O_: Multi-occur                              ^^_x_: Remove known project
-  _r_: Recent file                                                 ^^^^_X_: Cleanup non-existing
-  _d_: Dir                                                         ^^^^_z_: Cache current file
-  _w_: File other win
+  _f_: File            _a_: Ag                _b_: Switch to buffer    _p_: Switch project (find file)
+  _F_: File dwim       _g_: Update gtags      _k_: Kill all buffers    _m_: Switch project (magit)
+  _o_: Other file      _O_: Multi-occur                              ^^_c_: Cache clear
+  _r_: Recent file                                                 ^^^^_x_: Remove known project
+  _d_: Dir                                                         ^^^^_X_: Cleanup non-existing
+  _w_: File other win                                              ^^^^_z_: Cache current file
 
 "
     ("f" helm-projectile-find-file)
@@ -72,12 +78,12 @@ Projectile: %(projectile-project-root)
     ("k" projectile-kill-buffers)
 
     ("p" helm-projectile-switch-project)
+    ("m" msk/projectile-switch-project-magit :color blue)
     ("c" projectile-invalidate-cache)
     ("z" projectile-cache-current-file)
     ("x" projectile-remove-known-project)
     ("X" projectile-cleanup-known-projects)
 
-    ("m" magit-status "Magit" :color blue)
     ("q" nil "Cancel" :color blue))
 
   (define-key projectile-mode-map projectile-keymap-prefix 'projectile-hydra/body))
