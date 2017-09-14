@@ -30,19 +30,76 @@
   (compile
    (format "cd `dirname '%s'` && %s" (buffer-file-name) cmd)))
 
-(global-set-key [(C-f5)] 'compile)
-(global-set-key [(S-f5)] 'compile-from-buffer-folder)
-(global-set-key [(f5)] 'recompile)
-(global-set-key [(f6)] 'next-error)
-(global-set-key [(C-f6)] 'next-error-skip-warnings)
+(defun msk/compilation-toggle-scroll ()
+  "Toggle between not scrolling and scrolling until first error
+in compilation mode."
+  (interactive)
+  (if (not compilation-scroll-output)
+      (setq compilation-scroll-output 'first-error)
+    (setq compilation-scroll-output nil)))
 
-;; Use C-cC-c to recompile and C-cC-f to goto next error.
+(defun msk/compilation-scroll-output-string ()
+  (interactive)
+  (if (not compilation-scroll-output)
+      "No"
+    "First error"))
+
+(defun msk/compilation-skip-threshold-string ()
+  (interactive)
+  (cond
+   ((= compilation-skip-threshold 2)
+    "Skip anything less than error")
+   ((= compilation-skip-threshold 1)
+    "Skip anything less than warning")
+   ((<= compilation-skip-threshold 0)
+    "Don't skip anything")))
+
+(defun msk/compilation-toggle-threshold ()
+  (interactive)
+  (progn
+    (setq compilation-skip-threshold (- compilation-skip-threshold 1))
+    (when (< compilation-skip-threshold 0)
+      (setq compilation-skip-threshold 2))))
+
+(defun msk/compilation-command-string ()
+  (interactive)
+  (if (not compile-command)
+      "None"
+    compile-command))
+
+(defun msk/compilation-last-error ()
+  (interactive)
+  (condition-case err
+      (while t
+        (next-error))
+    (user-error nil)))
+
+;; Define hydra for programming modes.
 (add-hook 'prog-mode-hook
           (lambda ()
             ;; Using local-set-key because defining the bindings in prog-mode-map will get
             ;; overridden by c++-mode bindings, for instance. This shadows them instead.
-            (local-set-key "\C-c\C-c" 'recompile)
-            (local-set-key "\C-c\C-f" 'next-error)))
+            (local-set-key (kbd "C-c C-c")
+                           (defhydra compilation-hydra (:columns 3)
+                             "
+Compilation
+
+Scroll:    %(msk/compilation-scroll-output-string)
+Threshold: %(msk/compilation-skip-threshold-string)
+Command:   %(msk/compilation-command-string)
+"
+                             ("c" compile "Compile")
+                             ("C" compile-from-buffer-folder "Compile from buffer folder")
+                             ("r" recompile "Recompile")
+                             ("k" kill-compilation "Stop")
+                             ("n" next-error "Next error")
+                             ("N" next-error-skip-warnings "Next error, skip warnings")
+                             ("p" previous-error "Previous error")
+                             ("a" first-error "First error")
+                             ("e" msk/compilation-last-error "Last error")
+                             ("s" msk/compilation-toggle-scroll "Toggle scroll")
+                             ("t" msk/compilation-toggle-threshold "Toggle threshold")
+                             ("q" nil "Cancel" :color blue)))))
 
 ;; Closes *compilation* buffer after successful compilation, and otherwise when the failure was
 ;; fixed to compile, it restores the original window configuration.
