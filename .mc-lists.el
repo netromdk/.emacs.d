@@ -54,6 +54,7 @@
         multiple-cursors-hydra/mc/skip-to-previous-like-this
         multiple-cursors-hydra/mc/unmark-next-like-this
         multiple-cursors-hydra/mc/unmark-previous-like-this
+        multiple-cursors-hydra/nil
         orgtbl-self-insert-command
         smarter-move-beginning-of-line
         sp-backward-sexp
@@ -61,6 +62,8 @@
         sp-remove-active-pair-overlay
         transpose-words
         yaml-electric-backspace
+        yank-pop-hydra/yank
+        yank-pop-hydra/yank-pop
         ))
 
 (setq mc/cmds-to-run-once
@@ -74,4 +77,5 @@
         recompile
         select-window-1
         select-window-2
+        widget-button-click
         ))
