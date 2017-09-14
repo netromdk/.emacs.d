@@ -41,8 +41,8 @@ in compilation mode."
 (defun msk/compilation-scroll-output-string ()
   (interactive)
   (if (not compilation-scroll-output)
-      "No"
-    "First error"))
+      "No scroll"
+    "Scroll until match"))
 
 (defun msk/compilation-skip-threshold-string ()
   (interactive)
@@ -76,11 +76,8 @@ in compilation mode."
 
 (defhydra compilation-hydra (:columns 4)
   "
-Compilation
-
-Scroll:    %(msk/compilation-scroll-output-string)
-Threshold: %(msk/compilation-skip-threshold-string)
-Command:   %(msk/compilation-command-string)
+Command: %(msk/compilation-command-string)
+%(msk/compilation-scroll-output-string) + %(msk/compilation-skip-threshold-string)
 "
   ("c" compile "Compile")
   ("C" compile-from-buffer-folder "Compile from buffer folder")
