@@ -31,16 +31,20 @@
 ;; (define-key isearch-mode-map (kbd "M-z") 'zap-to-isearch)
 
 (req-package avy
+  :require hydra
   :config
-  (global-set-key (kbd "C-;") 'avy-goto-char)
-  (global-set-key (kbd "C-,") 'avy-goto-char-2)
-  (global-set-key (kbd "M-,") 'avy-pop-mark)
-  (global-set-key [remap goto-line] 'avy-goto-line) ; Enter 1-9 for line mode.
-  (global-set-key (kbd "M-g l") 'goto-line)         ; Keep the old one..
-  (global-set-key (kbd "M-g p") 'avy-goto-line-above)
-  (global-set-key (kbd "M-g n") 'avy-goto-line-below)
-  (global-set-key (kbd "M-g c") 'avy-goto-char-in-line)
-  (global-set-key (kbd "M-g w") 'avy-goto-word-1))
+  (defhydra avy-hydra (:color blue :columns 3)
+    "avy-goto"
+    ("g" avy-goto-line "Line")
+    ("p" avy-goto-line-above "Line above")
+    ("n" avy-goto-line-below "Line below")
+    ("c" avy-goto-char-2 "Char-2")
+    ("C" avy-goto-char "Char")
+    ("w" avy-goto-word-1 "Word")
+    ("s" avy-goto-subword-1 "Subword")
+    ("l" avy-goto-char-in-line "Char in line")
+    ("," avy-pop-mark "Pop mark"))
+  (global-set-key (kbd "M-g") 'avy-hydra/body))
 
 ;; ace-isearch combines ace/avy, isearch and help-swoop. Typing one char will invoke ace/avy, typing
 ;; more searches normally with isearch, and 6 or more invokes helm-swoop.
