@@ -449,12 +449,12 @@ Command: %(msk/compilation-command-string)
 
 ;; Jump to definition for multiple languages without configuration.
 (req-package dumb-jump
-  :require (helm hydra)
+  :require helm
   :config
   (setq dumb-jump-selector 'helm
         dumb-jump-max-find-time 5
         dumb-jump-aggressive nil)
-  (defhydra dumb-jump-hydra (:columns 3 :idle 1)
+  (defhydra dumb-jump-hydra (:color blue :columns 3)
     "Dumb Jump"
     ("j" dumb-jump-go "Go")
     ("o" dumb-jump-go-other-window "Other window")
@@ -462,8 +462,7 @@ Command: %(msk/compilation-command-string)
     ("x" dumb-jump-go-prefer-external-other-window "Go external other window")
     ("i" dumb-jump-go-prompt "Prompt")
     ("l" dumb-jump-quick-look "Quick look")
-    ("b" dumb-jump-back "Back"))
-  (global-set-key (kbd "M-g d") 'dumb-jump-hydra/body))
+    ("b" dumb-jump-back "Back")))
 
 
 (provide 'init-prog)

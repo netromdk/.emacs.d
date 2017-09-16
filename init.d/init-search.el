@@ -31,7 +31,7 @@
 ;; (define-key isearch-mode-map (kbd "M-z") 'zap-to-isearch)
 
 (req-package avy
-  :require hydra
+  :require (hydra dumb-jump)
   :config
   (defhydra avy-hydra (:color blue :columns 3)
     "avy-goto"
@@ -43,7 +43,8 @@
     ("w" avy-goto-word-1 "Word")
     ("s" avy-goto-subword-1 "Subword")
     ("l" avy-goto-char-in-line "Char in line")
-    ("," avy-pop-mark "Pop mark"))
+    ("," avy-pop-mark "Pop mark")
+    ("d" dumb-jump-hydra/body "Dumb jump hydra"))
   (global-set-key (kbd "M-g") 'avy-hydra/body))
 
 ;; ace-isearch combines ace/avy, isearch and help-swoop. Typing one char will invoke ace/avy, typing
