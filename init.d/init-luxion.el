@@ -115,8 +115,7 @@
 ;; Bindings
 (add-hook 'c-mode-common-hook
           (lambda ()
-            (local-set-key (kbd "C-M-l") 'lux-wrap-function)
-            (local-set-key (kbd "C-c l") 'lux-fix-buffer)))
+            (local-set-key (kbd "C-M-l") 'lux-wrap-function)))
 
 
 (provide 'init-luxion)
