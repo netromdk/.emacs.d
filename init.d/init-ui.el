@@ -169,7 +169,7 @@
   (dashboard-setup-startup-hook))
 
 (req-package treemacs
-  :require (treemacs-projectile hydra)
+  :require treemacs-projectile hydra
   :config
   (setq treemacs-follow-after-init          t
         treemacs-width                      30
@@ -189,6 +189,8 @@
     ("f" treemacs-find-file "find file")
     ("s" treemacs-select-window "select window")
     ("d" treemacs-delete-other-windows "delete other windows")
+    ("t" treemacs-toggle "toggle")
+    ("p" treemacs-projectile-toggle "toggle projectile")
     ("q" nil "Cancel"))
 
   (define-key global-map (kbd "C-c t") 'treemacs-hydra/body)
@@ -196,7 +198,7 @@
   ;; Update treemacs when finding a file but not for certain modes.
   (add-hook 'find-file-hook
             (lambda ()
-              (when (not (derived-mode-p 'magit-mode 'dashboard-mode))
+              (when (not (derived-mode-p 'dashboard-mode))
                 (treemacs-find-file))))
 
   (treemacs-follow-mode t)
