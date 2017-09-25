@@ -168,4 +168,42 @@
                           (projects . 10)))
   (dashboard-setup-startup-hook))
 
+(req-package treemacs
+  :require (treemacs-projectile hydra)
+  :config
+  (setq treemacs-follow-after-init          t
+        treemacs-width                      30
+        treemacs-indentation                2
+        treemacs-git-integration            t
+        treemacs-collapse-dirs              3
+        treemacs-silent-refresh             nil
+        treemacs-change-root-without-asking t
+        treemacs-sorting                    'alphabetic-desc
+        treemacs-show-hidden-files          t
+        treemacs-never-persist              nil
+        treemacs-is-never-other-window      t
+        treemacs-goto-tag-strategy          'refetch-index)
+
+  (defhydra treemacs-hydra (:color blue :columns 3)
+    "Treemacs"
+    ("f" treemacs-find-file "find file")
+    ("s" treemacs-select-window "select window")
+    ("d" treemacs-delete-other-windows "delete other windows")
+    ("q" nil "Cancel"))
+
+  (define-key global-map (kbd "C-c t") 'treemacs-hydra/body)
+
+  ;; Update treemacs when finding a file but not for certain modes.
+  (add-hook 'find-file-hook
+            (lambda ()
+              (when (not (derived-mode-p 'magit-mode 'dashboard-mode))
+                (treemacs-find-file))))
+
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t))
+
+(req-package treemacs-projectile
+  :config
+  (setq treemacs-header-function #'treemacs-projectile-create-header))
+
 (provide 'init-ui)

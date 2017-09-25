@@ -201,6 +201,13 @@
  '(tabbar-unselected ((t (:inherit tabbar-default :box
                                    (:line-width 1 :color "#232323" :style released-button)))))
  '(tabbar-button-highlight ((t (:inherit tabbar-default :foreground "#cccc00"))))
+
+ ;; treemacs
+ '(treemacs-git-added-face ((t (:foreground "#22bb22" :weight bold))))
+ '(treemacs-git-conflict-face ((t (:foreground "#f34a4a" :weight bold))))
+ '(treemacs-git-modified-face ((t (:foreground "#ff9800" :weight bold))))
+ '(treemacs-git-untracked-face ((t (:foreground "yellow" :slant italic))))
+ '(treemacs-header-face ((t (:inherit font-lock-constant-face :underline t :size 2.0))))
  )
 
 ;;;###autoload

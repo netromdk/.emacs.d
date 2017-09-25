@@ -15,7 +15,7 @@
   (projectile-global-mode))
 
 (req-package helm-projectile
-  :require (projectile helm helm-gtags hydra magit)
+  :require (projectile helm helm-gtags hydra magit treemacs)
   :config
   (setq helm-projectile-fuzzy-match t
         projectile-switch-project-action 'helm-projectile-find-file)
@@ -42,6 +42,12 @@ removed and then recreated."
           (progn
             (message "Creating gtags..")
             (helm-gtags-create-tags (projectile-project-root) "default"))))))
+
+  (defun msk/projectile-switch-project-treemacs (args)
+    "Switch to project using projectile and run `treemacs-find-file'."
+    (interactive "P")
+    (helm-projectile-switch-project)
+    (treemacs-find-file))
 
   (defun msk/projectile-switch-project-magit (args)
     "Switch to project using projectile and run `magit-status'."
@@ -77,7 +83,7 @@ Projectile: %(projectile-project-root)
     ("b" helm-projectile-switch-to-buffer)
     ("k" projectile-kill-buffers)
 
-    ("p" helm-projectile-switch-project)
+    ("p" msk/projectile-switch-project-treemacs)
     ("m" msk/projectile-switch-project-magit :color blue)
     ("c" projectile-invalidate-cache)
     ("z" projectile-cache-current-file)
