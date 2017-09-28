@@ -169,7 +169,7 @@
   (dashboard-setup-startup-hook))
 
 (req-package treemacs
-  :require treemacs-projectile hydra
+  :require treemacs-projectile hydra window-numbering
   :config
   (setq treemacs-follow-after-init          t
         treemacs-width                      30
@@ -195,11 +195,27 @@
 
   (define-key global-map (kbd "C-c t") 'treemacs-hydra/body)
 
-  ;; Update treemacs when finding a file but not for certain modes.
-  (add-hook 'find-file-hook
-            (lambda ()
-              (when (not (derived-mode-p 'dashboard-mode))
-                (treemacs-find-file))))
+  ;; Override window conf change to run `treemacs-find-file' to update for the current file but only
+  ;; if treemacs is visible.
+  (defun msk/treemacs-on-window-config-change ()
+    (-when-let (w (treemacs--is-visible?))
+      (progn
+        (treemacs--on-window-config-change)
+        (treemacs-find-file))))
+  (add-hook 'window-configuration-change-hook #'msk/treemacs-on-window-config-change)
+
+  ;; Advice to make sure that treemacs shows the correct and up-to-date info.
+  (defadvice switch-to-buffer (around switch-to-buffer activate)
+    ad-do-it
+    (msk/treemacs-on-window-config-change))
+
+  (defadvice other-window (around other-window activate)
+    ad-do-it
+    (msk/treemacs-on-window-config-change))
+
+  (defadvice select-window-by-number (around select-window-by-number activate)
+    ad-do-it
+    (msk/treemacs-on-window-config-change))
 
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t))
