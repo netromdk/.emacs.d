@@ -36,6 +36,7 @@
   (defhydra avy-hydra (:color blue :columns 3)
     "avy-goto"
     ("g" avy-goto-line "Line")
+    ("M-g" avy-goto-line "Line")
     ("p" avy-goto-line-above "Line above")
     ("n" avy-goto-line-below "Line below")
     ("c" avy-goto-char-2 "Char-2")
