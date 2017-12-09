@@ -466,7 +466,7 @@ Command: %(msk/compilation-command-string)
 
 ;; Haskell related packages
 
-;; Setup: cabal install hasktags stylish-haskell
+;; Setup: cabal install hasktags stylish-haskell hoogle
 ;; It is assumed that PATH is updated to point to where to find Haskell/cabal binaries!
 (req-package haskell-mode
   :config
@@ -476,11 +476,20 @@ Command: %(msk/compilation-command-string)
         haskell-process-auto-import-loaded-modules t
         haskell-process-log t)
 
+  (defun my-haskell-hoogle-browser ()
+    "Force hoogle to search via the browser for `haskell-ident-at-point'."
+    (interactive)
+    (let (command haskell-hoogle-command)
+      (setq haskell-hoogle-command nil) ; `nil' forces usage of browser.
+      (haskell-hoogle (haskell-ident-at-point))
+      (setq haskell-hoogle-command command)))
+
   ;; TODO: Make hydra
   (define-key haskell-mode-map [f8] 'haskell-navigate-imports)
   (define-key haskell-mode-map (kbd "C-c f") 'haskell-mode-stylish-buffer)
   (define-key haskell-mode-map (kbd "C-c C-o") 'haskell-compile)
   (define-key haskell-mode-map (kbd "C-c C-h") 'haskell-hoogle)
+  (define-key haskell-mode-map (kbd "C-c C-b") 'my-haskell-hoogle-browser)
   (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
   (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
 
