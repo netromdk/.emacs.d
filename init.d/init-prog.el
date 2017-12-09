@@ -464,5 +464,51 @@ Command: %(msk/compilation-command-string)
     ("l" dumb-jump-quick-look "Quick look")
     ("b" dumb-jump-back "Back")))
 
+;; Haskell related packages
+
+;; Setup: cabal install hasktags stylish-haskell
+;; It is assumed that PATH is updated to point to where to find Haskell/cabal binaries!
+(req-package haskell-mode
+  :config
+  (setq haskell-tags-on-save t
+        haskell-process-type 'auto
+        haskell-process-suggest-remove-import-lines t
+        haskell-process-auto-import-loaded-modules t
+        haskell-process-log t)
+
+  ;; TODO: Make hydra
+  (define-key haskell-mode-map [f8] 'haskell-navigate-imports)
+  (define-key haskell-mode-map (kbd "C-c f") 'haskell-mode-stylish-buffer)
+  (define-key haskell-mode-map (kbd "C-c C-o") 'haskell-compile)
+  (define-key haskell-mode-map (kbd "C-c C-h") 'haskell-hoogle)
+  (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
+  (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+
+  (define-key haskell-mode-map (kbd "C-c C-n C-t") 'haskell-process-do-type)
+  (define-key haskell-mode-map (kbd "C-c C-n C-i") 'haskell-process-do-info)
+  (define-key haskell-mode-map (kbd "C-c C-n C-c") 'haskell-process-cabal-build)
+  (define-key haskell-mode-map (kbd "C-c C-n c") 'haskell-process-cabal)
+
+  (define-key haskell-cabal-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+  (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
+  (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
+  (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)
+  (define-key haskell-cabal-mode-map (kbd "C-c C-o") 'haskell-compile))
+
+(req-package company-ghc
+  :require company haskell-mode
+  :config
+  (setq company-ghc-show-info t)
+  (add-hook 'haskell-mode-hook 'company-mode)
+  (add-to-list 'company-backends 'company-ghc))
+
+;; Setup: cabal install hindent
+(req-package hindent
+  :require haskell-mode
+  :config
+  (add-hook 'haskell-mode-hook #'hindent-mode))
+
+;; End of Haskell related packages
+
 
 (provide 'init-prog)
