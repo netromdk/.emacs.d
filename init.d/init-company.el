@@ -38,7 +38,7 @@
 (req-package company-statistics
   :config
   (setq company-statistics-file
-        (concat user-cache-directory "company-statistics-cache.el")))
+        (concat user-cache-dir "company-statistics-cache.el")))
 
 
 (provide 'init-company)

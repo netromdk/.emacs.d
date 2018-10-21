@@ -8,10 +8,10 @@
 
 ;; Constants.
 (defconst emacs-start-time (current-time))
-(defconst init-dir (concat user-emacs-directory "init.d"))
-(defconst yas-dir (concat user-emacs-directory "snippets"))
-(defconst themes-dir (concat user-emacs-directory "themes"))
-(defconst user-cache-directory (concat user-emacs-directory ".cache"))
+(defconst init-dir (concat user-emacs-directory "init.d/"))
+(defconst yas-dir (concat user-emacs-directory "snippets/"))
+(defconst themes-dir (concat user-emacs-directory "themes/"))
+(defconst user-cache-dir (concat user-emacs-directory ".cache/"))
 
 ;; These are without .el because `load` will add these as appropriately when using them.
 (defconst general-file (concat user-emacs-directory "general"))
@@ -50,6 +50,9 @@
 ;; Load general stuff that other init.d things might use.
 (load functions-file)
 (load general-file)
+
+;; Create necessary directories if missing.
+(mkdir user-cache-dir)
 
 ;; Speedup loading by removing handlers until finished. It contains a lot of regexps for matching
 ;; handlers to file names but it is not necessary while loading.

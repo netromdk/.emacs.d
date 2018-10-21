@@ -239,3 +239,8 @@ guard: #ifndef `(include-guard-header)`.."
   (declare (indent defun))
   `(when (eq system-type ',type)
      ,@body))
+
+(defun mkdir (dir)
+  "Make directory `dir' and don't signal error if it already exists."
+  (when (not (file-directory-p dir))
+    (make-directory dir)))
