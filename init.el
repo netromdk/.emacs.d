@@ -31,7 +31,7 @@
     ("76687ff31c9c8c0666f28d1b4853fc416500527e0450f301dae071319ecba61e" default)))
  '(package-selected-packages
    (quote
-    (company-ghc hindent haskell-mode cask ert-runner diminish treemacs-projectile treemacs modern-cpp-font-lock hydra helm-flycheck zygospore windresize window-numbering vlf vkill swift-mode string-edit spaceline smartparens req-package rainbow-mode rainbow-delimiters php-mode package-safe-delete on-screen nlinum multiple-cursors markdown-mode magit load-dir keyfreq key-chord json-mode indent-guide highlight-thing highlight-numbers highlight-escape-sequences highlight-current-line helm-swoop helm-projectile helm-ls-git helm-gtags helm-flx helm-c-yasnippet helm-ag golden-ratio-scroll-screen gitignore-mode gitconfig-mode git-timemachine git-messenger flyspell-lazy flycheck flx-ido fix-word find-temp-file fic-mode expand-region exec-path-from-shell edit-server dummy-h-mode dumb-jump discover-my-major dired-sort dired-narrow diff-hl describe-number dashboard dash-at-point csharp-mode copy-as-format company-statistics company-flx company-c-headers cmake-mode clang-format bury-successful-compilation avy auto-dim-other-buffers auto-dictionary auto-compile anzu ace-jump-mode ace-isearch))))
+    (use-package use-package-el-get auto-compile load-dir req-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -39,6 +39,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Must come before any package configurations!
+(package-initialize)
 
 ;; Prefer newest version of a file, especially for compiled files this is
 ;; useful.
@@ -52,26 +55,6 @@
 ;; handlers to file names but it is not necessary while loading.
 (setq file-name-handler-alist-old file-name-handler-alist)
 (setq file-name-handler-alist nil)
-
-;; Packages setup.
-(require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-;;(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-
-(eval-when-compile (package-initialize))
-
-(defun require-package (package)
-  "Refresh package archives, check package presence and install if it's not installed."
-  (if (null (require package nil t))
-      (progn (let* ((ARCHIVES (if (null package-archive-contents)
-                                  (progn (package-refresh-contents)
-                                         package-archive-contents)
-                                package-archive-contents))
-                    (AVAIL (assoc package ARCHIVES)))
-               (if AVAIL
-                   (package-install package)))
-             (require package))))
 
 ;; Timing.
 (setq initial-done-time (current-time))
@@ -102,20 +85,54 @@
 
   (byte-compile-confs-if-not-present))
 
-;; First install the auto-compile package and enable it.
-(require-package 'auto-compile)
-(require 'auto-compile)
-(auto-compile-on-load-mode)
-(auto-compile-on-save-mode)
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")))
 
-;; The "backbone" uses req-package.
-(require-package 'req-package)
-(require 'req-package)
+(eval-when-compile (package-initialize))
+
+(defun require-package (package)
+  "refresh package archives, check package presence and install if it's not installed"
+  (if (null (require package nil t))
+      (progn (let* ((ARCHIVES (if (null package-archive-contents)
+                                  (progn (package-refresh-contents)
+                                         package-archive-contents)
+                                package-archive-contents))
+                    (AVAIL (assoc package ARCHIVES)))
+               (if AVAIL
+                   (package-install package)))
+             (require package))))
+
+(require-package 'use-package)
+(require 'use-package)
+
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(require-package 'el-get)
+(require 'el-get)
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/el-get/recipes")
+(el-get 'sync)
+
+(use-package use-package-el-get
+  :ensure t
+  :config (use-package-el-get-setup))
+
+(use-package req-package
+  :ensure t
+  :config (req-package--log-set-level 'debug))
+
+(use-package auto-compile
+  :ensure t
+  :config
+    (require 'auto-compile)
+    (auto-compile-on-load-mode)
+    (auto-compile-on-save-mode))
+
 (random t)
 
 (req-package load-dir
-  :force t ; Load immediately!
-  :defer 1
+  :ensure t
+  :force true
   :init
   (setq force-load-messages nil)
   (setq load-dir-debug nil)
