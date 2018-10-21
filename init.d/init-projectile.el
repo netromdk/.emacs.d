@@ -15,7 +15,7 @@
   (projectile-global-mode))
 
 (req-package helm-projectile
-  :require (projectile helm helm-gtags hydra magit treemacs)
+  :require (projectile helm helm-gtags hydra magit)
   :config
   (setq helm-projectile-fuzzy-match t
         projectile-switch-project-action 'helm-projectile-find-file)
