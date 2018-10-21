@@ -11,6 +11,7 @@
 (defconst init-dir (concat user-emacs-directory "init.d"))
 (defconst yas-dir (concat user-emacs-directory "snippets"))
 (defconst themes-dir (concat user-emacs-directory "themes"))
+(defconst user-cache-directory (concat user-emacs-directory ".cache"))
 
 ;; These are without .el because `load` will add these as appropriately when using them.
 (defconst general-file (concat user-emacs-directory "general"))
