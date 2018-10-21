@@ -8,6 +8,8 @@
 /savehist
 /ido.last
 elpa/
+el-get/
+.cache/
 url/
 /projectile-bookmarks.eld
 /projectile.cache
