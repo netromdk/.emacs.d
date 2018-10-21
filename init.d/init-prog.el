@@ -74,32 +74,34 @@ in compilation mode."
         (next-error))
     (user-error nil)))
 
-(defhydra compilation-hydra (:columns 4)
-  "
+(req-package hydra
+  :config
+  (defhydra compilation-hydra (:columns 4)
+    "
 Command: %(msk/compilation-command-string)
 %(msk/compilation-scroll-output-string) + %(msk/compilation-skip-threshold-string)
 "
-  ("c" compile "Compile")
-  ("C" compile-from-buffer-folder "Compile from buffer folder")
-  ("r" recompile "Recompile")
-  ("k" kill-compilation "Stop")
-  ("n" next-error "Next error")
-  ("N" next-error-skip-warnings "Next error, skip warnings")
-  ("p" previous-error "Previous error")
-  ("f" first-error "First error")
-  ("l" msk/compilation-last-error "Last error")
-  ("s" msk/compilation-toggle-scroll "Toggle scroll")
-  ("t" msk/compilation-toggle-threshold "Toggle threshold")
-  ("q" nil "Cancel" :color blue))
+    ("c" compile "Compile")
+    ("C" compile-from-buffer-folder "Compile from buffer folder")
+    ("r" recompile "Recompile")
+    ("k" kill-compilation "Stop")
+    ("n" next-error "Next error")
+    ("N" next-error-skip-warnings "Next error, skip warnings")
+    ("p" previous-error "Previous error")
+    ("f" first-error "First error")
+    ("l" msk/compilation-last-error "Last error")
+    ("s" msk/compilation-toggle-scroll "Toggle scroll")
+    ("t" msk/compilation-toggle-threshold "Toggle threshold")
+    ("q" nil "Cancel" :color blue))
 
-(global-set-key [(f5)] 'compilation-hydra/body)
+  (global-set-key [(f5)] 'compilation-hydra/body)
 
-;; Define hydra for programming modes.
-(add-hook 'prog-mode-hook
-          (lambda ()
-            ;; Using local-set-key because defining the bindings in prog-mode-map will get
-            ;; overridden by c++-mode bindings, for instance. This shadows them instead.
-            (local-set-key (kbd "C-c C-c") 'compilation-hydra/body)))
+  ;; Define hydra for programming modes.
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              ;; Using local-set-key because defining the bindings in prog-mode-map will get
+              ;; overridden by c++-mode bindings, for instance. This shadows them instead.
+              (local-set-key (kbd "C-c C-c") 'compilation-hydra/body))))
 
 ;; Closes *compilation* buffer after successful compilation, and otherwise when the failure was
 ;; fixed to compile, it restores the original window configuration.
