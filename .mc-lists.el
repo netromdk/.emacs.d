@@ -71,6 +71,7 @@
         c-toggle-auto-newline
         cleanup-region-or-buffer
         helm-M-x
+        keyboard-escape-quit
         multiple-cursors-hydra/mc/mark-next-like-this
         multiple-cursors-hydra/mc/skip-to-next-like-this
         next-error
