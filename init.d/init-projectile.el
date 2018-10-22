@@ -2,15 +2,17 @@
 
 (req-package projectile
   :init
+  (defun msk/projectile-mode-line ()
+    "Report project name in the mode line."
+    (if (file-remote-p default-directory)
+        "rρ"
+      (if (string-equal "-" (projectile-project-name))
+          "!ρ"
+        "ρ")))
   (setq projectile-keymap-prefix (kbd "C-x p")
         projectile-enable-caching t
-        projectile-mode-line
-        '(:eval
-          (if (file-remote-p default-directory)
-              "rρ"
-            (if (string-equal "-" (projectile-project-name))
-                "!ρ"
-              "ρ"))))
+        projectile-mode-line-prefix "ρ"
+        projectile-mode-line-function 'msk/projectile-mode-line)
   :config
   (projectile-global-mode))
 
