@@ -521,5 +521,30 @@ Command: %(msk/compilation-command-string)
 
 ;; End of Haskell related packages
 
+;; Language Server Protocol
+
+(req-package lsp-mode)
+
+;; Install cquery server executable externally.
+;;   Homebrew: brew install cquery
+;; It tries to locate the "compile_commands.json" file in the root of the project or in root/build.
+(req-package cquery
+  :require lsp-mode
+  :config
+  ;;(setq cquery-extra-args '("--log-file=/tmp/cq.log"))
+
+  (defun msk/cquery-enable ()
+    (condition-case nil
+        (lsp-cquery-enable)
+      (user-error nil)))
+  (add-hook 'c-mode-hook #'msk/cquery-enable)
+  (add-hook 'c++-mode-hook #'msk/cquery-enable))
+
+;; Show xref results in helm.
+(req-package helm-xref
+  :require helm
+  :config
+  (setq xref-show-xrefs-function 'helm-xref-show-xrefs))
+
 
 (provide 'init-prog)

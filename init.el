@@ -31,7 +31,7 @@
     ("76687ff31c9c8c0666f28d1b4853fc416500527e0450f301dae071319ecba61e" default)))
  '(package-selected-packages
    (quote
-    (use-package use-package-el-get auto-compile load-dir req-package))))
+    (helm-xref cquery lsp-mode use-package use-package-el-get auto-compile load-dir req-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
