@@ -40,5 +40,13 @@
   (setq company-statistics-file
         (concat user-cache-dir "company-statistics-cache.el")))
 
+(req-package company-lsp
+  :require company
+  :config
+  (push 'company-lsp company-backends)
+
+  ;; Disable client-side cache because the LSP server does a better job.
+  (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil))
+
 
 (provide 'init-company)
