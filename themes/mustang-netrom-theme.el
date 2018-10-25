@@ -211,6 +211,8 @@
 
  ;; lsp-mode
  '(lsp-face-highlight-textual ((t (:foreground "#b3de81" :underline t :weight bold))))
+ '(lsp-face-highlight-read ((t (:inherit lsp-face-highlight-textual :underline "firebrick"))))
+ '(lsp-face-highlight-write ((t (:inherit lsp-face-highlight-textual :underline "sea green"))))
  )
 
 ;;;###autoload
