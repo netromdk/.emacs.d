@@ -553,6 +553,11 @@ Command: %(msk/compilation-command-string)
   (add-hook 'c-mode-hook #'msk/cquery-enable)
   (add-hook 'c++-mode-hook #'msk/cquery-enable))
 
+;; Xref
+
+;; Don't show prompt unless nothing is under point or if it has to show it.
+(setq xref-prompt-for-identifier nil)
+
 ;; Show xref results in helm.
 (req-package helm-xref
   :require helm
