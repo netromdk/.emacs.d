@@ -31,7 +31,7 @@
     ("ff4da27ee1a0826bcf45a448686b72d357a4709bd8c378e9b3600b78b2249268" default)))
  '(package-selected-packages
    (quote
-    (company-lsp helm-xref cquery lsp-mode use-package use-package-el-get auto-compile load-dir req-package))))
+    (lsp-python company-lsp helm-xref cquery lsp-mode use-package use-package-el-get auto-compile load-dir req-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

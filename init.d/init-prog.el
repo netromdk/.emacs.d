@@ -159,7 +159,7 @@ Command: %(msk/compilation-command-string)
   ;; highlight feature.
   (add-hook 'prog-mode-hook
             '(lambda ()
-               (when (not (member major-mode '(c++-mode c-mode)))
+               (when (not (member major-mode '(c++-mode c-mode python-mode)))
                  (highlight-thing-mode)))))
 
 ;; Avoid escape nightmares by editing string in separate buffer.
@@ -569,7 +569,30 @@ Command: %(msk/compilation-command-string)
 
   (add-hook 'lsp-mode-hook
             (lambda ()
-              (local-set-key (kbd "C-c C-l") 'msk/lsp-hydra/body))))
+              (local-set-key (kbd "C-c C-l") 'msk/lsp-hydra/body)))
+
+  ;; Python LSP support.
+  ;;
+  ;; Currently, the provided lsp-python package searches incorrectly for "__init__.py" files, which
+  ;; doesn't work correctly when having multiple sub-packages. :get-root is set to nil which means
+  ;; lsp--suggest-project-root will try to detect a projectile/VC project.
+  ;;
+  ;; TODO: Use lsp-python package (configured beneath) if its functionality changes to this.
+  (defcustom lsp-python-server-args
+    '()
+    "Extra arguments for the python-stdio language server"
+    :group 'lsp-python
+    :risky t
+    :type '(repeat string))
+
+  (defun lsp-python--ls-command ()
+    "Generate the language server startup command."
+    `("pyls" ,@lsp-python-server-args))
+
+  (lsp-define-stdio-client lsp-python "python" nil nil
+                           :command-fn 'lsp-python--ls-command)
+
+  (add-hook 'python-mode-hook #'lsp-python-enable))
 
 ;; Install cquery server executable externally.
 ;;   Homebrew: brew install cquery
@@ -585,6 +608,13 @@ Command: %(msk/compilation-command-string)
       (user-error nil)))
   (add-hook 'c-mode-hook #'msk/cquery-enable)
   (add-hook 'c++-mode-hook #'msk/cquery-enable))
+
+;; Requires python-language-server:
+;;   pip install python-language-server
+;; (req-package lsp-python
+;;   :require lsp-mode
+;;   :config
+;;   (add-hook 'python-mode-hook #'lsp-python-enable))
 
 ;; Xref
 
