@@ -58,10 +58,12 @@
         orgtbl-self-insert-command
         smarter-move-beginning-of-line
         sp-backward-sexp
+        sp-comment
         sp-forward-sexp
         sp-remove-active-pair-overlay
         transpose-words
         yaml-electric-backspace
+        yank-pop-hydra/lambda-y
         yank-pop-hydra/yank
         yank-pop-hydra/yank-pop
         ))
