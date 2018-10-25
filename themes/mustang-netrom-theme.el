@@ -208,6 +208,9 @@
  '(treemacs-git-modified-face ((t (:foreground "#ff9800" :weight bold))))
  '(treemacs-git-untracked-face ((t (:foreground "yellow" :slant italic))))
  '(treemacs-header-face ((t (:inherit font-lock-constant-face :underline t :size 2.0))))
+
+ ;; lsp-mode
+ '(lsp-face-highlight-textual ((t (:foreground "#b3de81" :underline t :weight bold))))
  )
 
 ;;;###autoload
