@@ -154,7 +154,13 @@ Command: %(msk/compilation-command-string)
   (setq highlight-thing-limit-to-defun t) ;; Limit to current function.
   (setq highlight-thing-what-thing 'symbol)
   (setq highlight-thing-case-sensitive-p t)
-  (add-hook 'prog-mode-hook 'highlight-thing-mode))
+
+  ;; Enable highlight-thing-mode in prog modes except for modes using LSP because it has it's own
+  ;; highlight feature.
+  (add-hook 'prog-mode-hook
+            '(lambda ()
+               (when (not (member major-mode '(c++-mode c-mode)))
+                 (highlight-thing-mode)))))
 
 ;; Avoid escape nightmares by editing string in separate buffer.
 (req-package string-edit
