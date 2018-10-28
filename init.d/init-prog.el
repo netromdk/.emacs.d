@@ -552,6 +552,11 @@ Command: %(msk/compilation-command-string)
     ("r" xref-find-references "References")
     ("a" xref-find-apropos "Apropos")
 
+    ;; Peek
+    ("p" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
+    ("P" lsp-ui-peek-find-references "References")
+    ("i" lsp-ui-peek-find-implementation "Implementation")
+
     ;; LSP
     ("R" lsp-rename "Rename" :column "LSP")
     ("t" lsp-goto-type-definition "Type definition")
@@ -566,6 +571,11 @@ Command: %(msk/compilation-command-string)
     ("D" xref-find-definitions-other-window "-> other win")
     ("r" xref-find-references "References")
     ("a" xref-find-apropos "Apropos")
+
+    ;; Peek
+    ("p" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
+    ("P" lsp-ui-peek-find-references "References")
+    ("i" lsp-ui-peek-find-implementation "Implementation")
 
     ;; Hierarchies
     ("m" cquery-member-hierarchy "Member" :column "Hierarchies")
@@ -612,6 +622,20 @@ Command: %(msk/compilation-command-string)
                            :command-fn 'lsp-python--ls-command)
 
   (add-hook 'python-mode-hook #'lsp-python-enable))
+
+(req-package lsp-ui
+  :require lsp-mode
+  :config
+
+  (setq lsp-ui-doc-enable nil
+        lsp-ui-sideline-enable nil
+        lsp-ui-peek-enable t)
+
+  ;; Remap keys for xref find defs to use the LSP UI peek mode.
+  ;;(define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  ;;(define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 ;; Install cquery server executable externally.
 ;;   Homebrew: brew install cquery
