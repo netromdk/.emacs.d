@@ -556,7 +556,9 @@ Command: %(msk/compilation-command-string)
     ("R" lsp-rename "Rename" :column "LSP")
     ("t" lsp-goto-type-definition "Type definition")
 
-    ("q" nil "Cancel" :column "Misc"))
+    ;; Misc
+    ("q" nil "Cancel" :column "Misc")
+    ("b" pop-tag-mark "Back"))
 
   (defhydra msk/lsp-cquery-hydra (:color blue :hint nil)
     ;; Xref
@@ -578,7 +580,9 @@ Command: %(msk/compilation-command-string)
     ("l" cquery-code-lens-mode "Toggle" :column "Code Lens")
     ("u" cquery-request-code-lens "Update")
 
-    ("q" nil "Cancel" :column "Misc"))
+    ;; Misc
+    ("q" nil "Cancel" :column "Misc")
+    ("b" pop-tag-mark "Back"))
 
   (add-hook 'lsp-mode-hook
             (lambda ()
