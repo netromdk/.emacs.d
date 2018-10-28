@@ -91,7 +91,8 @@
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")))
+                         ;("marmalade" . "https://marmalade-repo.org/packages/")
+                         ))
 
 (eval-when-compile (package-initialize))
 
