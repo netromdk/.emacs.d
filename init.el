@@ -28,7 +28,7 @@
  '(custom-enabled-themes (quote (mustang-netrom)))
  '(custom-safe-themes
    (quote
-    ("5d90c8e69ae1687d7b1dd4d8964695dbce3143e78e91425a8f1a9f01eccc9390" default)))
+    ("79c964d788c3206664e0b176149eb07772e50d235c2181420945918d8c27b46c" default)))
  '(package-selected-packages
    (quote
     (lsp-ui lsp-python company-lsp helm-xref cquery lsp-mode use-package use-package-el-get auto-compile load-dir req-package))))

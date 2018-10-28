@@ -213,6 +213,11 @@
  '(lsp-face-highlight-textual ((t (:foreground "#b3de81" :underline t :weight bold))))
  '(lsp-face-highlight-read ((t (:inherit lsp-face-highlight-textual :underline "firebrick"))))
  '(lsp-face-highlight-write ((t (:inherit lsp-face-highlight-textual :underline "sea green"))))
+
+ ;; lsp-ui
+ '(lsp-ui-peek-header ((t (:background "black" :foreground "#b1d631" :weight bold))))
+ '(lsp-ui-peek-highlight ((t (:foreground "#ff9800"))))
+ '(lsp-ui-peek-selection ((t (:foreground "#b1d631"))))
  )
 
 ;;;###autoload
