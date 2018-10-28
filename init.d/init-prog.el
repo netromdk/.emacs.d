@@ -552,6 +552,19 @@ Command: %(msk/compilation-command-string)
     ("r" xref-find-references "References")
     ("a" xref-find-apropos "Apropos")
 
+    ;; LSP
+    ("R" lsp-rename "Rename" :column "LSP")
+    ("t" lsp-goto-type-definition "Type definition")
+
+    ("q" nil "Cancel" :column "Misc"))
+
+  (defhydra msk/lsp-cquery-hydra (:color blue :hint nil)
+    ;; Xref
+    ("d" xref-find-definitions "Definitions" :column "Xref")
+    ("D" xref-find-definitions-other-window "-> other win")
+    ("r" xref-find-references "References")
+    ("a" xref-find-apropos "Apropos")
+
     ;; Hierarchies
     ("m" cquery-member-hierarchy "Member" :column "Hierarchies")
     ("i" cquery-inheritance-hierarchy "Inheritance")
@@ -569,7 +582,9 @@ Command: %(msk/compilation-command-string)
 
   (add-hook 'lsp-mode-hook
             (lambda ()
-              (local-set-key (kbd "C-c C-l") 'msk/lsp-hydra/body)))
+              (if (member major-mode '(c++-mode c-mode))
+                  (local-set-key (kbd "C-c C-l") 'msk/lsp-cquery-hydra/body)
+                (local-set-key (kbd "C-c C-l") 'msk/lsp-hydra/body))))
 
   ;; Python LSP support.
   ;;
