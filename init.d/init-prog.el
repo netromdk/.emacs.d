@@ -269,14 +269,16 @@ Command: %(msk/compilation-command-string)
             (local-set-key (kbd "C-c r") 'eval-region)))
 
 ;; Shell script
-(add-hook 'sh-mode (lambda () (setq-local sh-indentation general-tab-width)))
+(require 'sh-script)
+(setq-default sh-basic-offset general-tab-width)
 
 (setq auto-mode-alist
       (append '(("\\.[z]?sh$"  . sh-mode))
               auto-mode-alist))
 
 ;; JavaScript
-(add-hook 'js-mode (lambda () (setq-local js-indent-level general-tab-width)))
+(require 'js)
+(setq-default js-indent-level general-tab-width)
 
 (req-package json-mode
   :mode ("\\.json$" . json-mode))
