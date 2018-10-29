@@ -553,13 +553,15 @@ Command: %(msk/compilation-command-string)
     ("a" xref-find-apropos "Apropos")
 
     ;; Peek
-    ("p" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
-    ("P" lsp-ui-peek-find-references "References")
-    ("i" lsp-ui-peek-find-implementation "Implementation")
+    ("C-d" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
+    ("C-r" lsp-ui-peek-find-references "References")
+    ("C-i" lsp-ui-peek-find-implementation "Implementation")
 
     ;; LSP
     ("R" lsp-rename "Rename" :column "LSP")
     ("t" lsp-goto-type-definition "Type definition")
+    ("l" lsp-ui-imenu "IMenu")
+    ("C-c" lsp-capabilities "Capabilities")
 
     ;; Misc
     ("q" nil "Cancel" :column "Misc")
@@ -573,21 +575,23 @@ Command: %(msk/compilation-command-string)
     ("a" xref-find-apropos "Apropos")
 
     ;; Peek
-    ("p" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
-    ("P" lsp-ui-peek-find-references "References")
-    ("i" lsp-ui-peek-find-implementation "Implementation")
+    ("C-d" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
+    ("C-r" lsp-ui-peek-find-references "References")
+    ("C-i" lsp-ui-peek-find-implementation "Implementation")
+
+    ;; LSP
+    ("R" lsp-rename "Rename" :column "LSP")
+    ("t" lsp-goto-type-definition "Type definition")
+    ("l" lsp-ui-imenu "IMenu")
+    ("C-c" lsp-capabilities "Capabilities")
 
     ;; Hierarchies
     ("m" cquery-member-hierarchy "Member" :column "Hierarchies")
     ("i" cquery-inheritance-hierarchy "Inheritance")
     ("c" cquery-call-hierarchy "Calls")
 
-    ;; LSP
-    ("R" lsp-rename "Rename" :column "LSP")
-    ("t" lsp-goto-type-definition "Type definition")
-
     ;; Code Lens
-    ("l" cquery-code-lens-mode "Toggle" :column "Code Lens")
+    ("C" cquery-code-lens-mode "Toggle" :column "Code Lens")
     ("u" cquery-request-code-lens "Update")
 
     ;; Misc
