@@ -639,14 +639,19 @@ Command: %(msk/compilation-command-string)
 
 ;; Install cquery server executable externally.
 ;;   Homebrew: brew install cquery
-;; It tries to locate the "compile_commands.json" file.
+;; It tries to locate the "compile_commands.json" file in the root of the project or in root/build.
+;; If nested build folders are used then the following approach with a symlink can help:
+;;   build/
+;;     compile_commands.json -> debug/compile_commands.json
+;;     debug/
+;;     release/
+;;     ..
+;; This way the build folder structure can be preserved even if cquery only looks in root and
+;; root/build.
 (req-package cquery
   :require lsp-mode
   :config
   ;;(setq cquery-extra-args '("--log-file=/tmp/cq.log"))
-
-  ;; Append ways to detect project root. Default tries to look in root and root/build folders.
-  (add-to-list 'cquery-project-root-matchers "build/debug/compile_commands.json" t)
 
   (defun msk/cquery-enable ()
     (condition-case nil
