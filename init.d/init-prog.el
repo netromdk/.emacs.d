@@ -629,7 +629,9 @@ Command: %(msk/compilation-command-string)
 
   (setq lsp-ui-doc-enable nil
         lsp-ui-sideline-enable nil
-        lsp-ui-peek-enable t)
+        lsp-ui-peek-enable t
+        lsp-ui-peek-list-width 60
+        lsp-ui-peek-peek-height 25)
 
   ;; Remap keys for xref find defs to use the LSP UI peek mode.
   ;;(define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
