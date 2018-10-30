@@ -665,7 +665,6 @@ Command: %(msk/compilation-command-string)
     (condition-case nil
         (lsp-cquery-enable)
       (user-error nil)))
-  (add-hook 'c-mode-hook #'msk/cquery-enable)
   (add-hook 'c++-mode-hook #'msk/cquery-enable))
 
 ;; Requires python-language-server:
