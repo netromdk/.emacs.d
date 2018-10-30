@@ -34,5 +34,10 @@
   ;; Disable client-side cache because the LSP server does a better job.
   (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil))
 
+(req-package company-cmake
+  :config
+  (push 'company-cmake company-backends)
+  (setq company-cmake-executable (executable-find "cmake")))
+
 
 (provide 'init-company)
