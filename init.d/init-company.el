@@ -23,8 +23,6 @@
   ;;               (local-set-key (kbd "C-<return>") 'company-complete))))
   )
 
-(req-package company-c-headers
-  :require company)
 
 (req-package company-flx
   :require company
