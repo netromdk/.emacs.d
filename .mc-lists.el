@@ -44,7 +44,9 @@
         kill-region
         lux-fix-buffer
         lux-wrap-function
+        magit-copy-buffer-revision
         markdown-exdent-or-delete
+        markdown-outdent-or-delete
         multiple-cursors-hydra/mc/edit-lines
         multiple-cursors-hydra/mc/edit-lines-and-exit
         multiple-cursors-hydra/mc/mark-all-like-this-and-exit
