@@ -11,10 +11,10 @@
     (add-hook 'c++-mode-hook
               (lambda ()
                 (progn
-                  (setq flycheck-clang-language-standard "c++11"
+                  (setq flycheck-clang-language-standard "c++14"
                         flycheck-clang-standard-library "libc++"
-                        flycheck-gcc-language-standard "c++11"
-                        flycheck-cppcheck-standards '("c++11")
+                        flycheck-gcc-language-standard "c++14"
+                        flycheck-cppcheck-standards '("c++14")
                         flycheck-cppcheck-inconclusive t
                         flycheck-cppcheck-checks '("all")
 
