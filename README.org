@@ -1,3 +1,4 @@
 * Emacs Configurations
-- Just clone into "~/.emacs.d".
-- It is self-contained.
+- Clone into "~/.emacs.d"
+- Execute setup.sh to install local dependencies
+- Start Emacs
