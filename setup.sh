@@ -6,6 +6,7 @@ case "${OS}" in
     brew install cquery
     brew install the_silver_searcher
     brew install cppcheck
+    brew install shellcheck
     pip install python-language-server
     ;;
 
