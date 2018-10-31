@@ -630,11 +630,12 @@ Command: %(msk/compilation-command-string)
   (add-hook 'python-mode-hook #'lsp-python-enable))
 
 (req-package lsp-ui
-  :require lsp-mode
+  :require lsp-mode flycheck
   :config
 
   (setq lsp-ui-doc-enable nil
         lsp-ui-sideline-enable nil
+        lsp-ui-flycheck-enable t
         lsp-ui-peek-enable t
         lsp-ui-peek-list-width 60
         lsp-ui-peek-peek-height 25)
