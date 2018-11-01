@@ -1,14 +1,9 @@
 #!/bin/sh
 
 # OS specific
-OS=$(uname -s)
-case "${OS}" in
+case "$(uname -s)" in
   Darwin)
     brew install cquery the_silver_searcher cppcheck shellcheck
-    ;;
-
-  *)
-    echo "Unknown how to setup deps for '${OS}'!"
     ;;
 esac
 
