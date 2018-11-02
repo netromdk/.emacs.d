@@ -547,58 +547,51 @@ Command: %(msk/compilation-command-string)
 (req-package lsp-mode
   :require hydra
   :config
-  (defhydra msk/lsp-hydra (:color blue :hint nil)
-    ;; Xref
-    ("d" xref-find-definitions "Definitions" :column "Xref")
-    ("D" xref-find-definitions-other-window "-> other win")
-    ("r" xref-find-references "References")
-    ("a" xref-find-apropos "Apropos")
+  (setq msk--general-lsp-hydra-heads
+        '(;; Xref
+          ("d" xref-find-definitions "Definitions" :column "Xref")
+          ("D" xref-find-definitions-other-window "-> other win")
+          ("r" xref-find-references "References")
+          ("a" xref-find-apropos "Apropos")
 
-    ;; Peek
-    ("C-d" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
-    ("C-r" lsp-ui-peek-find-references "References")
-    ("C-i" lsp-ui-peek-find-implementation "Implementation")
+          ;; Peek
+          ("C-d" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
+          ("C-r" lsp-ui-peek-find-references "References")
+          ("C-i" lsp-ui-peek-find-implementation "Implementation")
 
-    ;; LSP
-    ("R" lsp-rename "Rename" :column "LSP")
-    ("t" lsp-goto-type-definition "Type definition")
-    ("l" lsp-ui-imenu "IMenu")
-    ("C-c" lsp-capabilities "Capabilities")
+          ;; LSP
+          ("R" lsp-rename "Rename" :column "LSP")
+          ("t" lsp-goto-type-definition "Type definition")
+          ("l" lsp-ui-imenu "IMenu")
+          ("C-c" lsp-capabilities "Capabilities"))
 
-    ;; Misc
-    ("q" nil "Cancel" :column "Misc")
-    ("b" pop-tag-mark "Back"))
+        msk--misc-lsp-hydra-heads
+        '(;; Misc
+          ("q" nil "Cancel" :column "Misc")
+          ("b" pop-tag-mark "Back"))
 
-  (defhydra msk/lsp-cquery-hydra (:color blue :hint nil)
-    ;; Xref
-    ("d" xref-find-definitions "Definitions" :column "Xref")
-    ("D" xref-find-definitions-other-window "-> other win")
-    ("r" xref-find-references "References")
-    ("a" xref-find-apropos "Apropos")
+        msk--cquery-lsp-hydra-heads
+        '(;; Hierarchies
+          ("m" cquery-member-hierarchy "Member" :column "Hierarchies")
+          ("i" cquery-inheritance-hierarchy "Inheritance")
+          ("c" cquery-call-hierarchy "Calls")
 
-    ;; Peek
-    ("C-d" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
-    ("C-r" lsp-ui-peek-find-references "References")
-    ("C-i" lsp-ui-peek-find-implementation "Implementation")
+          ;; Code Lens
+          ("C" cquery-code-lens-mode "Toggle" :column "Code Lens")
+          ("u" cquery-request-code-lens "Update")))
 
-    ;; LSP
-    ("R" lsp-rename "Rename" :column "LSP")
-    ("t" lsp-goto-type-definition "Type definition")
-    ("l" lsp-ui-imenu "IMenu")
-    ("C-c" lsp-capabilities "Capabilities")
+  ;; Create general hydra.
+  (eval `(defhydra msk/lsp-hydra (:color blue :hint nil)
+           ,@(append
+              msk--general-lsp-hydra-heads
+              msk--misc-lsp-hydra-heads)))
 
-    ;; Hierarchies
-    ("m" cquery-member-hierarchy "Member" :column "Hierarchies")
-    ("i" cquery-inheritance-hierarchy "Inheritance")
-    ("c" cquery-call-hierarchy "Calls")
-
-    ;; Code Lens
-    ("C" cquery-code-lens-mode "Toggle" :column "Code Lens")
-    ("u" cquery-request-code-lens "Update")
-
-    ;; Misc
-    ("q" nil "Cancel" :column "Misc")
-    ("b" pop-tag-mark "Back"))
+  ;; Create cquery hydra.
+  (eval `(defhydra msk/lsp-cquery-hydra (:color blue :hint nil)
+           ,@(append
+              msk--general-lsp-hydra-heads
+              msk--cquery-lsp-hydra-heads
+              msk--misc-lsp-hydra-heads)))
 
   (add-hook 'lsp-mode-hook
             (lambda ()
