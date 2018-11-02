@@ -94,7 +94,7 @@
 (setq uniquify-buffer-name-style 'forward)
 
 ;; Auto-revert buffers when files change on disk.
-(setq auto-revert-verbose nil)            ; Don't announce when buffer is reverted.
+(setq-default auto-revert-verbose nil)  ;; Don't announce when buffer is reverted.
 (global-auto-revert-mode t)
 
 ;; Log files should automatically update on changes.
