@@ -542,6 +542,24 @@ Command: %(msk/compilation-command-string)
 
 ;; End of Haskell related packages
 
+;; Xref
+
+;; Don't show prompt unless nothing is under point or if it has to show it.
+(setq xref-prompt-for-identifier nil)
+
+;; Show xref results in helm.
+(req-package helm-xref
+  :require helm
+  :config
+  (setq xref-show-xrefs-function 'helm-xref-show-xrefs))
+
+(defun msk/xref-find-apropos-at-point (pattern)
+  "Xref find apropos at point, if anything, and show prompt for PATTERN."
+  (interactive
+   (list
+    (read-string "Xref find apropos of: " (thing-at-point 'symbol))))
+  (xref-find-apropos pattern))
+
 ;; Language Server Protocol
 
 (req-package lsp-mode
@@ -552,7 +570,7 @@ Command: %(msk/compilation-command-string)
           ("d" xref-find-definitions "Definitions" :column "Xref")
           ("D" xref-find-definitions-other-window "-> other win")
           ("r" xref-find-references "References")
-          ("a" xref-find-apropos "Apropos")
+          ("a" msk/xref-find-apropos-at-point "Apropos")
 
           ;; Peek
           ("C-d" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
@@ -668,17 +686,6 @@ Command: %(msk/compilation-command-string)
 ;;   :require lsp-mode
 ;;   :config
 ;;   (add-hook 'python-mode-hook #'lsp-python-enable))
-
-;; Xref
-
-;; Don't show prompt unless nothing is under point or if it has to show it.
-(setq xref-prompt-for-identifier nil)
-
-;; Show xref results in helm.
-(req-package helm-xref
-  :require helm
-  :config
-  (setq xref-show-xrefs-function 'helm-xref-show-xrefs))
 
 
 (provide 'init-prog)
