@@ -595,9 +595,10 @@ Command: %(msk/compilation-command-string)
 
   (add-hook 'lsp-mode-hook
             (lambda ()
-              (if (member major-mode '(c++-mode c-mode))
-                  (local-set-key (kbd "C-c C-l") 'msk/lsp-cquery-hydra/body)
-                (local-set-key (kbd "C-c C-l") 'msk/lsp-hydra/body))))
+              (local-set-key (kbd "C-c C-l")
+                             (if (member major-mode '(c++-mode c-mode))
+                                 'msk/lsp-cquery-hydra/body
+                               'msk/lsp-hydra/body))))
 
   ;; Python LSP support.
   ;;
