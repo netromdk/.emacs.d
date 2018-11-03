@@ -687,5 +687,31 @@ Command: %(msk/compilation-command-string)
 ;;   :config
 ;;   (add-hook 'python-mode-hook #'lsp-python-enable))
 
+;; Requires the php-language-server that is bundled with the emacs config, and was installed like
+;; this:
+;; 1. Created folder ~/.emacs.d/php-language-server
+;; 2. Created file "composer.json" in that folder with the contents:
+;;    {
+;;      "minimum-stability": "dev",
+;;      "prefer-stable": true
+;;    }
+;; 3. Installed "composer" on the system, like: brew install composer
+;; 4. And while inside "~/.emacs.d/php-language-server" executing:
+;;    composer require felixfbecker/language-server
+;;    composer run-script --working-dir=vendor/felixfbecker/language-server parse-stubs
+(req-package lsp-php
+  :require lsp-mode
+  :config
+  (setq
+   ;; Don't show noisy parse messages.
+   lsp-php-show-file-parse-notifications nil
+
+   ;; Detect projectile before other options.
+   lsp-php-workspace-root-detectors
+   '(lsp-php-root-projectile lsp-php-root-composer-json lsp-php-root-vcs
+     ".dir-locals.el" ".project" "index.php""robots.txt"))
+
+  (add-hook 'php-mode-hook #'lsp-php-enable))
+
 
 (provide 'init-prog)

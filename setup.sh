@@ -3,7 +3,7 @@
 # OS specific
 case "$(uname -s)" in
   Darwin)
-    brew install cquery the_silver_searcher cppcheck shellcheck
+    brew install cquery the_silver_searcher cppcheck shellcheck composer
     ;;
 esac
 
