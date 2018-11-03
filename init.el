@@ -31,7 +31,7 @@
     ("f3091a7e5b3f5697eaafa3d3848db4ebbffd1f7a0f29aa21f300802999a87378" default)))
  '(package-selected-packages
    (quote
-    (flycheck-pycheckers lsp-ui lsp-python company-lsp helm-xref cquery lsp-mode company-ghc hindent haskell-mode cask ert-runner diminish treemacs-projectile treemacs modern-cpp-font-lock hydra helm-flycheck zygospore windresize window-numbering vlf vkill swift-mode string-edit spaceline smartparens req-package rainbow-mode rainbow-delimiters php-mode package-safe-delete on-screen nlinum multiple-cursors markdown-mode magit load-dir keyfreq key-chord json-mode indent-guide highlight-thing highlight-numbers highlight-escape-sequences highlight-current-line helm-swoop helm-projectile helm-ls-git helm-gtags helm-flx helm-c-yasnippet helm-ag golden-ratio-scroll-screen gitignore-mode gitconfig-mode git-timemachine git-messenger flyspell-lazy flycheck flx-ido fix-word find-temp-file fic-mode expand-region exec-path-from-shell edit-server dummy-h-mode dumb-jump discover-my-major dired-sort dired-narrow diff-hl describe-number dashboard dash-at-point csharp-mode copy-as-format company-statistics company-flx company-c-headers cmake-mode clang-format bury-successful-compilation avy auto-dim-other-buffers auto-dictionary auto-compile anzu ace-jump-mode ace-isearch))))
+    (flycheck-pycheckers lsp-ui lsp-python company-lsp helm-xref cquery lsp-mode company-ghc hindent haskell-mode cask ert-runner diminish treemacs-projectile treemacs modern-cpp-font-lock hydra helm-flycheck zygospore windresize window-numbering vlf vkill swift-mode string-edit spaceline smartparens req-package rainbow-mode rainbow-delimiters php-mode on-screen nlinum multiple-cursors markdown-mode magit load-dir keyfreq key-chord json-mode indent-guide highlight-thing highlight-numbers highlight-escape-sequences highlight-current-line helm-swoop helm-projectile helm-ls-git helm-gtags helm-flx helm-c-yasnippet helm-ag golden-ratio-scroll-screen gitignore-mode gitconfig-mode git-timemachine git-messenger flyspell-lazy flycheck flx-ido fix-word find-temp-file fic-mode expand-region exec-path-from-shell edit-server dummy-h-mode dumb-jump discover-my-major dired-sort dired-narrow diff-hl describe-number dashboard dash-at-point csharp-mode copy-as-format company-statistics company-flx company-c-headers cmake-mode clang-format bury-successful-compilation avy auto-dim-other-buffers auto-dictionary auto-compile anzu ace-jump-mode ace-isearch))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -88,9 +88,11 @@
 
   (byte-compile-confs-if-not-present))
 
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
+;; Packages setup.
+(require 'package)
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("gnu" . "https://elpa.gnu.org/packages/")
+                         ;("org" . "https://orgmode.org/elpa/")
                          ;("marmalade" . "https://marmalade-repo.org/packages/")
                          ))
 
@@ -108,24 +110,16 @@
                    (package-install package)))
              (require package))))
 
+;; The "backbone" uses req-package.
 (require-package 'use-package)
 (require 'use-package)
 
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(require-package 'el-get)
-(require 'el-get)
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/el-get/recipes")
-(el-get 'sync)
-
-(use-package use-package-el-get
-  :ensure t
-  :config (use-package-el-get-setup))
-
 (use-package req-package
   :ensure t
-  :config (req-package--log-set-level 'debug))
+  :config
+  (req-package--log-set-level 'debug))
 
-(use-package auto-compile
+(req-package auto-compile
   :ensure t
   :config
     (require 'auto-compile)
