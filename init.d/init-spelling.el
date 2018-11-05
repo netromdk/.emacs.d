@@ -61,20 +61,37 @@ don't want to fix with `SPC', and you can abort completely with
   (global-set-key (kbd "C-x C-i") 'endless/ispell-word-then-abbrev))
 
 (req-package flyspell
-  :require ispell flyspell-lazy
+  :require ispell flyspell-lazy auto-dictionary
   :config
-  ;; Flyspell activation for text mode.
-  (add-hook 'text-mode-hook (lambda ()
-                              (flyspell-lazy-mode)
-                              (flyspell-mode)))
+  ;; NOTE: Automatic spellchecking is disabled because it makes everything terribly slow if the
+  ;; files is very long.
+  (defun enable-spelling ()
+    "Enable spellchecking and automatic dictionary detection."
+    (interactive)
+    (progn
+      (flyspell-lazy-mode)
+      (flyspell-mode)
+      (auto-dictionary-mode)))
 
-  ;; Remove Flyspell from some sub modes of text mode
-  (dolist (hook '(change-log-mode-hook
-                  log-edit-mode-hook
-                  nxml-mode-hook))
-    (add-hook hook (lambda ()
-                     (flyspell-lazy-mode -1)
-                     (flyspell-mode -1))))
+  (defun disable-spelling ()
+    (interactive)
+    (progn
+      (flyspell-lazy-mode -1)
+      (flyspell-mode -1)
+      (auto-dictionary-mode -1)))
+
+  ;; ;; Flyspell activation for text mode.
+  ;; (add-hook 'text-mode-hook (lambda ()
+  ;;                             (flyspell-lazy-mode)
+  ;;                             (flyspell-mode)))
+
+  ;; ;; Remove Flyspell from some sub modes of text mode
+  ;; (dolist (hook '(change-log-mode-hook
+  ;;                 log-edit-mode-hook
+  ;;                 nxml-mode-hook))
+  ;;   (add-hook hook (lambda ()
+  ;;                    (flyspell-lazy-mode -1)
+  ;;                    (flyspell-mode -1))))
 
   ;; Flyspell comments and strings in programming modes.
   ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
@@ -87,7 +104,8 @@ don't want to fix with `SPC', and you can abort completely with
 (req-package auto-dictionary
   :require ispell
   :config
-  (add-hook 'text-mode-hook 'auto-dictionary-mode))
+  ;;(add-hook 'text-mode-hook 'auto-dictionary-mode)
+  )
 
 
 (provide 'init-spelling)
