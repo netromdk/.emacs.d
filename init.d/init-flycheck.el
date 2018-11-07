@@ -52,7 +52,7 @@
   (setq flycheck-pycheckers-checkers '(flake8 bandit)
         flycheck-pycheckers-ignore-codes
         '("C0411" "C0413" "C0103" "C0111" "W0142" "W0201" "W0232" "W0403" "W0511" "E1002" "E1101"
-          "E1103" "R0201" "R0801" "R0903" "R0904" "R0914"
+          "E1103" "R0201" "R0801" "R0903" "R0904" "R0914" "W503" "W504"
           ;; flake8
           "E111" "E114" "E121" "E126" "E127" "E221" "E241" "E302" "E305"
           ;; bandit
