@@ -17,7 +17,7 @@
   (projectile-global-mode))
 
 (req-package helm-projectile
-  :require (projectile helm helm-gtags hydra magit)
+  :require (projectile helm helm-gtags helm-ag hydra magit)
   :config
   (setq helm-projectile-fuzzy-match t
         projectile-switch-project-action 'helm-projectile-find-file)
@@ -45,6 +45,30 @@ removed and then recreated."
             (message "Creating gtags..")
             (helm-gtags-create-tags (projectile-project-root) "default"))))))
 
+  (defun msk/helm-do-ag-at-point ()
+    "First select folder and then search using `helm-do-ag' with symbol at point, if anything."
+    (interactive)
+    (let ((helm-ag-insert-at-point 'symbol))
+      (helm-do-ag)))
+
+  (defun msk/helm-do-ag-buffers-at-point ()
+    "Search open buffers using `helm-do-ag-buffers' with symbol at point, if anything."
+    (interactive)
+    (let ((helm-ag-insert-at-point 'symbol))
+      (helm-do-ag-buffers)))
+
+  (defun msk/helm-do-ag-this-file-at-point ()
+    "Search current file using `helm-do-ag-this-file' with symbol at point, if anything."
+    (interactive)
+    (let ((helm-ag-insert-at-point 'symbol))
+      (helm-do-ag-this-file)))
+
+  (defun msk/helm-projectile-ag-at-point ()
+    "Search using `helm-projectile-ag' (at project root) with symbol at point, if anything."
+    (interactive)
+    (let ((helm-ag-insert-at-point 'symbol))
+      (helm-projectile-ag)))
+
   (defun msk/projectile-switch-project-magit (args)
     "Switch to project using projectile and run `magit-status'."
     (interactive "P")
@@ -55,14 +79,14 @@ removed and then recreated."
     "
 Projectile: %(projectile-project-root)
 
-     Find               Search/Tags          Buffers                Cache/Project
-------------------------------------------------------------------------------------------
-  _f_: File            _a_: Ag                _b_: Switch to buffer    _p_: Switch project (find file)
-  _F_: File dwim       _g_: Update gtags      _k_: Kill all buffers    _m_: Switch project (magit)
-  _o_: Other file      _O_: Multi-occur                              ^^_c_: Cache clear
-  _r_: Recent file                                                 ^^^^_x_: Remove known project
-  _d_: Dir                                                         ^^^^_X_: Cleanup non-existing
-  _w_: File other win                                              ^^^^_z_: Cache current file
+     Find                Search                Buffers                Cache/Project
+-------------------------------------------------------------------------------------------
+  _f_: File            _ss_: Ag (at point)      _b_: Switch to buffer    _p_: Switch project (find file)
+  _F_: File dwim       _sb_: Ag (buffers)       _k_: Kill all buffers    _m_: Switch project (magit)
+  _o_: Other file      _sp_: Ag (project root)                         ^^_c_: Cache clear
+  _r_: Recent file     _sf_: Ag (this file)                            ^^_x_: Remove known project
+  _d_: Dir                                                           ^^^^_X_: Cleanup non-existing
+  _w_: File other win                                                ^^^^_z_: Cache current file
 
 "
     ("f" helm-projectile-find-file)
@@ -72,9 +96,12 @@ Projectile: %(projectile-project-root)
     ("d" helm-projectile-find-dir)
     ("w" projectile-find-file-other-window)
 
-    ("a" helm-projectile-ag)
-    ("g" msk/helm-update-gtags)
-    ("O" projectile-multi-occur :color blue)
+    ("ss" msk/helm-do-ag-at-point)
+    ("sb" msk/helm-do-ag-buffers-at-point)
+    ("sp" msk/helm-projectile-ag-at-point) ;; at project root
+    ("sf" msk/helm-do-ag-this-file-at-point)
+    ;;("g" msk/helm-update-gtags)
+    ;;("O" projectile-multi-occur :color blue)
 
     ("b" helm-projectile-switch-to-buffer)
     ("k" projectile-kill-buffers)
