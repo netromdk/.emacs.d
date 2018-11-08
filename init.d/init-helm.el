@@ -81,7 +81,7 @@
 (req-package helm-ag
   :require helm
   :config
-  (setq helm-ag-base-command "ag --nocolor --nogroup --smart-case --stats"))
+  (setq helm-ag-base-command "ag --nocolor --nogroup --smart-case"))
 
 
 (provide 'init-helm)
