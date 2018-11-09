@@ -162,6 +162,12 @@ Command: %(msk/compilation-command-string)
                (when (not (member major-mode '(c++-mode c-mode python-mode)))
                  (highlight-thing-mode)))))
 
+;; Better commenting DWIM that cycles. Use "C-u M-;" to align comments at end of line with those
+;; around it.
+(req-package comment-dwim-2
+  :config
+  (global-set-key (kbd "M-;") 'comment-dwim-2))
+
 ;; Avoid escape nightmares by editing string in separate buffer.
 (req-package string-edit
   :bind ("C-c e" . string-edit-at-point))
