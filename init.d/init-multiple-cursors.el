@@ -31,10 +31,23 @@ Multiple Cursors
     ("U" mc/unmark-previous-like-this "Unmark")
     ("S" mc/skip-to-previous-like-this "Skip")
 
+    ;; Cycling
+    ;; NOTE: It is in purpose that "C-s" `isearch-forward' and "C-r" `isearch-backward' are replaced
+    ;; because isearch isn't supported in mc so it might as well do something familiar!
+    ("C-s" mc/cycle-forward "Forward" :column "Cycling")
+    ("C-r" mc/cycle-backward "Backward")
+
+    ;; Insert
+    ("C-n" mc/insert-numbers "Numbers" :column "Insert")
+    ("C-l" mc/insert-letters "Letters")
+
     ;; Misc
     ("a" mc/mark-all-like-this-dwim "All" :column "Misc")
+    ("d" mc/mark-all-like-this-in-defun "All (defun)")
+    ("w" mc/mark-all-words-like-this-in-defun "All words (defun)")
+    ("M-s" mc/mark-all-symbols-like-this-in-defun "All symbols (defun)")
     ("m" mc/mark-all-dwim "Dwim")
-    ("l" mc/edit-lines "Edit lines" :color blue)
+    ("l" mc/edit-lines "Edit lines")
     ("q" nil "Quit" :color blue))
 
   (global-set-key (kbd "C-c m") 'msk/mc-hydra/body)
@@ -42,7 +55,8 @@ Multiple Cursors
   ;; Trigger hydra via some of the normal bindings, too.
   (global-set-key (kbd "C-c n") 'msk/mc-hydra/mc/mark-next-like-this)
   (global-set-key (kbd "C-c p") 'msk/mc-hydra/mc/mark-previous-like-this)
-  (global-set-key (kbd "C-c a") 'msk/mc-hydra/mc/mark-all-like-this-dwim))
+  (global-set-key (kbd "C-c a") 'msk/mc-hydra/mc/mark-all-like-this-dwim)
+  (global-set-key (kbd "C-c l") 'msk/mc-hydra/mc/edit-lines))
 
 
 (provide 'init-multiple-cursors)
