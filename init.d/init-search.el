@@ -1,5 +1,21 @@
 (require 'req-package)
 
+(defun msk/isearch-yank-region-or-thing-at-point ()
+  "Pull active region or thing-at-point from buffer into serach
+string. If region was active then `deactivate-mark' is invoked to
+stop region from expanding to next search match."
+  (interactive)
+  (isearch-yank-string
+   (if (region-active-p)
+       (let ((reg (buffer-substring (region-beginning) (region-end))))
+         (deactivate-mark)
+         reg)
+     (thing-at-point 'symbol))))
+
+;; Yank into search buffer the active region or thing-at-point instead of next word or char via
+;; `isearch-yank-word-or-char'.
+(define-key isearch-mode-map (kbd "C-w") 'msk/isearch-yank-region-or-thing-at-point)
+
 ;; Sometimes the cursor should be at the opposite end of the search match, e.g. when searching
 ;; forward the cursor will be at the end of the match, but if the opposite is intended then exit
 ;; isearch mode using C-RET. Same thing for searching backwards where it puts the cursor at the end
