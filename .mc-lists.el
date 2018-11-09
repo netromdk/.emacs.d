@@ -48,11 +48,12 @@
         magit-copy-buffer-revision
         markdown-exdent-or-delete
         markdown-outdent-or-delete
+        msk/mc-hydra/mc/mark-previous-like-this
+        msk/mc-hydra/mc/skip-to-previous-like-this
+        msk/mc-hydra/mc/unmark-next-like-this
+        msk/mc-hydra/mc/unmark-previous-like-this
         multiple-cursors-hydra/mc/edit-lines
         multiple-cursors-hydra/mc/edit-lines-and-exit
-        multiple-cursors-hydra/mc/mark-all-like-this-and-exit
-        multiple-cursors-hydra/mc/mark-all-like-this-dwim
-        multiple-cursors-hydra/mc/mark-all-like-this-dwim-and-exit
         multiple-cursors-hydra/mc/mark-previous-like-this
         multiple-cursors-hydra/mc/skip-to-previous-like-this
         multiple-cursors-hydra/mc/unmark-next-like-this
@@ -78,6 +79,13 @@
         cleanup-region-or-buffer
         helm-M-x
         keyboard-escape-quit
+        msk/mc-hydra/body
+        msk/mc-hydra/mc/edit-lines-and-exit
+        msk/mc-hydra/mc/mark-all-dwim
+        msk/mc-hydra/mc/mark-all-like-this-dwim
+        msk/mc-hydra/mc/mark-next-like-this
+        msk/mc-hydra/mc/skip-to-next-like-this
+        msk/mc-hydra/nil
         multiple-cursors-hydra/mc/mark-next-like-this
         multiple-cursors-hydra/mc/skip-to-next-like-this
         next-error
