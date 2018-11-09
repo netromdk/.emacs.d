@@ -48,17 +48,6 @@
         magit-copy-buffer-revision
         markdown-exdent-or-delete
         markdown-outdent-or-delete
-        msk/mc-hydra/mc/mark-previous-like-this
-        msk/mc-hydra/mc/skip-to-previous-like-this
-        msk/mc-hydra/mc/unmark-next-like-this
-        msk/mc-hydra/mc/unmark-previous-like-this
-        multiple-cursors-hydra/mc/edit-lines
-        multiple-cursors-hydra/mc/edit-lines-and-exit
-        multiple-cursors-hydra/mc/mark-previous-like-this
-        multiple-cursors-hydra/mc/skip-to-previous-like-this
-        multiple-cursors-hydra/mc/unmark-next-like-this
-        multiple-cursors-hydra/mc/unmark-previous-like-this
-        multiple-cursors-hydra/nil
         nxml-electric-slash
         orgtbl-self-insert-command
         smarter-move-beginning-of-line
@@ -80,10 +69,19 @@
         helm-M-x
         keyboard-escape-quit
         msk/mc-hydra/body
+        msk/mc-hydra/mc/cycle-backward
+        msk/mc-hydra/mc/cycle-forward
+        msk/mc-hydra/mc/edit-lines
         msk/mc-hydra/mc/edit-lines-and-exit
+        msk/mc-hydra/mc/insert-letters
+        msk/mc-hydra/mc/insert-numbers
         msk/mc-hydra/mc/mark-all-dwim
         msk/mc-hydra/mc/mark-all-like-this-dwim
+        msk/mc-hydra/mc/mark-all-like-this-in-defun
+        msk/mc-hydra/mc/mark-all-symbols-like-this-in-defun
+        msk/mc-hydra/mc/mark-all-words-like-this-in-defun
         msk/mc-hydra/mc/mark-next-like-this
+        msk/mc-hydra/mc/mark-previous-like-this
         msk/mc-hydra/mc/skip-to-next-like-this
         msk/mc-hydra/nil
         multiple-cursors-hydra/mc/mark-next-like-this
