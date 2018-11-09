@@ -21,6 +21,7 @@
         c-indent-line-or-region
         c-indent-new-comment-line
         clang-format-region-or-buffer
+        comment-dwim
         dired-do-delete
         dired-flag-file-deletion
         electric-newline-and-maybe-indent
@@ -57,6 +58,7 @@
         multiple-cursors-hydra/mc/unmark-next-like-this
         multiple-cursors-hydra/mc/unmark-previous-like-this
         multiple-cursors-hydra/nil
+        nxml-electric-slash
         orgtbl-self-insert-command
         smarter-move-beginning-of-line
         sp-backward-sexp
