@@ -28,7 +28,7 @@
  '(custom-enabled-themes (quote (mustang-netrom)))
  '(custom-safe-themes
    (quote
-    ("f3091a7e5b3f5697eaafa3d3848db4ebbffd1f7a0f29aa21f300802999a87378" default)))
+    ("c07ddfe89cbb24c8a0523c4f87ba9a7e82cd079fae9d43d6c0421501055666ba" default)))
  '(package-selected-packages
    (quote
     (unfill comment-dwim-2 lsp-php el-get flycheck-pycheckers lsp-ui lsp-python company-lsp helm-xref cquery lsp-mode company-ghc hindent haskell-mode cask ert-runner diminish treemacs-projectile treemacs modern-cpp-font-lock hydra helm-flycheck zygospore windresize window-numbering vlf vkill swift-mode string-edit spaceline smartparens req-package rainbow-mode rainbow-delimiters php-mode on-screen nlinum multiple-cursors markdown-mode magit load-dir keyfreq key-chord json-mode indent-guide highlight-thing highlight-numbers highlight-escape-sequences highlight-current-line helm-swoop helm-projectile helm-ls-git helm-gtags helm-flx helm-c-yasnippet helm-ag golden-ratio-scroll-screen gitignore-mode gitconfig-mode git-timemachine git-messenger flyspell-lazy flycheck flx-ido fix-word find-temp-file fic-mode expand-region exec-path-from-shell edit-server dummy-h-mode dumb-jump discover-my-major dired-sort dired-narrow diff-hl describe-number dashboard dash-at-point csharp-mode copy-as-format company-statistics company-flx company-c-headers cmake-mode clang-format bury-successful-compilation avy auto-dim-other-buffers auto-dictionary auto-compile anzu ace-jump-mode ace-isearch))))

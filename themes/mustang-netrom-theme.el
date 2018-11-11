@@ -48,6 +48,8 @@
  '(company-tooltip-annotation ((t (:foreground "#b1d631"))))
  '(company-scrollbar-bg ((t (:background "#282828"))))
  '(company-scrollbar-fg ((t (:background "#808080"))))
+
+ ;; Helm
  '(helm-candidate-number ((t (:background "#202020" :foreground "#ff9800"))))
  '(helm-selection ((t (:background "#282828" :foreground "#b1d631" :underline nil :weight bold))))
  '(helm-source-header ((t (:background "#353535" :foreground "white" :weight bold :height 1.3 :family "Sans Serif"))))
@@ -57,6 +59,8 @@
  '(helm-swoop-target-line-block-face ((t nil)))
  '(helm-swoop-target-line-face ((t (:background "#3c414c"))))
  '(helm-swoop-target-word-face ((t (:background "#b1d631" :foreground "#000000"))))
+ '(helm-buffer-modified ((t (:inherit font-lock-comment-face :foreground "red" :underline t))))
+
  '(highlight-current-line-face ((t (:background "#2c2c2c"))))
  '(linum ((t (:inherit (shadow default) :foreground "#696969" :height 0.9))))
  '(linum-highlight-face ((t (:inherit linum :foreground "#b1d631"))))
