@@ -584,7 +584,7 @@ Command: %(msk/compilation-command-string)
           ("C-i" lsp-ui-peek-find-implementation "Implementation")
 
           ;; LSP
-          ("a" lsp-execute-code-action "Execute code action" :column "LSP")
+          ("C-a" lsp-execute-code-action "Execute code action" :column "LSP")
           ("R" lsp-rename "Rename")
           ("t" lsp-goto-type-definition "Type definition")
           ("l" lsp-ui-imenu "IMenu")
