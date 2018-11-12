@@ -623,30 +623,7 @@ Command: %(msk/compilation-command-string)
               (local-set-key (kbd "C-c C-l")
                              (if (member major-mode '(c++-mode c-mode))
                                  'msk/lsp-cquery-hydra/body
-                               'msk/lsp-hydra/body))))
-
-  ;; Python LSP support.
-  ;;
-  ;; Currently, the provided lsp-python package searches incorrectly for "__init__.py" files, which
-  ;; doesn't work correctly when having multiple sub-packages. :get-root is set to nil which means
-  ;; lsp--suggest-project-root will try to detect a projectile/VC project.
-  ;;
-  ;; TODO: Use lsp-python package (configured beneath) if its functionality changes to this.
-  (defcustom lsp-python-server-args
-    '()
-    "Extra arguments for the python-stdio language server"
-    :group 'lsp-python
-    :risky t
-    :type '(repeat string))
-
-  (defun lsp-python--ls-command ()
-    "Generate the language server startup command."
-    `("pyls" ,@lsp-python-server-args))
-
-  (lsp-define-stdio-client lsp-python "python" nil nil
-                           :command-fn 'lsp-python--ls-command)
-
-  (add-hook 'python-mode-hook #'lsp-python-enable))
+                               'msk/lsp-hydra/body)))))
 
 (req-package lsp-ui
   :require lsp-mode flycheck
@@ -689,10 +666,10 @@ Command: %(msk/compilation-command-string)
 
 ;; Requires python-language-server:
 ;;   pip install python-language-server
-;; (req-package lsp-python
-;;   :require lsp-mode
-;;   :config
-;;   (add-hook 'python-mode-hook #'lsp-python-enable))
+(req-package lsp-python
+  :require lsp-mode
+  :config
+  (add-hook 'python-mode-hook #'lsp-python-enable))
 
 ;; Requires the php-language-server that is bundled with the emacs config, and was installed like
 ;; this:
