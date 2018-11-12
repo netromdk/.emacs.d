@@ -83,6 +83,8 @@
         msk/mc-hydra/mc/mark-next-like-this
         msk/mc-hydra/mc/mark-previous-like-this
         msk/mc-hydra/mc/skip-to-next-like-this
+        msk/mc-hydra/mc/skip-to-previous-like-this
+        msk/mc-hydra/mc/unmark-previous-like-this
         msk/mc-hydra/nil
         multiple-cursors-hydra/mc/mark-next-like-this
         multiple-cursors-hydra/mc/skip-to-next-like-this

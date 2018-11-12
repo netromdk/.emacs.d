@@ -41,12 +41,14 @@ Multiple Cursors
     ("C-n" mc/insert-numbers "Numbers" :column "Insert")
     ("C-l" mc/insert-letters "Letters")
 
-    ;; Misc
-    ("a" mc/mark-all-like-this-dwim "All" :column "Misc")
+    ;; "Like This"
+    ("a" mc/mark-all-like-this-dwim "All (dwim)" :column "Like This")
     ("d" mc/mark-all-like-this-in-defun "All (defun)")
     ("w" mc/mark-all-words-like-this-in-defun "All words (defun)")
     ("M-s" mc/mark-all-symbols-like-this-in-defun "All symbols (defun)")
-    ("m" mc/mark-all-dwim "Dwim")
+
+    ;; Misc
+    ("m" mc/mark-all-dwim "All (dwim)" :column "Misc")
     ("l" mc/edit-lines "Edit lines")
     ("q" nil "Quit" :color blue))
 
