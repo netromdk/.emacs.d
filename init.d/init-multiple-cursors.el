@@ -7,17 +7,12 @@
   (setq mc/mode-line
         (quote
          (" ["
-          (:eval
-           (format
-            #("%d" 0 2
-              (face font-lock-string-face))
-            (mc/num-cursors)))
+          (:eval (format #("%d" 0 2 (face font-lock-string-face)) (mc/num-cursors)))
           " mc]")))
 
   ;; Make <return> insert newline at each cursor instead of ending mc mode.
   (define-key mc/keymap (kbd "<return>") nil)
 
-  (global-set-key (kbd "C-c l") 'mc/edit-lines)
 
   (defhydra msk/mc-hydra ()
     "

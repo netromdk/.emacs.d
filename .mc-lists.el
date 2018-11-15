@@ -95,5 +95,6 @@
         recompile
         select-window-1
         select-window-2
+        select-window-3
         widget-button-click
         ))
