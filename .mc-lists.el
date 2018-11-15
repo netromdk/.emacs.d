@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        beginning-of-buffer
         c-backward-conditional
         c-beginning-of-statement
         c-electric-brace
@@ -25,6 +26,7 @@
         dired-do-delete
         dired-flag-file-deletion
         electric-newline-and-maybe-indent
+        end-of-buffer
         end-of-visual-line
         fix-word-capitalize
         fix-word-downcase
