@@ -557,7 +557,18 @@ Command: %(msk/compilation-command-string)
 (req-package helm-xref
   :require helm
   :config
-  (setq xref-show-xrefs-function 'helm-xref-show-xrefs))
+  (setq xref-show-xrefs-function 'helm-xref-show-xrefs)
+
+  ;; Setting `helm-xref-show-xrefs' as the xref show function breaks `find-name-dired' interactive
+  ;; search-and-replace across files, which uses `dired-do-find-regexp-and-replace'. Thus we make
+  ;; xref show results in the default way by setting `xref-show-xrefs-function' to
+  ;; `xref--show-xref-buffer' via an around-advice.
+  (defadvice dired-do-find-regexp-and-replace
+      (around msk-no-helm-dired-do-find-regexp-and-replace activate)
+    (let ((old-func xref-show-xrefs-function))
+      (setq xref-show-xrefs-function 'xref--show-xref-buffer)
+      ad-do-it
+      (setq xref-show-xrefs-function old-func))))
 
 (defun msk/xref-find-apropos-at-point (pattern)
   "Xref find apropos at point, if anything, and show prompt for PATTERN."
