@@ -53,6 +53,8 @@ Multiple Cursors
     ;; Misc
     ("m" mc/mark-all-dwim "All (dwim)" :column "Misc")
     ("l" mc/edit-lines "Edit lines")
+    ("r" mc/mark-all-in-region "Mark in region")
+    ("R" mc/mark-all-in-region-regexp "Mark in region (regexp)")
     ("q" nil "Quit" :color blue))
 
   (global-set-key (kbd "C-c m") 'msk/mc-hydra/body)
