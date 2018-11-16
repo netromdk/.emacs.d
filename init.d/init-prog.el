@@ -551,13 +551,17 @@ Command: %(msk/compilation-command-string)
 ;; Xref
 
 ;; Don't show prompt unless nothing is under point or if it has to show it.
-(setq xref-prompt-for-identifier nil)
+(setq-default xref-prompt-for-identifier nil)
 
 ;; Show xref results in helm.
 (req-package helm-xref
   :require helm
   :config
-  (setq xref-show-xrefs-function 'helm-xref-show-xrefs)
+  ;; Use helm-xref as the default xref show function.
+  (setq-default xref-show-xrefs-function 'helm-xref-show-xrefs)
+
+  ;; Show full filename in results instead of only basename which doesn't give enough context.
+  (setq helm-xref-candidate-formatting-function 'helm-xref-format-candidate-long)
 
   ;; Setting `helm-xref-show-xrefs' as the xref show function breaks `find-name-dired' interactive
   ;; search-and-replace across files, which uses `dired-do-find-regexp-and-replace'. Thus we make
