@@ -442,7 +442,7 @@ Command: %(msk/compilation-command-string)
   (define-key smartparens-mode-map (kbd "C-M-S-p") 'sp-push-hybrid-sexp)
 
   ;; General prog mode handling of "{}" to indent after hitting RET.
-  (sp-with-modes '(c-mode c++-mode php-mode java-mode js-mode rust-mode)
+  (sp-with-modes '(c-mode c++-mode php-mode java-mode js-mode rust-mode sh-mode)
     (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET"))))
 
   ;; Markdown modes
