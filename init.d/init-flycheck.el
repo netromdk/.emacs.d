@@ -4,7 +4,7 @@
 (require 'req-package)
 
 (req-package flycheck
-  :require helm-flycheck hydra flycheck-pycheckers
+  :require helm-flycheck hydra flycheck-pycheckers flycheck-inline
   :config
   (progn
     ;; C++11
@@ -32,6 +32,9 @@
 
     (add-hook 'prog-mode-hook 'flycheck-mode)
 
+    ;; Enable inline errors/warnings/info etc.
+    (flycheck-inline-mode)
+
     ;; Navigate flycheck errors more easily.
     (defhydra flycheck-hydra
       (:pre  (flycheck-list-errors)
@@ -44,6 +47,8 @@
       ("gg" flycheck-first-error                                      "First")
       ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
       ("q"  nil))))
+
+(req-package flycheck-inline)
 
 ;; Requires local dependencies:
 ;;   pip install flake8 bandit
