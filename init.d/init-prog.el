@@ -446,6 +446,10 @@ Command: %(msk/compilation-command-string)
   (sp-with-modes '(c-mode c++-mode php-mode java-mode js-mode rust-mode sh-mode)
     (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET"))))
 
+  ;; Same thing but with "[]".
+  (sp-with-modes '(rust-mode)
+    (sp-local-pair "[" nil :post-handlers '(("||\n[i]" "RET"))))
+
   ;; Markdown modes
   (sp-with-modes '(markdown-mode gfm-mode rst-mode)
     (sp-local-pair "**" "**")
