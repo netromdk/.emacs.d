@@ -65,6 +65,12 @@
   ;; Ensure that the correct python checker is chosen.
   (add-hook 'python-mode-hook (lambda () (flycheck-select-checker 'python-pycheckers))))
 
+;; Requires Rust to be installed locally: install rustup
+(req-package flycheck-rust
+  :require flycheck
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
 
 (provide 'init-flycheck)
 ;;; init-flycheck.el ends here

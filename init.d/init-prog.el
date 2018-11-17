@@ -159,7 +159,7 @@ Command: %(msk/compilation-command-string)
   ;; highlight feature.
   (add-hook 'prog-mode-hook
             '(lambda ()
-               (when (not (member major-mode '(c++-mode c-mode python-mode)))
+               (when (not (member major-mode '(c++-mode c-mode python-mode rust-mode)))
                  (highlight-thing-mode)))))
 
 ;; Better commenting DWIM that cycles. Use "C-u M-;" to align comments at end of line with those
@@ -548,6 +548,13 @@ Command: %(msk/compilation-command-string)
 
 ;; End of Haskell related packages
 
+;; Rust
+
+(req-package rust-mode
+  :config
+  (setq rust-format-on-save t)
+  (define-key rust-mode-map (kbd "C-c f") 'rust-format-buffer))
+
 ;; Xref
 
 ;; Don't show prompt unless nothing is under point or if it has to show it.
@@ -711,6 +718,15 @@ Command: %(msk/compilation-command-string)
      ".dir-locals.el" ".project" "index.php""robots.txt"))
 
   (add-hook 'php-mode-hook #'lsp-php-enable))
+
+;; Requires Rust Language Server (rls) to be installed.
+;; Installation:
+;; 1. rustup update
+;; 2. rustup component add rls-preview rust-analysis rust-src
+(req-package lsp-rust
+  :require rust-mode
+  :config
+  (add-hook 'rust-mode-hook #'lsp-rust-enable))
 
 
 (provide 'init-prog)
