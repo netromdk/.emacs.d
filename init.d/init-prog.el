@@ -550,10 +550,34 @@ Command: %(msk/compilation-command-string)
 
 ;; Rust
 
+(req-package cargo)
+
 (req-package rust-mode
+  :require cargo
   :config
   (setq rust-format-on-save t)
-  (define-key rust-mode-map (kbd "C-c f") 'rust-format-buffer))
+  (define-key rust-mode-map (kbd "C-c f") 'rust-format-buffer)
+
+  (defhydra rust-cargo-hydra ()
+    ("b" cargo-process-build "Build" :column "Cargo")
+    ("r" cargo-process-run "Run")
+    ("c" cargo-process-clean "Clean")
+    ("d" cargo-process-doc "Doc")
+    ("D" cargo-process-doc-open "Doc (open)")
+    ("t" cargo-process-test "Test")
+    ("u" cargo-process-update "Update")
+    ("U" cargo-process-upgrade "Upgrade")
+    ("C" cargo-process-check "Check")
+
+    ("n" next-error "Next" :column "Errors")
+    ("N" next-error-skip-warnings "Next, skip warnings")
+    ("p" previous-error "Previous")
+    ("f" first-error "First")
+    ("l" msk/compilation-last-error "Last")
+
+    ("q" nil "Cancel" :color blue :column "Misc"))
+
+  (define-key rust-mode-map (kbd "C-c C-c") 'rust-cargo-hydra/body))
 
 ;; Xref
 
