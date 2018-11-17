@@ -114,7 +114,8 @@ Command: %(msk/compilation-command-string)
             (lambda ()
               ;; Using local-set-key because defining the bindings in prog-mode-map will get
               ;; overridden by c++-mode bindings, for instance. This shadows them instead.
-              (local-set-key (kbd "C-c C-c") 'compilation-hydra/body))))
+              (when (member major-mode '(c++-mode c-mode))
+                (local-set-key (kbd "C-c C-c") 'compilation-hydra/body)))))
 
 ;; Closes *compilation* buffer after successful compilation, and otherwise when the failure was
 ;; fixed to compile, it restores the original window configuration.
@@ -553,7 +554,7 @@ Command: %(msk/compilation-command-string)
 (req-package cargo)
 
 (req-package rust-mode
-  :require cargo
+  :require cargo hydra
   :config
   (setq rust-format-on-save t)
   (define-key rust-mode-map (kbd "C-c f") 'rust-format-buffer)
