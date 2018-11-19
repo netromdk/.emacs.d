@@ -2,7 +2,9 @@
 
 # Takes program as argument.
 checkProgram() {
-  if ! hash $1 2> /dev/null; then
+  if hash $1 2> /dev/null; then
+    echo "$1 is installed!"
+  else
     echo "$1 is not installed!"
     exit 1
   fi
@@ -17,6 +19,7 @@ writeBanner() {
 case "$(uname -s)" in
   Darwin)
     writeBanner "Homebrew"
+    checkProgram brew
     brew install cquery the_silver_searcher cppcheck shellcheck composer
     ;;
 esac
