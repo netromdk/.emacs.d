@@ -48,6 +48,8 @@
         lux-fix-buffer
         lux-wrap-function
         magit-copy-buffer-revision
+        magit-next-line
+        magit-previous-line
         markdown-exdent-or-delete
         markdown-outdent-or-delete
         nxml-electric-slash
