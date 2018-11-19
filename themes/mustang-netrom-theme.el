@@ -222,6 +222,9 @@
  '(lsp-ui-peek-header ((t (:background "black" :foreground "#b1d631" :weight bold))))
  '(lsp-ui-peek-highlight ((t (:foreground "#ff9800"))))
  '(lsp-ui-peek-selection ((t (:foreground "#b1d631"))))
+
+ ;; eshell
+ '(eshell-prompt ((t (:foreground "#b1d631" :weight bold))))
  )
 
 ;;;###autoload
