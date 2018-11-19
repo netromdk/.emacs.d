@@ -559,13 +559,32 @@ Command: %(msk/compilation-command-string)
   (setq rust-format-on-save t)
   (define-key rust-mode-map (kbd "C-c f") 'rust-format-buffer)
 
+  (defun msk/toggle-rust-backtrace ()
+    "Toggle between Rust backtrace enabled and disabled."
+    (interactive)
+    (if (not cargo-process--enable-rust-backtrace)
+        (setq cargo-process--enable-rust-backtrace t)
+      (setq cargo-process--enable-rust-backtrace nil)))
+
+  (defun msk/rust-backtrace-string ()
+    (interactive)
+    (if (not cargo-process--enable-rust-backtrace)
+        "Backtrace: disabled"
+      "Backtrace: enabled"))
+
   (defhydra rust-cargo-hydra ()
+    "
+%(msk/rust-backtrace-string)
+
+"
     ("b" cargo-process-build "Build" :column "Cargo")
     ("r" cargo-process-run "Run")
-    ("c" cargo-process-clean "Clean")
-    ("d" cargo-process-doc "Doc")
-    ("D" cargo-process-doc-open "Doc (open)")
+    ("R" cargo-process-run-bin "Run (specific)")
     ("t" cargo-process-test "Test")
+    ("c" cargo-process-clean "Clean")
+
+    ("d" cargo-process-doc "Doc" :column "")
+    ("D" cargo-process-doc-open "Doc (open)")
     ("u" cargo-process-update "Update")
     ("U" cargo-process-upgrade "Upgrade")
     ("C" cargo-process-check "Check")
@@ -576,7 +595,8 @@ Command: %(msk/compilation-command-string)
     ("f" first-error "First")
     ("l" msk/compilation-last-error "Last")
 
-    ("q" nil "Cancel" :color blue :column "Misc"))
+    ("C-b" msk/toggle-rust-backtrace "Toggle backtrace" :column "Misc")
+    ("q" nil "Cancel" :color blue))
 
   (define-key rust-mode-map (kbd "C-c C-c") 'rust-cargo-hydra/body))
 
