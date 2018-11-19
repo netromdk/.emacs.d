@@ -18,10 +18,8 @@
 
 (defun next-error-skip-warnings ()
   (interactive)
-  (let (threshold compilation-skip-threshold)
-    (setq compilation-skip-threshold 2)
-    (next-error)
-    (setq compilation-skip-threshold threshold)))
+  (let ((compilation-skip-threshold 2))
+    (next-error)))
 
 (defun compile-from-buffer-folder (cmd)
   (interactive
@@ -513,10 +511,8 @@ Command: %(msk/compilation-command-string)
   (defun my-haskell-hoogle-browser ()
     "Force hoogle to search via the browser for `haskell-ident-at-point'."
     (interactive)
-    (let (command haskell-hoogle-command)
-      (setq haskell-hoogle-command nil) ; `nil' forces usage of browser.
-      (haskell-hoogle (haskell-ident-at-point))
-      (setq haskell-hoogle-command command)))
+    (let ((haskell-hoogle-command nil)) ; `nil' forces usage of browser.
+      (haskell-hoogle (haskell-ident-at-point))))
 
   ;; TODO: Make hydra
   (define-key haskell-mode-map [f8] 'haskell-navigate-imports)
@@ -605,10 +601,8 @@ Command: %(msk/compilation-command-string)
   ;; `xref--show-xref-buffer' via an around-advice.
   (defadvice dired-do-find-regexp-and-replace
       (around msk-no-helm-dired-do-find-regexp-and-replace activate)
-    (let ((old-func xref-show-xrefs-function))
-      (setq xref-show-xrefs-function 'xref--show-xref-buffer)
-      ad-do-it
-      (setq xref-show-xrefs-function old-func))))
+    (let ((xref-show-xrefs-function 'xref--show-xref-buffer))
+      ad-do-it)))
 
 (defun msk/xref-find-apropos-at-point (pattern)
   "Xref find apropos at point, if anything, and show prompt for PATTERN."
