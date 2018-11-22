@@ -721,7 +721,18 @@ Command: %(msk/compilation-command-string)
 (req-package cquery
   :require lsp-mode
   :config
-  ;;(setq cquery-extra-args '("--log-file=/tmp/cq.log"))
+  (setq
+   ;; cquery-extra-args '("--log-file=/tmp/cq.log")
+   cquery-sem-highlight-method 'overlay
+
+   ;; Options are defined here: https://github.com/cquery-project/cquery/blob/master/src/config.h
+   cquery-extra-init-params
+   '(:index (:comments 2 ;; Show all comments.
+             :blacklist [".*moc_.*\\.cxx" ".*qrc_.*\\.cxx" ".*/build/.*"])
+     :cacheFormat "msgpack" ;; Smaller than json files in general.
+     :completion (:detailedLabel t)
+     :diagnostics (:blacklist [".*moc_.*\\.cxx" ".*qrc_.*\\.cxx" ".*/build/.*"])
+     :highlight (:enabled t)))
 
   (defun msk/cquery-enable ()
     (condition-case nil
