@@ -297,6 +297,9 @@ Command: %(msk/compilation-command-string)
 (req-package php-mode)
 
 ;; CSS
+(require 'css-mode)
+(setq-default css-indent-offset general-tab-width)
+
 (setq auto-mode-alist
       (append '(("\\.css$" . css-mode)
                 ("\\.style$" . css-mode))
