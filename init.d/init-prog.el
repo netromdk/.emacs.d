@@ -597,6 +597,7 @@ Command: %(msk/compilation-command-string)
     ("p" previous-error "Previous")
     ("f" first-error "First")
     ("l" msk/compilation-last-error "Last")
+    ("k" kill-compilation "Stop")
 
     ("C-b" msk/toggle-rust-backtrace "Toggle backtrace" :column "Misc")
     ("q" nil "Cancel" :color blue))
