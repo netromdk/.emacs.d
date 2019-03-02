@@ -763,14 +763,14 @@ Command: %(msk/compilation-command-string)
 
 ;; Requires the php-language-server that is bundled with the emacs config, and was installed like
 ;; this:
-;; 1. Created folder ~/.emacs.d/php-language-server
+;; 1. Created folder ~/.composer
 ;; 2. Created file "composer.json" in that folder with the contents:
 ;;    {
 ;;      "minimum-stability": "dev",
 ;;      "prefer-stable": true
 ;;    }
 ;; 3. Installed "composer" on the system, like: brew install composer
-;; 4. And while inside "~/.emacs.d/php-language-server" executing:
+;; 4. And while inside "~/.composer/" executing:
 ;;    composer require felixfbecker/language-server
 ;;    composer run-script --working-dir=vendor/felixfbecker/language-server parse-stubs
 (req-package lsp-php
@@ -785,8 +785,8 @@ Command: %(msk/compilation-command-string)
    '(lsp-php-root-projectile lsp-php-root-composer-json lsp-php-root-vcs
      ".dir-locals.el" ".project" "index.php""robots.txt"))
 
-  (add-hook 'php-mode-hook #'lsp-php-enable))
-
+  ;;(add-hook 'php-mode-hook #'lsp-php-enable)
+  (add-hook 'php-mode-hook #'lsp))
 
 
 (provide 'init-prog)

@@ -1,1 +1,0 @@
-../felixfbecker/language-server/bin/php-language-server.php
