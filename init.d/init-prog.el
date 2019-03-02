@@ -741,7 +741,8 @@ Command: %(msk/compilation-command-string)
 
   (defun msk/cquery-enable ()
     (condition-case nil
-        (lsp-cquery-enable)
+        ;;(lsp-cquery-enable)
+        (lsp)
       (user-error nil)))
   (add-hook 'c++-mode-hook #'msk/cquery-enable))
 
