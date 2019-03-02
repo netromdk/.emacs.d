@@ -638,9 +638,19 @@ Command: %(msk/compilation-command-string)
 
 ;; Language Server Protocol
 
+;; Language support:
+;;
+;; == Rust ==
+;; Requires Rust Language Server (rls) to be installed.
+;; Installation:
+;; 1. rustup update
+;; 2. rustup component add rls-preview rust-analysis rust-src
+
 (req-package lsp-mode
   :require hydra
   :config
+  (add-hook 'rust-mode-hook #'lsp)
+
   (setq msk--general-lsp-hydra-heads
         '(;; Xref
           ("d" xref-find-definitions "Definitions" :column "Xref")
@@ -779,14 +789,6 @@ Command: %(msk/compilation-command-string)
 
   (add-hook 'php-mode-hook #'lsp-php-enable))
 
-;; Requires Rust Language Server (rls) to be installed.
-;; Installation:
-;; 1. rustup update
-;; 2. rustup component add rls-preview rust-analysis rust-src
-(req-package lsp-rust
-  :require rust-mode
-  :config
-  (add-hook 'rust-mode-hook #'lsp-rust-enable))
 
 
 (provide 'init-prog)
