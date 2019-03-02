@@ -645,11 +645,16 @@ Command: %(msk/compilation-command-string)
 ;; Installation:
 ;; 1. rustup update
 ;; 2. rustup component add rls-preview rust-analysis rust-src
+;;
+;; == Python ==
+;; Requires python-language-server:
+;;   pip install python-language-server
 
 (req-package lsp-mode
   :require hydra
   :config
   (add-hook 'rust-mode-hook #'lsp)
+  (add-hook 'python-mode-hook #'lsp)
 
   (setq msk--general-lsp-hydra-heads
         '(;; Xref
@@ -755,13 +760,6 @@ Command: %(msk/compilation-command-string)
         (lsp)
       (user-error nil)))
   (add-hook 'c++-mode-hook #'msk/cquery-enable))
-
-;; Requires python-language-server:
-;;   pip install python-language-server
-(req-package lsp-python
-  :require lsp-mode
-  :config
-  (add-hook 'python-mode-hook #'lsp-python-enable))
 
 ;; Requires the php-language-server that is bundled with the emacs config, and was installed like
 ;; this:
