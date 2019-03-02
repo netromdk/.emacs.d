@@ -592,6 +592,7 @@ Command: %(msk/compilation-command-string)
     ("u" cargo-process-update "Update")
     ("U" cargo-process-upgrade "Upgrade")
     ("C" cargo-process-check "Check")
+    ("C-c" cargo-process-clippy "Clippy")
 
     ("n" next-error "Next" :column "Errors")
     ("N" next-error-skip-warnings "Next, skip warnings")
