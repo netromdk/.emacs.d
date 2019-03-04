@@ -25,8 +25,8 @@ case "$(uname -s)" in
 esac
 
 writeBanner "Python"
-checkProgram pip
-pip install python-language-server flake8 bandit
+checkProgram pip3
+pip3 install python-language-server flake8 bandit
 
 writeBanner "Rust"
 checkProgram rustup
