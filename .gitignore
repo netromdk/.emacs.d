@@ -18,3 +18,5 @@ url/
 /company-statistics-cache.el
 /.cask
 /eshell
+transient/
+/.lsp-session-*
