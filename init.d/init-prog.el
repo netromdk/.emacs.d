@@ -669,7 +669,8 @@ Command: %(msk/compilation-command-string)
 (req-package lsp-mode
   :require hydra
   :config
-  (setq lsp-prefer-flymake nil) ;; Prefer using lsp-ui over flymake
+  (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
+        lsp-enable-xref t)
 
   (add-hook 'rust-mode-hook #'lsp)
   (add-hook 'python-mode-hook #'lsp)
