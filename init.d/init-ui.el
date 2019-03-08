@@ -8,25 +8,38 @@
 
 (req-package window-numbering)
 
-(req-package spaceline
+;; (req-package spaceline
+;;   :require window-numbering
+;;   :config
+;;   (window-numbering-mode t)
+
+;;   (require 'spaceline-config)
+;;   (spaceline-spacemacs-theme)
+
+;;   ;; Don't show unicode window numbers because they are too small to be seen
+;;   ;; fast and clearly.
+;;   (setq spaceline-window-numbers-unicode nil)
+
+;;   (setq spaceline-minor-modes-separator " ")
+
+;;   (spaceline-helm-mode)
+
+;;   (spaceline-toggle-process-on)
+;;   (spaceline-toggle-selection-info-on)
+;;   (spaceline-toggle-hud-off))
+
+;; Once for every computer, the `all-the-icons-install-fonts` function must be run to install fonts
+;; needed by the modeline.
+(req-package doom-modeline
   :require window-numbering
+  :hook (after-init . doom-modeline-mode)
   :config
   (window-numbering-mode t)
 
-  (require 'spaceline-config)
-  (spaceline-spacemacs-theme)
-
-  ;; Don't show unicode window numbers because they are too small to be seen
-  ;; fast and clearly.
-  (setq spaceline-window-numbers-unicode nil)
-
-  (setq spaceline-minor-modes-separator " ")
-
-  (spaceline-helm-mode)
-
-  (spaceline-toggle-process-on)
-  (spaceline-toggle-selection-info-on)
-  (spaceline-toggle-hud-off))
+  (setq doom-modeline-minor-modes nil
+        doom-modeline-enable-word-count t
+        doom-modeline-checker-simple-format t
+        doom-modeline-buffer-file-name-style 'truncate-upto-project))
 
 ;; Remove or rename mode line values.
 (req-package diminish

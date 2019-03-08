@@ -8,7 +8,7 @@
         (quote
          (" ["
           (:eval (format #("%d" 0 2 (face font-lock-string-face)) (mc/num-cursors)))
-          " mc]")))
+          " mc] ")))
 
   ;; Make <return> insert newline at each cursor instead of ending mc mode.
   (define-key mc/keymap (kbd "<return>") nil)
