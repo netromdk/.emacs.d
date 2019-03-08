@@ -39,7 +39,8 @@
   (setq doom-modeline-minor-modes nil
         doom-modeline-enable-word-count t
         doom-modeline-checker-simple-format t
-        doom-modeline-buffer-file-name-style 'truncate-upto-project))
+        doom-modeline-buffer-file-name-style 'truncate-upto-project
+        doom-modeline-env-python-executable "python3"))
 
 ;; Remove or rename mode line values.
 (req-package diminish
