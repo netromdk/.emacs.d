@@ -1,10 +1,8 @@
 ;;; Emacs Configurations                              -*- no-byte-compile: t -*-
 
-(let ((major 25)
-      (minor 1))
-  (unless (and (>= emacs-major-version major)
-               (>= emacs-minor-version minor))
-    (error "Emacs v. %d.%d+ is required for this configuration!" major minor)))
+(let ((min-version "25.1"))
+  (if (version< emacs-version min-version)
+      (error "Emacs v. %s+ is required for this configuration!" min-version)))
 
 ;; Constants.
 (defconst emacs-start-time (current-time))
