@@ -9,14 +9,14 @@
         magit-diff-arguments '("-U3" "--stat" "--no-ext-diff")
         magit-fetch-arguments '("--prune"))
 
+  ;; Bindings.
+  (global-set-key (kbd "C-x g") 'magit-status)
+
   ;; Show status full screen.
   (defadvice magit-status (around magit-fullscreen activate)
     (window-configuration-to-register :magit-fullscreen)
     ad-do-it
     (delete-other-windows))
-
-  ;; Bindings.
-  (global-set-key (kbd "C-x g") 'magit-status)
 
   ;; Protect against accident pushes to upstream/push remote.
   (defadvice magit-push-current-to-upstream
@@ -49,7 +49,44 @@ Advice to `magit-push-current-to-upstream' triggers this query."
 
   (ad-activate 'magit-push-current-to-upstream)
   (ad-activate 'magit-push-current-to-pushremote)
-  (ad-activate 'magit-git-push))
+  (ad-activate 'magit-git-push)
+
+  ;; Cycle between how much info is shown in the margin: author + date, date, none.
+  (defun magit-cycle-margin ()
+    "Cycle visibility of the Magit margin.
+
+,-> show with details --> show no details -- hide -.
+`--------------------------------------------------'"
+    (interactive)
+    (if (not (magit-margin-option))
+        (user-error "Magit margin isn't supported in this buffer")
+      (pcase (list (nth 0 magit-buffer-margin)
+                   (and (nth 3 magit-buffer-margin) t))
+        (`(t t)
+         (setf (nth 3 magit-buffer-margin) nil)
+         (magit-set-buffer-margin nil t))
+        (`(t nil)
+         (setf (nth 0 magit-buffer-margin) nil)
+         (magit-set-buffer-margin))
+        (`(nil ,_)
+         (setf (nth 0 magit-buffer-margin) t)
+         (setf (nth 3 magit-buffer-margin) t)
+         (magit-set-buffer-margin nil t)))))
+
+  ;; Call `magit-staging' to show mode with only unstaged and staged changes diff where one can
+  ;; stage/unstage chunks like normal.
+  (define-derived-mode magit-staging-mode magit-status-mode "Magit staging"
+    "Mode for showing staged and unstaged changes."
+    :group 'magit-status)
+
+  (defun magit-staging-refresh-buffer ()
+    (magit-insert-section (status)
+      (magit-insert-unstaged-changes)
+      (magit-insert-staged-changes)))
+
+  (defun magit-staging ()
+    (interactive)
+    (magit-mode-setup #'magit-staging-mode)))
 
 ;; Highlight uncommitted changes/additions/deletions in the fringe.
 (req-package diff-hl
