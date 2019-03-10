@@ -2236,7 +2236,10 @@ stop region from expanding to next search match."
     '(diminish 'auto-dim-other-buffers-mode))
 
   (eval-after-load "indent-guide"
-    '(diminish 'indent-guide-mode)))
+    '(diminish 'indent-guide-mode))
+
+  (eval-after-load "beacon"
+    '(diminish 'beacon-mode)))
 
 ;; Line numbers. Is faster than the built-in linum mode.
 (use-package nlinum
