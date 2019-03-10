@@ -1538,8 +1538,10 @@ Projectile: %(projectile-project-root)
 
 ;;;;; Editing ;;;;;
 
+(use-package ace-mc)
+
 (use-package multiple-cursors
-  :requires hydra
+  :requires hydra ace-mc
   :config
   (setq mc/mode-line
         (quote
@@ -1587,6 +1589,7 @@ Multiple Cursors
     ("l" mc/edit-lines "Edit lines")
     ("r" mc/mark-all-in-region "Mark in region")
     ("R" mc/mark-all-in-region-regexp "Mark in region (regexp)")
+    ("A" ace-mc-add-multiple-cursors "Ace" :color blue)
     ("q" nil "Quit" :color blue))
 
   (global-set-key (kbd "C-c m") 'msk/mc-hydra/body)
