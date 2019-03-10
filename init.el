@@ -330,7 +330,9 @@ Advice to `magit-push-current-to-upstream' triggers this query."
 
   (defun magit-staging ()
     (interactive)
-    (magit-mode-setup #'magit-staging-mode)))
+    (window-configuration-to-register :magit-fullscreen)
+    (magit-mode-setup #'magit-staging-mode)
+    (delete-other-windows)))
 
 ;;;;; HELM ;;;;;
 
