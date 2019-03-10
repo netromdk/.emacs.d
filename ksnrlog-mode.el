@@ -1,0 +1,27 @@
+;; Major mode to fontity KeyShot Network Rendering log files.
+
+(defvar ksnrlog-highlights nil "Highlights of ksnrlog-mode.")
+
+(setq ksnrlog-highlights
+      '(;; Timestamps, like "Tue Jan 23 10:52:05 2018".
+        ("\\w+ \\w+ [0-9]+ [0-9]+:[0-9]+:[0-9]+ [0-9]+" . font-lock-comment-face)
+
+        ;; Strings.
+        ("\\(\\\"\\|'\\).+\\(\\\"\\|'\\)" . font-lock-string-face)
+
+        ;; Log levels.
+        ;;("\\[\\(TT\\|DD\\|II\\)\\]" . (1 font-lock-function-name-face))
+        ("\\[\\(WW\\|EE\\|FF\\)\\]" . (1 font-lock-warning-face))
+
+        ;; Delimiters.
+        (",\\|:\\|;\\|-\\|(\\|)\\|\\[\\|\\]" . font-lock-builtin-face)
+
+        ;; Numbers.
+        ("\\(-\\)?[0-9.]+" . font-lock-constant-face)
+
+        ;; Booleans.
+        ("true\\|True\\|TRUE\\|false\\|False\\|FALSE" . font-lock-constant-face)))
+
+(define-derived-mode ksnrlog-mode text-mode "ksnrlog"
+  "major mode for viewing KeyShot Network Rendering log files."
+  (setq font-lock-defaults '(ksnrlog-highlights)))

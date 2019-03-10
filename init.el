@@ -2020,7 +2020,10 @@ stop region from expanding to next search match."
 
 ;;;;; Luxion related ;;;;;
 
-;; Note: bindings are at the bottom of this file!
+;; Associate `ksnrlog-mode' with KS NR log files to fontify them.
+(load (concat user-emacs-directory "ksnrlog-mode.el"))
+(add-to-list 'auto-mode-alist
+             '("\\(render\\|configurator\\|monitor\\|watchdog\\)_.+\\.log\\'" . ksnrlog-mode))
 
 ;; Wraps a function with // ***.. before and after (the region selected). Both
 ;; inserted lines with have a length fo 80 characters.
