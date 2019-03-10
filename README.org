@@ -2,3 +2,4 @@
 - Clone into "~/.emacs.d"
 - Execute setup.sh to install local dependencies
 - Start Emacs
+- Install needed icons by running command: ~all-the-icons-install-fonts~
