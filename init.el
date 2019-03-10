@@ -2202,7 +2202,8 @@ stop region from expanding to next search match."
   (eval-after-load "autorevert"
     (progn
       '(diminish 'auto-revert-mode "ar")
-      '(diminish 'global-auto-revert-mode "ar")))
+      '(diminish 'global-auto-revert-mode "ar")
+      '(diminish 'global-auto-composition-mode "ar")))
 
   (eval-after-load "rainbow-mode"
     '(diminish 'rainbow-mode))
