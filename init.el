@@ -824,6 +824,10 @@ in compilation mode."
 (require 'js)
 (setq-default js-indent-level general-tab-width)
 
+;; It can take quite some time to load dense, minified JS files, so revert to plain old
+;; fundamental-mode!
+(add-to-list 'auto-mode-alist '("\\.min.js\\'" . fundamental-mode))
+
 (use-package json-mode
   :mode ("\\.json$" . json-mode))
 
@@ -840,7 +844,8 @@ in compilation mode."
 (setq-default css-indent-offset general-tab-width)
 
 (setq auto-mode-alist
-      (append '(("\\.css$" . css-mode)
+      (append '(("\\.min.css$" . fundamental-mode) ;; Faster to load.
+                ("\\.css$" . css-mode)
                 ("\\.style$" . css-mode))
               auto-mode-alist))
 
