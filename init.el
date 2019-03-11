@@ -427,7 +427,8 @@ Advice to `magit-push-current-to-upstream' triggers this query."
 (use-package helm-ag
   :requires helm
   :config
-  (setq helm-ag-base-command "ag --nocolor --nogroup --smart-case"))
+  (setq helm-ag-base-command "ag --nocolor --nogroup --smart-case"
+        helm-ag-ignore-patterns '("*.min.js" "*.min.css")))
 
 ;;;;; Hydra ;;;;;
 
