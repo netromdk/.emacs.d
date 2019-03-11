@@ -228,7 +228,7 @@
 
  ;; doom-modeline
  '(doom-modeline-bar ((t (:inherit highlight))))
- '(doom-modeline-buffer-file ((t (:inherit (mode-line-buffer-id bold) :background "#151515"))))
+ '(doom-modeline-buffer-file ((t (:foreground "#ff9800" :weight bold))))
  '(doom-modeline-buffer-modified ((t (:inherit bold :foreground "#F34A4A"))))
  '(doom-modeline-highlight ((t (:inherit mode-line-emphasis))))
  '(doom-modeline-info ((t (:inherit bold :foreground "#b1d631"))))
