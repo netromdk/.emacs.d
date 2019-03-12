@@ -1308,6 +1308,7 @@ in compilation mode."
           ("C-a" lsp-execute-code-action "Execute code action" :column "LSP")
           ("R" lsp-rename "Rename")
           ("t" lsp-goto-type-definition "Type definition")
+          ("i" lsp-goto-implementation "Implementation")
           ("l" lsp-ui-imenu "IMenu")
           ("C-c" lsp-capabilities "Capabilities"))
 
@@ -1319,7 +1320,7 @@ in compilation mode."
         msk--cquery-lsp-hydra-heads
         '(;; Hierarchies
           ("m" cquery-member-hierarchy "Member" :column "Hierarchies")
-          ("i" cquery-inheritance-hierarchy "Inheritance")
+          ("I" cquery-inheritance-hierarchy "Inheritance")
           ("c" cquery-call-hierarchy "Calls")
 
           ;; Code Lens
