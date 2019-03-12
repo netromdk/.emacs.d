@@ -70,7 +70,11 @@
     (show-elapsed-time "Initial setup:  " emacs-start-time initial-done-time)
     (show-elapsed-time "Loaded packages:" initial-done-time cur)
     (show-elapsed-time "Total:          " emacs-start-time cur)
-    (message "============================")))
+    (message "============================")
+
+    ;; Show message 2s later about total time so it's visible in the mini buffer as the last thing.
+    (run-at-time "2 sec" nil
+                 #'show-elapsed-time "Loaded config in" emacs-start-time cur)))
 
 ;; Executed when loading is done.
 (defun loading-done ()
