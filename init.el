@@ -1319,13 +1319,16 @@ in compilation mode."
           ("C-i" lsp-ui-peek-find-implementation "Implementation")
 
           ;; LSP
-          ("p" lsp-describe-thing-at-point "Describe at point")
-          ("C-a" lsp-execute-code-action "Execute code action" :column "LSP")
+          ("p" lsp-describe-thing-at-point "Describe at point" :column "LSP")
+          ("C-a" lsp-execute-code-action "Execute code action")
           ("R" lsp-rename "Rename")
           ("t" lsp-goto-type-definition "Type definition")
           ("i" lsp-goto-implementation "Implementation")
-          ("l" lsp-ui-imenu "IMenu")
-          ("C-c" lsp-describe-session "Describe session"))
+          ("m" lsp-ui-imenu "IMenu")
+          ("C-c" lsp-describe-session "Describe session")
+
+          ;; Flycheck
+          ("l" lsp-ui-flycheck-list "List errs/warns/notes" :column "Flycheck"))
 
         msk--misc-lsp-hydra-heads
         '(;; Misc
@@ -1351,6 +1354,8 @@ in compilation mode."
         lsp-ui-doc-max-width 80
         lsp-ui-sideline-enable nil
         lsp-ui-flycheck-enable t
+        lsp-ui-flycheck-list-position 'right
+        lsp-ui-flycheck-live-reporting t
         lsp-ui-peek-enable t
         lsp-ui-peek-list-width 60
         lsp-ui-peek-peek-height 25)
