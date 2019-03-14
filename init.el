@@ -586,8 +586,26 @@ Command: %(msk/compilation-command-string)
   :config
   (push 'company-lsp company-backends)
 
-  ;; Disable client-side cache because the LSP server does a better job.
-  (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil))
+  (setq
+   ;; Disable filtering candidates locally for clangd (and the defaults). Otherwise, it's not
+   ;; possible to actively type and filter the candidates!
+   company-lsp-filter-candidates
+   '((clangd)
+
+     ;; Default values:
+     (bingo)
+     (ccls)
+     (cquery)
+     (javacomp)
+     (jdtls)
+     (pyls)
+     (rls)
+     (t . t))
+
+   ;; Disable client-side cache because the LSP server does a better job.
+   company-transformers nil
+   company-lsp-async t
+   company-lsp-cache-candidates nil))
 
 ;;;;; Development ;;;;;
 
