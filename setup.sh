@@ -20,9 +20,12 @@ case "$(uname -s)" in
   Darwin)
     writeBanner "Homebrew"
     checkProgram brew
-    brew install cquery the_silver_searcher cppcheck shellcheck composer
+    brew install the_silver_searcher cppcheck shellcheck composer
     ;;
 esac
+
+writeBanner "clangd (LSP)"
+checkProgram clangd
 
 writeBanner "Python"
 checkProgram pip3

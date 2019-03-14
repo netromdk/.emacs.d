@@ -30,7 +30,7 @@
     ("3339a57ac03dcf67eea1093fe33f149efec880b8699661f3f81e8d3d15e1a62d" default)))
  '(package-selected-packages
    (quote
-    (ace-mc goto-last-change cmake-font-lock vlf keyfreq describe-number discover-my-major dashboard auto-dim-other-buffers zygospore windresize anzu nlinum diminish doom-modeline window-numbering on-screen exec-path-from-shell ace-isearch avy find-temp-file dired-narrow auto-dictionary flyspell-lazy copy-as-format unfill fix-word expand-region multiple-cursors git-timemachine git-messenger helm-ls-git gitconfig-mode gitignore-mode diff-hl helm-projectile projectile flycheck-rust flycheck-pycheckers flycheck-inline flycheck cquery lsp-ui helm-xref cargo hindent company-ghc haskell-mode dumb-jump indent-guide smartparens helm-c-yasnippet yasnippet fic-mode markdown-mode csharp-mode php-mode json-mode swift-mode modern-cpp-font-lock highlight-escape-sequences clang-format string-edit comment-dwim-2 highlight-thing highlight-numbers rainbow-delimiters rainbow-mode dash-at-point bury-successful-compilation cmake-mode company-lsp company-statistics company-flx company flx-ido helpful hydra helm-ag helm-flx helm-gtags helm-swoop helm magit golden-ratio-scroll-screen key-chord beacon auto-compile use-package))))
+    (ace-mc goto-last-change cmake-font-lock vlf keyfreq describe-number discover-my-major dashboard auto-dim-other-buffers zygospore windresize anzu nlinum diminish doom-modeline window-numbering on-screen exec-path-from-shell ace-isearch avy find-temp-file dired-narrow auto-dictionary flyspell-lazy copy-as-format unfill fix-word expand-region multiple-cursors git-timemachine git-messenger helm-ls-git gitconfig-mode gitignore-mode diff-hl helm-projectile projectile flycheck-rust flycheck-pycheckers flycheck-inline flycheck lsp-ui helm-xref cargo hindent company-ghc haskell-mode dumb-jump indent-guide smartparens helm-c-yasnippet yasnippet fic-mode markdown-mode csharp-mode php-mode json-mode swift-mode modern-cpp-font-lock highlight-escape-sequences clang-format string-edit comment-dwim-2 highlight-thing highlight-numbers rainbow-delimiters rainbow-mode dash-at-point bury-successful-compilation cmake-mode company-lsp company-statistics company-flx company flx-ido helpful hydra helm-ag helm-flx helm-gtags helm-swoop helm magit golden-ratio-scroll-screen key-chord beacon auto-compile use-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -1263,6 +1263,12 @@ in compilation mode."
 
 ;; Language support:
 ;;
+;; == C++ ==
+;; Requires clangd is installed (comes with clang).
+;;
+;; clangd tries to locate the "compile_commands.json" file in the root of the project, so it's
+;; useful to make a symlink in the project root and to where it's located in a build folder.
+;;
 ;; == Rust ==
 ;; Requires Rust Language Server (rls) to be installed.
 ;; Installation:
@@ -1293,6 +1299,9 @@ in compilation mode."
   (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
         lsp-enable-xref t)
 
+  (setq lsp-clients-clangd-args '("-j=4" "-index" "-log=error"))
+
+  (add-hook 'c++-mode-hook #'lsp)
   (add-hook 'rust-mode-hook #'lsp)
   (add-hook 'python-mode-hook #'lsp)
   (add-hook 'php-mode-hook #'lsp)
@@ -1315,22 +1324,12 @@ in compilation mode."
           ("t" lsp-goto-type-definition "Type definition")
           ("i" lsp-goto-implementation "Implementation")
           ("l" lsp-ui-imenu "IMenu")
-          ("C-c" lsp-capabilities "Capabilities"))
+          ("C-c" lsp-describe-session "Describe session"))
 
         msk--misc-lsp-hydra-heads
         '(;; Misc
           ("q" nil "Cancel" :column "Misc")
-          ("b" pop-tag-mark "Back"))
-
-        msk--cquery-lsp-hydra-heads
-        '(;; Hierarchies
-          ("m" cquery-member-hierarchy "Member" :column "Hierarchies")
-          ("I" cquery-inheritance-hierarchy "Inheritance")
-          ("c" cquery-call-hierarchy "Calls")
-
-          ;; Code Lens
-          ("C" cquery-code-lens-mode "Toggle" :column "Code Lens")
-          ("u" cquery-request-code-lens "Update")))
+          ("b" pop-tag-mark "Back")))
 
   ;; Create general hydra.
   (eval `(defhydra msk/lsp-hydra (:color blue :hint nil)
@@ -1338,19 +1337,8 @@ in compilation mode."
               msk--general-lsp-hydra-heads
               msk--misc-lsp-hydra-heads)))
 
-  ;; Create cquery hydra.
-  (eval `(defhydra msk/lsp-cquery-hydra (:color blue :hint nil)
-           ,@(append
-              msk--general-lsp-hydra-heads
-              msk--cquery-lsp-hydra-heads
-              msk--misc-lsp-hydra-heads)))
-
   (add-hook 'lsp-mode-hook
-            (lambda ()
-              (local-set-key (kbd "C-c C-l")
-                             (if (member major-mode '(c++-mode c-mode))
-                                 'msk/lsp-cquery-hydra/body
-                               'msk/lsp-hydra/body)))))
+            (lambda () (local-set-key (kbd "C-c C-l") 'msk/lsp-hydra/body))))
 
 (use-package lsp-ui
   :requires lsp-mode flycheck
@@ -1368,40 +1356,6 @@ in compilation mode."
   ;;(define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
 
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
-
-;; Install cquery server executable externally.
-;;   Homebrew: brew install cquery
-;; It tries to locate the "compile_commands.json" file in the root of the project or in root/build.
-;; If nested build folders are used then the following approach with a symlink can help:
-;;   build/
-;;     compile_commands.json -> debug/compile_commands.json
-;;     debug/
-;;     release/
-;;     ..
-;; This way the build folder structure can be preserved even if cquery only looks in root and
-;; root/build.
-(use-package cquery
-  :requires lsp-mode
-  :config
-  (setq
-   ;; cquery-extra-args '("--log-file=/tmp/cq.log")
-   cquery-sem-highlight-method 'overlay
-
-   ;; Options are defined here: https://github.com/cquery-project/cquery/blob/master/src/config.h
-   cquery-extra-init-params
-   '(:index (:comments 2 ;; Show all comments.
-             :blacklist [".*moc_.*\\.cxx" ".*qrc_.*\\.cxx" ".*/build/.*"])
-     :cacheFormat "msgpack" ;; Smaller than json files in general.
-     :completion (:detailedLabel t)
-     :diagnostics (:blacklist [".*moc_.*\\.cxx" ".*qrc_.*\\.cxx" ".*/build/.*"])
-     :highlight (:enabled t)))
-
-  (defun msk/cquery-enable ()
-    (condition-case nil
-        ;;(lsp-cquery-enable)
-        (lsp)
-      (user-error nil)))
-  (add-hook 'c++-mode-hook #'msk/cquery-enable))
 
 ;; Turn on smerge-mode when opening a file with the markers in them.
 (defun sm-try-smerge ()
