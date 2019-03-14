@@ -1319,6 +1319,7 @@ in compilation mode."
           ("C-i" lsp-ui-peek-find-implementation "Implementation")
 
           ;; LSP
+          ("p" lsp-describe-thing-at-point "Describe at point")
           ("C-a" lsp-execute-code-action "Execute code action" :column "LSP")
           ("R" lsp-rename "Rename")
           ("t" lsp-goto-type-definition "Type definition")
