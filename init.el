@@ -30,7 +30,7 @@
     ("3339a57ac03dcf67eea1093fe33f149efec880b8699661f3f81e8d3d15e1a62d" default)))
  '(package-selected-packages
    (quote
-    (ace-window buffer-expose ace-mc goto-last-change cmake-font-lock vlf keyfreq describe-number discover-my-major dashboard auto-dim-other-buffers zygospore windresize anzu nlinum diminish doom-modeline window-numbering on-screen exec-path-from-shell ace-isearch avy find-temp-file dired-narrow auto-dictionary flyspell-lazy copy-as-format unfill fix-word expand-region multiple-cursors git-timemachine git-messenger helm-ls-git gitconfig-mode gitignore-mode diff-hl helm-projectile projectile flycheck-rust flycheck-pycheckers flycheck-inline flycheck cquery lsp-ui helm-xref cargo hindent company-ghc haskell-mode dumb-jump indent-guide smartparens helm-c-yasnippet yasnippet fic-mode markdown-mode csharp-mode php-mode json-mode swift-mode modern-cpp-font-lock highlight-escape-sequences clang-format string-edit comment-dwim-2 highlight-thing highlight-numbers rainbow-delimiters rainbow-mode dash-at-point bury-successful-compilation cmake-mode company-lsp company-statistics company-flx company flx-ido helpful hydra helm-ag helm-flx helm-gtags helm-swoop helm magit golden-ratio-scroll-screen key-chord beacon auto-compile use-package))))
+    (ace-mc goto-last-change cmake-font-lock vlf keyfreq describe-number discover-my-major dashboard auto-dim-other-buffers zygospore windresize anzu nlinum diminish doom-modeline window-numbering on-screen exec-path-from-shell ace-isearch avy find-temp-file dired-narrow auto-dictionary flyspell-lazy copy-as-format unfill fix-word expand-region multiple-cursors git-timemachine git-messenger helm-ls-git gitconfig-mode gitignore-mode diff-hl helm-projectile projectile flycheck-rust flycheck-pycheckers flycheck-inline flycheck cquery lsp-ui helm-xref cargo hindent company-ghc haskell-mode dumb-jump indent-guide smartparens helm-c-yasnippet yasnippet fic-mode markdown-mode csharp-mode php-mode json-mode swift-mode modern-cpp-font-lock highlight-escape-sequences clang-format string-edit comment-dwim-2 highlight-thing highlight-numbers rainbow-delimiters rainbow-mode dash-at-point bury-successful-compilation cmake-mode company-lsp company-statistics company-flx company flx-ido helpful hydra helm-ag helm-flx helm-gtags helm-swoop helm magit golden-ratio-scroll-screen key-chord beacon auto-compile use-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -246,27 +246,6 @@
   :config
   (global-set-key [remap scroll-down-command] 'golden-ratio-scroll-screen-down)
   (global-set-key [remap scroll-up-command] 'golden-ratio-scroll-screen-up))
-
-(use-package ace-window)
-
-;; Shift-<tab> shows a grid of all open buffers (no *..* buffers) to make it easy to choose and move
-;; around.
-(use-package buffer-expose
-  :requires ace-window
-  :init
-  (setq buffer-expose-mode-map
-        (let ((map (make-sparse-keymap)))
-          ;; (define-key map (kbd "<s-tab>") 'buffer-expose)
-          (define-key map (kbd "<C-tab>") 'buffer-expose-no-stars)
-          (define-key map (kbd "C-c <C-tab>") 'buffer-expose-current-mode)
-          ;; (define-key map (kbd "C-c C-m") 'buffer-expose-major-mode)
-          ;; (define-key map (kbd "C-c C-d") 'buffer-expose-dired-buffers)
-          ;; (define-key map (kbd "C-c C-*") 'buffer-expose-stars)
-          map))
-  :config
-  (setq buffer-expose-auto-init-aw t)
-
-  (buffer-expose-mode))
 
 ;;;;; Magit ;;;;;
 
