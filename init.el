@@ -1345,7 +1345,10 @@ in compilation mode."
   :requires lsp-mode flycheck
   :config
 
-  (setq lsp-ui-doc-enable nil
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-use-childframe nil
+        lsp-ui-doc-include-signature t
+        lsp-ui-doc-max-width 80
         lsp-ui-sideline-enable nil
         lsp-ui-flycheck-enable t
         lsp-ui-peek-enable t
