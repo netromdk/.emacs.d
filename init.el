@@ -23,7 +23,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(buffer-expose-mode t)
  '(custom-enabled-themes (quote (mustang-netrom)))
  '(custom-safe-themes
    (quote
@@ -557,6 +556,15 @@ Command: %(msk/compilation-command-string)
   (setq ido-enable-flex-matching t)
   (setq ido-use-faces nil))
 
+;; Company-statistics is a global minor mode built on top of the in-buffer completion system
+;; company-mode. The idea is to keep a log of a certain number of completions you choose, along with
+;; some context information, and use that to rank candidates the next time you have to choose —
+;; hopefully showing you likelier candidates at the top of the list.
+(use-package company-statistics
+  :config
+  (setq company-statistics-file
+        (concat user-cache-dir "company-statistics-cache.el")))
+
 (use-package company
   :requires company-statistics
   :config
@@ -572,15 +580,6 @@ Command: %(msk/compilation-command-string)
   :requires company
   :config
   (company-flx-mode +1))
-
-;; Company-statistics is a global minor mode built on top of the in-buffer completion system
-;; company-mode. The idea is to keep a log of a certain number of completions you choose, along with
-;; some context information, and use that to rank candidates the next time you have to choose —
-;; hopefully showing you likelier candidates at the top of the list.
-(use-package company-statistics
-  :config
-  (setq company-statistics-file
-        (concat user-cache-dir "company-statistics-cache.el")))
 
 (use-package company-lsp
   :requires company
