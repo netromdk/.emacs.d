@@ -180,6 +180,13 @@
 (if (eq window-system 'x)
     (set-default-font "-misc-fixed-medium-r-normal--13-120-75-75-c-70-iso8859-15"))
 
+;;;;; Shell ;;;;;
+
+(use-package exec-path-from-shell
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+
 ;;;;; Bindings ;;;;;
 
 (use-package beacon
@@ -2001,13 +2008,6 @@ stop region from expanding to next search match."
   (setq save-place-limit 400)
   (setq save-place-file (concat user-emacs-directory "saveplace"))
   (save-place-mode t))
-
-;;;;; Shell ;;;;;
-
-(use-package exec-path-from-shell
-  :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
 
 ;;;;; LaTeX ;;;;;
 
