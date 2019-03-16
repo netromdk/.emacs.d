@@ -1966,7 +1966,15 @@ stop region from expanding to next search match."
 
 (use-package deadgrep
   :config
-  (global-set-key (kbd "<f5>") #'deadgrep))
+  (defun msk/deadgrep-postpone-start ()
+    "Deadgrep shows the search buffer but doesn't start the
+search when the prefix argument is defined."
+    (interactive)
+    (let ((current-prefix-arg t))
+      (call-interactively #'deadgrep)))
+
+  (defalias 'dg 'deadgrep)
+  (defalias 'dgp 'msk/deadgrep-postpone-start))
 
 ;;;;; Session ;;;;;
 
