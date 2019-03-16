@@ -1322,7 +1322,7 @@ in compilation mode."
   (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
         lsp-enable-xref t)
 
-  (setq lsp-clients-clangd-args '("-j=4" "-index" "-log=error"))
+  (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
 
   (add-hook 'c++-mode-hook #'lsp)
   (add-hook 'rust-mode-hook #'lsp)
