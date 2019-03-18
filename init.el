@@ -1317,11 +1317,12 @@ in compilation mode."
       (call-interactively #'helm-lsp-global-workspace-symbol))))
 
 (use-package lsp-mode
-  :requires '(hydra helm-lsp)
+  :requires hydra helm-lsp
   :config
   (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
         lsp-enable-xref t)
 
+  ;; `-background-index' requires clangd v8+!
   (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
 
   (add-hook 'c++-mode-hook #'lsp)
