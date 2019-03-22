@@ -2271,8 +2271,8 @@ search when the prefix argument is defined."
     '(diminish 'beacon-mode)))
 
 ;; Line numbers. Is faster than the built-in linum mode.
+(require 'linum)
 (use-package nlinum
-  :requires linum
   :config
   ;; Precalculate the line number width to avoid horizontal jumps on scrolling. Or it disables the
   ;; mode if there are too many lines (10000 currently) because it will make them look wrong, like
