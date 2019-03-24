@@ -886,6 +886,10 @@ in compilation mode."
               (auto-fill-mode 0)
               (visual-line-mode t))))
 
+;; Python
+(require 'python)
+(setq python-indent-offset 2)
+
 ;; Marks TODO, FIXME etc. clearly.
 (use-package fic-mode
   :config
