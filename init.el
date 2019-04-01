@@ -460,8 +460,8 @@ Advice to `magit-push-current-to-upstream' triggers this query."
 
   (defhydra compilation-hydra (:columns 4)
     "
-Command: %(msk/compilation-command-string)
-%(msk/compilation-scroll-output-string) + %(msk/compilation-skip-threshold-string)
+Command: %(netrom/compilation-command-string)
+%(netrom/compilation-scroll-output-string) + %(netrom/compilation-skip-threshold-string)
 "
     ("c" compile "Compile")
     ("C" compile-from-buffer-folder "Compile from buffer folder")
@@ -471,9 +471,9 @@ Command: %(msk/compilation-command-string)
     ("N" next-error-skip-warnings "Next error, skip warnings")
     ("p" previous-error "Previous error")
     ("f" first-error "First error")
-    ("l" msk/compilation-last-error "Last error")
-    ("s" msk/compilation-toggle-scroll "Toggle scroll")
-    ("t" msk/compilation-toggle-threshold "Toggle threshold")
+    ("l" netrom/compilation-last-error "Last error")
+    ("s" netrom/compilation-toggle-scroll "Toggle scroll")
+    ("t" netrom/compilation-toggle-threshold "Toggle threshold")
     ("q" nil "Cancel" :color blue))
 
   (global-set-key [(f5)] 'compilation-hydra/body)
@@ -635,7 +635,7 @@ Command: %(msk/compilation-command-string)
   (compile
    (format "cd `dirname '%s'` && %s" (buffer-file-name) cmd)))
 
-(defun msk/compilation-toggle-scroll ()
+(defun netrom/compilation-toggle-scroll ()
   "Toggle between not scrolling and scrolling until first error
 in compilation mode."
   (interactive)
@@ -643,13 +643,13 @@ in compilation mode."
       (setq compilation-scroll-output 'first-error)
     (setq compilation-scroll-output nil)))
 
-(defun msk/compilation-scroll-output-string ()
+(defun netrom/compilation-scroll-output-string ()
   (interactive)
   (if (not compilation-scroll-output)
       "No scroll"
     "Scroll until match"))
 
-(defun msk/compilation-skip-threshold-string ()
+(defun netrom/compilation-skip-threshold-string ()
   (interactive)
   (cond
    ((= compilation-skip-threshold 2)
@@ -659,20 +659,20 @@ in compilation mode."
    ((<= compilation-skip-threshold 0)
     "Don't skip anything")))
 
-(defun msk/compilation-toggle-threshold ()
+(defun netrom/compilation-toggle-threshold ()
   (interactive)
   (progn
     (setq compilation-skip-threshold (- compilation-skip-threshold 1))
     (when (< compilation-skip-threshold 0)
       (setq compilation-skip-threshold 2))))
 
-(defun msk/compilation-command-string ()
+(defun netrom/compilation-command-string ()
   (interactive)
   (if (not compile-command)
       "None"
     compile-command))
 
-(defun msk/compilation-last-error ()
+(defun netrom/compilation-last-error ()
   (interactive)
   (condition-case err
       (while t
@@ -1127,14 +1127,14 @@ in compilation mode."
   (setq rust-format-on-save t)
   (define-key rust-mode-map (kbd "C-c f") 'rust-format-buffer)
 
-  (defun msk/toggle-rust-backtrace ()
+  (defun netrom/toggle-rust-backtrace ()
     "Toggle between Rust backtrace enabled and disabled."
     (interactive)
     (if (not cargo-process--enable-rust-backtrace)
         (setq cargo-process--enable-rust-backtrace t)
       (setq cargo-process--enable-rust-backtrace nil)))
 
-  (defun msk/rust-backtrace-string ()
+  (defun netrom/rust-backtrace-string ()
     (interactive)
     (if (not cargo-process--enable-rust-backtrace)
         "Backtrace: disabled"
@@ -1142,7 +1142,7 @@ in compilation mode."
 
   (defhydra rust-cargo-hydra ()
     "
-%(msk/rust-backtrace-string)
+%(netrom/rust-backtrace-string)
 
 "
     ("b" cargo-process-build "Build" :column "Cargo")
@@ -1162,10 +1162,10 @@ in compilation mode."
     ("N" next-error-skip-warnings "Next, skip warnings")
     ("p" previous-error "Previous")
     ("f" first-error "First")
-    ("l" msk/compilation-last-error "Last")
+    ("l" netrom/compilation-last-error "Last")
     ("k" kill-compilation "Stop")
 
-    ("C-b" msk/toggle-rust-backtrace "Toggle backtrace" :column "Misc")
+    ("C-b" netrom/toggle-rust-backtrace "Toggle backtrace" :column "Misc")
     ("q" nil "Cancel" :color blue))
 
   (define-key rust-mode-map (kbd "C-c C-c") 'rust-cargo-hydra/body))
@@ -1190,11 +1190,11 @@ in compilation mode."
   ;; xref show results in the default way by setting `xref-show-xrefs-function' to
   ;; `xref--show-xref-buffer' via an around-advice.
   (defadvice dired-do-find-regexp-and-replace
-      (around msk-no-helm-dired-do-find-regexp-and-replace activate)
+      (around netrom-no-helm-dired-do-find-regexp-and-replace activate)
     (let ((xref-show-xrefs-function 'xref--show-xref-buffer))
       ad-do-it)))
 
-(defun msk/xref-find-apropos-at-point (pattern)
+(defun netrom/xref-find-apropos-at-point (pattern)
   "Xref find apropos at point, if anything, and show prompt for PATTERN."
   (interactive
    (list
@@ -1288,7 +1288,7 @@ in compilation mode."
 ;; Requires Rust Language Server (rls) to be installed.
 ;; Installation:
 ;; 1. rustup update
-;; 2. rustup component add rls-preview rust-analysis rust-src
+;; 2. rustup component add rls rust-analysis rust-src
 ;;
 ;; == Python ==
 ;; Requires python-language-server:
@@ -1310,12 +1310,12 @@ in compilation mode."
 
 (use-package helm-lsp
   :config
-  (defun msk/helm-lsp-workspace-symbol-at-point ()
+  (defun netrom/helm-lsp-workspace-symbol-at-point ()
     (interactive)
     (let ((current-prefix-arg t))
       (call-interactively #'helm-lsp-workspace-symbol)))
 
-  (defun msk/helm-lsp-global-workspace-symbol-at-point ()
+  (defun netrom/helm-lsp-global-workspace-symbol-at-point ()
     (interactive)
     (let ((current-prefix-arg t))
       (call-interactively #'helm-lsp-global-workspace-symbol))))
@@ -1334,14 +1334,14 @@ in compilation mode."
   (add-hook 'python-mode-hook #'lsp)
   (add-hook 'php-mode-hook #'lsp)
 
-  (setq msk--general-lsp-hydra-heads
+  (setq netrom--general-lsp-hydra-heads
         '(;; Xref
           ("d" xref-find-definitions "Definitions" :column "Xref")
           ("D" xref-find-definitions-other-window "-> other win")
           ("r" xref-find-references "References")
-          ("s" msk/helm-lsp-workspace-symbol-at-point "Helm search")
-          ("S" msk/helm-lsp-global-workspace-symbol-at-point "Helm global search")
-          ;;("a" msk/xref-find-apropos-at-point "Apropos")
+          ("s" netrom/helm-lsp-workspace-symbol-at-point "Helm search")
+          ("S" netrom/helm-lsp-global-workspace-symbol-at-point "Helm global search")
+          ;;("a" netrom/xref-find-apropos-at-point "Apropos")
 
           ;; Peek
           ("C-d" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
@@ -1360,19 +1360,19 @@ in compilation mode."
           ;; Flycheck
           ("l" lsp-ui-flycheck-list "List errs/warns/notes" :column "Flycheck"))
 
-        msk--misc-lsp-hydra-heads
+        netrom--misc-lsp-hydra-heads
         '(;; Misc
           ("q" nil "Cancel" :column "Misc")
           ("b" pop-tag-mark "Back")))
 
   ;; Create general hydra.
-  (eval `(defhydra msk/lsp-hydra (:color blue :hint nil)
+  (eval `(defhydra netrom/lsp-hydra (:color blue :hint nil)
            ,@(append
-              msk--general-lsp-hydra-heads
-              msk--misc-lsp-hydra-heads)))
+              netrom--general-lsp-hydra-heads
+              netrom--misc-lsp-hydra-heads)))
 
   (add-hook 'lsp-mode-hook
-            (lambda () (local-set-key (kbd "C-c C-l") 'msk/lsp-hydra/body))))
+            (lambda () (local-set-key (kbd "C-c C-l") 'netrom/lsp-hydra/body))))
 
 (use-package lsp-ui
   :requires lsp-mode flycheck
@@ -1409,7 +1409,7 @@ in compilation mode."
 
 (use-package projectile
   :init
-  (defun msk/projectile-mode-line ()
+  (defun netrom/projectile-mode-line ()
     "Report project name in the mode line."
     (if (file-remote-p default-directory)
         "rρ"
@@ -1419,7 +1419,7 @@ in compilation mode."
   (setq projectile-keymap-prefix (kbd "C-x p")
         projectile-enable-caching t
         projectile-mode-line-prefix "ρ"
-        projectile-mode-line-function 'msk/projectile-mode-line)
+        projectile-mode-line-function 'netrom/projectile-mode-line)
   :config
   (projectile-mode))
 
@@ -1429,7 +1429,7 @@ in compilation mode."
   (setq helm-projectile-fuzzy-match t
         projectile-switch-project-action 'helm-projectile-find-file)
 
-  (defun msk/helm-update-gtags (arg)
+  (defun netrom/helm-update-gtags (arg)
     "Update gtags for all files or create if they don't already
 exist. When given the prefix argument present gtags will be
 removed and then recreated."
@@ -1452,31 +1452,31 @@ removed and then recreated."
             (message "Creating gtags..")
             (helm-gtags-create-tags (projectile-project-root) "default"))))))
 
-  (defun msk/helm-do-ag-at-point ()
+  (defun netrom/helm-do-ag-at-point ()
     "First select folder and then search using `helm-do-ag' with symbol at point, if anything."
     (interactive)
     (let ((helm-ag-insert-at-point 'symbol))
       (helm-do-ag)))
 
-  (defun msk/helm-do-ag-buffers-at-point ()
+  (defun netrom/helm-do-ag-buffers-at-point ()
     "Search open buffers using `helm-do-ag-buffers' with symbol at point, if anything."
     (interactive)
     (let ((helm-ag-insert-at-point 'symbol))
       (helm-do-ag-buffers)))
 
-  (defun msk/helm-do-ag-this-file-at-point ()
+  (defun netrom/helm-do-ag-this-file-at-point ()
     "Search current file using `helm-do-ag-this-file' with symbol at point, if anything."
     (interactive)
     (let ((helm-ag-insert-at-point 'symbol))
       (helm-do-ag-this-file)))
 
-  (defun msk/helm-projectile-ag-at-point ()
+  (defun netrom/helm-projectile-ag-at-point ()
     "Search using `helm-projectile-ag' (at project root) with symbol at point, if anything."
     (interactive)
     (let ((helm-ag-insert-at-point 'symbol))
       (helm-projectile-ag)))
 
-  (defun msk/projectile-switch-project-magit (args)
+  (defun netrom/projectile-switch-project-magit (args)
     "Switch to project using projectile and run `magit-status'."
     (interactive "P")
     (let ((projectile-switch-project-action 'magit-status))
@@ -1503,18 +1503,18 @@ Projectile: %(projectile-project-root)
     ("d" helm-projectile-find-dir)
     ("w" projectile-find-file-other-window)
 
-    ("ss" msk/helm-do-ag-at-point)
-    ("sb" msk/helm-do-ag-buffers-at-point)
-    ("sp" msk/helm-projectile-ag-at-point) ;; at project root
-    ("sf" msk/helm-do-ag-this-file-at-point)
-    ;;("g" msk/helm-update-gtags)
+    ("ss" netrom/helm-do-ag-at-point)
+    ("sb" netrom/helm-do-ag-buffers-at-point)
+    ("sp" netrom/helm-projectile-ag-at-point) ;; at project root
+    ("sf" netrom/helm-do-ag-this-file-at-point)
+    ;;("g" netrom/helm-update-gtags)
     ;;("O" projectile-multi-occur :color blue)
 
     ("b" helm-projectile-switch-to-buffer)
     ("k" projectile-kill-buffers)
 
     ("p" helm-projectile-switch-project)
-    ("m" msk/projectile-switch-project-magit :color blue)
+    ("m" netrom/projectile-switch-project-magit :color blue)
     ("c" projectile-invalidate-cache)
     ("z" projectile-cache-current-file)
     ("x" projectile-remove-known-project)
@@ -1571,7 +1571,7 @@ Projectile: %(projectile-project-root)
   (define-key mc/keymap (kbd "<return>") nil)
 
 
-  (defhydra msk/mc-hydra ()
+  (defhydra netrom/mc-hydra ()
     "
 Multiple Cursors
 
@@ -1610,13 +1610,13 @@ Multiple Cursors
     ("A" ace-mc-add-multiple-cursors "Ace" :color blue)
     ("q" nil "Quit" :color blue))
 
-  (global-set-key (kbd "C-c m") 'msk/mc-hydra/body)
+  (global-set-key (kbd "C-c m") 'netrom/mc-hydra/body)
 
   ;; Trigger hydra via some of the normal bindings, too.
-  (global-set-key (kbd "C-c n") 'msk/mc-hydra/mc/mark-next-like-this)
-  (global-set-key (kbd "C-c p") 'msk/mc-hydra/mc/mark-previous-like-this)
-  (global-set-key (kbd "C-c a") 'msk/mc-hydra/mc/mark-all-like-this-dwim)
-  (global-set-key (kbd "C-c l") 'msk/mc-hydra/mc/edit-lines))
+  (global-set-key (kbd "C-c n") 'netrom/mc-hydra/mc/mark-next-like-this)
+  (global-set-key (kbd "C-c p") 'netrom/mc-hydra/mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c a") 'netrom/mc-hydra/mc/mark-all-like-this-dwim)
+  (global-set-key (kbd "C-c l") 'netrom/mc-hydra/mc/edit-lines))
 
 (use-package expand-region
   :config
@@ -1901,7 +1901,7 @@ T - tag prefix
 
 ;;;;; Search ;;;;;
 
-(defun msk/isearch-yank-region-or-thing-at-point ()
+(defun netrom/isearch-yank-region-or-thing-at-point ()
   "Pull active region or thing-at-point from buffer into serach
 string. If region was active then `deactivate-mark' is invoked to
 stop region from expanding to next search match."
@@ -1915,7 +1915,7 @@ stop region from expanding to next search match."
 
 ;; Yank into search buffer the active region or thing-at-point instead of next word or char via
 ;; `isearch-yank-word-or-char'.
-(define-key isearch-mode-map (kbd "C-w") 'msk/isearch-yank-region-or-thing-at-point)
+(define-key isearch-mode-map (kbd "C-w") 'netrom/isearch-yank-region-or-thing-at-point)
 
 ;; Sometimes the cursor should be at the opposite end of the search match, e.g. when searching
 ;; forward the cursor will be at the end of the match, but if the opposite is intended then exit
@@ -1985,7 +1985,7 @@ stop region from expanding to next search match."
 
 (use-package deadgrep
   :config
-  (defun msk/deadgrep-postpone-start ()
+  (defun netrom/deadgrep-postpone-start ()
     "Deadgrep shows the search buffer but doesn't start the
 search when the prefix argument is defined."
     (interactive)
@@ -1993,7 +1993,7 @@ search when the prefix argument is defined."
       (call-interactively #'deadgrep)))
 
   (defalias 'dg 'deadgrep)
-  (defalias 'dgp 'msk/deadgrep-postpone-start))
+  (defalias 'dgp 'netrom/deadgrep-postpone-start))
 
 ;;;;; Session ;;;;;
 
@@ -2312,14 +2312,14 @@ search when the prefix argument is defined."
   (setq anzu-deactivate-region t)
 
   ;; Change the mode-line text summary of search/replace results.
-  (defun msk-anzu-update-func (here total)
+  (defun netrom-anzu-update-func (here total)
     (when anzu--state
       (let ((status (cl-case anzu--state
                       (search (format "%d/%d" here total))
                       (replace-query (format "%d replaces" total))
                       (replace (format "%d/%d" here total)))))
         (propertize status 'face 'anzu-mode-line))))
-  (setq anzu-mode-line-update-function #'msk-anzu-update-func)
+  (setq anzu-mode-line-update-function #'netrom-anzu-update-func)
 
   (global-anzu-mode t))
 
