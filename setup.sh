@@ -20,7 +20,7 @@ case "$(uname -s)" in
   Darwin)
     writeBanner "Homebrew"
     checkProgram brew
-    brew install ripgrep the_silver_searcher cppcheck shellcheck composer
+    brew install ripgrep the_silver_searcher cppcheck shellcheck composer aspell
     ;;
 esac
 
