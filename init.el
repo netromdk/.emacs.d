@@ -1321,7 +1321,7 @@ in compilation mode."
       (call-interactively #'helm-lsp-global-workspace-symbol))))
 
 (use-package lsp-mode
-  :requires hydra helm-lsp
+  :requires hydra helm helm-lsp
   :config
   (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
         lsp-enable-xref t)
@@ -1354,7 +1354,7 @@ in compilation mode."
           ("R" lsp-rename "Rename")
           ("t" lsp-goto-type-definition "Type definition")
           ("i" lsp-goto-implementation "Implementation")
-          ("m" lsp-ui-imenu "IMenu")
+          ("f" helm-imenu "Filter funcs/classes (Helm)")
           ("C-c" lsp-describe-session "Describe session")
 
           ;; Flycheck
