@@ -24,8 +24,9 @@ case "$(uname -s)" in
     ;;
 esac
 
-writeBanner "clangd (LSP)"
-checkProgram clangd
+writeBanner "LLVM / Clang"
+checkProgram clang-format
+checkProgram clangd # LSP
 
 writeBanner "Python"
 checkProgram pip3
