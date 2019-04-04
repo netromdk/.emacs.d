@@ -2,6 +2,7 @@
 
 (defvar ksnrlog-highlights nil "Highlights of ksnrlog-mode.")
 
+;; It will take the first regexp match so the order matters.
 (setq ksnrlog-highlights
       '(;; Timestamps, like "Tue Jan 23 10:52:05 2018".
         ("\\w+ \\w+ [0-9]+ [0-9]+:[0-9]+:[0-9]+ [0-9]+" . font-lock-comment-face)
@@ -10,8 +11,14 @@
         ("\\(\\\"\\|'\\).+\\(\\\"\\|'\\)" . font-lock-string-face)
 
         ;; Log levels.
-        ;;("\\[\\(TT\\|DD\\|II\\)\\]" . (1 font-lock-function-name-face))
-        ("\\[\\(WW\\|EE\\|FF\\)\\]" . (1 font-lock-warning-face))
+        ;; Old logs look like "[EE]" while newer ones like "[EE default  ]".
+        ;;("\\[\\(TT\\|DD\\|II\\)\\]?" . (1 font-lock-function-name-face))
+        ("\\[\\(WW\\|EE\\|FF\\)\\]?" . (1 font-lock-warning-face))
+
+        ;; Log categories.
+        ("\\[\\w+ \\(default\\)\s*\\]" . (1 font-lock-function-name-face))
+        ;; Make non-default categories stand out.
+        ("\\[\\w+ \\(\\w+\\)\s*\\]" . (1 font-lock-type-face))
 
         ;; Delimiters.
         (",\\|:\\|;\\|-\\|(\\|)\\|\\[\\|\\]" . font-lock-builtin-face)
