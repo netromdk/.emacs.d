@@ -63,7 +63,7 @@
 
 ;; Sensible window splitting should follow the fill column.
 (when window-system
-  (setq split-height-threshold global-fill-column
+  (setq split-height-threshold (* 2 global-fill-column)
         split-width-threshold (* 2 global-fill-column)))
 
 ;; Disable visible bell because it looks ugly, but that makes the audible bell and therefore we
