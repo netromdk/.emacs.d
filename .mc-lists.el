@@ -70,8 +70,11 @@
       '(
         c-toggle-auto-newline
         cleanup-region-or-buffer
+        compilation-hydra/body
         helm-M-x
         keyboard-escape-quit
+        multiple-cursors-hydra/mc/mark-next-like-this
+        multiple-cursors-hydra/mc/skip-to-next-like-this
         netrom/mc-hydra/body
         netrom/mc-hydra/mc/cycle-backward
         netrom/mc-hydra/mc/cycle-forward
@@ -91,8 +94,6 @@
         netrom/mc-hydra/mc/unmark-next-like-this
         netrom/mc-hydra/mc/unmark-previous-like-this
         netrom/mc-hydra/nil
-        multiple-cursors-hydra/mc/mark-next-like-this
-        multiple-cursors-hydra/mc/skip-to-next-like-this
         next-error
         recompile
         select-window-1
