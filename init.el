@@ -614,14 +614,23 @@ Command: %(netrom/compilation-command-string)
       compilation-always-kill t)             ; Don't ask, just start new compilation.
 
 ;; Turn off adaptive process buffering when using compilation mode because it speeds up immensely
-;; when there is a lot of output in the buffer.
+;; when there is a lot of output in the buffer. And tweak split-height-threshold so that it shows
+;; the compilation buffer in the bottom because that looks best, otherwise it will show to the side
+;; and replace any buffer already at that place whereas this solution keeps the buffers but shows it
+;; at the bottom.
+(setq old-split-height-threshold nil)
 (add-hook 'compilation-mode-hook
-          (lambda () (setq process-adaptive-read-buffering nil)))
+          (lambda ()
+            (setq old-split-height-threshold split-height-threshold
+                  split-height-threshold global-fill-column)
+                  process-adaptive-read-buffering nil))
 
 ;; Turn it back on again when finished.
 (add-hook 'compilation-finish-functions
           (lambda (buffer string)
-            (setq process-adaptive-read-buffering t)))
+            (setq split-height-threshold old-split-height-threshold
+                  old-split-height-threshold nil
+                  process-adaptive-read-buffering t)))
 
 (defun next-error-skip-warnings ()
   (interactive)
