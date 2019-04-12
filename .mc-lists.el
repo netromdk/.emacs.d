@@ -71,6 +71,7 @@
         c-toggle-auto-newline
         cleanup-region-or-buffer
         compilation-hydra/body
+        compilation-hydra/recompile
         helm-M-x
         keyboard-escape-quit
         multiple-cursors-hydra/mc/mark-next-like-this
