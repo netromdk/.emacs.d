@@ -273,17 +273,6 @@
         magit-log-arguments '("-n50" "--graph" "--decorate" "--color")
         magit-diff-arguments '("-U3" "--stat" "--no-ext-diff"))
 
-  ;; Change so recent commits section is always shown, also when there are unpushed-to-upstream
-  ;; commits: replacing `magit-insert-unpushed-to-upstream-or-recent' with
-  ;; `magit-insert-unpushed-to-upstream', and appending `magit-insert-recent-commits'. This is the
-  ;; "old" behavior.
-  (magit-add-section-hook 'magit-status-sections-hook
-                          'magit-insert-unpushed-to-upstream
-                          'magit-insert-unpushed-to-upstream-or-recent
-                          'replace)
-  (magit-add-section-hook 'magit-status-sections-hook
-                          'magit-insert-recent-commits nil t)
-
   ;; Bindings.
   (global-set-key (kbd "C-x g") 'magit-status)
 
