@@ -405,7 +405,8 @@
 (use-package helm-ag
   :requires helm
   :config
-  (setq helm-ag-base-command "ag --nocolor --nogroup --smart-case"
+  (setq helm-ag-base-command
+        (format "ag --nocolor --nogroup --smart-case --width %d" global-fill-column)
         helm-ag-ignore-patterns '("*.min.js" "*.min.css")))
 
 ;;;;; Hydra ;;;;;
