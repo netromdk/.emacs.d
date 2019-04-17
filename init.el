@@ -255,17 +255,6 @@
 
 ;;;;; Magit ;;;;;
 
-(use-package git-commit
-  :config
-  ;; Turn off auto-fill-mode in commit buffers, and enable visual-line-mode, because git tools are
-  ;; sensitive to line breaks.
-  (add-hook 'git-commit-setup-hook
-            (lambda ()
-              (turn-off-auto-fill)
-              (visual-line-mode t))
-            t ; Append to end.
-            ))
-
 (use-package magit
   :config
   ;; Set defaults used by specific operations.
