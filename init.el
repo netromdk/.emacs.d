@@ -257,11 +257,6 @@
 
 (use-package magit
   :config
-  ;; Set defaults used by specific operations.
-  (setq magit-cherry-pick-arguments '("-x")
-        magit-log-arguments '("-n50" "--graph" "--decorate" "--color")
-        magit-diff-arguments '("-U3" "--stat" "--no-ext-diff"))
-
   ;; Bindings.
   (global-set-key (kbd "C-x g") 'magit-status)
 
