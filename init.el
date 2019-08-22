@@ -14,6 +14,7 @@
 ;; These are without .el because `load` will add these as appropriately when using them.
 (defconst general-file (concat user-emacs-directory "general"))
 (defconst functions-file (concat user-emacs-directory "functions"))
+(defconst system-cores-file (concat user-emacs-directory "system-cores"))
 
 (setq custom-theme-directory themes-dir)
 
@@ -48,6 +49,7 @@
 ;; Load general stuff that other init.d things might use.
 (load functions-file)
 (load general-file)
+(load system-cores-file)
 
 ;; Create necessary directories if missing.
 (mkdir user-cache-dir)
