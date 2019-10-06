@@ -6,7 +6,6 @@
 
 ;; Constants.
 (defconst emacs-start-time (current-time))
-(defconst init-dir (concat user-emacs-directory "init.d/"))
 (defconst yas-dir (concat user-emacs-directory "snippets/"))
 (defconst themes-dir (concat user-emacs-directory "themes/"))
 (defconst user-cache-dir (concat user-emacs-directory ".cache/"))
