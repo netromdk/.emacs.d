@@ -2010,6 +2010,14 @@ search when the prefix argument is defined."
 (add-to-list 'auto-mode-alist
              '("\\(render\\|configurator\\|monitor\\|watchdog\\)_.+\\.log\\'" . ksnrlog-mode))
 
+;; Load `crashpad-stack-mode' which is useful for fontifying call stacks created by
+;; crashpad/breakpad minidump_stackwalk (or minidump_analysis.py).
+(load (concat user-emacs-directory "crashpad-stack-mode.el"))
+
+;; Associate with files with "stack" and ".txt" in them.
+;; TODO: Might be too general?
+(add-to-list 'auto-mode-alist '(".*stack.*\\.txt\\'" . crashpad-stack-mode))
+
 ;; Wraps a function with // ***.. before and after (the region selected). Both
 ;; inserted lines with have a length fo 80 characters.
 (defun lux-wrap-function (start end)
