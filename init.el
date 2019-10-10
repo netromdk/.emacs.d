@@ -29,7 +29,7 @@
     ("ff97c90ea205e380a4be99b2dc8f0da90972e06983091e98ae677eda01a71fa3" default)))
  '(package-selected-packages
    (quote
-    (helm-lsp deadgrep nginx-mode ace-mc goto-last-change cmake-font-lock vlf keyfreq describe-number discover-my-major dashboard auto-dim-other-buffers zygospore windresize anzu nlinum diminish doom-modeline window-numbering on-screen exec-path-from-shell ace-isearch avy find-temp-file dired-narrow auto-dictionary flyspell-lazy copy-as-format unfill fix-word expand-region multiple-cursors git-timemachine git-messenger helm-ls-git gitconfig-mode gitignore-mode diff-hl helm-projectile projectile flycheck-rust flycheck-pycheckers flycheck-inline flycheck lsp-ui helm-xref cargo hindent company-ghc haskell-mode dumb-jump indent-guide smartparens helm-c-yasnippet yasnippet fic-mode markdown-mode csharp-mode php-mode json-mode swift-mode modern-cpp-font-lock highlight-escape-sequences clang-format string-edit comment-dwim-2 highlight-thing highlight-numbers rainbow-delimiters rainbow-mode dash-at-point bury-successful-compilation cmake-mode company-lsp company-statistics company-flx company flx-ido helpful hydra helm-ag helm-flx helm-gtags helm-swoop helm magit golden-ratio-scroll-screen key-chord beacon auto-compile use-package))))
+    (which-key helm-lsp deadgrep nginx-mode ace-mc goto-last-change cmake-font-lock vlf keyfreq describe-number dashboard auto-dim-other-buffers zygospore windresize anzu nlinum diminish doom-modeline window-numbering on-screen exec-path-from-shell ace-isearch avy find-temp-file dired-narrow auto-dictionary flyspell-lazy copy-as-format unfill fix-word expand-region multiple-cursors git-timemachine git-messenger helm-ls-git gitconfig-mode gitignore-mode diff-hl helm-projectile projectile flycheck-rust flycheck-pycheckers flycheck-inline flycheck lsp-ui helm-xref cargo hindent company-ghc haskell-mode dumb-jump indent-guide smartparens helm-c-yasnippet yasnippet fic-mode markdown-mode csharp-mode php-mode json-mode swift-mode modern-cpp-font-lock highlight-escape-sequences clang-format string-edit comment-dwim-2 highlight-thing highlight-numbers rainbow-delimiters rainbow-mode dash-at-point bury-successful-compilation cmake-mode company-lsp company-statistics company-flx company flx-ido helpful hydra helm-ag helm-flx helm-gtags helm-swoop helm magit golden-ratio-scroll-screen key-chord beacon auto-compile use-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -2321,10 +2321,14 @@ search when the prefix argument is defined."
 ;; Set auto-fill-mode and org minor modes for lists and tables.
 (add-hook 'text-mode-hook (lambda () (auto-fill-mode t)))
 
-(use-package discover-my-major
+;; Shows available key bindings in a completing, helpful way. It's very useful if one cannot
+;; remember the entire command sequence or to discover what's possible.
+(use-package which-key
   :config
-  (global-set-key (kbd "C-h C-m") 'discover-my-major)
-  (global-set-key (kbd "C-h M-m") 'discover-my-mode))
+  (setq which-key-idle-delay 2              ; Don't show too fast.
+        which-key-idle-secondary-delay 0.05 ; Show next possibilities immediately when shown.
+        which-key-show-early-on-C-h t)      ; Show instantly while waiting in idle delay.
+  (which-key-mode))
 
 (use-package describe-number
   :config
