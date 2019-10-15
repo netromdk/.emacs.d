@@ -2,7 +2,8 @@
   "Byte-compiles all configuration files."
   (interactive)
   (byte-compile-file (concat general-file ".el") t)
-  (byte-compile-file (concat functions-file ".el") t))
+  (byte-compile-file (concat functions-file ".el") t)
+  (byte-compile-file (concat system-cores-file ".el") t))
 
 (defun byte-compile-confs-if-not-present ()
   "If the .elc files are not there then compile all configuration
