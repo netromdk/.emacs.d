@@ -1116,6 +1116,7 @@ in compilation mode."
     ("D" cargo-process-doc-open "Doc (open)")
     ("u" cargo-process-update "Update")
     ("C" cargo-process-check "Check")
+    ("a" cargo-process-audit "Audit")
     ("C-c" cargo-process-clippy "Clippy")
 
     ("n" next-error "Next" :column "Errors")
