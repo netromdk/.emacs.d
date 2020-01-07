@@ -312,6 +312,22 @@
 
 (use-package helm
   :config
+  ;; To get the best fuzzy completion style via helm: (via helm docs)
+  ;; > For a better experience, if you don't know what to use, set
+  ;; > completion-styles to '(flex) if you are using emacs-27 or to
+  ;; > '(helm-flex) if you are using emacs-26 and keep 'emacs as default
+  ;; > value for helm-completion-style.
+  ;; Default: (setq completion-styles '(basic partial-completion emacs22))
+  (cond
+   ;; 27+
+   ((version<= "27.0" emacs-version)
+    (setq completion-styles '(flex)))
+
+   ;; 26.x
+   ((and (version<= "26.0" emacs-version)
+         (version< emacs-version "27.0"))
+    (setq completion-styles '(helm-flex))))
+
   (setq helm-candidate-number-limit 100
         helm-display-source-at-screen-top t
         helm-exit-idle-delay 0
