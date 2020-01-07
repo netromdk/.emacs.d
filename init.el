@@ -316,10 +316,13 @@
         helm-display-source-at-screen-top t
         helm-exit-idle-delay 0
         helm-full-frame nil
-        helm-buffers-fuzzy-matching t
-        helm-M-x-fuzzy-match t
-        helm-recentf-fuzzy-match t
+
+        ;; Fuzzy matching.
         helm-apropos-fuzzy-match t
+        helm-buffers-fuzzy-matching t
+        helm-recentf-fuzzy-match t
+        helm-ff-fuzzy-matching t
+
         helm-ff-file-name-history-use-recentf t
         helm-split-window-default-side (quote below)
         helm-reuse-last-window-split-state nil
