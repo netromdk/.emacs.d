@@ -151,7 +151,10 @@
           (setq mac-option-key-is-meta nil)
           (setq mac-command-key-is-meta t)
           (setq mac-command-modifier 'meta)
-          (setq mac-option-modifier nil)))
+          (setq mac-option-modifier nil)
+
+          ;; The font is located in the ./font/ folder. Install it on the system to be used.
+          (set-frame-font "JetBrains Mono-12")))
 
     (defun remove-dos-eol ()
       "Do not show ^M in files containing mixed UNIX and DOS line endings."
