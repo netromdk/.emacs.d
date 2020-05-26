@@ -687,6 +687,8 @@ in compilation mode."
 ;; distinguish between them.
 (use-package rainbow-delimiters
   :config
+  (add-hook 'typescript-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 ;; Highlights numbers with another color so they are easier to spot.
@@ -1174,15 +1176,12 @@ in compilation mode."
         ;; maximum fontification
         js2-highlight-level 3
         js2-highlight-external-variables t
-        js2-idle-timer-delay 0.1)
-
-  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode))
+        js2-idle-timer-delay 0.1))
 
 (use-package typescript-mode
   :defer t
-  :mode ("\\.ts[x]\\'" . typescript-mode)
-  :config
-  (add-hook 'typescript-mode-hook #'rainbow-delimiters-mode))
+  :mode ("\\.ts[x]\\'" . typescript-mode))
+
 (use-package rjsx-mode
   :defer t
   :mode "components/.+\\.js$"
