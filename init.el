@@ -1335,8 +1335,9 @@ in compilation mode."
 ;;    }
 ;;
 ;; == Javascript/JSX ==
-;; Requires the javascript language server
-;; npm i -g javascript-typescript-langserver
+;; Requires the typescript language server
+;; npm i -g typescript-language-server
+;; npm i -g javascript-typescript-language-server
 ;;
 ;; 3. Installed "composer" on the system, like: brew install composer
 ;; 4. And while inside "~/.composer/" executing:
