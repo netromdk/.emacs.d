@@ -1176,15 +1176,13 @@ in compilation mode."
         js2-highlight-external-variables t
         js2-idle-timer-delay 0.1)
 
-  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'js2-mode-hook #'lsp-deferred))
+  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode))
 
 (use-package typescript-mode
   :defer t
   :mode ("\\.ts[x]\\'" . typescript-mode)
   :config
-  (add-hook 'typescript-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'typescript-mode-hook #'lsp-deferred))
+  (add-hook 'typescript-mode-hook #'rainbow-delimiters-mode))
 (use-package rjsx-mode
   :defer t
   :mode "components/.+\\.js$"
@@ -1202,8 +1200,6 @@ in compilation mode."
 (add-hook 'rsjx-mode-hook
           (lambda ()
             (setq mode-name "React")))
-
-(add-hook 'rsjx-mode-hook #'lsp-deferred)
 
 ;; Xref
 
@@ -1376,6 +1372,10 @@ in compilation mode."
   (add-hook 'python-mode-hook #'lsp)
   (add-hook 'php-mode-hook #'lsp)
   (add-hook 'css-mode-hook #'lsp)
+  (add-hook 'typescript-mode-hook #'lsp-deferred)
+  (add-hook 'rsjx-mode-hook #'lsp-deferred)
+  (add-hook 'js2-mode-hook #'lsp-deferred)
+
 
   (setq netrom--general-lsp-hydra-heads
         '(;; Xref
