@@ -706,7 +706,7 @@ in compilation mode."
   ;; highlight feature.
   (add-hook 'prog-mode-hook
             '(lambda ()
-               (when (not (member major-mode '(c++-mode c-mode python-mode rust-mode js-mode)))
+               (when (not (member major-mode '(c++-mode c-mode python-mode rust-mode)))
                  (highlight-thing-mode)))))
 
 ;; Better commenting DWIM that cycles. Use "C-u M-;" to align comments at end of line with those
@@ -1371,13 +1371,10 @@ in compilation mode."
   (setq lsp-clients-clangd-args `(,(format "-j=%d" (max 1 (/ (system-cores :logical) 2)))
                                   "-background-index" "-log=error"))
 
-  (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascript"))
   (add-hook 'c++-mode-hook #'lsp)
   (add-hook 'rust-mode-hook #'lsp)
   (add-hook 'python-mode-hook #'lsp)
   (add-hook 'php-mode-hook #'lsp)
-  (add-hook 'js-mode-hook #'lsp)
-  (add-hook 'jsx-mode-hook #'lsp)
   (add-hook 'css-mode-hook #'lsp)
 
   (setq netrom--general-lsp-hydra-heads
