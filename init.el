@@ -1371,9 +1371,9 @@ in compilation mode."
   (add-hook 'python-mode-hook #'lsp)
   (add-hook 'php-mode-hook #'lsp)
   (add-hook 'css-mode-hook #'lsp)
-  (add-hook 'typescript-mode-hook #'lsp-deferred)
-  (add-hook 'rsjx-mode-hook #'lsp-deferred)
-  (add-hook 'js2-mode-hook #'lsp-deferred)
+  (add-hook 'typescript-mode-hook #'lsp)
+  (add-hook 'rsjx-mode-hook #'lsp)
+  (add-hook 'js2-mode-hook #'lsp)
 
 
   (setq netrom--general-lsp-hydra-heads
