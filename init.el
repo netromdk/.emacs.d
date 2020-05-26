@@ -29,7 +29,7 @@
     ("ff97c90ea205e380a4be99b2dc8f0da90972e06983091e98ae677eda01a71fa3" default)))
  '(package-selected-packages
    (quote
-    (which-key helm-lsp deadgrep nginx-mode ace-mc goto-last-change cmake-font-lock vlf keyfreq describe-number dashboard auto-dim-other-buffers zygospore windresize anzu nlinum diminish doom-modeline window-numbering on-screen exec-path-from-shell ace-isearch avy find-temp-file dired-narrow auto-dictionary flyspell-lazy copy-as-format unfill fix-word expand-region multiple-cursors git-timemachine git-messenger helm-ls-git gitconfig-mode gitignore-mode diff-hl helm-projectile projectile flycheck-rust flycheck-pycheckers flycheck-inline flycheck lsp-ui helm-xref cargo hindent company-ghc haskell-mode dumb-jump indent-guide smartparens helm-c-yasnippet yasnippet fic-mode markdown-mode csharp-mode php-mode json-mode swift-mode modern-cpp-font-lock highlight-escape-sequences clang-format string-edit comment-dwim-2 highlight-thing highlight-numbers rainbow-delimiters rainbow-mode dash-at-point bury-successful-compilation cmake-mode company-lsp company-statistics company-flx company flx-ido helpful hydra helm-ag helm-flx helm-gtags helm-swoop helm magit golden-ratio-scroll-screen key-chord beacon auto-compile use-package))))
+    (rjsx-mode typescript-mode js2-mode which-key helm-lsp deadgrep nginx-mode ace-mc goto-last-change cmake-font-lock vlf keyfreq describe-number dashboard auto-dim-other-buffers zygospore windresize anzu nlinum diminish doom-modeline window-numbering on-screen exec-path-from-shell ace-isearch avy find-temp-file dired-narrow auto-dictionary flyspell-lazy copy-as-format unfill fix-word expand-region multiple-cursors git-timemachine git-messenger helm-ls-git gitconfig-mode gitignore-mode diff-hl helm-projectile projectile flycheck-rust flycheck-pycheckers flycheck-inline flycheck lsp-ui helm-xref cargo hindent company-ghc haskell-mode dumb-jump indent-guide smartparens helm-c-yasnippet yasnippet fic-mode markdown-mode csharp-mode php-mode json-mode swift-mode modern-cpp-font-lock highlight-escape-sequences clang-format string-edit comment-dwim-2 highlight-thing highlight-numbers rainbow-delimiters rainbow-mode dash-at-point bury-successful-compilation cmake-mode company-lsp company-statistics company-flx company flx-ido helpful hydra helm-ag helm-flx helm-gtags helm-swoop helm magit golden-ratio-scroll-screen key-chord beacon auto-compile use-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -706,7 +706,7 @@ in compilation mode."
   ;; highlight feature.
   (add-hook 'prog-mode-hook
             '(lambda ()
-               (when (not (member major-mode '(c++-mode c-mode python-mode rust-mode)))
+               (when (not (member major-mode '(c++-mode c-mode python-mode rust-mode js-mode)))
                  (highlight-thing-mode)))))
 
 ;; Better commenting DWIM that cycles. Use "C-u M-;" to align comments at end of line with those
@@ -1154,6 +1154,57 @@ in compilation mode."
 
   (define-key rust-mode-map (kbd "C-c C-c") 'rust-cargo-hydra/body))
 
+;; Javascript/ JSX
+
+(use-package js2-mode
+  :mode "\\.m?js\\'"
+  :interpreter "node"
+  :commands js2-line-break
+  :config
+  (setq js-chain-indent t
+        ;; Don't mishighlight shebang lines
+        js2-skip-preprocessor-directives t
+        ;; let flycheck handle this
+        js2-mode-show-parse-errors nil
+        js2-mode-show-strict-warnings nil
+        ;; Flycheck provides these features, so disable them: conflicting with
+        ;; the eslint settings.
+        js2-strict-trailing-comma-warning nil
+        js2-strict-missing-semi-warning nil
+        ;; maximum fontification
+        js2-highlight-level 3
+        js2-highlight-external-variables t
+        js2-idle-timer-delay 0.1)
+
+  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'js2-mode-hook #'lsp-deferred))
+
+(use-package typescript-mode
+  :defer t
+  :mode ("\\.ts[x]\\'" . typescript-mode)
+  :config
+  (add-hook 'typescript-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'typescript-mode-hook #'lsp-deferred))
+(use-package rjsx-mode
+  :defer t
+  :mode "components/.+\\.js$"
+  :init
+  (defun +javascript-jsx-file-p ()
+    "Detect React or preact imports early in the file."
+    (and buffer-file-name
+         (string= (file-name-extension buffer-file-name) "js")
+         (re-search-forward "\\(^\\s-*import +React\\|\\( from \\|require(\\)[\"']p?react\\)"
+                            magic-mode-regexp-match-limit t)
+         (progn (goto-char (match-beginning 1))
+                (not (sp-point-in-string-or-comment)))))
+  (add-to-list 'magic-mode-alist '(+javascript-jsx-file-p . rjsx-mode)))
+
+(add-hook 'rsjx-mode-hook
+          (lambda ()
+            (setq mode-name "React")))
+
+(add-hook 'rsjx-mode-hook #'lsp-deferred)
+
 ;; Xref
 
 ;; Don't show prompt unless nothing is under point or if it has to show it.
@@ -1287,6 +1338,11 @@ in compilation mode."
 ;;      "minimum-stability": "dev",
 ;;      "prefer-stable": true
 ;;    }
+;;
+;; == Javascript/JSX ==
+;; Requires the javascript language server
+;; npm i -g javascript-typescript-langserver
+;;
 ;; 3. Installed "composer" on the system, like: brew install composer
 ;; 4. And while inside "~/.composer/" executing:
 ;;    composer require felixfbecker/language-server
@@ -1315,10 +1371,14 @@ in compilation mode."
   (setq lsp-clients-clangd-args `(,(format "-j=%d" (max 1 (/ (system-cores :logical) 2)))
                                   "-background-index" "-log=error"))
 
+  (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascript"))
   (add-hook 'c++-mode-hook #'lsp)
   (add-hook 'rust-mode-hook #'lsp)
   (add-hook 'python-mode-hook #'lsp)
   (add-hook 'php-mode-hook #'lsp)
+  (add-hook 'js-mode-hook #'lsp)
+  (add-hook 'jsx-mode-hook #'lsp)
+  (add-hook 'css-mode-hook #'lsp)
 
   (setq netrom--general-lsp-hydra-heads
         '(;; Xref
