@@ -1310,9 +1310,9 @@ in compilation mode."
         lsp-enable-xref t)
 
   ;; Let clangd use half of the logical cores but one as minimum.
-  ;; `-background-index' requires clangd v8+!
+  ;; `--background-index' requires clangd v8+!
   (setq lsp-clients-clangd-args `(,(format "-j=%d" (max 1 (/ (system-cores :logical) 2)))
-                                  "-background-index" "-log=error"))
+                                  "--background-index" "--log=error"))
 
   (add-hook 'c++-mode-hook #'lsp)
   (add-hook 'rust-mode-hook #'lsp)
