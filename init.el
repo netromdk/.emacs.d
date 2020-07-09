@@ -1100,6 +1100,10 @@ in compilation mode."
 
 ;; End of Haskell related packages
 
+;; YAML
+(use-package yaml-mode
+  :mode ("\\.yml$" "\\.yaml$"))
+
 ;; Rust
 
 (use-package cargo)
