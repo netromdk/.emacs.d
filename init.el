@@ -26,10 +26,7 @@
  '(custom-enabled-themes (quote (mustang-netrom)))
  '(custom-safe-themes
    (quote
-    ("ff97c90ea205e380a4be99b2dc8f0da90972e06983091e98ae677eda01a71fa3" default)))
- '(package-selected-packages
-   (quote
-    (company-box editorconfig yaml-mode which-key helm-lsp deadgrep nginx-mode ace-mc goto-last-change cmake-font-lock vlf keyfreq describe-number dashboard auto-dim-other-buffers zygospore windresize anzu nlinum diminish doom-modeline window-numbering on-screen exec-path-from-shell ace-isearch avy find-temp-file dired-narrow auto-dictionary flyspell-lazy copy-as-format unfill fix-word expand-region multiple-cursors git-timemachine git-messenger helm-ls-git gitconfig-mode gitignore-mode diff-hl helm-projectile projectile flycheck-rust flycheck-pycheckers flycheck-inline flycheck lsp-ui helm-xref cargo hindent company-ghc haskell-mode dumb-jump indent-guide smartparens helm-c-yasnippet yasnippet fic-mode markdown-mode csharp-mode php-mode json-mode swift-mode modern-cpp-font-lock highlight-escape-sequences clang-format string-edit comment-dwim-2 highlight-thing highlight-numbers rainbow-delimiters rainbow-mode dash-at-point bury-successful-compilation cmake-mode company-lsp company-statistics company-flx company flx-ido helpful hydra helm-ag helm-flx helm-gtags helm-swoop helm magit golden-ratio-scroll-screen key-chord beacon auto-compile use-package))))
+    ("ff97c90ea205e380a4be99b2dc8f0da90972e06983091e98ae677eda01a71fa3" default))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -37,13 +34,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;; Must come before any package configurations!
-(package-initialize)
-
-;; Prefer newest version of a file, especially for compiled files this is
-;; useful.
-(setq load-prefer-newer t)
 
 ;; Load general stuff that other init.d things might use.
 (load functions-file)
@@ -91,33 +81,30 @@
 
   (byte-compile-confs-if-not-present))
 
-;; Packages setup.
-(require 'package)
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("gnu" . "https://elpa.gnu.org/packages/")
-                         ;("org" . "https://orgmode.org/elpa/")
-                         ;("marmalade" . "https://marmalade-repo.org/packages/")
-                         ))
+;; Initial straight.el setup (https://github.com/raxod502/straight.el)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(eval-when-compile (package-initialize))
+(setq straight-repository-branch "master"
+      straight-cache-autoloads t
 
-(defun require-package (package)
-  "refresh package archives, check package presence and install if it's not installed"
-  (if (null (require package nil t))
-      (progn (let* ((ARCHIVES (if (null package-archive-contents)
-                                  (progn (package-refresh-contents)
-                                         package-archive-contents)
-                                package-archive-contents))
-                    (AVAIL (assoc package ARCHIVES)))
-               (if AVAIL
-                   (package-install package)))
-             (require package))))
+      ;; Make `use-package` use `straight.el` by default so that `:straight t` is not necessary to
+      ;; write for every `use-package` invocation.
+      straight-use-package-by-default t)
 
-(require-package 'use-package)
-(require 'use-package)
-
-;; Always ensure packages are downloaded and installed!
-(setq use-package-always-ensure t)
+;; Install `use-package` which `straight.el` will automatically modify to use itself instead of
+;; `package.el`.
+(straight-use-package 'use-package)
 
 ;; Verbosity when starting emacs with `--debug-init'.
 (if init-file-debug
@@ -127,13 +114,6 @@
           debug-on-error t)
   (setq use-package-verbose nil
         use-package-expand-minimally t))
-
-(use-package auto-compile
-  :ensure t
-  :config
-    (require 'auto-compile)
-    (auto-compile-on-load-mode)
-    (auto-compile-on-save-mode))
 
 (random t)
 
@@ -1640,7 +1620,6 @@ Multiple Cursors
 ;; Loads ".editorconfig" files and sets up indent style/size etc.
 ;; Ref: https://editorconfig.org/
 (use-package editorconfig
-  :ensure t
   :config
   (editorconfig-mode 1))
 
