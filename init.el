@@ -29,7 +29,7 @@
     ("ff97c90ea205e380a4be99b2dc8f0da90972e06983091e98ae677eda01a71fa3" default)))
  '(package-selected-packages
    (quote
-    (editorconfig yaml-mode which-key helm-lsp deadgrep nginx-mode ace-mc goto-last-change cmake-font-lock vlf keyfreq describe-number dashboard auto-dim-other-buffers zygospore windresize anzu nlinum diminish doom-modeline window-numbering on-screen exec-path-from-shell ace-isearch avy find-temp-file dired-narrow auto-dictionary flyspell-lazy copy-as-format unfill fix-word expand-region multiple-cursors git-timemachine git-messenger helm-ls-git gitconfig-mode gitignore-mode diff-hl helm-projectile projectile flycheck-rust flycheck-pycheckers flycheck-inline flycheck lsp-ui helm-xref cargo hindent company-ghc haskell-mode dumb-jump indent-guide smartparens helm-c-yasnippet yasnippet fic-mode markdown-mode csharp-mode php-mode json-mode swift-mode modern-cpp-font-lock highlight-escape-sequences clang-format string-edit comment-dwim-2 highlight-thing highlight-numbers rainbow-delimiters rainbow-mode dash-at-point bury-successful-compilation cmake-mode company-lsp company-statistics company-flx company flx-ido helpful hydra helm-ag helm-flx helm-gtags helm-swoop helm magit golden-ratio-scroll-screen key-chord beacon auto-compile use-package))))
+    (company-box editorconfig yaml-mode which-key helm-lsp deadgrep nginx-mode ace-mc goto-last-change cmake-font-lock vlf keyfreq describe-number dashboard auto-dim-other-buffers zygospore windresize anzu nlinum diminish doom-modeline window-numbering on-screen exec-path-from-shell ace-isearch avy find-temp-file dired-narrow auto-dictionary flyspell-lazy copy-as-format unfill fix-word expand-region multiple-cursors git-timemachine git-messenger helm-ls-git gitconfig-mode gitignore-mode diff-hl helm-projectile projectile flycheck-rust flycheck-pycheckers flycheck-inline flycheck lsp-ui helm-xref cargo hindent company-ghc haskell-mode dumb-jump indent-guide smartparens helm-c-yasnippet yasnippet fic-mode markdown-mode csharp-mode php-mode json-mode swift-mode modern-cpp-font-lock highlight-escape-sequences clang-format string-edit comment-dwim-2 highlight-thing highlight-numbers rainbow-delimiters rainbow-mode dash-at-point bury-successful-compilation cmake-mode company-lsp company-statistics company-flx company flx-ido helpful hydra helm-ag helm-flx helm-gtags helm-swoop helm magit golden-ratio-scroll-screen key-chord beacon auto-compile use-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -556,6 +556,17 @@ Command: %(netrom/compilation-command-string)
   (global-company-mode 1)
 
   (global-set-key (kbd "C-<tab>") 'company-complete))
+
+;; Show icons in company completion UI.
+(use-package company-box
+  :config
+  (if (display-graphic-p)
+      ;; Show font icons in windowed mode.
+      (setq company-box-icons-alist 'company-box-icons-all-the-icons
+            company-box-color-icon t)
+    ;; Show compatible icons in terminal.
+    (setq company-box-icons-alist 'company-box-icons-icons-in-terminal))
+  :hook (company-mode . company-box-mode))
 
 (use-package company-flx
   :requires company
