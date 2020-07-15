@@ -35,6 +35,9 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; Set the random number seed from the system's entropy pool.
+(random t)
+
 ;; Load general stuff that other init.d things might use.
 (load functions-file)
 (load general-file)
@@ -43,13 +46,38 @@
 ;; Create necessary directories if missing.
 (mkdir user-cache-dir)
 
-;; Speedup loading by removing handlers until finished. It contains a lot of regexps for matching
-;; handlers to file names but it is not necessary while loading.
-(setq file-name-handler-alist-old file-name-handler-alist)
-(setq file-name-handler-alist nil)
-
-;; Timing.
 (setq initial-done-time (current-time))
+
+;; Speed up loading by removing handlers until finished. It contains a lot of regexps for matching
+;; handlers to file names but it is not necessary while loading.
+(setq file-name-handler-alist-old file-name-handler-alist
+      file-name-handler-alist nil)
+
+;;;;; Setup and Bootstrap straight.el ;;;;;
+
+(defvar straight-bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (straight-bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(setq straight-repository-branch "master"
+      straight-cache-autoloads t
+
+      ;; Make `use-package` use `straight.el` by default so that `:straight t` is not necessary to
+      ;; write for every `use-package` invocation.
+      straight-use-package-by-default t)
+
+;;;;; Timing ;;;;;
+
+(setq straight-init-done-time (current-time))
 
 (defun show-elapsed-time (msg start end)
   (let ((elapsed (float-time (time-subtract end start))))
@@ -58,9 +86,10 @@
 (defun show-loading-info ()
   (let ((cur (current-time)))
     (message "============================")
-    (show-elapsed-time "Initial setup:  " emacs-start-time initial-done-time)
-    (show-elapsed-time "Loaded packages:" initial-done-time cur)
-    (show-elapsed-time "Total:          " emacs-start-time cur)
+    (show-elapsed-time "Initial setup:     " emacs-start-time initial-done-time)
+    (show-elapsed-time "straight.el setup: " initial-done-time straight-init-done-time)
+    (show-elapsed-time "Loaded packages:   " straight-init-done-time cur)
+    (show-elapsed-time "Total:             " emacs-start-time cur)
     (message "============================")
 
     ;; Show message 2s later about total time so it's visible in the mini buffer as the last thing.
@@ -81,29 +110,13 @@
 
   (byte-compile-confs-if-not-present))
 
-;; Initial straight.el setup (https://github.com/raxod502/straight.el)
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+;;;;; Package Configuration Macro ;;;;;
 
-(setq straight-repository-branch "master"
-      straight-cache-autoloads t
-
-      ;; Make `use-package` use `straight.el` by default so that `:straight t` is not necessary to
-      ;; write for every `use-package` invocation.
-      straight-use-package-by-default t)
+;; The `use-package` configuration macro is used throughout this configuration to isolate package
+;; configurations in a tidy fashion.
 
 ;; Install `use-package` which `straight.el` will automatically modify to use itself instead of
-;; `package.el`.
+;; `package.el` since `straight-use-package-by-default` is set above.
 (straight-use-package 'use-package)
 
 ;; Verbosity when starting emacs with `--debug-init'.
@@ -114,8 +127,6 @@
           debug-on-error t)
   (setq use-package-verbose nil
         use-package-expand-minimally t))
-
-(random t)
 
 ;;;;; Mac Setup ;;;;;
 
