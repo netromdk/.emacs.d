@@ -72,14 +72,14 @@ compile to .elc if not already present first."
   "Move up the current line."
   (interactive)
   (transpose-lines 1)
-  (previous-line 2))
+  (forward-line -2))
 
 (defun move-line-down ()
   "Move down the current line."
   (interactive)
-  (next-line 1)
+  (forward-line 1)
   (transpose-lines 1)
-  (previous-line 1))
+  (forward-line -1))
 
 (defun indent-buffer ()
   "Indents the entire buffer."
@@ -146,12 +146,13 @@ compile to .elc if not already present first."
   (interactive)
   (mapc 'kill-buffer
         (delq (current-buffer)
-              (remove-if-not 'buffer-file-name (buffer-list)))))
+              (with-no-warnings
+                (remove-if-not 'buffer-file-name (buffer-list))))))
 
 (defun kill-all-buffers ()
   "Kill all buffers."
   (interactive)
-  (mapcar 'kill-buffer (buffer-list))
+  (mapc 'kill-buffer (buffer-list))
   (delete-other-windows))
 
 (defun prelude-smart-open-line (arg)

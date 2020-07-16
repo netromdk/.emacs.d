@@ -85,7 +85,8 @@
 ;; [1]: http://stackoverflow.com/q/20666556/1713079
 ;; [2]: https://github.com/aaron-em/system-cores.el
 
-(require 'cl)
+(with-no-warnings
+  (require 'cl))
 
 (put 'system-cores-delegate-error
      'error-conditions '(error system-cores-delegate-error))
@@ -222,20 +223,22 @@ shown in the echo area.
               (process-lines "cat" "/proc/cpuinfo")))
         processors cores)
     (setq cores
-          (reduce '+
-                  (map 'list
-                       #'(lambda (a) (if (string= "processor" (car a)) 1 0))
-                       cpuinfo)))
+          (with-no-warnings
+            (reduce '+
+                    (map 'list
+                         #'(lambda (a) (if (string= "processor" (car a)) 1 0))
+                         cpuinfo))))
     (setq processors
           (length (delete-dups
-                   (remove-if 'null
-                              (map 'list
-                                   #'(lambda (a)
-                                       (if (or (string= "core id" (car a))
-                                               (string= "physical id" (car a)))
-                                           (cadr a)
-                                         nil))
-                                   cpuinfo)))))
+                   (with-no-warnings
+                     (remove-if 'null
+                                (map 'list
+                                     #'(lambda (a)
+                                         (if (or (string= "core id" (car a))
+                                                 (string= "physical id" (car a)))
+                                             (cadr a)
+                                           nil))
+                                     cpuinfo))))))
     (if (= 0 processors)
         (progn
           (message "system-cores-cpuinfo: Found no physical processor IDs; using logical core count")
@@ -254,14 +257,15 @@ obtained from the value listed for the key
 \"NumberOfLogicalProcessors\".
 
   This function is a `system-cores' delegate."
-  (let ((cpuinfo 
+  (let ((cpuinfo
          (map 'list
               #'(lambda (s) (split-string s "="))
-              (remove-if
-               #'(lambda (s) (string= s ""))
-               (process-lines
-                "wmic" "cpu" "get" "NumberOfCores,NumberOfLogicalProcessors"
-                "/format:List")))))
+              (with-no-warnings
+                (remove-if
+                 #'(lambda (s) (string= s ""))
+                 (process-lines
+                  "wmic" "cpu" "get" "NumberOfCores,NumberOfLogicalProcessors"
+                  "/format:List"))))))
     `((logical .
                ,(string-to-number (cadr (assoc "NumberOfCores" cpuinfo))))
       (physical .
@@ -282,12 +286,13 @@ Processors\".
   (let ((cpuinfo
          (map 'list
               #'(lambda (s) (split-string s ": "))
-              (remove-if 'null
-                         (map 'list #'(lambda (s)
-                                        (when (string-match "^ +" s)
-                                          (replace-match "" t t s)))
-                              (process-lines "system_profiler"
-                                             "SPHardwareDataType"))))))
+              (with-no-warnings
+                (remove-if 'null
+                           (map 'list #'(lambda (s)
+                                          (when (string-match "^ +" s)
+                                            (replace-match "" t t s)))
+                                (process-lines "system_profiler"
+                                               "SPHardwareDataType")))))))
     `((logical .
                ,(let ((ht (string-equal "Enabled"
                                         (car (last (assoc "Hyper-Threading Technology" cpuinfo))))))
@@ -314,11 +319,11 @@ system's sysctl output and modify this function accordingly!]
   (let ((cpuinfo
          (map 'list
               #'(lambda (s) (split-string s ": " t))
-              (process-lines "sysctl" "hw.physicalcpu" "hw.logicalcpu")))
-  `((logical .
-             ,(string-to-number (cadr (assoc "hw.logicalcpu" cpuinfo))))
-    (physical .
-              ,(string-to-number (cadr (assoc "hw.physicalcpu" cpuinfo))))))))
+              (process-lines "sysctl" "hw.physicalcpu" "hw.logicalcpu"))))
+    `((logical .
+               ,(string-to-number (cadr (assoc "hw.logicalcpu" cpuinfo))))
+      (physical .
+                ,(string-to-number (cadr (assoc "hw.physicalcpu" cpuinfo)))))))
 
 (provide 'system-cores)
 
