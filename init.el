@@ -38,6 +38,9 @@
 ;; Set the random number seed from the system's entropy pool.
 (random t)
 
+;; Prefer newest version of a file. This is especially useful for compiled files.
+(setq load-prefer-newer t)
+
 ;; Load general stuff that other init.d things might use.
 (load functions-file)
 (load general-file)
