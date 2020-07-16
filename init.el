@@ -2351,6 +2351,12 @@ search when the prefix argument is defined."
                           (projects . 10)))
   (dashboard-setup-startup-hook))
 
+;; Makes the cursor stay vertically centered (unless being at the top or bottom part).
+(use-package centered-cursor-mode
+  :config
+  (defalias 'ccm 'centered-cursor-mode)
+  (defalias 'gccm 'global-centered-cursor-mode))
+
 ;;;;; Miscellaneous ;;;;;
 
 ;; Set auto-fill-mode and org minor modes for lists and tables.
