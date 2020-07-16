@@ -9,6 +9,7 @@
  ("beacon" . "bde78180c678b233c94321394f46a81dc6dce1da")
  ("bury-successful-compilation" . "674644c844184605a1bb4f9487a60f7a780a6fe7")
  ("cargo.el" . "dc9ff35c2861d524ac4d65020c5320eec71acacf")
+ ("centered-cursor-mode.el" . "f376bdb882047347345d5f0e3ec3fcef63ee93ba")
  ("clang-format" . "2d6a4526a2518b7c0059a8a0dfee156e90a49369")
  ("cmake" . "2da778664d3e99ada4e67a5a1b9d377f92a9f75f")
  ("cmake-font-lock" . "9e0fcd1ee2cf316f661f2d652368b12f83a4ec9c")
