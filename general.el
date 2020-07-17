@@ -42,9 +42,17 @@
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 
-;; Stop creating backup~ and #autosave# files!
-(setq make-backup-files nil)
-(setq auto-save-default nil)
+;; Don't create backup and lock files files.
+(setq make-backup-files nil
+      create-lockfiles nil)
+
+;; Auto-save file-visiting buffers to isolated folder on 30s idle timeouts, 300 input events, and
+;; program crashes. They look like "#...#". The auto-save files are removed again when the
+;; file-visiting buffers are saved.
+(setq auto-save-file-name-transforms `((".*" ,(expand-file-name --auto-save-dir) t))
+      auto-save-timeout 30
+      auto-save-interval 300
+      auto-save-default t)
 
 ;; Enable abbrev-mode on default and save new abbrevs silently to "~/.emacs.d/abbrev_defs".
 (setq save-abbrevs 'silently)
