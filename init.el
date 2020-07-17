@@ -815,6 +815,12 @@ in compilation mode."
             (local-set-key (kbd "C-c b") 'eval-buffer)
             (local-set-key (kbd "C-c r") 'eval-region)))
 
+;; Auto-compile .el files when loading and saving them.
+(use-package auto-compile
+  :config
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode))
+
 ;; Shell script
 (require 'sh-script)
 (setq-default sh-basic-offset general-tab-width)
