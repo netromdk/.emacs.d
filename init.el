@@ -14,6 +14,8 @@
 (defconst general-file (concat user-emacs-directory "general"))
 (defconst functions-file (concat user-emacs-directory "functions"))
 (defconst system-cores-file (concat user-emacs-directory "system-cores"))
+(defconst ksnrlog-mode-file (concat user-emacs-directory "ksnrlog-mode"))
+(defconst crashpad-stack-mode-file (concat user-emacs-directory "crashpad-stack-mode"))
 
 (setq custom-theme-directory themes-dir)
 
@@ -2044,13 +2046,13 @@ search when the prefix argument is defined."
 ;;;;; Luxion related ;;;;;
 
 ;; Associate `ksnrlog-mode' with KS NR log files to fontify them.
-(load (concat user-emacs-directory "ksnrlog-mode.el"))
+(load ksnrlog-mode-file)
 (add-to-list 'auto-mode-alist
              '("\\(render\\|configurator\\|monitor\\|watchdog\\)_.+\\.log\\'" . ksnrlog-mode))
 
 ;; Load `crashpad-stack-mode' which is useful for fontifying call stacks created by
 ;; crashpad/breakpad minidump_stackwalk (or minidump_analysis.py).
-(load (concat user-emacs-directory "crashpad-stack-mode.el"))
+(load crashpad-stack-mode-file)
 
 ;; Associate with files with "stack" and ".txt" in them.
 ;; TODO: Might be too general?
