@@ -51,11 +51,11 @@
 (setq-default abbrev-mode t)
 
 ;; Set fill column to 100.
-(defconst global-fill-column 100)
-(setq-default fill-column global-fill-column)
+(defconst --global-fill-column 100)
+(setq-default fill-column --global-fill-column)
 (dolist (hook '(auto-fill-mode-hook
                 prog-mode-hook))
-  (add-hook hook (lambda () (setq fill-column global-fill-column))))
+  (add-hook hook (lambda () (setq fill-column --global-fill-column))))
 
 ;; Set default tab width to 2 spaces.
 (defconst general-tab-width 2)
@@ -63,8 +63,8 @@
 
 ;; Sensible window splitting should follow the fill column.
 (when window-system
-  (setq split-height-threshold (* 2 global-fill-column)
-        split-width-threshold (* 2 global-fill-column)))
+  (setq split-height-threshold (* 2 --global-fill-column)
+        split-width-threshold (* 2 --global-fill-column)))
 
 ;; Disable visible bell because it looks ugly, but that makes the audible bell and therefore we
 ;; "flash" the mode line by double-inverting instead.

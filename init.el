@@ -5,19 +5,20 @@
       (error "Emacs v. %s+ is required for this configuration!" min-version)))
 
 ;; Constants.
-(defconst emacs-start-time (current-time))
-(defconst yas-dir (concat user-emacs-directory "snippets/"))
-(defconst themes-dir (concat user-emacs-directory "themes/"))
-(defconst user-cache-dir (concat user-emacs-directory ".cache/"))
+(defconst --emacs-start-time (current-time))
+(defconst --yas-dir (concat user-emacs-directory "snippets/"))
+(defconst --themes-dir (concat user-emacs-directory "themes/"))
+(defconst --user-cache-dir (concat user-emacs-directory "cache/"))
+(defconst --auto-save-dir (concat user-emacs-directory "auto-save/"))
 
 ;; These are without .el because `load` will add these as appropriately when using them.
-(defconst general-file (concat user-emacs-directory "general"))
-(defconst functions-file (concat user-emacs-directory "functions"))
-(defconst system-cores-file (concat user-emacs-directory "system-cores"))
-(defconst ksnrlog-mode-file (concat user-emacs-directory "ksnrlog-mode"))
-(defconst crashpad-stack-mode-file (concat user-emacs-directory "crashpad-stack-mode"))
+(defconst --general-file (concat user-emacs-directory "general"))
+(defconst --functions-file (concat user-emacs-directory "functions"))
+(defconst --system-cores-file (concat user-emacs-directory "system-cores"))
+(defconst --ksnrlog-mode-file (concat user-emacs-directory "ksnrlog-mode"))
+(defconst --crashpad-stack-mode-file (concat user-emacs-directory "crashpad-stack-mode"))
 
-(setq custom-theme-directory themes-dir)
+(setq custom-theme-directory --themes-dir)
 
 ;; Custom.
 (custom-set-variables
@@ -44,14 +45,15 @@
 (setq load-prefer-newer t)
 
 ;; Load general stuff that other init.d things might use.
-(load functions-file)
-(load general-file)
-(load system-cores-file)
+(load --functions-file)
+(load --general-file)
+(load --system-cores-file)
 
 ;; Create necessary directories if missing.
-(mkdir user-cache-dir)
+(mkdir --user-cache-dir)
+(mkdir --auto-save-dir)
 
-(setq initial-done-time (current-time))
+(setq --initial-done-time (current-time))
 
 ;; Speed up loading by removing handlers until finished. It contains a lot of regexps for matching
 ;; handlers to file names but it is not necessary while loading.
@@ -60,10 +62,10 @@
 
 ;;;;; Setup and Bootstrap straight.el ;;;;;
 
-(defvar straight-bootstrap-version)
+(defvar --straight-bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (straight-bootstrap-version 5))
+      (--straight-bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously
@@ -82,7 +84,7 @@
 
 ;;;;; Timing ;;;;;
 
-(setq straight-init-done-time (current-time))
+(setq --straight-init-done-time (current-time))
 
 (defun show-elapsed-time (msg start end)
   (let ((elapsed (float-time (time-subtract end start))))
@@ -91,15 +93,15 @@
 (defun show-loading-info ()
   (let ((cur (current-time)))
     (message "============================")
-    (show-elapsed-time "Initial setup:     " emacs-start-time initial-done-time)
-    (show-elapsed-time "straight.el setup: " initial-done-time straight-init-done-time)
-    (show-elapsed-time "Loaded packages:   " straight-init-done-time cur)
-    (show-elapsed-time "Total:             " emacs-start-time cur)
+    (show-elapsed-time "Initial setup:     " --emacs-start-time --initial-done-time)
+    (show-elapsed-time "straight.el setup: " --initial-done-time --straight-init-done-time)
+    (show-elapsed-time "Loaded packages:   " --straight-init-done-time cur)
+    (show-elapsed-time "Total:             " --emacs-start-time cur)
     (message "============================")
 
     ;; Show message 2s later about total time so it's visible in the mini buffer as the last thing.
     (run-at-time "2 sec" nil
-                 #'show-elapsed-time "Loaded config in" emacs-start-time cur)))
+                 #'show-elapsed-time "Loaded config in" --emacs-start-time cur)))
 
 ;; Executed when loading is done.
 (defun loading-done ()
@@ -540,7 +542,7 @@ Command: %(netrom/compilation-command-string)
 (use-package company-statistics
   :config
   (setq company-statistics-file
-        (concat user-cache-dir "company-statistics-cache.el")))
+        (concat --user-cache-dir "company-statistics-cache.el")))
 
 (use-package company
   :requires company-statistics
@@ -603,7 +605,7 @@ Command: %(netrom/compilation-command-string)
 (add-hook 'compilation-mode-hook
           (lambda ()
             (setq old-split-height-threshold split-height-threshold
-                  split-height-threshold global-fill-column)
+                  split-height-threshold --global-fill-column)
                   process-adaptive-read-buffering nil))
 
 ;; Turn it back on again when finished.
@@ -728,7 +730,7 @@ in compilation mode."
 ;; Visualize certain like space at end of line and trailing characters after
 ;; fill column.
 (setq whitespace-style '(face tabs lines-tail trailing tab-mark))
-(setq whitespace-line-column global-fill-column)
+(setq whitespace-line-column --global-fill-column)
 
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
@@ -895,7 +897,7 @@ in compilation mode."
   :requires helm
   :config
   ;; Add local snippets to override some of the defaults in elpa folder.
-  (add-to-list 'yas-snippet-dirs yas-dir)
+  (add-to-list 'yas-snippet-dirs --yas-dir)
 
   ;; (setq yas-prompt-functions
   ;;       '(yas-ido-prompt yas-dropdown-prompt yas-completing-prompt yas-x-prompt yas-no-prompt))
@@ -2052,13 +2054,13 @@ search when the prefix argument is defined."
 ;;;;; Luxion related ;;;;;
 
 ;; Associate `ksnrlog-mode' with KS NR log files to fontify them.
-(load ksnrlog-mode-file)
+(load --ksnrlog-mode-file)
 (add-to-list 'auto-mode-alist
              '("\\(render\\|configurator\\|monitor\\|watchdog\\)_.+\\.log\\'" . ksnrlog-mode))
 
 ;; Load `crashpad-stack-mode' which is useful for fontifying call stacks created by
 ;; crashpad/breakpad minidump_stackwalk (or minidump_analysis.py).
-(load crashpad-stack-mode-file)
+(load --crashpad-stack-mode-file)
 
 ;; Associate with files with "stack" and ".txt" in them.
 ;; TODO: Might be too general?
@@ -2069,7 +2071,7 @@ search when the prefix argument is defined."
 (defun lux-wrap-function (start end)
   "Put comments around Luxion function."
   (interactive "r")
-  (let ((str (concat "// " (make-string (- global-fill-column 3) ?*) "\n")))
+  (let ((str (concat "// " (make-string (- --global-fill-column 3) ?*) "\n")))
     (save-excursion
       (goto-char end)
       (insert str)
@@ -2080,7 +2082,7 @@ search when the prefix argument is defined."
   "Fix all functions with an incorrect number of '// ***..' (or '=' or '-') around them."
   (interactive)
   (let* ((regexp "[ ]*\/\/[ ]*[\*\=\-]+")
-         (line-width global-fill-column)
+         (line-width --global-fill-column)
          (str (concat "// " (make-string (- line-width 3) ?*)))
          (old-line)
          (line-end))
@@ -2113,7 +2115,7 @@ search when the prefix argument is defined."
   (interactive)
   (let* ((regexp-line "[ ]*\/\/[ ]*[\*]+")
          (regexp-curl "{")
-         (line-width global-fill-column)
+         (line-width --global-fill-column)
          (str (concat "// " (make-string (- line-width 3) ?*)))
          (line-one)
          (line-two)
