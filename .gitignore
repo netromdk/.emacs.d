@@ -7,10 +7,12 @@
 /saveplace
 /savehist
 /ido.last
-elpa/
-el-get/
-cache/
-url/
+/auto-save/
+/auto-save-list/
+/elpa/
+/el-get/
+/cache/
+/url/
 /projectile-bookmarks.eld
 /projectile.cache
 /tramp
@@ -18,7 +20,7 @@ url/
 /company-statistics-cache.el
 /.cask
 /eshell
-transient/
+/transient/
 /.lsp-session-*
 /straight/build-cache.el
 /straight/build/
