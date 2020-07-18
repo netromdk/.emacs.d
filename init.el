@@ -60,6 +60,9 @@
 (setq file-name-handler-alist-old file-name-handler-alist
       file-name-handler-alist nil)
 
+;; Speed up loading by disabling garbage collection until finished.
+(setq gc-cons-threshold most-positive-fixnum)
+
 ;;;;; Setup and Bootstrap straight.el ;;;;;
 
 (defvar --straight-bootstrap-version)
@@ -109,6 +112,10 @@
 
   ;; Restore the file name handlers.
   (setq file-name-handler-alist file-name-handler-alist-old)
+
+  ;; Garbage collect at every 20 MB allocated instead of the default 8 MB. This speeds up various
+  ;; things.
+  (setq gc-cons-threshold 20000000)
 
   ;; Start daemon server if not already running.
   (require 'server)

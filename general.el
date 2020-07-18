@@ -27,10 +27,6 @@
 (when (fboundp 'fringe-mode)
   (fringe-mode 4))
 
-;; Garbage collect at every 20 MB allocated instead of the default 8 MB. This
-;; speeds up various things.
-(setq gc-cons-threshold 20000000)
-
 ;; Change warning to appear at 100+ MB instead of 10 MB.
 (setq large-file-warning-threshold 100000000)
 
