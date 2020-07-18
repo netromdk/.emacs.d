@@ -18,6 +18,9 @@
 (defconst --ksnrlog-mode-file (concat user-emacs-directory "ksnrlog-mode"))
 (defconst --crashpad-stack-mode-file (concat user-emacs-directory "crashpad-stack-mode"))
 
+;; Set to `t' to enable config loading benchmarking and showing results when finished.
+(defconst --do-init-benchmark nil)
+
 (setq custom-theme-directory --themes-dir)
 
 ;; Custom.
@@ -108,6 +111,12 @@
 
 ;; Executed when loading is done.
 (defun loading-done ()
+  ;; Stop benchmarking if enabled and show tabulated findings.
+  (when --do-init-benchmark
+    (benchmark-init/deactivate)
+    (run-at-time "2 sec" nil
+                 #'benchmark-init/show-durations-tabulated))
+
   (show-loading-info)
 
   ;; Restore the file name handlers.
@@ -141,6 +150,13 @@
           debug-on-error t)
   (setq use-package-verbose nil
         use-package-expand-minimally t))
+
+;;;;; Benchmarking ;;;;;
+
+;; Load and activate config loading benchmarking. It is deactivated in `loading-done'.
+(when --do-init-benchmark
+  (use-package benchmark-init)
+  (benchmark-init/activate))
 
 ;;;;; Mac Setup ;;;;;
 
