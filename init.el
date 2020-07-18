@@ -1797,12 +1797,13 @@ don't want to fix with `SPC', and you can abort completely with
 ;; Improve flyspell responsiveness using idle timers.
 (use-package flyspell-lazy)
 
+;; Disabled due to not being used and slows init a bit: 155 ms
 ;; Tries to automatically detect the language of the buffer and setting the dictionary accordingly.
-(use-package auto-dictionary
-  :requires ispell
-  :config
-  ;;(add-hook 'text-mode-hook 'auto-dictionary-mode)
-  )
+;; (use-package auto-dictionary
+;;   :requires ispell
+;;   :config
+;;   ;;(add-hook 'text-mode-hook 'auto-dictionary-mode)
+;;   )
 
 ;;;;; File System ;;;;;
 
@@ -2364,11 +2365,6 @@ search when the prefix argument is defined."
 
   (global-anzu-mode t))
 
-;; Easy window resizing using keys.
-(use-package windresize
-  :config
-  (defalias 'wr 'windresize))
-
 ;; Show one buffer and hiding all others, do again to restore buffers.
 (use-package zygospore
   :config
@@ -2407,9 +2403,12 @@ search when the prefix argument is defined."
         which-key-show-early-on-C-h t)      ; Show instantly while waiting in idle delay.
   (which-key-mode))
 
-(use-package describe-number
-  :config
-  (global-set-key (kbd "M-?") 'describe-number-at-point))
+;; Disabled due to not being used and slows init a bit:
+;;   dep yabin: 87 ms
+;;   dep calc:  40 ms
+;; (use-package describe-number
+;;   :config
+;;   (global-set-key (kbd "M-?") 'describe-number-at-point))
 
 (use-package keyfreq
   :config
