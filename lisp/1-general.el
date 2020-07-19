@@ -66,7 +66,8 @@
 
 ;; Set default tab width to 2 spaces.
 (defconst --general-tab-width 2)
-(setq-default indent-tabs-mode nil)  ;; Use spaces instead of tabs
+(setq-default tab-width --general-tab-width)
+(setq-default indent-tabs-mode nil) ;; Use spaces instead of tabs
 
 ;; Sensible window splitting should follow the fill column.
 (when window-system
