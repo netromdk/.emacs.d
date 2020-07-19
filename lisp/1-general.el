@@ -65,7 +65,7 @@
   (add-hook hook (lambda () (setq fill-column --global-fill-column))))
 
 ;; Set default tab width to 2 spaces.
-(defconst general-tab-width 2)
+(defconst --general-tab-width 2)
 (setq-default indent-tabs-mode nil)  ;; Use spaces instead of tabs
 
 ;; Sensible window splitting should follow the fill column.

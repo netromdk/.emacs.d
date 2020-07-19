@@ -787,7 +787,7 @@ in compilation mode."
             ;; If in Qt code then use 4 spaces as tabs, otherwise the general tab width.
             (if (bound-and-true-p use-qt-tab-width)
                 (setq tab-width 4)
-              (setq tab-width general-tab-width))
+              (setq tab-width --general-tab-width))
             (setq c-basic-offset tab-width)
             (setq indent-tabs-mode nil)
 
@@ -818,7 +818,7 @@ in compilation mode."
 ;; Swift
 (use-package swift-mode
   :config
-  (setq swift-indent-offset general-tab-width))
+  (setq swift-indent-offset --general-tab-width))
 
 ;; Elisp
 (add-hook 'emacs-lisp-mode-hook
@@ -835,7 +835,7 @@ in compilation mode."
 
 ;; Shell script
 (require 'sh-script)
-(setq-default sh-basic-offset general-tab-width)
+(setq-default sh-basic-offset --general-tab-width)
 
 (setq auto-mode-alist
       (append '(("\\.[z]?sh$"  . sh-mode))
@@ -843,7 +843,7 @@ in compilation mode."
 
 ;; JavaScript
 (require 'js)
-(setq-default js-indent-level general-tab-width)
+(setq-default js-indent-level --general-tab-width)
 
 ;; It can take quite some time to load dense, minified JS files, so revert to plain old
 ;; fundamental-mode!
@@ -862,7 +862,7 @@ in compilation mode."
 
 ;; CSS
 (require 'css-mode)
-(setq-default css-indent-offset general-tab-width)
+(setq-default css-indent-offset --general-tab-width)
 
 (setq auto-mode-alist
       (append '(("\\.min.css$" . fundamental-mode) ;; Faster to load.
@@ -880,7 +880,7 @@ in compilation mode."
   :config
   (add-hook 'csharp-mode-hook
             (lambda ()
-              (setq c-basic-offset general-tab-width))))
+              (setq c-basic-offset --general-tab-width))))
 
 ;; Markdown
 (use-package markdown-mode
