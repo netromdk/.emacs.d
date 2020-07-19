@@ -2214,6 +2214,10 @@ search when the prefix argument is defined."
    ;; search results with an active region as well.
    anzu-deactivate-region t)
 
+  ;; Use anzu to query-replace via isearch.
+  (define-key isearch-mode-map (kbd "M-r") 'anzu-isearch-query-replace)
+  (define-key isearch-mode-map (kbd "M-R") 'anzu-isearch-query-replace-regexp)
+
   ;; Change the mode-line text summary of search/replace results.
   ;; Note: doom-modeline will use its own rendering so this function only takes effect when
   ;; doom-modeline-mode isn't active!
