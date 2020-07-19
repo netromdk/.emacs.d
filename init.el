@@ -1989,13 +1989,13 @@ stop region from expanding to next search match."
   (global-set-key (kbd "M-g") 'avy-hydra/body))
 
 ;; ace-isearch combines ace/avy, isearch and help-swoop. Typing one char will invoke ace/avy, typing
-;; more searches normally with isearch, and 6 or more invokes helm-swoop.
+;; more searches normally with isearch, and 10 or more invokes helm-swoop.
 (use-package ace-isearch
   :requires helm-swoop avy ace-jump-mode
   :config
   (setq ace-isearch-input-idle-jump-delay 1.0
         ace-isearch-function 'avy-goto-char
-        ace-isearch-input-length 7 ; Invoke helm-swoop when >= 7.
+        ace-isearch-input-length 10 ; Invoke helm-swoop when >= 10.
         ace-isearch-function-from-isearch 'ace-isearch-helm-swoop-from-isearch
         ace-isearch-use-jump 'printing-char)
   (global-ace-isearch-mode +1)
