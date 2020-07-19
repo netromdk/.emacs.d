@@ -1,20 +1,9 @@
 (defun byte-compile-confs ()
-  "Byte-compiles all configuration files."
+  "Byte-compiles all .el in ~/.emacs.d/lisp/ that are newer than
+.elc, and creates nonexistent .elc files."
   (interactive)
-  (byte-compile-file (concat --general-file ".el") t)
-  (byte-compile-file (concat --functions-file ".el") t)
-  (byte-compile-file (concat --system-cores-file ".el") t)
-  (byte-compile-file (concat --ksnrlog-mode-file ".el") t)
-  (byte-compile-file (concat --crashpad-stack-mode-file ".el") t))
-
-(defun byte-compile-confs-if-not-present ()
-  "If the .elc files are not there then compile all configuration
-files (I just assume all are not there if 'general.elc' is not
-there). This is necessary because the auto-compile feature won't
-compile to .elc if not already present first."
-  (interactive)
-  (if (not (file-exists-p (concat --general-file ".elc")))
-      (byte-compile-confs)))
+  (let ((arg 0)) ; 0 = always make .elc if nonexistent.
+    (byte-recompile-directory --lisp-dir arg)))
 
 ;; convert current buffer to unix EOLs
 (defun to-unix-eol ()

@@ -132,7 +132,7 @@
   (unless (server-running-p)
     (server-start))
 
-  (byte-compile-confs-if-not-present))
+  (byte-compile-confs))
 
 ;;;;; Package Configuration Macro ;;;;;
 
