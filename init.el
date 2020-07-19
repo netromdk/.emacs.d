@@ -2200,6 +2200,39 @@ search when the prefix argument is defined."
 
 (use-package window-numbering)
 
+;; Shows the number of matches for searches.
+(use-package anzu
+  :config
+  (defalias 'qr 'anzu-query-replace)
+  (defalias 'qrr 'anzu-query-replace-regexp)
+
+  (setq
+   ;; Don't add to modeline because doom-modeline will show anzu.
+   anzu-cons-mode-line-p nil
+
+   ;; Deactivate region, if any, when using anzu replace functionality because it's hard to see the
+   ;; search results with an active region as well.
+   anzu-deactivate-region t)
+
+  ;; Change the mode-line text summary of search/replace results.
+  ;; Note: doom-modeline will use its own rendering so this function only takes effect when
+  ;; doom-modeline-mode isn't active!
+  (defun netrom-anzu-update-func (here total)
+    (when anzu--state
+      (let ((status (cl-case anzu--state
+                      (search (format "(%s/%d%s)"
+                                      (anzu--format-here-position here total)
+                                      total (if anzu--overflow-p "+" "")))
+                      (replace-query (format "(%d replaces)" total))
+                      (replace (format "(%d/%d)" here total))))
+            (face (if (and (zerop total) (not (string= isearch-string "")))
+                      'anzu-mode-line-no-match
+                    'anzu-mode-line)))
+        (propertize status 'face face))))
+  (setq anzu-mode-line-update-function #'netrom-anzu-update-func)
+
+  (global-anzu-mode t))
+
 ;; (use-package spaceline
 ;;   :requires window-numbering
 ;;   :config
@@ -2223,7 +2256,7 @@ search when the prefix argument is defined."
 ;; Once for every computer, the `all-the-icons-install-fonts` function must be run to install fonts
 ;; needed by the modeline.
 (use-package doom-modeline
-  :requires window-numbering
+  :requires (window-numbering anzu)
   :hook (after-init . doom-modeline-mode)
   :config
   (window-numbering-mode t)
@@ -2324,31 +2357,6 @@ search when the prefix argument is defined."
    'nlinum-mode
    '(prog-mode-hook
      text-mode-hook)))
-
-;; Shows the number of matches for searches.
-(use-package anzu
-  :config
-  (defalias 'qr 'anzu-query-replace)
-  (defalias 'qrr 'anzu-query-replace-regexp)
-
-  ;; Don't add to modeline because spaceline will show anzu.
-  (setq anzu-cons-mode-line-p nil)
-
-  ;; Deactivate region, if any, when using anzu replace functionality because it's
-  ;; hard to see the search results with an active region as well.
-  (setq anzu-deactivate-region t)
-
-  ;; Change the mode-line text summary of search/replace results.
-  (defun netrom-anzu-update-func (here total)
-    (when anzu--state
-      (let ((status (cl-case anzu--state
-                      (search (format "%d/%d" here total))
-                      (replace-query (format "%d replaces" total))
-                      (replace (format "%d/%d" here total)))))
-        (propertize status 'face 'anzu-mode-line))))
-  (setq anzu-mode-line-update-function #'netrom-anzu-update-func)
-
-  (global-anzu-mode t))
 
 ;; Show one buffer and hiding all others, do again to restore buffers.
 (use-package zygospore
