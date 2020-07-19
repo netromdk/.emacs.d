@@ -345,6 +345,9 @@
    ;; 26.x
    ((and (version<= "26.0" emacs-version)
          (version< emacs-version "27.0"))
+    ;; Require is needed to avoid error:
+    ;;   completion--some: Symbol’s function definition is void: helm-flex-completion-try-completion
+    (require 'helm-mode)
     (setq completion-styles '(helm-flex))))
 
   (setq helm-candidate-number-limit 100
