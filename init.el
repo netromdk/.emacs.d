@@ -12,13 +12,6 @@
 (defconst --user-cache-dir (concat user-emacs-directory "cache/"))
 (defconst --auto-save-dir (concat user-emacs-directory "auto-save/"))
 
-;; These are without .el because `load` will add these as appropriately when using them.
-(defconst --general-file (concat --lisp-dir "general"))
-(defconst --functions-file (concat --lisp-dir "functions"))
-(defconst --system-cores-file (concat --lisp-dir "system-cores"))
-(defconst --ksnrlog-mode-file (concat --lisp-dir "ksnrlog-mode"))
-(defconst --crashpad-stack-mode-file (concat --lisp-dir "crashpad-stack-mode"))
-
 ;; Set to `t' to enable config loading benchmarking and showing results when finished.
 (defconst --do-init-benchmark nil)
 
@@ -48,10 +41,11 @@
 ;; Prefer newest version of a file. This is especially useful for compiled files.
 (setq load-prefer-newer t)
 
-;; Load general stuff that other init.d things might use.
-(load --functions-file)
-(load --general-file)
-(load --system-cores-file)
+;; Load general stuff that other init.el things might use. Loading without extension to
+;; automatically load the newest version of a file: .el or .elc.
+(mapc (lambda (file)
+        (load (file-name-sans-extension file)))
+      (directory-files --lisp-dir t "\\.el$"))
 
 ;; Create necessary directories if missing.
 (mkdir --user-cache-dir)
@@ -2079,15 +2073,11 @@ search when the prefix argument is defined."
 ;;;;; Luxion related ;;;;;
 
 ;; Associate `ksnrlog-mode' with KS NR log files to fontify them.
-(load --ksnrlog-mode-file)
 (add-to-list 'auto-mode-alist
              '("\\(render\\|configurator\\|monitor\\|watchdog\\)_.+\\.log\\'" . ksnrlog-mode))
 
-;; Load `crashpad-stack-mode' which is useful for fontifying call stacks created by
-;; crashpad/breakpad minidump_stackwalk (or minidump_analysis.py).
-(load --crashpad-stack-mode-file)
-
-;; Associate with files with "stack" and ".txt" in them.
+;; `crashpad-stack-mode' which is useful for fontifying call stacks created by crashpad/breakpad
+;; minidump_stackwalk (or minidump_analysis.py).
 ;; TODO: Might be too general?
 (add-to-list 'auto-mode-alist '(".*stack.*\\.txt\\'" . crashpad-stack-mode))
 
