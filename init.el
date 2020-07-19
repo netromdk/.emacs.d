@@ -6,17 +6,18 @@
 
 ;; Constants.
 (defconst --emacs-start-time (current-time))
+(defconst --lisp-dir (concat user-emacs-directory "lisp/"))
 (defconst --yas-dir (concat user-emacs-directory "snippets/"))
 (defconst --themes-dir (concat user-emacs-directory "themes/"))
 (defconst --user-cache-dir (concat user-emacs-directory "cache/"))
 (defconst --auto-save-dir (concat user-emacs-directory "auto-save/"))
 
 ;; These are without .el because `load` will add these as appropriately when using them.
-(defconst --general-file (concat user-emacs-directory "general"))
-(defconst --functions-file (concat user-emacs-directory "functions"))
-(defconst --system-cores-file (concat user-emacs-directory "system-cores"))
-(defconst --ksnrlog-mode-file (concat user-emacs-directory "ksnrlog-mode"))
-(defconst --crashpad-stack-mode-file (concat user-emacs-directory "crashpad-stack-mode"))
+(defconst --general-file (concat --lisp-dir "general"))
+(defconst --functions-file (concat --lisp-dir "functions"))
+(defconst --system-cores-file (concat --lisp-dir "system-cores"))
+(defconst --ksnrlog-mode-file (concat --lisp-dir "ksnrlog-mode"))
+(defconst --crashpad-stack-mode-file (concat --lisp-dir "crashpad-stack-mode"))
 
 ;; Set to `t' to enable config loading benchmarking and showing results when finished.
 (defconst --do-init-benchmark nil)
