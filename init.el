@@ -557,21 +557,9 @@ Command: %(netrom/compilation-command-string)
   (setq ido-enable-flex-matching t)
   (setq ido-use-faces nil))
 
-;; Company-statistics is a global minor mode built on top of the in-buffer completion system
-;; company-mode. The idea is to keep a log of a certain number of completions you choose, along with
-;; some context information, and use that to rank candidates the next time you have to choose —
-;; hopefully showing you likelier candidates at the top of the list.
-(use-package company-statistics
-  :config
-  (setq company-statistics-file
-        (concat --user-cache-dir "company-statistics-cache.el")))
-
 (use-package company
-  :requires company-statistics
   :config
   (setq company-idle-delay 0.3)
-
-  (add-hook 'global-company-mode-hook 'company-statistics-mode)
 
   (global-company-mode 1)
 
