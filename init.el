@@ -7,6 +7,7 @@
 ;; Constants.
 (defconst --emacs-start-time (current-time))
 (defconst --lisp-dir (concat user-emacs-directory "lisp/"))
+(defconst --misc-dir (concat user-emacs-directory "misc/"))
 (defconst --yas-dir (concat user-emacs-directory "snippets/"))
 (defconst --themes-dir (concat user-emacs-directory "themes/"))
 (defconst --user-cache-dir (concat user-emacs-directory "cache/"))
@@ -1585,6 +1586,8 @@ Projectile: %(projectile-project-root)
 
 (use-package multiple-cursors
   :requires hydra ace-mc
+  :init
+  (setq mc/list-file (concat --misc-dir "mc-lists.el"))
   :config
   (setq mc/mode-line
         (quote

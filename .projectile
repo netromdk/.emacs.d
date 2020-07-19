@@ -1,10 +1,9 @@
 -/.projectile
 -/.gitignore
--/.mc-lists.el
+-/misc/
 -/abbrev_defs
--/tramp
+-/tramp/
 -/*autoloads.el
 -/elpa/
--/php-language-server/
 -/.cask/
 -/eshell/

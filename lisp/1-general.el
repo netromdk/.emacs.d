@@ -16,6 +16,9 @@
 (setq echo-keystrokes 0.2)           ;; Echo keystrokes quicker.
 (setq tab-always-indent 'complete)   ;; First indent, but if indented then try to complete at point.
 
+;; Abbreviations file.
+(setq abbrev-file-name (concat --misc-dir "abbrev_defs"))
+
 ;; Don't show menu bar, scroll bar, and tool bar. In TTY they are not
 ;; defined.
 (when window-system
