@@ -69,10 +69,13 @@
 (setq-default tab-width --general-tab-width)
 (setq-default indent-tabs-mode nil) ;; Use spaces instead of tabs
 
-;; Sensible window splitting should follow the fill column.
-(when window-system
-  (setq split-height-threshold (* 2 --global-fill-column)
-        split-width-threshold (* 2 --global-fill-column)))
+(defun fix-split-thresholds ()
+  "Sensible window splitting should follow the fill column."
+  (interactive)
+  (when window-system
+    (setq split-height-threshold (* 2 --global-fill-column)
+          split-width-threshold (* 2 --global-fill-column))))
+(fix-split-thresholds)
 
 ;; Disable visible bell because it looks ugly, but that makes the audible bell and therefore we
 ;; "flash" the mode line by double-inverting instead.
