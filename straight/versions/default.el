@@ -27,7 +27,7 @@
  ("diff-hl" . "2281a89a3ddc6616073da6f190dda08d23b18ba6")
  ("diminish.el" . "6ec6ebc391371418efc6c98d70b013f34af5a2ee")
  ("dired-hacks" . "f49a8bbf95f70671a74a24f7f4de453b2686be46")
- ("doom-modeline" . "1c4711c719e4700694c49d8f1d91a7396dfa6746")
+ ("doom-modeline" . "d7f187efc6ae965e7a01902754dee3a4557110ff")
  ("dumb-jump" . "ba6a4e6af4ac04b273acb95dea12b9d929cf1b00")
  ("editorconfig-emacs" . "9a73ff743b9fe820301ea9b5c5c7804bfc967324")
  ("elisp-refs" . "0e7ea1574717108ddc2eda5e1bc883d44cd28257")
