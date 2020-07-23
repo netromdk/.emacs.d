@@ -821,11 +821,28 @@ in compilation mode."
   (setq swift-indent-offset --general-tab-width))
 
 ;; Elisp
+
+(defhydra netrom-elisp-hydra (:color blue :hint nil)
+  ;; Xref
+  ("d" xref-find-definitions "Definitions" :column "Xref")
+  ("D" xref-find-definitions-other-window "-> other win")
+  ("r" xref-find-references "References")
+  ("s" xref-find-apropos "Search")
+
+  ;; Buffer
+  ("b" eval-buffer "Eval buffer" :column "Buffer")
+  ("r" eval-region "Eval region")
+
+  ;; Misc
+  ("q" nil "Cancel" :column "Misc")
+  ("b" pop-tag-mark "Back"))
+
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
             (eldoc-mode)
             (local-set-key (kbd "C-c b") 'eval-buffer)
-            (local-set-key (kbd "C-c r") 'eval-region)))
+            (local-set-key (kbd "C-c r") 'eval-region)
+            (local-set-key (kbd "C-c C-c") 'netrom-elisp-hydra/body)))
 
 ;; Auto-compile .el files when loading and saving them.
 (use-package auto-compile
