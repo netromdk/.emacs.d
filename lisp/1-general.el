@@ -15,6 +15,7 @@
 (setq confirm-kill-emacs 'y-or-n-p)  ;; Confirm killing emacs (might not be on purpose..).
 (setq echo-keystrokes 0.2)           ;; Echo keystrokes quicker.
 (setq tab-always-indent 'complete)   ;; First indent, but if indented then try to complete at point.
+(setq vc-follow-symlinks t)          ;; Follow symlinks, don't ask to follow.
 
 ;; Abbreviations file.
 (setq abbrev-file-name (concat --misc-dir "abbrev_defs"))
