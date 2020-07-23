@@ -110,6 +110,7 @@
  ("string-edit.el" . "c44b65b4c5e9f52be9c14d88ca2f402a18d9e1dd")
  ("swift-mode" . "d266fbd300a1bf1592e1462ead4be093b8b68f98")
  ("transient" . "dd9c40adc3eb7f8656c8a17c3c450388610b7986")
+ ("twig-mode" . "2849f273a4855d3314a9c0cc84134f5b28ad5ea6")
  ("unfill" . "02c36a04364bcb586477ab79d2b5e0d4e6ae6d47")
  ("use-package" . "bfc5ecd69cdf71fae0af722d90336c66a6415f03")
  ("vlfi" . "cc02f2533782d6b9b628cec7e2dcf25b2d05a27c")

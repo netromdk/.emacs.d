@@ -870,6 +870,9 @@ in compilation mode."
                 ("\\.style$" . css-mode))
               auto-mode-alist))
 
+;; TWIG with SGML/HTML integration.
+(use-package twig-mode)
+
 ;; Nginx config mode.
 (use-package nginx-mode)
 
