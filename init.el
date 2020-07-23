@@ -828,6 +828,8 @@ in compilation mode."
   ("D" xref-find-definitions-other-window "-> other win")
   ("r" xref-find-references "References")
   ("s" xref-find-apropos "Search")
+  ("f" helm-imenu "Filter funcs/classes (Helm)")
+  ("F" helm-imenu-in-all-buffers "-> in all buffers")
 
   ;; Buffer
   ("b" eval-buffer "Eval buffer" :column "Buffer")
@@ -1389,6 +1391,7 @@ in compilation mode."
           ("t" lsp-goto-type-definition "Type definition")
           ("i" lsp-goto-implementation "Implementation")
           ("f" helm-imenu "Filter funcs/classes (Helm)")
+          ("F" helm-imenu-in-all-buffers "-> in all buffers")
           ("C-c" lsp-describe-session "Describe session")
 
           ;; Flycheck
