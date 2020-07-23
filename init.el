@@ -2241,7 +2241,7 @@ search when the prefix argument is defined."
   ;; Change the mode-line text summary of search/replace results.
   ;; Note: doom-modeline will use its own rendering so this function only takes effect when
   ;; doom-modeline-mode isn't active!
-  (defun netrom-anzu-update-func (here total)
+  (defun netrom/anzu-update-func (here total)
     (when anzu--state
       (let ((status (cl-case anzu--state
                       (search (format "(%s/%d%s)"
@@ -2253,7 +2253,7 @@ search when the prefix argument is defined."
                       'anzu-mode-line-no-match
                     'anzu-mode-line)))
         (propertize status 'face face))))
-  (setq anzu-mode-line-update-function #'netrom-anzu-update-func)
+  (setq anzu-mode-line-update-function #'netrom/anzu-update-func)
 
   (global-anzu-mode t))
 
