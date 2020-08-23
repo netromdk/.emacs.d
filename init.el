@@ -1213,20 +1213,9 @@ in compilation mode."
 (use-package helm-xref
   :requires helm
   :config
-  ;; Use helm-xref as the default xref show function.
-  (setq-default xref-show-xrefs-function 'helm-xref-show-xrefs)
-
-  ;; Show full filename in results instead of only basename which doesn't give enough context.
-  (setq helm-xref-candidate-formatting-function 'helm-xref-format-candidate-long)
-
-  ;; Setting `helm-xref-show-xrefs' as the xref show function breaks `find-name-dired' interactive
-  ;; search-and-replace across files, which uses `dired-do-find-regexp-and-replace'. Thus we make
-  ;; xref show results in the default way by setting `xref-show-xrefs-function' to
-  ;; `xref--show-xref-buffer' via an around-advice.
-  (defadvice dired-do-find-regexp-and-replace
-      (around netrom-no-helm-dired-do-find-regexp-and-replace activate)
-    (let ((xref-show-xrefs-function 'xref--show-xref-buffer))
-      ad-do-it)))
+  ;; Show the full file name in results instead of only the base name which doesn't always give
+  ;; enough context.
+  (setq helm-xref-candidate-formatting-function 'helm-xref-format-candidate-full-path))
 
 (defun netrom/xref-find-apropos-at-point (pattern)
   "Xref find apropos at point, if anything, and show prompt for PATTERN."
