@@ -581,16 +581,6 @@ Command: %(netrom/compilation-command-string)
   :config
   (company-flx-mode +1))
 
-(use-package company-lsp
-  :requires company
-  :config
-  (push 'company-lsp company-backends)
-
-   ;; Disable client-side cache because the LSP server does a better job.
-  (setq company-transformers nil
-        company-lsp-async t
-        company-lsp-cache-candidates nil))
-
 ;;;;; Development ;;;;;
 
 (use-package cmake-font-lock
