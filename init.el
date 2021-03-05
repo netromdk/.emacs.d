@@ -1122,12 +1122,12 @@ in compilation mode."
   (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)
   (define-key haskell-cabal-mode-map (kbd "C-c C-o") 'haskell-compile))
 
-(use-package company-ghc
-  :requires company haskell-mode
-  :config
-  (setq company-ghc-show-info t)
-  (add-hook 'haskell-mode-hook 'company-mode)
-  (add-to-list 'company-backends 'company-ghc))
+;; (use-package company-ghc
+;;   :requires company haskell-mode
+;;   :config
+;;   (setq company-ghc-show-info t)
+;;   (add-hook 'haskell-mode-hook 'company-mode)
+;;   (add-to-list 'company-backends 'company-ghc))
 
 ;; Setup: cabal install hindent
 (use-package hindent
