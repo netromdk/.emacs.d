@@ -1394,10 +1394,10 @@ in compilation mode."
   :requires lsp-mode flycheck
   :config
 
-  (setq lsp-ui-doc-enable t
-        lsp-ui-doc-use-childframe t
-        lsp-ui-doc-position 'top
-        lsp-ui-doc-include-signature t
+  (setq lsp-ui-doc-enable nil
+        ;; lsp-ui-doc-use-childframe t
+        ;; lsp-ui-doc-position 'top
+        ;; lsp-ui-doc-include-signature t
         lsp-ui-sideline-enable nil
         lsp-ui-flycheck-enable t
         lsp-ui-flycheck-list-position 'right
