@@ -331,6 +331,7 @@
 (require 'recentf)
 
 (use-package helm
+  :requires magit
   :config
   ;; To get the best fuzzy completion style via helm: (via helm docs)
   ;; > For a better experience, if you don't know what to use, set
@@ -372,6 +373,9 @@
   (setq helm-autoresize-min-height 10
         helm-autoresize-max-height 40)
   (helm-autoresize-mode t)
+
+  ;; Instruct magit to use helm completion.
+  (add-hook 'magit-mode-hook 'helm-mode)
 
   ;; Aliases for viewing packages.
   (defalias 'lp 'helm-list-elisp-packages)
