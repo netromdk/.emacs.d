@@ -281,6 +281,9 @@
   ;; Bindings.
   (global-set-key (kbd "C-x g") 'magit-status)
 
+  ;; Show word-granularity differences within current diff hunk.
+  (setq magit-diff-refine-hunk t)
+
   ;; Show status full screen.
   (defadvice magit-status (around magit-fullscreen activate)
     (window-configuration-to-register :magit-fullscreen)
