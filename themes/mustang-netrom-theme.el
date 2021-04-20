@@ -78,7 +78,9 @@
  '(powerline-active2 ((t (:inherit mode-line :background "#9E9E9E"))))
  '(diff-hl-change ((t (:background "#888822" :foreground "#ff9800"))))
  '(diff-added ((t (:background "#228822"))))
+ '(diff-refine-added ((t (:inherit diff-added :foreground "#FFFFFF")))) ;; word-granularity
  '(diff-removed ((t (:background "#882222"))))
+ '(diff-refine-removed ((t (:inherit diff-removed :foreground "#FFFFFF")))) ;; word-granularity
  '(diff-file-header ((t (:foreground "#ff9800"))))
  '(diff-hunk-header ((t (:foreground "#b1d631"))))
  '(magit-item-highlight ((t (:background "#303030"))))
