@@ -76,13 +76,19 @@
  '(sml/position-percentage ((t (:foreground "#df9f2d" :weight normal))))
  '(powerline-active1 ((t (:inherit mode-line :background "#6D6D6D" :foreground "#D0D0D0"))))
  '(powerline-active2 ((t (:inherit mode-line :background "#9E9E9E"))))
+
+ ;; Diff
  '(diff-hl-change ((t (:background "#888822" :foreground "#ff9800"))))
  '(diff-added ((t (:background "#228822"))))
- '(diff-refine-added ((t (:inherit diff-added :foreground "#FFFFFF")))) ;; word-granularity
  '(diff-removed ((t (:background "#882222"))))
- '(diff-refine-removed ((t (:inherit diff-removed :foreground "#FFFFFF")))) ;; word-granularity
+
+ ;;;; word-granularity
+ '(diff-refine-added ((t (:inherit diff-added :foreground "#FFFFFF" :weight bold))))
+ '(diff-refine-removed ((t (:inherit diff-removed :foreground "#FFFFFF" :weight bold))))
+
  '(diff-file-header ((t (:foreground "#ff9800"))))
  '(diff-hunk-header ((t (:foreground "#b1d631"))))
+
  '(magit-item-highlight ((t (:background "#303030"))))
  '(magit-tag ((t (:background "#343434" :foreground "#b1d613" :box 1))))
  '(magit-log-head-label-tags ((t (:inherit magit-tag))))
