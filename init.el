@@ -466,7 +466,7 @@ Command: %(netrom/compilation-command-string)
     ("c" compile "Compile")
     ("C" compile-from-buffer-folder "Compile from buffer folder")
     ("r" recompile "Recompile")
-    ("k" kill-compilation "Stop")
+    ("k" netrom/kill-compilation "Stop")
     ("n" next-error "Next error")
     ("N" next-error-skip-warnings "Next error, skip warnings")
     ("p" previous-error "Previous error")
@@ -676,6 +676,13 @@ in compilation mode."
       (while t
         (next-error))
     (user-error nil)))
+
+(defun netrom/kill-compilation ()
+  "Sometimes `kill-compilation' doesn't work because it finds the
+wrong buffer. Here `compilation-find-buffer' uses non-nil
+`AVOID-CURRENT' to only use current as a last resort."
+  (interactive)
+  (interrupt-process (get-buffer-process (compilation-find-buffer t))))
 
 ;; Closes *compilation* buffer after successful compilation, and otherwise when the failure was
 ;; fixed to compile, it restores the original window configuration.
