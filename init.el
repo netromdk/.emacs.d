@@ -412,22 +412,22 @@
   (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
   (define-key isearch-mode-map (kbd "M-I") 'helm-multi-swoop-all-from-isearch))
 
-(use-package helm-gtags
-  :requires helm
-  :config
-  (setq helm-gtags-maximum-candidates 1000)
+;; (use-package helm-gtags
+;;   :requires helm
+;;   :config
+;;   (setq helm-gtags-maximum-candidates 1000)
 
-  ;; Enable helm-gtags-mode
-  (add-hook 'c-mode-hook 'helm-gtags-mode)
-  (add-hook 'c++-mode-hook 'helm-gtags-mode)
-  (add-hook 'asm-mode-hook 'helm-gtags-mode)
+;;   ;; Enable helm-gtags-mode
+;;   (add-hook 'c-mode-hook 'helm-gtags-mode)
+;;   (add-hook 'c++-mode-hook 'helm-gtags-mode)
+;;   (add-hook 'asm-mode-hook 'helm-gtags-mode)
 
-  ;; Set key bindings
-  (eval-after-load "helm-gtags"
-    '(progn
-       (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-find-tag)
-       (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
-       (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol))))
+;;   ;; Set key bindings
+;;   (eval-after-load "helm-gtags"
+;;     '(progn
+;;        (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-find-tag)
+;;        (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
+;;        (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol))))
 
 (use-package helm-ag
   :requires helm
@@ -812,10 +812,10 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
                 ("\\.cc$" . c++-mode))
               auto-mode-alist))
 
-;; Swift
-(use-package swift-mode
-  :config
-  (setq swift-indent-offset --general-tab-width))
+;; ;; Swift
+;; (use-package swift-mode
+;;   :config
+;;   (setq swift-indent-offset --general-tab-width))
 
 ;; Elisp
 
@@ -892,14 +892,13 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 ;; Nginx config mode.
 (use-package nginx-mode)
 
-;; C#
-(use-package csharp-mode
-  :mode (("\\.cs$" . csharp-mode))
-
-  :config
-  (add-hook 'csharp-mode-hook
-            (lambda ()
-              (setq c-basic-offset --general-tab-width))))
+;; ;; C#
+;; (use-package csharp-mode
+;;   :mode (("\\.cs$" . csharp-mode))
+;;   :config
+;;   (add-hook 'csharp-mode-hook
+;;             (lambda ()
+;;               (setq c-basic-offset --general-tab-width))))
 
 ;; Markdown
 (use-package markdown-mode
@@ -1074,75 +1073,75 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
         indent-guide-delay 0.5)
   (add-hook 'prog-mode-hook 'indent-guide-mode))
 
-;; Jump to definition for multiple languages without configuration.
-(use-package dumb-jump
-  :requires helm
-  :config
-  (setq dumb-jump-selector 'helm
-        dumb-jump-max-find-time 5
-        dumb-jump-aggressive nil)
-  (defhydra dumb-jump-hydra (:color blue :columns 3)
-    "Dumb Jump"
-    ("j" dumb-jump-go "Go")
-    ("o" dumb-jump-go-other-window "Other window")
-    ("e" dumb-jump-go-prefer-external "Go external")
-    ("x" dumb-jump-go-prefer-external-other-window "Go external other window")
-    ("i" dumb-jump-go-prompt "Prompt")
-    ("l" dumb-jump-quick-look "Quick look")
-    ("b" dumb-jump-back "Back")))
-
-;; Haskell related packages
-
-;; Setup: cabal install hasktags stylish-haskell hoogle
-;; It is assumed that PATH is updated to point to where to find Haskell/cabal binaries!
-(use-package haskell-mode
-  :config
-  (setq haskell-tags-on-save t
-        haskell-process-type 'auto
-        haskell-process-suggest-remove-import-lines t
-        haskell-process-auto-import-loaded-modules t
-        haskell-process-log t)
-
-  (defun my-haskell-hoogle-browser ()
-    "Force hoogle to search via the browser for `haskell-ident-at-point'."
-    (interactive)
-    (let ((haskell-hoogle-command nil)) ; `nil' forces usage of browser.
-      (haskell-hoogle (haskell-ident-at-point))))
-
-  ;; TODO: Make hydra
-  (define-key haskell-mode-map [f8] 'haskell-navigate-imports)
-  (define-key haskell-mode-map (kbd "C-c f") 'haskell-mode-stylish-buffer)
-  (define-key haskell-mode-map (kbd "C-c C-o") 'haskell-compile)
-  (define-key haskell-mode-map (kbd "C-c C-h") 'haskell-hoogle)
-  (define-key haskell-mode-map (kbd "C-c C-b") 'my-haskell-hoogle-browser)
-  (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
-  (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
-
-  (define-key haskell-mode-map (kbd "C-c C-n C-t") 'haskell-process-do-type)
-  (define-key haskell-mode-map (kbd "C-c C-n C-i") 'haskell-process-do-info)
-  (define-key haskell-mode-map (kbd "C-c C-n C-c") 'haskell-process-cabal-build)
-  (define-key haskell-mode-map (kbd "C-c C-n c") 'haskell-process-cabal)
-
-  (define-key haskell-cabal-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
-  (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
-  (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
-  (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)
-  (define-key haskell-cabal-mode-map (kbd "C-c C-o") 'haskell-compile))
-
-;; (use-package company-ghc
-;;   :requires company haskell-mode
+;; ;; Jump to definition for multiple languages without configuration.
+;; (use-package dumb-jump
+;;   :requires helm
 ;;   :config
-;;   (setq company-ghc-show-info t)
-;;   (add-hook 'haskell-mode-hook 'company-mode)
-;;   (add-to-list 'company-backends 'company-ghc))
+;;   (setq dumb-jump-selector 'helm
+;;         dumb-jump-max-find-time 5
+;;         dumb-jump-aggressive nil)
+;;   (defhydra dumb-jump-hydra (:color blue :columns 3)
+;;     "Dumb Jump"
+;;     ("j" dumb-jump-go "Go")
+;;     ("o" dumb-jump-go-other-window "Other window")
+;;     ("e" dumb-jump-go-prefer-external "Go external")
+;;     ("x" dumb-jump-go-prefer-external-other-window "Go external other window")
+;;     ("i" dumb-jump-go-prompt "Prompt")
+;;     ("l" dumb-jump-quick-look "Quick look")
+;;     ("b" dumb-jump-back "Back")))
 
-;; Setup: cabal install hindent
-(use-package hindent
-  :requires haskell-mode
-  :config
-  (add-hook 'haskell-mode-hook #'hindent-mode))
+;; ;; Haskell related packages
 
-;; End of Haskell related packages
+;; ;; Setup: cabal install hasktags stylish-haskell hoogle
+;; ;; It is assumed that PATH is updated to point to where to find Haskell/cabal binaries!
+;; (use-package haskell-mode
+;;   :config
+;;   (setq haskell-tags-on-save t
+;;         haskell-process-type 'auto
+;;         haskell-process-suggest-remove-import-lines t
+;;         haskell-process-auto-import-loaded-modules t
+;;         haskell-process-log t)
+
+;;   (defun my-haskell-hoogle-browser ()
+;;     "Force hoogle to search via the browser for `haskell-ident-at-point'."
+;;     (interactive)
+;;     (let ((haskell-hoogle-command nil)) ; `nil' forces usage of browser.
+;;       (haskell-hoogle (haskell-ident-at-point))))
+
+;;   ;; TODO: Make hydra
+;;   (define-key haskell-mode-map [f8] 'haskell-navigate-imports)
+;;   (define-key haskell-mode-map (kbd "C-c f") 'haskell-mode-stylish-buffer)
+;;   (define-key haskell-mode-map (kbd "C-c C-o") 'haskell-compile)
+;;   (define-key haskell-mode-map (kbd "C-c C-h") 'haskell-hoogle)
+;;   (define-key haskell-mode-map (kbd "C-c C-b") 'my-haskell-hoogle-browser)
+;;   (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
+;;   (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+
+;;   (define-key haskell-mode-map (kbd "C-c C-n C-t") 'haskell-process-do-type)
+;;   (define-key haskell-mode-map (kbd "C-c C-n C-i") 'haskell-process-do-info)
+;;   (define-key haskell-mode-map (kbd "C-c C-n C-c") 'haskell-process-cabal-build)
+;;   (define-key haskell-mode-map (kbd "C-c C-n c") 'haskell-process-cabal)
+
+;;   (define-key haskell-cabal-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+;;   (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
+;;   (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
+;;   (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)
+;;   (define-key haskell-cabal-mode-map (kbd "C-c C-o") 'haskell-compile))
+
+;; ;; (use-package company-ghc
+;; ;;   :requires company haskell-mode
+;; ;;   :config
+;; ;;   (setq company-ghc-show-info t)
+;; ;;   (add-hook 'haskell-mode-hook 'company-mode)
+;; ;;   (add-to-list 'company-backends 'company-ghc))
+
+;; ;; Setup: cabal install hindent
+;; (use-package hindent
+;;   :requires haskell-mode
+;;   :config
+;;   (add-hook 'haskell-mode-hook #'hindent-mode))
+
+;; ;; End of Haskell related packages
 
 ;; YAML
 (use-package yaml-mode
@@ -1967,7 +1966,7 @@ stop region from expanding to next search match."
 ;; (define-key isearch-mode-map (kbd "M-z") 'zap-to-isearch)
 
 (use-package avy
-  :requires (hydra dumb-jump)
+  :requires (hydra)
   :config
   (defhydra avy-hydra (:color blue :columns 3)
     "avy-goto"
@@ -1980,8 +1979,7 @@ stop region from expanding to next search match."
     ("w" avy-goto-word-1 "Word")
     ("s" avy-goto-subword-1 "Subword")
     ("l" avy-goto-char-in-line "Char in line")
-    ("," avy-pop-mark "Pop mark")
-    ("d" dumb-jump-hydra/body "Dumb jump hydra"))
+    ("," avy-pop-mark "Pop mark"))
   (global-set-key (kbd "M-g") 'avy-hydra/body))
 
 ;; ace-isearch combines ace/avy, isearch and help-swoop. Typing one char will invoke ace/avy, typing
@@ -2300,9 +2298,6 @@ search when the prefix argument is defined."
 
   (eval-after-load "rainbow-mode"
     '(diminish 'rainbow-mode))
-
-  (eval-after-load "helm-gtags"
-    '(diminish 'helm-gtags-mode))
 
   (eval-after-load "yasnippet"
     '(diminish 'yas-minor-mode "y"))
