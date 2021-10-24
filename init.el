@@ -429,12 +429,6 @@
        (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
        (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol))))
 
-(use-package helm-flx
-  :requires (helm flx)
-  :config
-  ;; Use flx for better search results.
-  (helm-flx-mode +1))
-
 (use-package helm-ag
   :requires helm
   :config
@@ -1565,19 +1559,6 @@ Projectile: %(projectile-project-root)
 
   (diff-hl-flydiff-mode 1)
   (global-diff-hl-mode 1))
-
-(use-package gitignore-mode)
-(use-package gitconfig-mode)
-
-(use-package helm-ls-git
-  :requires helm
-  :bind ("M-+" . helm-ls-git-ls))
-
-;; Show git commit at line.
-(use-package git-messenger
-  :bind ("C-x v p" . git-messenger:popup-message)
-  :config
-  (setq git-messenger:show-detail t))
 
 (use-package git-timemachine
   :config
