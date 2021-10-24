@@ -1229,10 +1229,10 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
     (add-hook 'c++-mode-hook
               (lambda ()
                 (progn
-                  (setq flycheck-clang-language-standard "c++14"
+                  (setq flycheck-clang-language-standard "c++17"
                         flycheck-clang-standard-library "libc++"
-                        flycheck-gcc-language-standard "c++14"
-                        flycheck-cppcheck-standards '("c++14")
+                        flycheck-gcc-language-standard "c++17"
+                        flycheck-cppcheck-standards '("c++17")
                         flycheck-cppcheck-inconclusive t
                         flycheck-cppcheck-checks '("all")
 
