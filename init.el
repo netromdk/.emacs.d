@@ -1446,33 +1446,34 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   (projectile-mode))
 
 (use-package helm-projectile
-  :requires (projectile helm helm-gtags helm-ag hydra magit)
+  :requires (projectile helm ;; helm-gtags
+                        helm-ag hydra magit)
   :config
   (setq helm-projectile-fuzzy-match t
         projectile-switch-project-action 'helm-projectile-find-file)
 
-  (defun netrom/helm-update-gtags (arg)
-    "Update gtags for all files or create if they don't already
-exist. When given the prefix argument present gtags will be
-removed and then recreated."
-    (interactive "P")
-    (let ((gtags-file (concat (projectile-project-root) "GTAGS"))
-          (grtags-file (concat (projectile-project-root) "GRTAGS"))
-          (gpath-file (concat (projectile-project-root) "GPATH")))
-      (progn
-        (when arg
-          (message "Removing gtags..")
-          (delete-file gtags-file)
-          (delete-file grtags-file)
-          (delete-file gpath-file))
-        (if (file-exists-p gtags-file)
-            (progn
-              (message "Updating gtags..")
-              (universal-argument)
-              (helm-gtags-update-tags))
-          (progn
-            (message "Creating gtags..")
-            (helm-gtags-create-tags (projectile-project-root) "default"))))))
+  ;;   (defun netrom/helm-update-gtags (arg)
+  ;;     "Update gtags for all files or create if they don't already
+  ;; exist. When given the prefix argument present gtags will be
+  ;; removed and then recreated."
+  ;;     (interactive "P")
+  ;;     (let ((gtags-file (concat (projectile-project-root) "GTAGS"))
+  ;;           (grtags-file (concat (projectile-project-root) "GRTAGS"))
+  ;;           (gpath-file (concat (projectile-project-root) "GPATH")))
+  ;;       (progn
+  ;;         (when arg
+  ;;           (message "Removing gtags..")
+  ;;           (delete-file gtags-file)
+  ;;           (delete-file grtags-file)
+  ;;           (delete-file gpath-file))
+  ;;         (if (file-exists-p gtags-file)
+  ;;             (progn
+  ;;               (message "Updating gtags..")
+  ;;               (universal-argument)
+  ;;               (helm-gtags-update-tags))
+  ;;           (progn
+  ;;             (message "Creating gtags..")
+  ;;             (helm-gtags-create-tags (projectile-project-root) "default"))))))
 
   (defun netrom/helm-do-ag-at-point ()
     "First select folder and then search using `helm-do-ag' with symbol at point, if anything."
