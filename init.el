@@ -328,117 +328,41 @@
     (magit-mode-setup #'magit-staging-mode)
     (delete-other-windows)))
 
-;;;;; HELM ;;;;;
+;;;;; Selectrum ;;;;;
 
-(require 'recentf)
-
-(use-package helm
-  :requires magit
+(use-package orderless
   :config
-  ;; To get the best fuzzy completion style via helm: (via helm docs)
-  ;; > For a better experience, if you don't know what to use, set
-  ;; > completion-styles to '(flex) if you are using emacs-27 or to
-  ;; > '(helm-flex) if you are using emacs-26 and keep 'emacs as default
-  ;; > value for helm-completion-style.
-  ;; Default: (setq completion-styles '(basic partial-completion emacs22))
-  (cond
-   ;; 27+
-   ((version<= "27.0" emacs-version)
-    (setq completion-styles '(flex)))
+  (setq completion-styles '(orderless)))
 
-   ;; 26.x
-   ((and (version<= "26.0" emacs-version)
-         (version< emacs-version "27.0"))
-    ;; Require is needed to avoid error:
-    ;;   completion--some: Symbol’s function definition is void: helm-flex-completion-try-completion
-    (require 'helm-mode)
-    (setq completion-styles '(helm-flex))))
-
-  (setq helm-candidate-number-limit 100
-        helm-display-source-at-screen-top t
-        helm-exit-idle-delay 0
-        helm-full-frame nil
-
-        ;; Fuzzy matching.
-        helm-apropos-fuzzy-match t
-        helm-buffers-fuzzy-matching t
-        helm-recentf-fuzzy-match t
-        helm-ff-fuzzy-matching t
-
-        helm-ff-file-name-history-use-recentf t
-        helm-split-window-default-side (quote below)
-        helm-reuse-last-window-split-state nil
-        helm-split-window-in-side-p t ;; split in same window
-        helm-quick-update t) ;; don't show invisible candidates
-
-  ;; Resize helm according to number of results within min/max height.
-  (setq helm-autoresize-min-height 10
-        helm-autoresize-max-height 40)
-  (helm-autoresize-mode t)
-
-  ;; Instruct magit to use helm completion.
-  (add-hook 'magit-mode-hook 'helm-mode)
-
-  ;; Aliases for viewing packages.
-  (defalias 'lp 'helm-list-elisp-packages)
-  (defalias 'lpn 'helm-list-elisp-packages-no-fetch)
-
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-  (global-set-key (kbd "C-x b") 'helm-mini)
-  (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files)
-
-  ;; Enhance the help menu using helm functionality.
-  (define-key 'help-command (kbd "a") 'helm-apropos)
-  (define-key 'help-command (kbd "r") 'helm-info-emacs)
-  (define-key 'help-command (kbd "C-l") 'helm-locate-library)
-  (define-key 'help-command (kbd "SPC") 'helm-all-mark-rings))
-
-(use-package helm-swoop
-  :requires helm
+(use-package prescient
   :config
-  (setq helm-swoop-split-direction (quote split-window-vertically)
-        helm-swoop-split-with-multiple-windows t
-        helm-swoop-candidate-number-limit 1000)
+  (setq prescient-save-file (concat user-emacs-directory "prescient-save"))
+  (prescient-persist-mode +1))
 
-  ;; Use isearch bindings to move up and down.
-  (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
-  (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
-  (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
-  (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
-
-  ;; Activate helm-swoop on isearch results.
-  (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
-  (define-key isearch-mode-map (kbd "M-I") 'helm-multi-swoop-all-from-isearch))
-
-;; (use-package helm-gtags
-;;   :requires helm
-;;   :config
-;;   (setq helm-gtags-maximum-candidates 1000)
-
-;;   ;; Enable helm-gtags-mode
-;;   (add-hook 'c-mode-hook 'helm-gtags-mode)
-;;   (add-hook 'c++-mode-hook 'helm-gtags-mode)
-;;   (add-hook 'asm-mode-hook 'helm-gtags-mode)
-
-;;   ;; Set key bindings
-;;   (eval-after-load "helm-gtags"
-;;     '(progn
-;;        (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-find-tag)
-;;        (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
-;;        (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol))))
-
-(use-package helm-ag
-  :requires helm
+(use-package marginalia
   :config
-  (setq helm-ag-base-command "ag --nocolor --nogroup --smart-case"
-        helm-ag-ignore-patterns '("*.min.js" "*.min.css")))
+  (marginalia-mode +1))
+
+(use-package selectrum
+  :requires orderless
+  :config
+  (setq selectrum-refine-candidates-function #'orderless-filter
+        selectrum-highlight-candidates-function #'orderless-highlight-matches
+        selectrum-count-style 'current/matches)
+  (selectrum-mode +1))
+
+(use-package selectrum-prescient
+  :requires selectrum orderless prescient
+  :config
+  ;; Use filtring from only `completion-styles' and not selectrum.
+  (setq selectrum-prescient-enable-filtering nil)
+
+  ;; But enable frequency and recency ordering from selectrum.
+  (selectrum-prescient-mode +1))
 
 ;;;;; Hydra ;;;;;
 
 (use-package hydra
-  :requires helm
   :config
   ;; Easier cycling of yanking.
   (defhydra yank-pop-hydra ()
@@ -446,8 +370,7 @@
     ("C-y" yank nil)
     ("M-y" yank-pop nil)
     ("y" (yank-pop 1) "next")
-    ("Y" (yank-pop -1) "prev")
-    ("l" helm-show-kill-ring "list" :color blue))
+    ("Y" (yank-pop -1) "prev"))
 
   (global-set-key (kbd "M-y") #'yank-pop-hydra/yank-pop)
   (global-set-key (kbd "C-y") #'yank-pop-hydra/yank)
@@ -825,8 +748,8 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   ("D" xref-find-definitions-other-window "-> other win")
   ("r" xref-find-references "References")
   ("s" xref-find-apropos "Search")
-  ("f" helm-imenu "Filter funcs/classes (Helm)")
-  ("F" helm-imenu-in-all-buffers "-> in all buffers")
+  ("f" consult-imenu "Filter funcs/classes")
+  ("F" consult-imenu-multi "-> in all buffers")
 
   ;; Buffer
   ("b" eval-buffer "Eval buffer" :column "Buffer")
@@ -922,34 +845,12 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   (add-hook 'prog-mode-hook 'fic-mode))
 
 (use-package yasnippet
-  :requires helm
   :config
   ;; Add local snippets to override some of the defaults in elpa folder.
   (add-to-list 'yas-snippet-dirs --yas-dir)
 
   ;; (setq yas-prompt-functions
   ;;       '(yas-ido-prompt yas-dropdown-prompt yas-completing-prompt yas-x-prompt yas-no-prompt))
-
-  (defun shk-yas/helm-prompt (prompt choices &optional display-fn)
-    "Use helm to select a snippet. Put this into `yas/prompt-functions.'"
-    (interactive)
-    (setq display-fn (or display-fn 'identity))
-    (if (require 'helm-config)
-        (let (tmpsource cands result rmap)
-          (setq cands (mapcar (lambda (x) (funcall display-fn x)) choices))
-          (setq rmap (mapcar (lambda (x) (cons (funcall display-fn x) x)) choices))
-          (setq tmpsource
-                (list
-                 (cons 'name prompt)
-                 (cons 'candidates cands)
-                 '(action . (("Expand" . (lambda (selection) selection))))
-                 ))
-          (setq result (helm-other-buffer '(tmpsource) "*helm-select-yasnippet"))
-          (if (null result)
-              (signal 'quit "user quit!")
-            (cdr (assoc result rmap))))
-      nil))
-  (add-to-list 'yas-prompt-functions 'shk-yas/helm-prompt)
 
   (yas-global-mode 1)
 
@@ -995,10 +896,6 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
     (or (abbrev--before-point) (yasnippet-can-fire-p)))
 
   (add-hook 'post-command-hook 'my/change-cursor-color-when-can-expand))
-
-(use-package helm-c-yasnippet
-  :requires yasnippet
-  :bind ("C-c y" . helm-yas-complete))
 
 (use-package smartparens
   :config
@@ -1205,14 +1102,6 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 ;; Don't show prompt unless nothing is under point or if it has to show it.
 (setq-default xref-prompt-for-identifier nil)
 
-;; Show xref results in helm.
-(use-package helm-xref
-  :requires helm
-  :config
-  ;; Show the full file name in results instead of only the base name which doesn't always give
-  ;; enough context.
-  (setq helm-xref-candidate-formatting-function 'helm-xref-format-candidate-full-path))
-
 (defun netrom/xref-find-apropos-at-point (pattern)
   "Xref find apropos at point, if anything, and show prompt for PATTERN."
   (interactive
@@ -1221,7 +1110,7 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   (xref-find-apropos pattern))
 
 (use-package flycheck
-  :requires helm-flycheck hydra flycheck-pycheckers flycheck-inline
+  :requires hydra flycheck-pycheckers flycheck-inline
   :config
   (progn
     ;; C++11
@@ -1245,7 +1134,6 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
                   '(emacs-lisp-checkdoc c/c++-clang c/c++-gcc))
 
     (defalias 'fcn 'flycheck-next-error)
-    (defalias 'hf 'helm-flycheck)
 
     (add-hook 'prog-mode-hook 'flycheck-mode)
 
@@ -1327,20 +1215,9 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 ;;    composer require felixfbecker/language-server
 ;;    composer run-script --working-dir=vendor/felixfbecker/language-server parse-stubs
 
-(use-package helm-lsp
-  :config
-  (defun netrom/helm-lsp-workspace-symbol-at-point ()
-    (interactive)
-    (let ((current-prefix-arg t))
-      (call-interactively #'helm-lsp-workspace-symbol)))
-
-  (defun netrom/helm-lsp-global-workspace-symbol-at-point ()
-    (interactive)
-    (let ((current-prefix-arg t))
-      (call-interactively #'helm-lsp-global-workspace-symbol))))
 
 (use-package lsp-mode
-  :requires hydra helm helm-lsp
+  :requires hydra
   :config
   (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
         lsp-enable-xref t)
@@ -1360,9 +1237,6 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
           ("d" xref-find-definitions "Definitions" :column "Xref")
           ("D" xref-find-definitions-other-window "-> other win")
           ("r" xref-find-references "References")
-          ("s" netrom/helm-lsp-workspace-symbol-at-point "Helm search")
-          ("S" netrom/helm-lsp-global-workspace-symbol-at-point "Helm global search")
-          ;;("a" netrom/xref-find-apropos-at-point "Apropos")
 
           ;; Peek
           ("C-d" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
@@ -1375,8 +1249,8 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
           ("R" lsp-rename "Rename")
           ("t" lsp-goto-type-definition "Type definition")
           ("i" lsp-goto-implementation "Implementation")
-          ("f" helm-imenu "Filter funcs/classes (Helm)")
-          ("F" helm-imenu-in-all-buffers "-> in all buffers")
+          ("f" consult-imenu "Filter funcs/classes (Consult)")
+          ("F" consult-imenu-multi "-> in all buffers")
           ("C-c" lsp-describe-session "Describe session")
 
           ;; Flycheck
@@ -1429,7 +1303,13 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
 ;;;;; Project Handling ;;;;;
 
+(use-package ag
+  :config
+  (setq ag-arguments '("--nocolor" "--nogroup" "--smart-case")
+        ag-ignore-list '("*.min.js" "*.min.css")))
+
 (use-package projectile
+  :requires hydra ag
   :init
   (defun netrom/projectile-mode-line ()
     "Report project name in the mode line."
@@ -1441,69 +1321,14 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   (setq projectile-keymap-prefix (kbd "C-x p")
         projectile-enable-caching t
         projectile-mode-line-prefix "ρ"
-        projectile-mode-line-function 'netrom/projectile-mode-line)
+        projectile-mode-line-function 'netrom/projectile-mode-line
+        projectile-switch-project-action 'projectile-find-file)
   :config
-  (projectile-mode))
-
-(use-package helm-projectile
-  :requires (projectile helm ;; helm-gtags
-                        helm-ag hydra magit)
-  :config
-  (setq helm-projectile-fuzzy-match t
-        projectile-switch-project-action 'helm-projectile-find-file)
-
-  ;;   (defun netrom/helm-update-gtags (arg)
-  ;;     "Update gtags for all files or create if they don't already
-  ;; exist. When given the prefix argument present gtags will be
-  ;; removed and then recreated."
-  ;;     (interactive "P")
-  ;;     (let ((gtags-file (concat (projectile-project-root) "GTAGS"))
-  ;;           (grtags-file (concat (projectile-project-root) "GRTAGS"))
-  ;;           (gpath-file (concat (projectile-project-root) "GPATH")))
-  ;;       (progn
-  ;;         (when arg
-  ;;           (message "Removing gtags..")
-  ;;           (delete-file gtags-file)
-  ;;           (delete-file grtags-file)
-  ;;           (delete-file gpath-file))
-  ;;         (if (file-exists-p gtags-file)
-  ;;             (progn
-  ;;               (message "Updating gtags..")
-  ;;               (universal-argument)
-  ;;               (helm-gtags-update-tags))
-  ;;           (progn
-  ;;             (message "Creating gtags..")
-  ;;             (helm-gtags-create-tags (projectile-project-root) "default"))))))
-
-  (defun netrom/helm-do-ag-at-point ()
-    "First select folder and then search using `helm-do-ag' with symbol at point, if anything."
-    (interactive)
-    (let ((helm-ag-insert-at-point 'symbol))
-      (helm-do-ag)))
-
-  (defun netrom/helm-do-ag-buffers-at-point ()
-    "Search open buffers using `helm-do-ag-buffers' with symbol at point, if anything."
-    (interactive)
-    (let ((helm-ag-insert-at-point 'symbol))
-      (helm-do-ag-buffers)))
-
-  (defun netrom/helm-do-ag-this-file-at-point ()
-    "Search current file using `helm-do-ag-this-file' with symbol at point, if anything."
-    (interactive)
-    (let ((helm-ag-insert-at-point 'symbol))
-      (helm-do-ag-this-file)))
-
-  (defun netrom/helm-projectile-ag-at-point ()
-    "Search using `helm-projectile-ag' (at project root) with symbol at point, if anything."
-    (interactive)
-    (let ((helm-ag-insert-at-point 'symbol))
-      (helm-projectile-ag)))
-
   (defun netrom/projectile-switch-project-magit (args)
     "Switch to project using projectile and run `magit-status'."
     (interactive "P")
     (let ((projectile-switch-project-action 'magit-status))
-      (helm-projectile-switch-project)))
+      (projectile-switch-project)))
 
   (defhydra projectile-hydra (:idle 1 :hint nil)
     "
@@ -1511,32 +1336,27 @@ Projectile: %(projectile-project-root)
 
      Find                Search                Buffers                Cache/Project
 -------------------------------------------------------------------------------------------
-  _f_: File            _ss_: Ag (at point)      _b_: Switch to buffer    _p_: Switch project (find file)
-  _F_: File dwim       _sb_: Ag (buffers)       _k_: Kill all buffers    _m_: Switch project (magit)
-  _o_: Other file      _sp_: Ag (project root)                         ^^_c_: Cache clear
-  _r_: Recent file     _sf_: Ag (this file)                            ^^_x_: Remove known project
-  _d_: Dir                                                           ^^^^_X_: Cleanup non-existing
-  _w_: File other win                                                ^^^^_z_: Cache current file
+  _f_: File            _s_: Ag (at point)      _b_: Switch to buffer    _p_: Switch project (find file)
+  _F_: File dwim                             _k_: Kill all buffers    _m_: Switch project (magit)
+  _o_: Other file                                                   ^^_c_: Cache clear
+  _r_: Recent file                                                  ^^_x_: Remove known project
+  _d_: Dir                                                          ^^^^_X_: Cleanup non-existing
+  _w_: File other win                                               ^^^^_z_: Cache current file
 
 "
-    ("f" helm-projectile-find-file)
-    ("F" helm-projectile-find-file-dwim)
-    ("o" helm-projectile-find-other-file)
-    ("r" helm-projectile-recentf)
-    ("d" helm-projectile-find-dir)
+    ("f" projectile-find-file)
+    ("F" projectile-find-file-dwim)
+    ("o" projectile-find-other-file)
+    ("r" projectile-recentf)
+    ("d" projectile-find-dir)
     ("w" projectile-find-file-other-window)
 
-    ("ss" netrom/helm-do-ag-at-point)
-    ("sb" netrom/helm-do-ag-buffers-at-point)
-    ("sp" netrom/helm-projectile-ag-at-point) ;; at project root
-    ("sf" netrom/helm-do-ag-this-file-at-point)
-    ;;("g" netrom/helm-update-gtags)
-    ;;("O" projectile-multi-occur :color blue)
+    ("s" projectile-ag :color blue)
 
-    ("b" helm-projectile-switch-to-buffer)
+    ("b" projectile-switch-to-buffer)
     ("k" projectile-kill-buffers)
 
-    ("p" helm-projectile-switch-project)
+    ("p" projectile-switch-project)
     ("m" netrom/projectile-switch-project-magit :color blue)
     ("c" projectile-invalidate-cache)
     ("z" projectile-cache-current-file)
@@ -1546,7 +1366,9 @@ Projectile: %(projectile-project-root)
     ("M" magit-status "Magit" :color blue)
     ("q" nil "Cancel" :color blue))
 
-  (define-key projectile-mode-map projectile-keymap-prefix 'projectile-hydra/body))
+  (define-key projectile-mode-map projectile-keymap-prefix 'projectile-hydra/body)
+
+  (projectile-mode))
 
 ;;;;; Version Control ;;;;;
 
@@ -1918,6 +1740,20 @@ T - tag prefix
 (use-package find-temp-file
   :bind ("C-x C-t" . find-temp-file))
 
+;;;;; Consult ;;;;;
+
+(use-package consult
+  :requires projectile
+  :bind (("<help> a" . consult-apropos)
+         :map isearch-mode-map
+              ("M-l" . consult-line)
+              ("M-L" . consult-line-multi)
+              ("M-h" . consult-isearch-history))
+  :config
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref
+        consult-project-root-function #'projectile-project-root))
+
 ;;;;; Search ;;;;;
 
 (defun netrom/isearch-yank-region-or-thing-at-point ()
@@ -1967,10 +1803,9 @@ stop region from expanding to next search match."
 ;; (define-key isearch-mode-map (kbd "M-z") 'zap-to-isearch)
 
 (use-package avy
-  :requires (hydra)
+  :requires hydra consult
   :config
   (defhydra avy-hydra (:color blue :columns 3)
-    "avy-goto"
     ("g" avy-goto-line "Line")
     ("M-g" avy-goto-line "Line")
     ("p" avy-goto-line-above "Line above")
@@ -1980,26 +1815,12 @@ stop region from expanding to next search match."
     ("w" avy-goto-word-1 "Word")
     ("s" avy-goto-subword-1 "Subword")
     ("l" avy-goto-char-in-line "Char in line")
+    ("i" consult-imenu "Imenu")
+    ("I" consult-imenu-multi "Imenu multi")
+    ("e" consult-compile-error "Compile error")
+    ("o" consult-outline "Outline")
     ("," avy-pop-mark "Pop mark"))
   (global-set-key (kbd "M-g") 'avy-hydra/body))
-
-;; ace-isearch combines ace/avy, isearch and help-swoop. Typing one char will invoke ace/avy, typing
-;; more searches normally with isearch, and 10 or more invokes helm-swoop.
-(use-package ace-isearch
-  :requires helm-swoop avy ace-jump-mode
-  :config
-  (setq ace-isearch-input-idle-jump-delay 1.0
-        ace-isearch-function 'avy-goto-char
-        ace-isearch-input-length 10 ; Invoke helm-swoop when >= 10.
-        ace-isearch-function-from-isearch 'ace-isearch-helm-swoop-from-isearch
-        ace-isearch-use-jump 'printing-char)
-  (global-ace-isearch-mode +1)
-
-  ;; Don't use ace-isearch when defining a macro because it triggers one-char ace mode immediately.
-  (defadvice ace-isearch--jumper-function (around ace-isearch--jumper-function-kmacro-advice)
-    (unless (or defining-kbd-macro executing-kbd-macro)
-      ad-do-it))
-  (ad-activate 'ace-isearch--jumper-function))
 
 (use-package deadgrep
   :config
@@ -2016,17 +1837,15 @@ search when the prefix argument is defined."
 ;;;;; Session ;;;;;
 
 (use-package savehist
-  :requires helm
   :config
-  ;; Saves mini buffer history including search and kill ring values, compile history, and helm
-  ;; find-files history.
+  ;; Saves mini buffer history including search and kill ring values, compile history.
   (setq savehist-additional-variables
         '(search-ring
           regexp-search-ring
           query-replace-history
           kill-ring
           compile-history
-          helm-ff-history))
+          ))
   (setq savehist-autosave-interval 60)
   (setq savehist-file (concat user-emacs-directory "savehist"))
   (savehist-mode t))
