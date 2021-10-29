@@ -21,6 +21,7 @@
  '(fringe ((t (:background "#232323" :foreground "#cfbfad"))))
  '(cursor ((t (:background "#b1d631"))))
  '(show-paren-match-face ((t (:background "#ff9800" :foreground "#000000"))))
+ '(match ((t (:foreground "#ff9800"))))
  '(isearch ((t (:bold t :foreground "#FFD845" :background "#3A3F4B"))))
  '(mode-line ((t (:background "#151515" :foreground "#808080" :box (:line-width 1 :color "#000000" :style released-button) :weight bold))))
  '(mode-line-inactive ((t (:background "#303030" :foreground "#696969" :box (:line-width 1 :color "#000000" :style released-button)))))
@@ -60,6 +61,16 @@
  '(helm-swoop-target-line-face ((t (:background "#3c414c"))))
  '(helm-swoop-target-word-face ((t (:background "#b1d631" :foreground "#000000"))))
  '(helm-buffer-modified ((t (:inherit font-lock-comment-face :foreground "red" :underline t))))
+
+ ;; Selectrum
+ '(selectrum-current-candidate ((t (:inherit highlight :extend t :weight extra-bold))))
+ '(selectrum-group-title ((t (:inherit shadow :foreground "#b1d631"))))
+ '(selectrum-mouse-highlight ((t (:inherit selectrum-current-candidate :foreground "#b1d631" :underline t))))
+ '(selectrum-quick-keys-highlight ((t (:foreground "#ff9800" :weight extra-bold))))
+ '(selectrum-quick-keys-match ((t (:inherit isearch :weight extra-bold))))
+
+ ;; Marginalia
+ '(marginalia-key ((t (:foreground "#b1d631"))))
 
  '(highlight-current-line-face ((t (:background "#2c2c2c"))))
  '(linum ((t (:inherit (shadow default) :foreground "#696969" :height 0.9))))

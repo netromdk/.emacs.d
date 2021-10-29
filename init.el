@@ -26,7 +26,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(mustang-netrom))
  '(custom-safe-themes
-   '("86198b5a3af9c66299279d5a916b101bd5ab857be8dff41cb1d418daaafcb08b" default)))
+   '("7fbf91c674f9628401c56c88729d1d5037568cb8537b2d45d81b34f4836e450e" default)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -2154,9 +2154,6 @@ search when the prefix argument is defined."
   ;; Diminish because the errors, warnings and info counts are shown in spaceline.
   (eval-after-load "flycheck"
     '(diminish 'flycheck-mode "fc"))
-
-  (eval-after-load "ace-isearch"
-    '(diminish 'ace-isearch-mode))
 
   (eval-after-load "auto-dim-other-buffers"
     '(diminish 'auto-dim-other-buffers-mode))
