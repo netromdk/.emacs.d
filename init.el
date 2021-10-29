@@ -348,7 +348,8 @@
   :config
   (setq selectrum-refine-candidates-function #'orderless-filter
         selectrum-highlight-candidates-function #'orderless-highlight-matches
-        selectrum-count-style 'current/matches)
+        selectrum-count-style 'current/matches
+        selectrum-max-window-height 15)
   (selectrum-mode +1))
 
 (use-package selectrum-prescient
