@@ -749,8 +749,8 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   ("D" xref-find-definitions-other-window "-> other win")
   ("r" xref-find-references "References")
   ("s" xref-find-apropos "Search")
-  ("f" consult-imenu "Filter funcs/classes")
-  ("F" consult-imenu-multi "-> in all buffers")
+  ("f" netrom/consult-imenu "Filter funcs/classes")
+  ("F" netrom/consult-imenu-multi "-> in all buffers")
 
   ;; Buffer
   ("b" eval-buffer "Eval buffer" :column "Buffer")
@@ -1755,6 +1755,22 @@ T - tag prefix
         xref-show-definitions-function #'consult-xref
         consult-project-root-function #'projectile-project-root))
 
+(defun netrom/consult-imenu ()
+  (interactive)
+  (consult-imenu))
+
+(defun netrom/consult-imenu-multi ()
+  (interactive)
+  (consult-imenu-multi))
+
+(defun netrom/consult-compile-error ()
+  (interactive)
+  (consult-compile-error))
+
+(defun netrom/consult-outline ()
+  (interactive)
+  (consult-outline))
+
 ;;;;; Search ;;;;;
 
 (defun netrom/isearch-yank-region-or-thing-at-point ()
@@ -1804,9 +1820,9 @@ stop region from expanding to next search match."
 ;; (define-key isearch-mode-map (kbd "M-z") 'zap-to-isearch)
 
 (use-package avy
-  :requires hydra consult
+  :requires hydra
   :config
-  (defhydra avy-hydra (:color blue :columns 3)
+  (defhydra avy-hydra (:color blue :columns 4)
     ("g" avy-goto-line "Line")
     ("M-g" avy-goto-line "Line")
     ("p" avy-goto-line-above "Line above")
@@ -1816,10 +1832,10 @@ stop region from expanding to next search match."
     ("w" avy-goto-word-1 "Word")
     ("s" avy-goto-subword-1 "Subword")
     ("l" avy-goto-char-in-line "Char in line")
-    ("i" consult-imenu "Imenu")
-    ("I" consult-imenu-multi "Imenu multi")
-    ("e" consult-compile-error "Compile error")
-    ("o" consult-outline "Outline")
+    ("i" netrom/consult-imenu "Imenu")
+    ("I" netrom/consult-imenu-multi "Imenu multi")
+    ("e" netrom/consult-compile-error "Compile error")
+    ("o" netrom/consult-outline "Outline")
     ("," avy-pop-mark "Pop mark"))
   (global-set-key (kbd "M-g") 'avy-hydra/body))
 
