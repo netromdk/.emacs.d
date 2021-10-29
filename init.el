@@ -1750,7 +1750,7 @@ T - tag prefix
               ("M-l" . consult-line)
               ("M-L" . consult-line-multi)
               ("M-h" . consult-isearch-history))
-  :config
+  :init
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref
         consult-project-root-function #'projectile-project-root))
