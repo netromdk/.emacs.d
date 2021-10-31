@@ -1743,18 +1743,6 @@ T - tag prefix
 
 ;;;;; Consult ;;;;;
 
-(use-package consult
-  :requires projectile
-  :bind (("<help> a" . consult-apropos)
-         :map isearch-mode-map
-              ("M-l" . consult-line)
-              ("M-L" . consult-line-multi)
-              ("M-h" . consult-isearch-history))
-  :init
-  (setq xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref
-        consult-project-root-function #'projectile-project-root))
-
 (defun netrom/consult-imenu ()
   (interactive)
   (consult-imenu))
@@ -1770,6 +1758,47 @@ T - tag prefix
 (defun netrom/consult-outline ()
   (interactive)
   (consult-outline))
+
+(defun consult-line-symbol-at-point ()
+  (interactive)
+  (consult-line (thing-at-point 'symbol)))
+
+(use-package consult
+  :requires projectile
+  :bind (;; C-x bindings (ctl-x-map)
+         ("C-x b" . consult-buffer)
+         ("C-x r" . consult-recent-file)
+         ;; Other custom bindings
+         ("<help> a" . consult-apropos)
+         ;; M-s bindings (search-map)
+         ("M-s f" . consult-find)
+         ("M-s F" . consult-locate)
+         ("M-s g" . consult-grep)
+         ("M-s G" . consult-git-grep)
+         ("M-s r" . consult-ripgrep)
+         ("M-s l" . consult-line-symbol-at-point)
+         ("M-s L" . consult-line-multi)
+         ("M-s m" . consult-multi-occur)
+         ("M-s k" . consult-keep-lines)
+         ("M-s u" . consult-focus-lines)
+         :map isearch-mode-map
+         ("M-l" . consult-line)
+         ("M-L" . consult-line-multi)
+         ("M-h" . consult-isearch-history))
+  :init
+  (setq consult-project-root-function #'projectile-project-root
+        consult-goto-line-numbers nil
+
+        ;; All previewing is manual by default.
+        consult-preview-key (list :debounce 0.2 (kbd "M-."))
+
+        ;; Xref through consult.
+        xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
+  :config
+  (consult-customize
+   ;; Automatically show preview while browsing themes.
+   consult-theme :preview-key '(:debounce 0.2 any)))
 
 ;;;;; Search ;;;;;
 
@@ -1877,11 +1906,13 @@ search when the prefix argument is defined."
                           "\\.emacs\\.d/saveplace"
                           "\\.emacs\\.d/savehist"
                           "\\.emacs\\.d/recentf"
+                          "\\.emacs\\.d/prescient-save"
                           "\\.git/COMMIT_EDITMSG"
                           ".*-autoloads\\.el"
                           "/elpa/.*"))
   (recentf-mode 1)
-  (global-set-key "\C-xr" 'recentf-open-files))
+  ;; (global-set-key "\C-xr" 'recentf-open-files)
+  )
 
 ;; Saves cursor positions of visited files.
 (use-package saveplace
