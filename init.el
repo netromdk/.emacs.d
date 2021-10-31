@@ -1250,8 +1250,10 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
           ("R" lsp-rename "Rename")
           ("t" lsp-goto-type-definition "Type definition")
           ("i" lsp-goto-implementation "Implementation")
-          ("f" consult-imenu "Filter funcs/classes (Consult)")
+          ("f" consult-imenu "Filter funcs/classes")
           ("F" consult-imenu-multi "-> in all buffers")
+          ("s" consult-lsp-file-symbols "Search file symbols")
+          ("S" consult-lsp-symbols "Search workspace symbols")
           ("C-c" lsp-describe-session "Describe session")
 
           ;; Flycheck
@@ -1762,6 +1764,11 @@ T - tag prefix
 (defun consult-line-symbol-at-point ()
   (interactive)
   (consult-line (thing-at-point 'symbol)))
+
+(use-package consult-lsp
+  :requires marginalia
+  :config
+  (consult-lsp-marginalia-mode +1))
 
 (use-package consult
   :requires projectile
