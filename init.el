@@ -1770,6 +1770,9 @@ T - tag prefix
   :config
   (consult-lsp-marginalia-mode +1))
 
+(use-package consult-projectile
+  :requires projectile)
+
 (use-package consult
   :requires projectile
   :bind (;; C-x bindings (ctl-x-map)
