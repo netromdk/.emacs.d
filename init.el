@@ -1339,12 +1339,12 @@ Projectile: %(projectile-project-root)
 
      Find                Search                Buffers                Cache/Project
 -------------------------------------------------------------------------------------------
-  _f_: File            _s_: Ag (at point)      _b_: Switch to buffer    _p_: Switch project (find file)
-  _F_: File dwim                             _k_: Kill all buffers    _m_: Switch project (magit)
-  _o_: Other file                                                   ^^_c_: Cache clear
-  _r_: Recent file                                                  ^^_x_: Remove known project
-  _d_: Dir                                                          ^^^^_X_: Cleanup non-existing
-  _w_: File other win                                               ^^^^_z_: Cache current file
+  _f_: File            _ss_: Ag (at point)      _b_: Switch to buffer    _p_: Switch project (find file)
+  _F_: File dwim       _sf_: Ag (choose dir)    _k_: Kill all buffers    _m_: Switch project (magit)
+  _o_: Other file      _sr_: Ripgrep (async)                           ^^_c_: Cache clear
+  _r_: Recent file     _sg_: Gip Grep (async)                          ^^_x_: Remove known project
+  _d_: Dir                                                           ^^^^_X_: Cleanup non-existing
+  _w_: File other win                                                ^^^^_z_: Cache current file
 
 "
     ("f" projectile-find-file)
@@ -1354,7 +1354,10 @@ Projectile: %(projectile-project-root)
     ("d" projectile-find-dir)
     ("w" projectile-find-file-other-window)
 
-    ("s" projectile-ag :color blue)
+    ("ss" projectile-ag :color blue)
+    ("sf" ag-regexp :color blue)
+    ("sr" netrom/consult-ripgrep :color blue)
+    ("sg" netrom/consult-git-grep :color blue)
 
     ("b" projectile-switch-to-buffer)
     ("k" projectile-kill-buffers)
@@ -1760,6 +1763,14 @@ T - tag prefix
 (defun netrom/consult-outline ()
   (interactive)
   (consult-outline))
+
+(defun netrom/consult-ripgrep ()
+  (interactive)
+  (consult-ripgrep))
+
+(defun netrom/consult-git-grep ()
+  (interactive)
+  (consult-git-grep))
 
 (defun consult-line-symbol-at-point ()
   (interactive)
