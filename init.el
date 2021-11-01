@@ -1785,7 +1785,7 @@ T - tag prefix
   :requires projectile)
 
 (use-package consult
-  :requires projectile
+  :requires projectile selectrum
   :bind (;; C-x bindings (ctl-x-map)
          ("C-x b" . consult-buffer)
          ("C-x r" . consult-recent-file)
@@ -1811,15 +1811,26 @@ T - tag prefix
         consult-goto-line-numbers nil
 
         ;; All previewing is manual by default.
-        consult-preview-key (list :debounce 0.2 (kbd "M-."))
+        my-consult-preview-key (list :debounce 0.2 (kbd "M-."))
+        consult-preview-key my-consult-preview-key
 
         ;; Xref through consult.
         xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
   :config
-  (consult-customize
-   ;; Automatically show preview while browsing themes.
-   consult-theme :preview-key '(:debounce 0.2 any)))
+  ;; Auto-preview with a delay while browsing themes since it is a bit slow previewing them.
+  (consult-customize consult-theme :preview-key '(:debounce 0.5 any))
+
+  (defun consult-toggle-preview ()
+    "Command to toggle between `my-consult-preview-key' and `any'
+preview mode via the value of `consult-preview-key'."
+    (interactive)
+    (setq consult-preview-key
+          (if (eq 'any consult-preview-key)
+              my-consult-preview-key
+            'any)))
+
+  (define-key selectrum-minibuffer-map (kbd "M-P") #'consult-toggle-preview))
 
 ;;;;; Search ;;;;;
 
