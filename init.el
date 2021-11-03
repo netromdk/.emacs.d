@@ -1343,8 +1343,8 @@ Projectile: %(projectile-project-root)
   _f_: File            _ss_: Ag (at point)      _b_: Switch to buffer    _p_: Switch project (find file)
   _F_: File dwim       _sf_: Ag (choose dir)    _k_: Kill all buffers    _m_: Switch project (magit)
   _o_: Other file      _sr_: Ripgrep (async)                           ^^_c_: Cache clear
-  _r_: Recent file     _sg_: Gip Grep (async)                          ^^_x_: Remove known project
-  _d_: Dir                                                           ^^^^_X_: Cleanup non-existing
+  _r_: Recent file     _sR_: Ripgrep (cur dir)                         ^^_x_: Remove known project
+  _d_: Dir             _sg_: Gip Grep (async)                          ^^^^_X_: Cleanup non-existing
   _w_: File other win                                                ^^^^_z_: Cache current file
 
 "
@@ -1358,6 +1358,7 @@ Projectile: %(projectile-project-root)
     ("ss" projectile-ag :color blue)
     ("sf" ag-regexp :color blue)
     ("sr" netrom/consult-ripgrep :color blue)
+    ("sR" netrom/consult-ripgrep-current-dir :color blue)
     ("sg" netrom/consult-git-grep :color blue)
 
     ("b" projectile-switch-to-buffer)
@@ -1768,6 +1769,10 @@ T - tag prefix
 (defun netrom/consult-ripgrep ()
   (interactive)
   (consult-ripgrep))
+
+(defun netrom/consult-ripgrep-current-dir ()
+  (interactive)
+  (consult-ripgrep (current-directory)))
 
 (defun netrom/consult-git-grep ()
   (interactive)

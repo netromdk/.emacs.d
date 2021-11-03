@@ -236,3 +236,9 @@ guard: #ifndef `(include-guard-header)`.."
   "Make directory `dir' and don't signal error if it already exists."
   (when (not (file-directory-p dir))
     (make-directory dir)))
+
+(defun current-directory ()
+  "Current directory of buffer or dired directory."
+  (if buffer-file-name
+      (file-name-directory (buffer-file-name))
+    (dired-current-directory)))
