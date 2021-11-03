@@ -1254,6 +1254,7 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
           ("F" consult-imenu-multi "-> in all buffers")
           ("s" consult-lsp-file-symbols "Search file symbols")
           ("S" consult-lsp-symbols "Search workspace symbols")
+          ("M-d" consult-lsp-diagnostics "Diagnostics")
           ("C-c" lsp-describe-session "Describe session")
 
           ;; Flycheck
