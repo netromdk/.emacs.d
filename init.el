@@ -353,7 +353,7 @@
   (selectrum-mode +1))
 
 (use-package selectrum-prescient
-  :requires selectrum orderless prescient
+  :requires selectrum prescient
   :config
   ;; Use filtring from only `completion-styles' and not selectrum.
   (setq selectrum-prescient-enable-filtering nil)
