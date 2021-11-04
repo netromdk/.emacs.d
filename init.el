@@ -1766,19 +1766,59 @@ T - tag prefix
   (interactive)
   (consult-outline))
 
-(defun netrom/consult-ripgrep ()
-  (interactive)
-  (consult-ripgrep))
 
-(defun netrom/consult-ripgrep-current-dir ()
-  (interactive)
-  (consult-ripgrep (current-directory)))
+(defun netrom/make-consult-search-funcs (name)
+  "Creates 6 functions given NAME:
+`netrom/consult-NAME' with optional arguments `current-dir' and `symbol-at-point'
+`netrom/consult-NAME-symbol-at-point'
+`netrom/consult-NAME-current-dir'
+`netrom/consult-NAME-current-dir-symbol-at-point'
+`netrom/consult-NAME-ask-dir'
+`netrom/consult-NAME-ask-dir-symbol-at-point'"
+  (progn
+    (eval (list 'defun
+                (intern (format "netrom/consult-%s" name))
+                (list '&optional 'current-dir 'symbol-at-point)
+                (list 'interactive)
+                (list (intern (format "consult-%s" name))
+                      (list 'when 'current-dir (list 'current-directory))
+                      (list 'when 'symbol-at-point (list 'thing-at-point ''symbol)))))
+    (eval (list 'defun
+                (intern (format "netrom/consult-%s-symbol-at-point" name))
+                ()
+                (list 'interactive)
+                (list (intern (format "netrom/consult-%s" name)) 'nil 't)))
+    (eval (list 'defun
+                (intern (format "netrom/consult-%s-current-dir" name))
+                ()
+                (list 'interactive)
+                (list (intern (format "netrom/consult-%s" name)) 't)))
+    (eval (list 'defun
+                (intern (format "netrom/consult-%s-current-dir-symbol-at-point" name))
+                ()
+                (list 'interactive)
+                (list (intern (format "netrom/consult-%s" name)) 't 't)))
+    (eval (list 'defun
+                (intern (format "netrom/consult-%s-ask-dir" name))
+                (list 'dir '&optional 'symbol-at-point)
+                (list 'interactive "DSearch in:\nP")
+                (list (intern (format "consult-%s" name))
+                      'dir
+                      (list 'when 'symbol-at-point (list 'thing-at-point ''symbol)))))
+    (eval (list 'defun
+                (intern (format "netrom/consult-%s-ask-dir-symbol-at-point" name))
+                ()
+                (list 'interactive)
+                (list 'let (list (list 'current-prefix-arg 't))
+                      (list 'call-interactively
+                            `(quote ,(intern (format "netrom/consult-%s-ask-dir" name)))))))))
 
-(defun netrom/consult-git-grep ()
-  (interactive)
-  (consult-git-grep))
 
-(defun consult-line-symbol-at-point ()
+(dolist (name '(grep ripgrep git-grep))
+  (netrom/make-consult-search-funcs name))
+
+
+(defun netrom/consult-line-symbol-at-point ()
   (interactive)
   (consult-line (thing-at-point 'symbol)))
 
@@ -1800,10 +1840,10 @@ T - tag prefix
          ;; M-s bindings (search-map)
          ("M-s f" . consult-find)
          ("M-s F" . consult-locate)
-         ("M-s g" . consult-grep)
-         ("M-s G" . consult-git-grep)
-         ("M-s r" . consult-ripgrep)
-         ("M-s l" . consult-line-symbol-at-point)
+         ("M-s g" . netrom/consult-grep-symbol-at-point)
+         ("M-s G" . netrom/consult-git-grep-symbol-at-point)
+         ("M-s r" . netrom/consult-ripgrep-symbol-at-point)
+         ("M-s l" . netrom/consult-line-symbol-at-point)
          ("M-s L" . consult-line-multi)
          ("M-s m" . consult-multi-occur)
          ("M-s k" . consult-keep-lines)
