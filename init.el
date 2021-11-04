@@ -1345,7 +1345,7 @@ Projectile: %(projectile-project-root)
   _o_: Other file      _sr_: Ripgrep (async)                           ^^_c_: Cache clear
   _r_: Recent file     _sR_: Ripgrep (cur dir)                         ^^_x_: Remove known project
   _d_: Dir             _sg_: Gip Grep (async)                          ^^^^_X_: Cleanup non-existing
-  _w_: File other win                                                ^^^^_z_: Cache current file
+  _w_: File other win  _sG_: Gip Grep (cur dir)                        ^^^^_z_: Cache current file
 
 "
     ("f" projectile-find-file)
@@ -1360,6 +1360,7 @@ Projectile: %(projectile-project-root)
     ("sr" netrom/consult-ripgrep :color blue)
     ("sR" netrom/consult-ripgrep-current-dir :color blue)
     ("sg" netrom/consult-git-grep :color blue)
+    ("sG" netrom/consult-git-grep-current-dir :color blue)
 
     ("b" projectile-switch-to-buffer)
     ("k" projectile-kill-buffers)
