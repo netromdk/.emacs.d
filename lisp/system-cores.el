@@ -95,7 +95,12 @@
   '((gnu/linux      . system-cores-cpuinfo)
     (windows-nt     . system-cores-wmic)
     (cygwin         . system-cores-wmic)
-    (darwin         . system-cores-profiler)
+
+    ;; With M1 chips, the number of physical CPUs isn't part of the result of the profiler's
+    ;; output. Therfore, it's more precise to use sysctl.
+    (darwin         . system-cores-sysctl)
+    ;; (darwin         . system-cores-profiler)
+
     (berkeley-unix  . system-cores-sysctl))
   "An alist whose cars are `system-type' values, and whose cdrs
 are the corresponding function to call in order to find out how
@@ -299,7 +304,10 @@ Processors\".
                   (* (if ht 2 1)
                      (string-to-number (cadr (assoc "Total Number of Cores" cpuinfo))))))
       (physical .
-                ,(string-to-number (cadr (assoc "Number of Processors" cpuinfo)))))))
+                ,(string-to-number
+                  ;; The key doesn't exist anymore on M1 chips.
+                  (or (cadr (assoc "Number of Processors" cpuinfo))
+                      "1"))))))
 
 (defun system-cores-sysctl ()
   "Return the number of logical cores, and the number of
