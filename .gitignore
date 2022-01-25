@@ -20,7 +20,7 @@
 /company-statistics-cache.el
 /.cask
 /eshell
-/transient/
+/transient/history.el
 /.lsp-session-*
 /straight/build-cache.el
 /straight/build/
