@@ -16,6 +16,9 @@
 (setq echo-keystrokes 0.2)           ;; Echo keystrokes quicker.
 (setq tab-always-indent 'complete)   ;; First indent, but if indented then try to complete at point.
 (setq vc-follow-symlinks t)          ;; Follow symlinks, don't ask to follow.
+(setq completions-detailed t)        ;; Completions with details added as prefix/suffix.
+(setq help-enable-symbol-autoload t) ;; Perform autoload if docs are missing from autoload objects.
+(setq describe-bindings-outline t)
 
 ;; Abbreviations file.
 (setq abbrev-file-name (concat --misc-dir "abbrev_defs"))
