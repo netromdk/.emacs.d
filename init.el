@@ -1,6 +1,6 @@
 ;;; Emacs Configurations                              -*- no-byte-compile: t -*-
 
-(let ((min-version "26.0"))
+(let ((min-version "28.1"))
   (if (version< emacs-version min-version)
       (error "Emacs v. %s+ is required for this configuration!" min-version)))
 
