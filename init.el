@@ -232,7 +232,7 @@
 
 ;; General bindings.
 (global-set-key (kbd "C-c o")
-                '(lambda () (interactive) (ff-find-other-file nil t)))
+                #'(lambda () (interactive) (ff-find-other-file nil t)))
 (global-set-key (kbd "C-.") 'repeat)
 
 ;; Move to first whitespace or begninning of line if none. Pressing again goes to the beginning if
@@ -242,7 +242,7 @@
 ;; Cycle through "just one space", "no spaces" and original number of spaces,
 ;; instead of just "just one space". It does not delete newlines, too.
 (global-set-key (kbd "M-SPC")
-                '(lambda () (interactive) (cycle-spacing +1 t)))
+                #'(lambda () (interactive) (cycle-spacing +1 t)))
 
 ;; Make font bigger/smaller.
 (global-set-key (kbd "C-+") 'text-scale-increase)
@@ -644,9 +644,9 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   ;; Enable highlight-thing-mode in prog modes except for modes using LSP because it has it's own
   ;; highlight feature.
   (add-hook 'prog-mode-hook
-            '(lambda ()
-               (when (not (member major-mode '(c++-mode c-mode python-mode rust-mode)))
-                 (highlight-thing-mode)))))
+            #'(lambda ()
+                (when (not (member major-mode '(c++-mode c-mode python-mode rust-mode)))
+                  (highlight-thing-mode)))))
 
 ;; Better commenting DWIM that cycles. Use "C-u M-;" to align comments at end of line with those
 ;; around it.
