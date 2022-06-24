@@ -1823,10 +1823,7 @@ T - tag prefix
   (interactive)
   (consult-line (thing-at-point 'symbol)))
 
-(use-package consult-lsp
-  :requires marginalia
-  :config
-  (consult-lsp-marginalia-mode +1))
+(use-package consult-lsp)
 
 (use-package consult-projectile
   :requires projectile)
