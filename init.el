@@ -494,8 +494,7 @@ Command: %(netrom/compilation-command-string)
   :config
   (if (display-graphic-p)
       ;; Show font icons in windowed mode.
-      (setq company-box-icons-alist 'company-box-icons-all-the-icons
-            company-box-color-icon t)
+      (setq company-box-color-icon t)
     ;; Show compatible icons in terminal.
     (setq company-box-icons-alist 'company-box-icons-icons-in-terminal))
   :hook (company-mode . company-box-mode))
