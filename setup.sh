@@ -18,6 +18,9 @@ writeBanner() {
 # OS specific.
 case "$(uname -s)" in
   Darwin)
+    writeBanner "Fonts"
+    cp -v font/*.ttf ~/Library/Fonts/
+
     writeBanner "Homebrew"
     checkProgram brew
     brew install curl git ripgrep the_silver_searcher cppcheck shellcheck aspell
