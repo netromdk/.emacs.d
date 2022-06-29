@@ -2203,8 +2203,6 @@ search when the prefix argument is defined."
 ;;   (spaceline-toggle-selection-info-on)
 ;;   (spaceline-toggle-hud-off))
 
-;; Once for every computer, the `all-the-icons-install-fonts` function must be run to install fonts
-;; needed by the modeline.
 (let ((straight-current-profile 'pinned))
   (use-package doom-modeline
     :requires (window-numbering anzu)
