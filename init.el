@@ -81,7 +81,16 @@
 
       ;; Make `use-package` use `straight.el` by default so that `:straight t` is not necessary to
       ;; write for every `use-package` invocation.
-      straight-use-package-by-default t)
+      straight-use-package-by-default t
+
+      straight-profiles '((nil . "default.el")
+                          ;; Packages which are pinned to a specific commit.
+                          (pinned . "pinned.el")))
+
+;; Load straight-x.el to make pinning of packages possible.
+;; NOTE: Use `straight-x-pull-all' instead of `straight-pull-all', and use
+;; `straight-x-freeze-versions' instead of `straight-freeze-versions'!
+(load-library "straight-x")
 
 ;;;;; Timing ;;;;;
 
