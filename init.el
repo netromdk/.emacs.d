@@ -2205,18 +2205,23 @@ search when the prefix argument is defined."
 
 ;; Once for every computer, the `all-the-icons-install-fonts` function must be run to install fonts
 ;; needed by the modeline.
-(use-package doom-modeline
-  :requires (window-numbering anzu)
-  :hook (after-init . doom-modeline-mode)
-  :config
-  (window-numbering-mode t)
+(let ((straight-current-profile 'pinned))
+  (use-package doom-modeline
+    :requires (window-numbering anzu)
+    :hook (after-init . doom-modeline-mode)
+    :config
+    (window-numbering-mode t)
 
-  (setq doom-modeline-minor-modes nil
-        doom-modeline-enable-word-count t
-        doom-modeline-checker-simple-format t
-        doom-modeline-buffer-file-name-style 'truncate-upto-project
-        doom-modeline-env-python-executable "python3"
-        doom-modeline-indent-info t))
+    (setq doom-modeline-minor-modes nil
+          doom-modeline-enable-word-count t
+          doom-modeline-checker-simple-format t
+          doom-modeline-buffer-file-name-style 'truncate-upto-project
+          doom-modeline-env-python-executable "python3"
+          doom-modeline-indent-info t))
+
+  ;; Pin doom-modeline v3.3.1 since master has issues.
+  (add-to-list 'straight-x-pinned-packages
+               '("doom-modeline" . "156b02445c3360added80009ab3c1a33dd88c5d9")))
 
 ;; Remove or rename mode line values.
 (use-package diminish
