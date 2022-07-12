@@ -34,3 +34,7 @@
 
 
 ;;;; Saved keyboard macros
+
+;; Show magit status buffer to the left and magit log to the right.
+(fset 'netrom-magit-status-and-log
+   (kmacro-lambda-form [?\C-x ?1 ?\C-x ?g ?\C-x ?3 ?\C-x ?o ?l ?l] 0 "%d"))
