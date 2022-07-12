@@ -335,7 +335,12 @@
     (interactive)
     (window-configuration-to-register :magit-fullscreen)
     (magit-mode-setup #'magit-staging-mode)
-    (delete-other-windows)))
+    (delete-other-windows))
+
+  (defun magit-log-origin ()
+    "Show log of origin of current branch."
+    (interactive)
+    (magit-log-other `(,(concat "origin/" (magit-get-current-branch))))))
 
 ;;;;; Selectrum ;;;;;
 
