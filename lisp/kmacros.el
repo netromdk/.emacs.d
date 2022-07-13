@@ -43,8 +43,31 @@
 (defalias 'kmacro-insert-macro 'insert-kbd-macro)
 (defalias 'kmacro-apply-macro-to-region-lines 'apply-macro-to-region-lines)
 
-;; Insert macro by name via `C-x C-k i'.
-(define-key kmacro-keymap (kbd "i") #'kmacro-insert-macro)
+(defun kmacro-query-minibuffer ()
+  "Query user for input in the minibuffer during kbd macro execution."
+  (interactive)
+  (or executing-kbd-macro
+      defining-kbd-macro
+      (user-error "Not defining or executing kbd macro"))
+
+  ;; Do nothing when defining the macro, only when executing it afterwards.
+  (when executing-kbd-macro
+    (let* ((prompt-map (let ((map (make-keymap)))
+                         ;; Make return key exit recursive edit.
+                         (define-key map (kbd "RET") #'exit-recursive-edit)
+                         map))
+           (input (minibuffer-with-setup-hook
+                      (lambda ()
+                        (let (executing-kbd-macro defining-kbd-macro)
+                          (recursive-edit)))
+                    (read-from-minibuffer "Macro input: " "" prompt-map))))
+      (unless (string= "" input)
+        (insert input)))))
+
+;; Insert macro by name via `C-x C-k I'.
+(define-key kmacro-keymap (kbd "I") #'kmacro-insert-macro)
+
+(define-key kmacro-keymap (kbd "C-x Q") #'kmacro-query-minibuffer)
 
 
 ;;;; Saved keyboard macros
