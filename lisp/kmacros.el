@@ -7,6 +7,8 @@
 ;; 3) Name it with `kmacro-name-last-macro' (C-x C-k n).
 ;; 4) Insert the new macro into this file by invoking `kmacro-insert-macro'.
 ;;
+;; Or, instead of steps 3+4, invoke `kmacro-persist-macro' instead.
+;;
 ;; Tricks:
 ;;
 ;; Execute last macro `kmacro-end-and-call-macro' (C-x e). Execute it N times via `C-u N C-x e' or
@@ -67,6 +69,19 @@
                     (read-from-minibuffer "Macro input: " "" prompt-map))))
       (unless (string= "" input)
         (insert input)))))
+
+;; Inspired from "Saving a macro" section of https://www.emacswiki.org/emacs/KeyboardMacrosTricks.
+(defun kmacro-persist-macro (name)
+  "NAME and persist last macro to the end of `kmacros.el' and
+switch back to the origin buffer."
+  (interactive "SMacro name: ")
+  (kmacro-name-last-macro name)
+  (find-file (concat --lisp-dir "kmacros.el"))
+  (goto-char (point-max))
+  (newline)
+  (kmacro-insert-macro name)
+  (switch-to-buffer nil))
+
 
 ;; Insert macro by name via `C-x C-k I'.
 (define-key kmacro-keymap (kbd "I") #'kmacro-insert-macro)
