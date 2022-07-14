@@ -9,6 +9,9 @@
 ;;
 ;; Tricks:
 ;;
+;; Execute last macro `kmacro-end-and-call-macro' (C-x e). Execute it N times via `C-u N C-x e' or
+;; execute it until an error occurs, like reaching the end of file, via `C-u 0 C-x e'.
+;;
 ;; Bind last macro to keys: `kmacro-bind-to-key' (C-x C-k b)
 ;;
 ;; Store last macro in register R: `kmacro-to-register' (C-x C-k x)
@@ -25,7 +28,8 @@
 ;; C-a). The format of counters is `%d' by default but it can be changed via `kmacro-set-format'
 ;; (C-x C-k C-f).
 ;;
-;; `kmacro-apply-macro-to-region-lines' applies a macro at the beginning of each line of a region.
+;; `kmacro-apply-macro-to-region-lines' applies a macro at the beginning of each line of a region
+;; (C-x C-k r).
 ;;
 ;; Enter keyboard macro editor for last macro via `kmacro-edit-macro-repeat' (C-x C-k C-e). The
 ;; buffer is editable and can be executed using `C-c C-c'. Or edit the last 300 keystrokes as a
