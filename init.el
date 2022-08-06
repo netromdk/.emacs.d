@@ -1443,6 +1443,7 @@ Projectile: %(projectile-project-root)
   (global-diff-hl-mode 1))
 
 (use-package git-timemachine
+  :straight (git-timemachine :type git :host codeberg :repo "pidu/git-timemachine")
   :config
   (defalias 'tm 'git-timemachine))
 
