@@ -83,6 +83,11 @@
       ;; write for every `use-package` invocation.
       straight-use-package-by-default t
 
+      straight-hosts '((github "github.com" ".git")
+                       (gitlab "gitlab.com" ".git")
+                       (bitbucket "bitbucket.com" ".git")
+                       (codeberg "codeberg.org" ".git"))
+
       straight-profiles '((nil . "default.el")
                           ;; Packages which are pinned to a specific commit.
                           (pinned . "pinned.el")))
