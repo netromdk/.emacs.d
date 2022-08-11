@@ -43,6 +43,3 @@ checkProgram rustup
 checkProgram rustc
 checkProgram cargo
 rustup component add rustfmt rls rust-analysis rust-src
-
-writeBanner "Marksman LSP"
-checkProgram marksman

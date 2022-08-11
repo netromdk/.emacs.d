@@ -1247,10 +1247,6 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 ;; Requires python-language-server:
 ;;   pip install python-language-server
 ;;
-;; == Markdown ==
-;; Requires the marksman executable in PATH.
-;; Follow https://github.com/artempyanykh/marksman#how-to-install.
-;;
 ;; == PHP ==
 ;; Requires the php-language-server that is bundled with the emacs config, and was installed like
 ;; this:
@@ -1282,7 +1278,6 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
     (add-hook 'rust-mode-hook #'lsp)
     (add-hook 'python-mode-hook #'lsp)
     (add-hook 'php-mode-hook #'lsp)
-    (add-hook 'markdown-mode-hook #'lsp)
 
     (setq netrom--general-lsp-hydra-heads
           '(;; Xref
