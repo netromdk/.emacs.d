@@ -2402,6 +2402,16 @@ search when the prefix argument is defined."
   (require 'vlf-setup)
   (setq vlf-application 'dont-ask))
 
+(use-package obsidian
+  :straight (obsidian :type git :host github :repo "licht1stein/obsidian.el")
+  :ensure t
+  :demand t
+  :config
+  (obsidian-specify-path "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/notes")
+  (global-obsidian-mode t)
+  :bind (:map obsidian-mode-map
+              ("C-c C-o" . obsidian-follow-link-at-point)
+              ("C-c C-l" . obsidian-insert-wikilink)))
 
 ;;;;;;;;;;;;;;;;;;;
 ;; End of Config ;;
