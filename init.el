@@ -2369,7 +2369,10 @@ search when the prefix argument is defined."
 
 (use-package markdown-mode
   :bind (:map markdown-mode-map
-              ("S-<return>" . markdown-toggle-gfm-checkbox)))
+        ("S-<return>" . markdown-toggle-gfm-checkbox))
+  :config
+  ;; Syntax highlighting of wiki links.
+  (setq markdown-enable-wiki-links t))
 
 (use-package obsidian
   :straight (obsidian :type git :host github :repo "licht1stein/obsidian.el")
