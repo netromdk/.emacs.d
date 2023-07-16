@@ -2378,36 +2378,14 @@ search when the prefix argument is defined."
   :straight (obsidian :type git :host github :repo "licht1stein/obsidian.el")
   :requires hydra
   :ensure t
-  :demand t
   :config
   (obsidian-specify-path "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/notes")
-
-  (defhydra netrom/obsidian-hydra (:hint nil)
-    "
-Obsidian
-_f_ollow at point   insert _w_ikilink          _q_uit
-_j_ump to note      insert _l_ink              go _b_ack
-_t_ag find          _c_apture new note
-_s_earch by expr.   _u_pdate tags/alises etc.
-"
-    ("b" previous-user-buffer)
-    ("c" obsidian-capture)
-    ("f" obsidian-follow-link-at-point)
-    ("j" obsidian-jump)
-    ("l" obsidian-insert-link :color blue)
-    ("q" nil :color blue)
-    ("s" obsidian-search)
-    ("t" obsidian-tag-find)
-    ("u" obsidian-update)
-    ("w" obsidian-insert-wikilink :color blue))
-
   (global-obsidian-mode t)
-
   :bind (:map obsidian-mode-map
-              ("C-c M-o" . 'netrom/obsidian-hydra/body)  ;; Show hydra menu.
+              ("C-c M-o" . 'obsidian-hydra/body)  ;; Show hydra menu.
 
               ;; Shadows comparable functions of markdown-mode-map.
-              ("C-c C-o" . 'netrom/obsidian-hydra/obsidian-follow-link-at-point)
+              ("C-c C-o" . 'obsidian-hydra/obsidian-follow-link-at-point)
               ("C-c C-l" . 'obsidian-insert-wikilink)))
 
 ;;;;; Miscellaneous ;;;;;
