@@ -995,11 +995,12 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   (define-key smartparens-mode-map (kbd "C-M-S-p") 'sp-push-hybrid-sexp)
 
   ;; General prog mode handling of "{}" to indent after hitting RET.
-  (sp-with-modes '(c-mode c++-mode php-mode java-mode js-mode rust-mode sh-mode)
+  (sp-with-modes '(c-mode c-ts-mode c++-mode c++-ts-mode rust-mode rust-ts-mode php-mode java-mode
+                   js-mode  sh-mode)
     (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET"))))
 
   ;; Same thing but with "[]" and match "|" with "|".
-  (sp-with-modes '(rust-mode)
+  (sp-with-modes '(rust-mode rust-ts-mode)
     (sp-local-pair "[" nil :post-handlers '(("||\n[i]" "RET")))
     (sp-local-pair "|" "|"))
 
