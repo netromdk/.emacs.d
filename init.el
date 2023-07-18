@@ -1893,6 +1893,8 @@ T - tag prefix
          ("M-s m" . consult-multi-occur)
          ("M-s k" . consult-keep-lines)
          ("M-s u" . consult-focus-lines)
+         ("M-s k" . consult-kmacro)
+         ("M-s M" . consult-kmacro)
          :map isearch-mode-map
          ("M-l" . consult-line)
          ("M-L" . consult-line-multi)
