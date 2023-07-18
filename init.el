@@ -749,44 +749,51 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
 ;; C/C++
 
-(use-package modern-cpp-font-lock
-  :config
-  (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode))
-
-(setq use-qt-tab-width nil)
-(defun turn-on-qt-tab-width ()
-  "Use Qt tab width (4 spaces)."
-  (interactive)
-  (setq use-qt-tab-width t)
-  (revert-buffer :ignore-auto :noconfirm))
-(defun turn-off-qt-tab-width ()
-  "Use general tab width."
-  (interactive)
-  (setq use-qt-tab-width nil)
-  (revert-buffer :ignore-auto :noconfirm))
-
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            ;; If in Qt code then use 4 spaces as tabs, otherwise the general tab width.
-            (if (bound-and-true-p use-qt-tab-width)
-                (setq tab-width 4)
-              (setq tab-width --general-tab-width))
-            (setq c-basic-offset tab-width)
-            (setq indent-tabs-mode nil)
-
-            ;; Run clang-format on region or buffer.
-            (local-set-key (kbd "C-c f") 'clang-format-region-or-buffer)))
-
-(use-package cc-mode
-  :requires key-chord
-  :config
-  (defun my-colon-at-the-end ()
-    (interactive)
+;; When not having tree-sitter, use a more modern font lock, otherwise the font lock is as modern as
+;; can be.
+(if has-treesit
     (progn
-      (move-end-of-line nil)
-      (cycle-spacing 0)                 ; Remove all spaces.
-      (insert ";")))
-  (key-chord-define c-mode-base-map ";;" 'my-colon-at-the-end))
+      (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
+      (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
+      (add-to-list 'major-mode-remap-alist '(c-or-c++-mode . c-or-c++-ts-mode)))
+  (use-package modern-cpp-font-lock
+    :config
+    (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode)))
+
+;; (setq use-qt-tab-width nil)
+;; (defun turn-on-qt-tab-width ()
+;;   "Use Qt tab width (4 spaces)."
+;;   (interactive)
+;;   (setq use-qt-tab-width t)
+;;   (revert-buffer :ignore-auto :noconfirm))
+;; (defun turn-off-qt-tab-width ()
+;;   "Use general tab width."
+;;   (interactive)
+;;   (setq use-qt-tab-width nil)
+;;   (revert-buffer :ignore-auto :noconfirm))
+
+;; (add-hook 'c-mode-common-hook
+;;           (lambda ()
+;;             ;; If in Qt code then use 4 spaces as tabs, otherwise the general tab width.
+;;             (if (bound-and-true-p use-qt-tab-width)
+;;                 (setq tab-width 4)
+;;               (setq tab-width --general-tab-width))
+;;             (setq c-basic-offset tab-width)
+;;             (setq indent-tabs-mode nil)
+
+;;             ;; Run clang-format on region or buffer.
+;;             (local-set-key (kbd "C-c f") 'clang-format-region-or-buffer)))
+
+;; (use-package cc-mode
+;;   :requires key-chord
+;;   :config
+;;   (defun my-colon-at-the-end ()
+;;     (interactive)
+;;     (progn
+;;       (move-end-of-line nil)
+;;       (cycle-spacing 0)                 ; Remove all spaces.
+;;       (insert ";")))
+;;   (key-chord-define c-mode-base-map ";;" 'my-colon-at-the-end))
 
 (setq auto-mode-alist
       (append '(("\\.c$"  . c-mode)
