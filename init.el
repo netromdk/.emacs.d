@@ -553,6 +553,22 @@ Command: %(netrom/compilation-command-string)
 
 ;;;;; Development ;;;;;
 
+;; Tree-sitter requires Emacs 29+.
+;; NOTE: for some reason `(featurep 'treesit)' returns `nil' while starting emacs but `t' afterwards
+;; so using a hack instead.
+(setq has-treesit (version<= "29.0" emacs-version))
+
+(when has-treesit
+  (require 'treesit)
+  ;; (setq treesit-font-lock-level 3)
+
+  (use-package treesit-auto
+    :demand t
+    :init
+    (setq treesit-auto-install 'prompt)
+    :config
+    (global-treesit-auto-mode)))
+
 (use-package cmake-font-lock
   :hook (cmake-mode . cmake-font-lock-activate))
 
