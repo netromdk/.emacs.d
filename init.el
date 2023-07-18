@@ -437,7 +437,7 @@ Command: %(netrom/compilation-command-string)
             (lambda ()
               ;; Using local-set-key because defining the bindings in prog-mode-map will get
               ;; overridden by c++-mode bindings, for instance. This shadows them instead.
-              (when (member major-mode '(c++-mode c-mode))
+              (when (member major-mode '(c++-mode c++-ts-mode c-mode c-ts-mode))
                 (local-set-key (kbd "C-c C-c") 'compilation-hydra/body)))))
 
 ;;;;; Help & Documentation ;;;;;
