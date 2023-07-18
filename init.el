@@ -1299,6 +1299,7 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
                                     "--background-index" "--clang-tidy" "--log=error"))
 
     (add-hook 'c++-mode-hook #'lsp)
+    (add-hook 'c++-ts-mode-hook #'lsp)
     (add-hook 'rust-mode-hook #'lsp)
     (add-hook 'python-mode-hook #'lsp)
     (add-hook 'php-mode-hook #'lsp)
