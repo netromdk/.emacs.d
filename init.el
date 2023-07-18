@@ -1287,11 +1287,9 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
     (setq lsp-clients-clangd-args `(,(format "-j=%d" (max 1 (/ (system-cores :logical) 2)))
                                     "--background-index" "--clang-tidy" "--log=error"))
 
-    (add-hook 'c++-mode-hook #'lsp)
-    (add-hook 'c++-ts-mode-hook #'lsp)
-    (add-hook 'rust-mode-hook #'lsp)
-    (add-hook 'python-mode-hook #'lsp)
-    (add-hook 'php-mode-hook #'lsp)
+    (dolist (hook '(c++-mode-hook c++-ts-mode-hook rust-mode-hook rust-ts-mode-hook python-mode-hook
+                    python-ts-mode-hook php-mode-hook))
+      (add-hook hook #'lsp))
 
     (setq netrom--general-lsp-hydra-heads
           '(;; Xref
