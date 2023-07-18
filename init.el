@@ -694,9 +694,11 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
   ;; Enable highlight-thing-mode in prog modes except for modes using LSP because it has it's own
   ;; highlight feature.
+  (setq netrom/not-highlight-prog-modes
+        '(c++-mode c++-ts-mode c-mode c-ts-mode python-mode python-ts-mode rust-mode rust-ts-mode))
   (add-hook 'prog-mode-hook
             #'(lambda ()
-                (when (not (member major-mode '(c++-mode c-mode python-mode rust-mode)))
+                (when (not (member major-mode netrom/not-highlight-prog-modes))
                   (highlight-thing-mode)))))
 
 ;; Better commenting DWIM that cycles. Use "C-u M-;" to align comments at end of line with those
