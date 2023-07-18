@@ -258,11 +258,6 @@
 ;; there was whitespace.
 (global-set-key [remap move-beginning-of-line] 'smarter-move-beginning-of-line)
 
-;; Cycle through "just one space", "no spaces" and original number of spaces,
-;; instead of just "just one space". It does not delete newlines, too.
-(global-set-key (kbd "M-SPC")
-                #'(lambda () (interactive) (cycle-spacing +1 t)))
-
 ;; Make font bigger/smaller.
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
