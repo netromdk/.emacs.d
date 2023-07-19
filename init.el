@@ -552,7 +552,7 @@ Command: %(netrom/compilation-command-string)
 (use-package treesit-auto
   :demand t
   :init
-  (setq treesit-auto-install 'prompt)
+  (setq treesit-auto-install nil)       ; Don't auto-install.
   :config
   (global-treesit-auto-mode))
 
