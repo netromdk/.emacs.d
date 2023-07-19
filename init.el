@@ -1,8 +1,11 @@
 ;;; Emacs Configurations                              -*- no-byte-compile: t -*-
 
-(let ((min-version "28.1"))
+(let ((min-version "29.1"))
   (if (version< emacs-version min-version)
       (error "Emacs v. %s+ is required for this configuration!" min-version)))
+
+(if (not (treesit-available-p))
+    (error "Tree-sitter isn't built into Emacs! Recompile, please."))
 
 ;; Constants.
 (defconst --emacs-start-time (current-time))
@@ -543,20 +546,15 @@ Command: %(netrom/compilation-command-string)
 ;;;;; Development ;;;;;
 
 ;; Tree-sitter requires Emacs 29+.
-;; NOTE: for some reason `(featurep 'treesit)' returns `nil' while starting emacs but `t' afterwards
-;; so using a hack instead.
-(setq has-treesit (version<= "29.0" emacs-version))
+(require 'treesit)
+;; (setq treesit-font-lock-level 3)
 
-(when has-treesit
-  (require 'treesit)
-  ;; (setq treesit-font-lock-level 3)
-
-  (use-package treesit-auto
-    :demand t
-    :init
-    (setq treesit-auto-install 'prompt)
-    :config
-    (global-treesit-auto-mode)))
+(use-package treesit-auto
+  :demand t
+  :init
+  (setq treesit-auto-install 'prompt)
+  :config
+  (global-treesit-auto-mode))
 
 (use-package cmake-font-lock
   :hook (cmake-mode . cmake-font-lock-activate))
@@ -745,14 +743,14 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
 ;; When not having tree-sitter, use a more modern font lock, otherwise the font lock is as modern as
 ;; can be.
-(if has-treesit
-    (progn
-      (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
-      (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
-      (add-to-list 'major-mode-remap-alist '(c-or-c++-mode . c-or-c++-ts-mode)))
-  (use-package modern-cpp-font-lock
-    :config
-    (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode)))
+(add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
+(add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
+(add-to-list 'major-mode-remap-alist '(c-or-c++-mode . c-or-c++-ts-mode))
+
+;; Disabled when having tree-sitter.
+;; (use-package modern-cpp-font-lock
+;;   :config
+;;   (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode))
 
 ;; (setq use-qt-tab-width nil)
 ;; (defun turn-on-qt-tab-width ()
