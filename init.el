@@ -1173,54 +1173,56 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   (xref-find-apropos pattern))
 
 (use-package flycheck
-  :requires hydra flycheck-pycheckers flycheck-inline
+  :requires hydra
   :config
-  (progn
-    ;; C++11
-    (add-hook 'c++-mode-hook
-              (lambda ()
-                (progn
-                  (setq flycheck-clang-language-standard "c++17"
-                        flycheck-clang-standard-library "libc++"
-                        flycheck-gcc-language-standard "c++17"
-                        flycheck-cppcheck-standards '("c++17")
-                        flycheck-cppcheck-inconclusive t
-                        flycheck-cppcheck-checks '("all")
+  ;; C++20
+  (defun netrom/flycheck-cpp-hook ()
+    (setq flycheck-clang-language-standard "c++20"
+          flycheck-clang-standard-library "libc++"
+          flycheck-gcc-language-standard "c++20"
+          flycheck-cppcheck-standards '("c++20")
+          flycheck-cppcheck-inconclusive t
+          flycheck-cppcheck-checks '("all")
 
-                        ;; Ignore "no explicit constructor" because often you don't want it to be
-                        ;; explicit and in general it's annoying.
-                        flycheck-cppcheck-suppressions '("noExplicitConstructor")))))
+          ;; Ignore "no explicit constructor" because often you don't want it to be
+          ;; explicit and in general it's annoying.
+          flycheck-cppcheck-suppressions '("noExplicitConstructor")))
+  (dolist (hook '(c++-mode-hook c++-ts-mode-hook))
+    (add-hook hook #'netrom/flycheck-cpp-hook))
 
-    ;; Disable elisp checkdoc because it's annoying, and clang/gcc because they never know the
-    ;; includes anyway!
-    (setq-default flycheck-disabled-checkers
-                  '(emacs-lisp-checkdoc c/c++-clang c/c++-gcc))
 
-    (defalias 'fcn 'flycheck-next-error)
+  ;; Disable elisp checkdoc because it's annoying, and clang/gcc because they never know the
+  ;; includes anyway!
+  (setq-default flycheck-disabled-checkers
+                '(emacs-lisp-checkdoc c/c++-clang c/c++-gcc))
 
-    (add-hook 'prog-mode-hook 'flycheck-mode)
+  (defalias 'fcn 'flycheck-next-error)
 
+  (add-hook 'prog-mode-hook 'flycheck-mode)
+
+  ;; Navigate flycheck errors more easily.
+  (defhydra flycheck-hydra
+    (:pre  (flycheck-list-errors)
+           :post (quit-windows-on "*Flycheck errors*")
+           :hint nil)
+    "Errors"
+    ("f"  flycheck-error-list-set-filter                            "Filter")
+    ("j"  flycheck-next-error                                       "Next")
+    ("k"  flycheck-previous-error                                   "Previous")
+    ("gg" flycheck-first-error                                      "First")
+    ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
+    ("q"  nil)))
+
+(use-package flycheck-inline
+  :requires flycheck
+  :config
     ;; Enable inline errors/warnings/info etc.
-    (flycheck-inline-mode)
-
-    ;; Navigate flycheck errors more easily.
-    (defhydra flycheck-hydra
-      (:pre  (flycheck-list-errors)
-             :post (quit-windows-on "*Flycheck errors*")
-             :hint nil)
-      "Errors"
-      ("f"  flycheck-error-list-set-filter                            "Filter")
-      ("j"  flycheck-next-error                                       "Next")
-      ("k"  flycheck-previous-error                                   "Previous")
-      ("gg" flycheck-first-error                                      "First")
-      ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
-      ("q"  nil))))
-
-(use-package flycheck-inline)
+  (flycheck-inline-mode))
 
 ;; Requires local dependencies:
 ;;   pip install flake8 bandit
 (use-package flycheck-pycheckers
+  :requires flycheck
   :config
   (setq flycheck-pycheckers-checkers '(flake8 bandit)
         flycheck-pycheckers-ignore-codes
