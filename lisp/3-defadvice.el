@@ -1,4 +1,4 @@
-;;;;; kill-line
+;;;;; kill-line, kill-region, kill-ring-save
 ;;
 ;; Originally found at:
 ;; https://www.reddit.com/r/emacs/comments/rlli0u/whats_your_favorite_defadvice/
@@ -11,6 +11,21 @@ indent whitespace in front of the next line."
     (save-excursion
       (forward-char 1)
       (just-one-space 1))))
+
+(defadvice kill-ring-save (before slick-copy activate compile)
+  "When called interactively with no active region, copy a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (message "Single line killed")
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
+
+(defadvice kill-region (before slick-cut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
 
 
 ;;;;;
