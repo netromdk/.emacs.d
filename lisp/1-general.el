@@ -80,7 +80,9 @@
   (when window-system
     (setq split-height-threshold (* 2 --global-fill-column)
           split-width-threshold (* 2 --global-fill-column))))
-(fix-split-thresholds)
+
+;; Calling it right away doesn't work. Must be postponed a bit.
+(run-at-time "3 sec" nil #'fix-split-thresholds)
 
 ;; Disable visible bell because it looks ugly, but that makes the audible bell and therefore we
 ;; "flash" the mode line by double-inverting instead.
