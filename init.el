@@ -554,6 +554,10 @@ Command: %(netrom/compilation-command-string)
   :init
   (setq treesit-auto-install nil)       ; Don't auto-install.
   :config
+  ;; Install grammers if not already installed.
+  (dolist (lang '(cpp python rust))
+    (if (not (treesit-language-available-p lang))
+        (treesit-install-language-grammar lang)))
   (global-treesit-auto-mode))
 
 (use-package cmake-font-lock
