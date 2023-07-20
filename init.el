@@ -560,12 +560,15 @@ Command: %(netrom/compilation-command-string)
         (treesit-install-language-grammar lang)))
   (global-treesit-auto-mode))
 
-(use-package cmake-font-lock
-  :hook (cmake-mode . cmake-font-lock-activate))
-
 (use-package cmake-mode
   :mode (("CMakeLists\\.txt\\'" . cmake-mode)
          ("\\.cmake\\'" . cmake-mode)))
+
+;; Only use cmake-font-lock when not using tree-sitter parser.
+(when (not (treesit-language-available-p 'cmake))
+  (use-package cmake-font-lock
+    :requires cmake-mode
+    :hook (cmake-mode . cmake-font-lock-activate)))
 
 ;; General compilation settings.
 (setq compilation-window-height 30
