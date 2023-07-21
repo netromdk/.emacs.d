@@ -23,7 +23,7 @@ case "$(uname -s)" in
 
     writeBanner "Homebrew"
     checkProgram brew
-    brew install curl git ripgrep the_silver_searcher cppcheck shellcheck aspell
+    brew install curl git ripgrep the_silver_searcher cppcheck shellcheck aspell zstd
     ;;
 esac
 
@@ -43,3 +43,6 @@ checkProgram rustup
 checkProgram rustc
 checkProgram cargo
 rustup component add rustfmt rls rust-analysis rust-src
+
+writeBanner "Zstd"
+checkProgram zstd

@@ -1583,6 +1583,61 @@ Multiple Cursors
 
   (global-set-key (kbd "C-c w") 'copying-hydra/body))
 
+;;;;; Undoing/Redoing ;;;;;
+
+;; Quoting the original package author:
+;;   (https://github.com/tarsiiformes/undo-tree/blob/master/undo-tree.el#L31)
+;;
+;;   Emacs has a powerful undo system. Unlike the standard undo/redo system in most software, it
+;;   allows you to recover *any* past state of a buffer (whereas the standard undo/redo system can
+;;   lose past states as soon as you redo). However, this power comes at a price: many people find
+;;   Emacs' undo system confusing and difficult to use, spawning a number of packages that replace
+;;   it with the less powerful but more intuitive undo/redo system.
+;;
+;;   Both the loss of data with standard undo/redo, and the confusion of Emacs' undo, stem from
+;;   trying to treat undo history as a linear sequence of changes. It's not. The `undo-tree-mode'
+;;   provided by this package replaces Emacs' undo system with a system that treats undo history as
+;;   what it is: a branching tree of changes. This simple idea allows the more intuitive behaviour
+;;   of the standard undo/redo system to be combined with the power of never losing any history. An
+;;   added side bonus is that undo history can in some cases be stored more efficiently, allowing
+;;   more changes to accumulate before Emacs starts discarding history.
+;;
+;;   The only downside to this more advanced yet simpler undo system is that it was inspired by
+;;   Vim. But, after all, most successful religions steal the best ideas from their competitors!
+;;
+;; The package remaps:
+;;   `C-_' `C-/' for `undo-tree-undo'
+;;   `M-_' `C-?' for `undo-tree-redo'
+;;
+;; The visualizer mode is entered via `C-x u' or `undo-tree-visualize'. In the visualizer mode, `q'
+;; quits leaving the buffer in the state that was chosen, while `C-q' aborts and leaves the buffer
+;; in the original state before entering the visualizer.
+(use-package undo-tree
+  :init
+  ;; Save all undo history to individual files in `--user-cache-dir'.
+  (setq undo-tree-auto-save-history t
+        undo-tree-history-directory-alist `(("." . ,--user-cache-dir)))
+
+  ;; Auto-compress history files on disk using Zstd. See `jka-compr-compression-info-list' for the
+  ;; list of supported formats.
+  (defvar netrom/undo-tree-comp-ext ".zst")
+  (defvar netrom/undo-tree-comp-bin "zstd")
+  (if (not (executable-find netrom/undo-tree-comp-bin))
+      (warn "Could not find '%s' in PATH! Needed for undo-tree history file
+auto-compression." netrom/undo-tree-comp-bin)
+    (defadvice undo-tree-make-history-save-file-name
+        (after undo-tree activate)
+      (setq ad-return-value (concat ad-return-value netrom/undo-tree-comp-ext))))
+
+  (setq undo-tree-visualizer-diff t                 ; Show diff at the bottom of visualizer.
+        undo-tree-visualizer-timestamps t           ; Show timestamps between each revision.
+        undo-tree-visualizer-relative-timestamps t) ; ..and make them relative.
+
+  ;; `undo-in-region' is disabled because it is buggy.
+  (setq undo-tree-enable-undo-in-region nil)
+  :config
+  (global-undo-tree-mode +1))
+
 ;;;;; Spelling ;;;;;
 
 (use-package ispell
