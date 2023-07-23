@@ -1288,84 +1288,84 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 ;;    composer run-script --working-dir=vendor/felixfbecker/language-server parse-stubs
 
 
-(let ((straight-current-profile 'pinned))
-  (use-package lsp-mode
-    :requires hydra markdown-mode
-    :config
-    (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
-          lsp-enable-xref t)
 
-    ;; Let clangd use half of the logical cores but one as minimum. `--background-index' requires
-    ;; clangd v8+! Enable clang-tidy checks, too.
-    (setq lsp-clients-clangd-args `(,(format "-j=%d" (max 1 (/ (system-cores :logical 1) 2)))
-                                    "--background-index" "--clang-tidy" "--log=error"))
+(use-package lsp-mode
+  :requires hydra markdown-mode
+  :config
+  (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
+        lsp-enable-xref t)
 
-    (dolist (hook '(c++-mode-hook c++-ts-mode-hook rust-mode-hook rust-ts-mode-hook python-mode-hook
-                    python-ts-mode-hook php-mode-hook))
-      (add-hook hook #'lsp))
+  ;; Let clangd use half of the logical cores but one as minimum. `--background-index' requires
+  ;; clangd v8+! Enable clang-tidy checks, too.
+  (setq lsp-clients-clangd-args `(,(format "-j=%d" (max 1 (/ (system-cores :logical 1) 2)))
+                                  "--background-index" "--clang-tidy" "--log=error"))
 
-    (setq netrom--general-lsp-hydra-heads
-          '(;; Xref
-            ("d" xref-find-definitions "Definitions" :column "Xref")
-            ("D" xref-find-definitions-other-window "-> other win")
-            ("r" xref-find-references "References")
+  (dolist (hook '(c++-mode-hook c++-ts-mode-hook rust-mode-hook rust-ts-mode-hook python-mode-hook
+                                python-ts-mode-hook php-mode-hook))
+    (add-hook hook #'lsp))
 
-            ;; Peek
-            ("C-d" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
-            ("C-r" lsp-ui-peek-find-references "References")
-            ("C-i" lsp-ui-peek-find-implementation "Implementation")
+  (setq netrom--general-lsp-hydra-heads
+        '(;; Xref
+          ("d" xref-find-definitions "Definitions" :column "Xref")
+          ("D" xref-find-definitions-other-window "-> other win")
+          ("r" xref-find-references "References")
 
-            ;; LSP
-            ("p" lsp-describe-thing-at-point "Describe at point" :column "LSP")
-            ("C-a" lsp-execute-code-action "Execute code action")
-            ("R" lsp-rename "Rename")
-            ("t" lsp-goto-type-definition "Type definition")
-            ("i" lsp-goto-implementation "Implementation")
-            ("f" consult-imenu "Filter funcs/classes")
-            ("F" consult-imenu-multi "-> in all buffers")
-            ("s" consult-lsp-file-symbols "Search file symbols")
-            ("S" consult-lsp-symbols "Search workspace symbols")
-            ("M-d" consult-lsp-diagnostics "Diagnostics")
-            ("C-c" lsp-describe-session "Describe session")
+          ;; Peek
+          ("C-d" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
+          ("C-r" lsp-ui-peek-find-references "References")
+          ("C-i" lsp-ui-peek-find-implementation "Implementation")
 
-            ;; Flycheck
-            ("l" lsp-ui-flycheck-list "List errs/warns/notes" :column "Flycheck"))
+          ;; LSP
+          ("p" lsp-describe-thing-at-point "Describe at point" :column "LSP")
+          ("C-a" lsp-execute-code-action "Execute code action")
+          ("R" lsp-rename "Rename")
+          ("t" lsp-goto-type-definition "Type definition")
+          ("i" lsp-goto-implementation "Implementation")
+          ("f" consult-imenu "Filter funcs/classes")
+          ("F" consult-imenu-multi "-> in all buffers")
+          ("s" consult-lsp-file-symbols "Search file symbols")
+          ("S" consult-lsp-symbols "Search workspace symbols")
+          ("M-d" consult-lsp-diagnostics "Diagnostics")
+          ("C-c" lsp-describe-session "Describe session")
 
-          netrom--misc-lsp-hydra-heads
-          '(;; Misc
-            ("q" nil "Cancel" :column "Misc")
-            ("b" pop-tag-mark "Back")))
+          ;; Flycheck
+          ("l" lsp-ui-flycheck-list "List errs/warns/notes" :column "Flycheck"))
 
-    ;; Create general hydra.
-    (eval `(defhydra netrom/lsp-hydra (:color blue :hint nil)
-             ,@(append
-                netrom--general-lsp-hydra-heads
-                netrom--misc-lsp-hydra-heads)))
+        netrom--misc-lsp-hydra-heads
+        '(;; Misc
+          ("q" nil "Cancel" :column "Misc")
+          ("b" pop-tag-mark "Back")))
 
-    (add-hook 'lsp-mode-hook
-              (lambda () (local-set-key (kbd "C-c C-l") 'netrom/lsp-hydra/body))))
+  ;; Create general hydra.
+  (eval `(defhydra netrom/lsp-hydra (:color blue :hint nil)
+           ,@(append
+              netrom--general-lsp-hydra-heads
+              netrom--misc-lsp-hydra-heads)))
 
-  (use-package lsp-ui
-    :requires lsp-mode flycheck
-    :config
+  (add-hook 'lsp-mode-hook
+            (lambda () (local-set-key (kbd "C-c C-l") 'netrom/lsp-hydra/body))))
 
-    (setq lsp-ui-doc-enable nil
-          ;; lsp-ui-doc-use-childframe t
-          ;; lsp-ui-doc-position 'top
-          ;; lsp-ui-doc-include-signature t
-          lsp-ui-sideline-enable nil
-          lsp-ui-flycheck-enable t
-          lsp-ui-flycheck-list-position 'right
-          lsp-ui-flycheck-live-reporting t
-          lsp-ui-peek-enable t
-          lsp-ui-peek-list-width 60
-          lsp-ui-peek-peek-height 25)
+(use-package lsp-ui
+  :requires lsp-mode flycheck
+  :config
 
-    ;; Remap keys for xref find defs to use the LSP UI peek mode.
-    ;;(define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-    ;;(define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+  (setq lsp-ui-doc-enable nil
+        ;; lsp-ui-doc-use-childframe t
+        ;; lsp-ui-doc-position 'top
+        ;; lsp-ui-doc-include-signature t
+        lsp-ui-sideline-enable nil
+        lsp-ui-flycheck-enable t
+        lsp-ui-flycheck-list-position 'right
+        lsp-ui-flycheck-live-reporting t
+        lsp-ui-peek-enable t
+        lsp-ui-peek-list-width 60
+        lsp-ui-peek-peek-height 25)
 
-    (add-hook 'lsp-mode-hook 'lsp-ui-mode)))
+  ;; Remap keys for xref find defs to use the LSP UI peek mode.
+  ;;(define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  ;;(define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 ;; Turn on smerge-mode when opening a file with the markers in them.
 (defun sm-try-smerge ()
