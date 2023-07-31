@@ -110,8 +110,8 @@ delegate function to invoke for a given architecture.
 
   Delegates are expected to return an alist of the form:
 
-  '((logical  . #)
-    (physical . #))
+  \='((logical  . #)
+      (physical . #))
 
 where '#' represents a number greater than zero. A condition will
 be signaled if a delegate returns a value not satisfying this
@@ -161,8 +161,8 @@ latter may reasonably be expected, on an Apple system, to be
 more accurate than the former, it is preferred by default on
 that architecture.)")
 
-(defun* system-cores (&key (logical  nil log-p)
-                           (physical nil phy-p))
+(cl-defun system-cores (&key (logical  nil log-p)
+                             (physical nil phy-p))
   "Return the number of processor cores, and the number of
 physical processors, installed on the machine where Emacs is
 running.
@@ -170,8 +170,8 @@ running.
   Called without arguments, this function returns an alist of the
 form:
 
-  '((logical  . #)
-    (physical . #))
+  \='((logical  . #)
+      (physical . #))
 
 where '#' represents a number greater than zero. Called with one
 of the keywords :LOGICAL and :PHYSICAL, the function returns the

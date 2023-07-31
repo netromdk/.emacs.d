@@ -93,7 +93,7 @@ switch back to the origin buffer."
 
 ;; Show magit status buffer to the left and magit log to the right.
 (fset 'netrom-magit-status-and-log
-   (kmacro-lambda-form [?\C-x ?1 ?\C-x ?g ?\C-x ?3 ?\C-x ?o ?l ?l] 0 "%d"))
+   (kmacro [?\C-x ?1 ?\C-x ?g ?\C-x ?3 ?\C-x ?o ?l ?l] 0 "%d"))
 
 ;; Convert the output of `apt --upgradable', like
 ;;   linux-generic/bionic-updates,bionic-security 4.15.0.189.174 amd64 [upgradable from: 4.15.0.188.173]
@@ -103,4 +103,4 @@ switch back to the origin buffer."
 ;;   linux-generic linux-headers-generic linux-image-generic
 ;; Requires an auxiliary buffer to put results into, jumping back and forth via `C-x o'.
 (fset 'netrom-apt-upgradable-to-one-line
-   (kmacro-lambda-form [?\C-  ?\C-s ?/ ?\C-b ?\C-w ?\C-x ?o ?\C-y ?  ?\C-x ?o ?\C-n] 0 "%d"))
+   (kmacro [?\C-  ?\C-s ?/ ?\C-b ?\C-w ?\C-x ?o ?\C-y ?  ?\C-x ?o ?\C-n] 0 "%d"))
