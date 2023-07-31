@@ -19,7 +19,6 @@
 (setq completions-detailed t)        ;; Completions with details added as prefix/suffix.
 (setq help-enable-symbol-autoload t) ;; Perform autoload if docs are missing from autoload objects.
 (setq describe-bindings-outline t)
-(setq warning-minimum-level :error)  ;; Set minimum severity to error instead of warning.
 
 ;; Abbreviations file.
 (setq abbrev-file-name (concat --misc-dir "abbrev_defs"))
