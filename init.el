@@ -291,6 +291,10 @@
   (global-set-key [remap scroll-down-command] 'golden-ratio-scroll-screen-down)
   (global-set-key [remap scroll-up-command] 'golden-ratio-scroll-screen-up))
 
+
+;; Smooth precision scrolling. Especially useful when using a trackpad to scroll.
+(pixel-scroll-precision-mode +1)
+
 ;;;;; Magit ;;;;;
 
 (use-package magit
