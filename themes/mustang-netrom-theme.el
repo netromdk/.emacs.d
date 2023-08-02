@@ -14,7 +14,6 @@
 (custom-theme-set-faces
  'mustang-netrom
  '(default ((t (:background "#202020" :foreground "#e2e2e5"))))
- '(font-lock-builtin-face ((t (:foreground "#808080"))))
  '(region ((t (:background "#3c414c" :foreground "#faf4c6"))))
  '(highlight ((t (:background "#3c414c"))))
  '(hl-line ((t (:background "#393939"))))
@@ -28,19 +27,37 @@
  '(mode-line-buffer-id ((t (:bold t :foreground "#ff9800" :background "#202020"))))
  '(minibuffer-prompt ((t (:bold t :foreground "#708090"))))
  '(default-italic ((t (:italic t))))
- '(font-lock-negation-char-face ((t (:foreground "#ff9800"))))
+
+ ;; Font lock
+ ;;;;; CHANGE these if necessary:
+ '(font-lock-punctuation-face ((t (:foreground "#ff0000"))))
+ ;; '(font-lock-bracket-face ((t (:foreground "#ff0000")))) ; font-lock-punctuation-face
+ ;; '(font-lock-delimiter-face ((t (:foreground "#ff0000")))) ; font-lock-punctuation-face
+ ;; '(font-lock-misc-punctuation-face ((t (:foreground "#ff0000")))) ; font-lock-punctuation-face
+ '(font-lock-operator-face ((t (:foreground "#ff0000"))))
+ '(font-lock-regexp-face ((t (:foreground "#ff0000"))))
+ ;;;;; /CHANGE
+ '(font-lock-builtin-face ((t (:foreground "#808080"))))
  '(font-lock-comment-delimiter-face ((t (:foreground "#908080"))))
  '(font-lock-comment-face ((t (:foreground "#908080"))))
  '(font-lock-constant-face ((t (:foreground "#ff9800"))))
  '(font-lock-doc-face ((t (:foreground "#7e8aa2"))))
+ '(font-lock-escape-face ((t (:foreground "#908080"))))
  '(font-lock-function-name-face ((t (:foreground "#ffffff"))))
+ ;; '(font-lock-function-call-face ((t (:foreground "#ff0000")))) ; font-lock-function-name-face
  '(font-lock-keyword-face ((t (:bold t :foreground "#808080"))))
+ '(font-lock-negation-char-face ((t (:foreground "#ff9800"))))
+ '(font-lock-number-face ((t (:foreground "#ff9800"))))
  '(font-lock-preprocessor-face ((t (:foreground "#ff9800"))))
+ '(font-lock-property-use-face ((t (:foreground "#ffffff"))))
  '(font-lock-reference-face ((t (:bold t :foreground "#808bed"))))
  '(font-lock-string-face ((t (:foreground "#b1d631"))))
  '(font-lock-type-face ((t (:foreground "#7e8aa2"))))
  '(font-lock-variable-name-face ((t (:foreground "#ff9800"))))
+ ;; '(font-lock-variable-use-face ((t (:foreground "#ff0000")))) ; font-lock-variable-name-face
+ '(font-lock-property-name-face ((t (:foreground "#ff9800"))))
  '(font-lock-warning-face ((t (:foreground "#ffffff" :background "#ff6523"))))
+
  '(link ((t (:foreground "#ff9800"))))
  '(company-tooltip ((t (:background "#404040" :foreground "#ffffff"))))
  '(company-tooltip-common ((t (:background "#282828" :foreground "#ff9800"))))
