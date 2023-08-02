@@ -1562,6 +1562,12 @@ Multiple Cursors
   :config
   (editorconfig-mode 1))
 
+;;;;; Saving ;;;;;
+
+;; Saving a file that is considered a script will have its executable flags set. Emacs checks this
+;; via the magic shebang line at the top of files, like `#!/bin/sh'.
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
 ;;;;; Copying ;;;;;
 
 ;; Convenience for formatting things to be copied and inserted elsewhere, like code blocks.
