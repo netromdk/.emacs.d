@@ -25,6 +25,13 @@ case "$(uname -s)" in
     checkProgram brew
     brew install curl git ripgrep the_silver_searcher cppcheck shellcheck aspell zstd
     ;;
+
+  Linux)
+    # Dist specific.
+    if grep -q Fedora /etc/system-release; then
+      sudo dnf install git ripgrep cppcheck shellcheck aspell aspell-da aspell-en zstd
+    fi
+    ;;
 esac
 
 writeBanner "Git"
