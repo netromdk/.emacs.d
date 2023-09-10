@@ -36,7 +36,7 @@ checkProgram clangd # LSP
 
 writeBanner "Python"
 checkProgram pip3
-pip3 install python-lsp-server flake8 bandit
+pip3 install --user python-lsp-server flake8 bandit
 
 writeBanner "Rust"
 checkProgram rustup
