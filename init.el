@@ -66,6 +66,9 @@
 
 ;;;;; Setup and Bootstrap straight.el ;;;;;
 
+;; This is to fix an error of a 'void-variable' being referenced in straight.el.
+(defvar native-comp-deferred-compilation-deny-list nil)
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
