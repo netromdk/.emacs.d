@@ -775,17 +775,20 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   (setq use-qt-tab-width nil)
   (revert-buffer :ignore-auto :noconfirm))
 
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            ;; If in Qt code then use 4 spaces as tabs, otherwise the general tab width.
-            (if (bound-and-true-p use-qt-tab-width)
-                (setq tab-width 4)
-              (setq tab-width --general-tab-width))
-            (setq c-basic-offset tab-width)
-            (setq indent-tabs-mode nil)
+(add-to-multiple-hooks
+ (lambda ()
+   ;; If in Qt code then use 4 spaces as tabs, otherwise the general tab width.
+   (if (bound-and-true-p use-qt-tab-width)
+       (setq tab-width 4)
+     (setq tab-width --general-tab-width))
+   (setq c-basic-offset tab-width)
+   (setq indent-tabs-mode nil)
 
-            ;; Run clang-format on region or buffer.
-            (local-set-key (kbd "C-c f") 'clang-format-region-or-buffer)))
+   ;; Run clang-format on region or buffer.
+   (local-set-key (kbd "C-c f") 'clang-format-region-or-buffer))
+ '(c-mode-common-hook
+   c-ts-mode-hook
+   c++-ts-mode-hook))
 
 (use-package cc-mode
   :requires key-chord
