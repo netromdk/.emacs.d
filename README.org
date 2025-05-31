@@ -2,3 +2,6 @@
 - Clone into "~/.emacs.d"
 - Execute setup.sh to install fonts and local dependencies
 - Start Emacs
+- Execute ~M-x nerd-icons-install-fonts~ and choose the local "./font/" folder
+- ~Windows:~ Open "./font/" in Explorer, right-click the TTFs, and select "Install"
+- Restart Emacs
