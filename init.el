@@ -2377,19 +2377,19 @@ search when the prefix argument is defined."
   ;; Syntax highlighting of wiki links.
   (setq markdown-enable-wiki-links t))
 
-(use-package obsidian
-  :straight (obsidian :type git :host github :repo "licht1stein/obsidian.el")
-  :requires hydra
-  :ensure t
-  :config
-  (obsidian-specify-path "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/notes")
-  (global-obsidian-mode t)
-  :bind (:map obsidian-mode-map
-              ("C-c M-o" . 'obsidian-hydra/body)  ;; Show hydra menu.
+;; (use-package obsidian
+;;   :straight (obsidian :type git :host github :repo "licht1stein/obsidian.el")
+;;   :requires hydra
+;;   :ensure t
+;;   :config
+;;   (obsidian-specify-path "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/notes")
+;;   (global-obsidian-mode t)
+;;   :bind (:map obsidian-mode-map
+;;               ("C-c M-o" . 'obsidian-hydra/body)  ;; Show hydra menu.
 
-              ;; Shadows comparable functions of markdown-mode-map.
-              ("C-c C-o" . 'obsidian-hydra/obsidian-follow-link-at-point)
-              ("C-c C-l" . 'obsidian-insert-wikilink)))
+;;               ;; Shadows comparable functions of markdown-mode-map.
+;;               ("C-c C-o" . 'obsidian-hydra/obsidian-follow-link-at-point)
+;;               ("C-c C-l" . 'obsidian-insert-wikilink)))
 
 ;;;;; Miscellaneous ;;;;;
 
