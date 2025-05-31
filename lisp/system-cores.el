@@ -272,9 +272,9 @@ obtained from the value listed for the key
                   "wmic" "cpu" "get" "NumberOfCores,NumberOfLogicalProcessors"
                   "/format:List"))))))
     `((logical .
-               ,(string-to-number (cadr (assoc "NumberOfCores" cpuinfo))))
+               ,(string-to-number (cadr (assoc "NumberOfLogicalProcessors" cpuinfo))))
       (physical .
-                ,(string-to-number (cadr (assoc "NumberOfLogicalProcessors" cpuinfo)))))))
+                ,(string-to-number (cadr (assoc "NumberOfCores" cpuinfo)))))))
 
 (defun system-cores-profiler ()
   "Return the number of logical cores, and the number of
