@@ -220,6 +220,12 @@
 (if (eq window-system 'x)
     (set-default-font "-misc-fixed-medium-r-normal--13-120-75-75-c-70-iso8859-15"))
 
+;;;;; Windows ;;;;;
+
+(if (eq window-system 'w32)
+    ;; The font is located in the ./font/ folder. Install it on the system to be used.
+    (set-frame-font "JetBrains Mono-9"))
+
 ;;;;; Shell ;;;;;
 
 (use-package exec-path-from-shell
