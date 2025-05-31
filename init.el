@@ -1429,6 +1429,12 @@ Projectile: %(projectile-project-root)
 
 ;;;;; Version Control ;;;;;
 
+;; Add Git-for-Windows' /usr/bin to PATH because it also has diff.exe that is needed for diffing.
+(let ((fld "C:/Program Files/Git/usr/bin"))
+  (when (file-directory-p fld)
+    (push fld exec-path)
+    (setenv "PATH" (concat fld ";" (getenv "PATH")))))
+
 ;; Highlight uncommitted changes/additions/deletions in the fringe.
 (use-package diff-hl
   :requires magit
