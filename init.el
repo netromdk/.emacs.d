@@ -1273,7 +1273,7 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
     ;; Let clangd use half of the logical cores but one as minimum. `--background-index' requires
     ;; clangd v8+! Enable clang-tidy checks, too.
-    (setq lsp-clients-clangd-args `(,(format "-j=%d" (max 1 (/ (system-cores :logical) 2)))
+    (setq lsp-clients-clangd-args `(,(format "-j=%d" (max 1 (/ (system-cores :logical t) 2)))
                                     "--background-index" "--clang-tidy" "--log=error"))
 
     (add-hook 'c++-mode-hook #'lsp)
