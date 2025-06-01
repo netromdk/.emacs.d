@@ -1570,21 +1570,46 @@ Multiple Cursors
 
 (use-package ispell
   :config
-  ;; Set aspell as spell program
-  (setq ispell-program-name "aspell")
+  (if (eq window-system 'w32)
+      (progn
+        ;; Install dictionaries from here:
+        ;;   https://github.com/wooorm/dictionaries?tab=readme-ov-file#list-of-dictionaries
+        ;; Put them in "C:/Hunspell" as "en_US.aff" and "en_US.dic" etc.
+        (setq ispell-program-name "hunspell")
 
-  ;; Speed up aspell: ultra | fast | normal
-  (setq ispell-extra-args '("--sug-mode=normal"))
+        (setq ispell-hunspell-dictionary-alist
+              '(("en_US" "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-d" "en_US") nil utf-8)
+                ("da_DK" "[A-Åa-å]" "[^A-Åa-å]" "[']" nil ("-d" "da_DK") nil utf-8)))
 
-  (defun da-spell ()
-    "Set ispell to use Danish dictionary (locally)"
-    (interactive)
-    (ispell-change-dictionary "dansk"))
+        (defun da-spell ()
+          "Set ispell to use Danish dictionary (locally)"
+          (interactive)
+          (setenv "LANG" "da_DK")
+          (ispell-change-dictionary "da_DK"))
 
-  (defun en-spell ()
-    "Set ispell to use English dictionary (locally)"
-    (interactive)
-    (ispell-change-dictionary "english"))
+        (defun en-spell ()
+          "Set ispell to use English dictionary (locally)"
+          (interactive)
+          (setenv "LANG" "en_US")
+          (ispell-change-dictionary "en_US"))
+
+        (en-spell))
+
+    (progn
+      (setq ispell-program-name "aspell")
+
+      ;; Speed up aspell: ultra | fast | normal
+      (setq ispell-extra-args '("--sug-mode=normal")))
+
+    (defun da-spell ()
+      "Set ispell to use Danish dictionary (locally)"
+      (interactive)
+      (ispell-change-dictionary "dansk"))
+
+    (defun en-spell ()
+      "Set ispell to use English dictionary (locally)"
+      (interactive)
+      (ispell-change-dictionary "english")))
 
   (defalias 'sb 'ispell-buffer)
 

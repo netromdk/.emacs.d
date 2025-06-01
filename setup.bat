@@ -6,6 +6,12 @@ if %errorlevel% neq 0 (
   exit /b
 )
 
+
+:: Copy Hunspell dicts.
+mkdir "C:\Hunspell"
+xcopy "%~dp0\dicts\*.aff" "C:\Hunspell\" /Y
+xcopy "%~dp0\dicts\*.dic" "C:\Hunspell\" /Y
+
 :: llvm also contains clangd and clang-format.
 choco install -y ripgrep shellcheck hunspell.portable llvm
 pip3 install python-lsp-server flake8 bandit
