@@ -268,7 +268,7 @@
 ;; Cycle through "just one space", "no spaces" and original number of spaces,
 ;; instead of just "just one space". It does not delete newlines, too.
 (global-set-key (kbd "M-SPC")
-                #'(lambda () (interactive) (cycle-spacing +1 t)))
+                #'(lambda () (interactive) (cycle-spacing +1)))
 
 ;; Make font bigger/smaller.
 (global-set-key (kbd "C-+") 'text-scale-increase)
