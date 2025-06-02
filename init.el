@@ -1936,27 +1936,12 @@ T - tag prefix
   (setq consult-project-root-function #'projectile-project-root
         consult-goto-line-numbers nil
 
-        ;; All previewing is manual by default.
-        my-consult-preview-key (list :debounce 0.2 (kbd "M-."))
-        consult-preview-key my-consult-preview-key
-
         ;; Xref through consult.
         xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
   :config
   ;; Auto-preview with a delay while browsing themes since it is a bit slow previewing them.
-  (consult-customize consult-theme :preview-key '(:debounce 0.5 any))
-
-  (defun consult-toggle-preview ()
-    "Command to toggle between `my-consult-preview-key' and `any'
-preview mode via the value of `consult-preview-key'."
-    (interactive)
-    (setq consult-preview-key
-          (if (eq 'any consult-preview-key)
-              my-consult-preview-key
-            'any)))
-
-  (define-key selectrum-minibuffer-map (kbd "M-P") #'consult-toggle-preview))
+  (consult-customize consult-theme :preview-key '(:debounce 0.5 any)))
 
 ;;;;; Search ;;;;;
 
