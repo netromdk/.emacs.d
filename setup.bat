@@ -13,6 +13,11 @@ setlocal
 call :checkProgram powershell
 call :checkProgram git
 call :checkProgram choco
+call :checkProgram python
+
+:: python3.exe is required for certain scripts to function. Isn't enough to only have python.exe.
+call :checkProgram python3
+
 call :checkProgram pip3
 call :checkProgram rustup
 call :checkProgram rustc

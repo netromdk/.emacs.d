@@ -1203,6 +1203,14 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
 (use-package flycheck-inline)
 
+;; NOTE: On Windows, it is important to have `python3.exe' in PATH and not only `python.exe'!
+;; Otherwise, flycheck will not detect pycheckers properly.
+(when (eq window-system 'w32)
+  (let ((p (executable-find "python"))
+        (p3 (executable-find "python3")))
+    (when (and p (not p3))
+      (error "python.exe found but not python3.exe!\npython.exe is located at: %s" p))))
+
 ;; Requires local dependencies:
 ;;   pip install flake8 bandit
 (use-package flycheck-pycheckers
