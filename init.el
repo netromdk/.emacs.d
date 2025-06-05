@@ -1922,7 +1922,7 @@ T - tag prefix
          ("C-x b" . consult-buffer)
          ("C-x r" . consult-recent-file)
          ;; Other custom bindings
-         ("<help> a" . consult-apropos)
+         ("<help> a" . describe-symbol)
          ;; M-s bindings (search-map)
          ("M-s f" . consult-find)
          ("M-s F" . consult-locate)
@@ -1931,7 +1931,6 @@ T - tag prefix
          ("M-s r" . netrom/consult-ripgrep-symbol-at-point)
          ("M-s l" . netrom/consult-line-symbol-at-point)
          ("M-s L" . consult-line-multi)
-         ("M-s m" . consult-multi-occur)
          ("M-s k" . consult-keep-lines)
          ("M-s u" . consult-focus-lines)
          ("M-s k" . consult-kmacro)
