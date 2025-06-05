@@ -1943,6 +1943,9 @@ T - tag prefix
   (setq consult-project-root-function #'projectile-project-root
         consult-goto-line-numbers nil
 
+        ;; Not using splitting due to how Orderless works.
+        consult-async-split-style nil
+
         ;; Xref through consult.
         xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
