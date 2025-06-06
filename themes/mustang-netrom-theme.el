@@ -207,7 +207,7 @@
  '(indent-guide-face ((t (:foreground "gray27" :slant normal))))
 
  ;; auto-dim-other-buffers
- '(auto-dim-other-buffers-face ((t (:background "gray12"))))
+ '(auto-dim-other-buffers-face ((t (:background "#191919"))))
 
  ;; tabbar
  '(tabbar-button ((t (:inherit tabbar-default :box
