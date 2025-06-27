@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: luxion member function
-# key: luxmfn
+# name: KeyShot member function
+# key: ksmfn
 # --
 // *************************************************************************************************
 ${1:type} ${2:Class}::${3:name}(${4:args})${5: const}

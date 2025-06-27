@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: luxion function
-# key: luxfn
+# name: KeyShot function
+# key: ksfn
 # --
 // *************************************************************************************************
 ${1:type} ${2:name}(${3:args})${4: const}

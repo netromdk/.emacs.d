@@ -2079,7 +2079,7 @@ search when the prefix argument is defined."
 (add-hook 'latex-mode-hook 'auto-fill-mode)
 (setenv "TEXINPUTS" ".:~/latex/:")
 
-;;;;; Luxion related ;;;;;
+;;;;; KeyShot related ;;;;;
 
 ;; Associate `ksnrlog-mode' with KS NR log files to fontify them.
 (add-to-list 'auto-mode-alist
@@ -2092,8 +2092,8 @@ search when the prefix argument is defined."
 
 ;; Wraps a function with // ***.. before and after (the region selected). Both
 ;; inserted lines with have a length fo 80 characters.
-(defun lux-wrap-function (start end)
-  "Put comments around Luxion function."
+(defun ks-wrap-function (start end)
+  "Put comments around KeyShot function."
   (interactive "r")
   (let ((str (concat "// " (make-string (- --global-fill-column 3) ?*) "\n")))
     (save-excursion
@@ -2102,7 +2102,7 @@ search when the prefix argument is defined."
       (goto-char start)
       (insert str))))
 
-(defun lux-fix-function-comments ()
+(defun ks-fix-function-comments ()
   "Fix all functions with an incorrect number of '// ***..' (or '=' or '-') around them."
   (interactive)
   (let* ((regexp "[ ]*\/\/[ ]*[\*\=\-]+")
@@ -2134,7 +2134,7 @@ search when the prefix argument is defined."
           (goto-line old-line))
         (forward-line))))) ;; Search next line.
 
-(defun lux-fix-function-curls ()
+(defun ks-fix-function-curls ()
   "Fix all functions with '// ***..' around it to have it's '{' be put after the second '//***..'."
   (interactive)
   (let* ((regexp-line "[ ]*\/\/[ ]*[\*]+")
@@ -2193,17 +2193,17 @@ search when the prefix argument is defined."
               (setq flag nil)
               (forward-line))))))))
 
-(defun lux-fix-buffer ()
+(defun ks-fix-buffer ()
   (interactive)
-  (lux-fix-function-curls)
+  (ks-fix-function-curls)
   (cleanup-region-or-buffer)
-  (lux-fix-function-comments)
+  (ks-fix-function-comments)
   (clang-format-buffer))
 
 ;; Bindings
 (add-hook 'c-mode-common-hook
           (lambda ()
-            (local-set-key (kbd "C-M-l") 'lux-wrap-function)))
+            (local-set-key (kbd "C-M-l") 'ks-wrap-function)))
 
 ;;;;; User Interface ;;;;;
 

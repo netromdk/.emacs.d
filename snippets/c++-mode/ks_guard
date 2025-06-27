@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
 # name : copyright header + #ifndef XXX; #define XXX; #endif
-# key: lgrd
+# key: kgrd
 # --
-// (c) Copyright 2003-`(format-time-string "%Y")` Luxion ApS - All Rights Reserved
+// (c) Copyright 2003-`(format-time-string "%Y")` KeyShot ApS - All Rights Reserved
 #ifndef ${1:`(include-guard-header)`}
 #define $1
 
