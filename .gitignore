@@ -22,6 +22,7 @@
 /eshell
 /transient/history.el
 /.lsp-session-*
+/straight/bootstrap.el
 /straight/build-cache.el
 /straight/build/
 /straight/repos/
@@ -29,3 +30,5 @@
 /prescient-save
 /eln-cache/
 /elgrep-data.el
+/projects
+/session.*
