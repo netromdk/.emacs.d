@@ -61,4 +61,4 @@ writeBanner "Rust"
 checkProgram rustup
 checkProgram rustc
 checkProgram cargo
-rustup component add rustfmt rls rust-analysis rust-src
+rustup component add rustfmt rust-analysis rust-src
