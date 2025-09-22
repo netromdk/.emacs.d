@@ -25,6 +25,25 @@ case "$(uname -s)" in
     checkProgram brew
     brew install curl git ripgrep the_silver_searcher cppcheck shellcheck aspell
     ;;
+
+  Linux)
+    writeBanner "Fonts"
+    mkdir -p ~/.local/share/fonts
+    cp -v font/*.ttf ~/.local/share/fonts
+    fc-cache -f -v ~/.local/share/fonts
+
+    if [ -f /etc/lsb-release -o -d /etc/lsb-release.d ]; then
+      DISTRO=$(lsb_release -i | cut -d: -f2 | sed s/'^\t'//)
+    else
+      DISTRO=$(ls -d /etc/[A-Za-z]*[_-][rv]e[lr]* | grep -v "lsb" | cut -d'/' -f3 | cut -d'-' -f1 | cut -d'_' -f1)
+    fi
+
+    if [ "${DISTRO}" = "Ubuntu" ] || [ "${DISTRO}" = "Debian"]; then
+        writeBanner "APT"
+        checkProgram apt
+        sudo apt install curl git ripgrep silversearcher-ag cppcheck shellcheck aspell aspell-en aspell-da
+    fi
+    ;;
 esac
 
 writeBanner "Git"
