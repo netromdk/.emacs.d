@@ -218,7 +218,7 @@
 ;;;;; Linux / X11 Setup ;;;;;
 
 (if (eq window-system 'x)
-    (set-frame-font "JetBrains Mono-9"))
+    (set-frame-font "-JB  -JetBrains Mono-regular-normal-normal-*-*-*-*-*-d-0-iso10646-1"))
 
 ;;;;; Windows ;;;;;
 
