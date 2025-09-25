@@ -4,8 +4,8 @@
 
 ;; It will take the first regexp match so the order matters.
 (setq ksnrlog-highlights
-      '(;; Timestamps, like "Tue Jan 23 10:52:05 2018".
-        ("\\w+ \\w+ [0-9]+ [0-9]+:[0-9]+:[0-9]+ [0-9]+" . font-lock-comment-face)
+      '(;; Timestamps, like "Wed Sep 24 2025 13:59:51.207 +0000".
+        ("\\w+ \\w+ [0-9]+ [0-9]+ [0-9]+:[0-9]+:[0-9]+\\.[0-9]+ \\+[0-9]+" . font-lock-comment-face)
 
         ;; Strings.
         ("\\(\\\"\\|'\\).+\\(\\\"\\|'\\)" . font-lock-string-face)
