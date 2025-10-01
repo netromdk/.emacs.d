@@ -242,3 +242,17 @@ guard: #ifndef `(include-guard-header)`.."
   (if buffer-file-name
       (file-name-directory (buffer-file-name))
     (dired-current-directory)))
+
+(defun current-buffer-filename ()
+  "Current buffer's absolute filename."
+  (let ((buf (if (active-minibuffer-window)
+                 (window-buffer (minibuffer-selected-window))
+               (current-buffer))))
+    (or (buffer-file-name buf) (buffer-name buf))))
+
+(defun copy-current-buffer-filename ()
+  "Copy current buffer's filename to clipboard."
+  (interactive)
+  (let ((fn (current-buffer-filename)))
+    (kill-new fn)
+    (message "Copied to clipboard: %s" fn)))
