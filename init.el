@@ -64,17 +64,20 @@
 ;;;;; Setup and Bootstrap straight.el ;;;;;
 
 (defvar --straight-bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (--straight-bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
+(let ((--straight-bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (--straight-bootstrap-version 7))
+  (unless (file-exists-p --straight-bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
          'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+  (load --straight-bootstrap-file nil 'nomessage))
 
 (setq straight-repository-branch "master"
       straight-cache-autoloads t
@@ -82,11 +85,6 @@
       ;; Make `use-package` use `straight.el` by default so that `:straight t` is not necessary to
       ;; write for every `use-package` invocation.
       straight-use-package-by-default t
-
-      straight-hosts '((github "github.com" ".git")
-                       (gitlab "gitlab.com" ".git")
-                       (bitbucket "bitbucket.com" ".git")
-                       (codeberg "codeberg.org" ".git"))
 
       straight-profiles '((nil . "default.el")
                           ;; Packages which are pinned to a specific commit.
