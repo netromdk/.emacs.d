@@ -1274,7 +1274,9 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   :requires hydra markdown-mode
   :config
   (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
-        lsp-enable-xref t)
+        lsp-enable-xref t
+        ;; Do not apply edits while typing. For instance when hitting return.
+        lsp-enable-on-type-formatting nil)
 
   ;; Let clangd use half of the logical cores but one as minimum. `--background-index' requires
   ;; clangd v8+! Enable clang-tidy checks, too.
