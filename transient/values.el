@@ -1,5 +1,6 @@
-((magit-fetch "--prune")
- (magit-log:magit-log-mode "-n50" "--graph" "--color" "--decorate")
+((magit-diff:magit-diff-mode "--no-ext-diff" "--stat" "--show-signature")
+ (magit-fetch "--prune")
+ (magit-log:magit-log-mode "-n50" "--graph" "--color" "--decorate" "--show-signature")
  (magit-pull "--rebase")
  (magit-rebase "--autostash")
  (magit-revert "--edit"))
