@@ -1,4 +1,4 @@
-;;; Emacs Configurations                              -*- no-byte-compile: t -*-
+;;; Emacs Configurations                              -*- no-byte-compile: t; lexical-binding: t; -*-
 
 (let ((min-version "30.0"))
   (if (version< emacs-version min-version)
@@ -26,7 +26,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(mustang-netrom))
  '(custom-safe-themes
-   '("4988053aea6b3e5240cb6e80e40580ecf404d29d7d69239925c9299fff034469" default)))
+   '("e88d5ffcf9a4085e9c5cb3a7509839a679ebb7e89c7e1a8ef867e6fe7cb4cfb5" default)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -48,8 +48,8 @@
       (directory-files --lisp-dir t "\\.el$"))
 
 ;; Create necessary directories if missing.
-(mkdir --user-cache-dir)
-(mkdir --auto-save-dir)
+(make-directory --user-cache-dir t)
+(make-directory --auto-save-dir t)
 
 (setq --initial-done-time (current-time))
 

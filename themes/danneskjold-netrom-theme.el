@@ -1,4 +1,4 @@
-;;; danneskjold-theme.el --- beautiful high-contrast theme
+;;; danneskjold-theme.el --- beautiful high-contrast theme -*- lexical-binding: t; -*-
 
 ;; Copyright (c) 2016 Dmitry Akatov
 

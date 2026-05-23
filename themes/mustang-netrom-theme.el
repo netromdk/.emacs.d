@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t; -*-
+
 ;; Extended to suit my needs.
 
 ;;; mustang-theme.el --- port of vim's mustang theme

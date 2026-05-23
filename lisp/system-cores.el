@@ -1,4 +1,4 @@
-;;; system-cores.el --- Find out how many processors and cores you have
+;;; system-cores.el --- Find out how many processors and cores you have -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2013 Aaron Miller. All rights reversed.
 ;; Share and Enjoy!
@@ -85,8 +85,7 @@
 ;; [1]: http://stackoverflow.com/q/20666556/1713079
 ;; [2]: https://github.com/aaron-em/system-cores.el
 
-(with-no-warnings
-  (require 'cl))
+(require 'cl-lib)
 
 (put 'system-cores-delegate-error
      'error-conditions '(error system-cores-delegate-error))
@@ -110,10 +109,10 @@ delegate function to invoke for a given architecture.
 
   Delegates are expected to return an alist of the form:
 
-  '((logical  . #)
+  \\='((logical  . #)
     (physical . #))
 
-where '#' represents a number greater than zero. A condition will
+where # represents a number greater than zero. A condition will
 be signaled if a delegate returns a value not satisfying this
 requirement.
 
@@ -161,24 +160,22 @@ latter may reasonably be expected, on an Apple system, to be
 more accurate than the former, it is preferred by default on
 that architecture.)")
 
-(defun* system-cores (&key (logical  nil log-p)
-                           (physical nil phy-p))
-  "Return the number of processor cores, and the number of
-physical processors, installed on the machine where Emacs is
-running.
+(cl-defun system-cores (&key (_logical  nil log-p)
+                           (_physical nil phy-p))
+  "Return the number of processor cores and physical processors on this machine.
 
-  Called without arguments, this function returns an alist of the
+Called without arguments, this function returns an alist of the
 form:
 
-  '((logical  . #)
+  \\='((logical  . #)
     (physical . #))
 
-where '#' represents a number greater than zero. Called with one
+where # represents a number greater than zero. Called with one
 of the keywords :LOGICAL and :PHYSICAL, the function returns the
 corresponding number. (Called with both keywords, the function
 signals a WRONG-NUMBER-OF-ARGUMENTS condition.)
 
-  Most of the actual work involved in obtaining this information
+Most of the actual work involved in obtaining this information
 is done by one of several delegate functions, selected on the
 basis of the system architecture where you are running as
 identified by the value of `system-type'. For details on what
@@ -224,26 +221,24 @@ shown in the echo area.
 
   This function is a `system-cores' delegate."
   (let ((cpuinfo
-         (map 'list #'(lambda (line) (split-string line "\\s-*\:\\s-*"))
+         (mapcar #'(lambda (line) (split-string line "\\s-*\:\\s-*"))
               (process-lines "cat" "/proc/cpuinfo")))
         processors cores)
     (setq cores
-          (with-no-warnings
-            (reduce '+
-                    (map 'list
+          (cl-reduce '+
+                    (mapcar
                          #'(lambda (a) (if (string= "processor" (car a)) 1 0))
-                         cpuinfo))))
+                         cpuinfo)))
     (setq processors
           (length (delete-dups
-                   (with-no-warnings
-                     (remove-if 'null
-                                (map 'list
-                                     #'(lambda (a)
-                                         (if (or (string= "core id" (car a))
-                                                 (string= "physical id" (car a)))
-                                             (cadr a)
-                                           nil))
-                                     cpuinfo))))))
+                    (cl-remove-if 'null
+                                 (mapcar
+                                      #'(lambda (a)
+                                          (if (or (string= "core id" (car a))
+                                                  (string= "physical id" (car a)))
+                                                  (cadr a)
+                                             nil))
+                                       cpuinfo)))))
     (if (= 0 processors)
         (progn
           (message "system-cores-cpuinfo: Found no physical processor IDs; using logical core count")
@@ -263,14 +258,13 @@ obtained from the value listed for the key
 
   This function is a `system-cores' delegate."
   (let ((cpuinfo
-         (map 'list
+         (mapcar
               #'(lambda (s) (split-string s "="))
-              (with-no-warnings
-                (remove-if
-                 #'(lambda (s) (string= s ""))
-                 (process-lines
+               (cl-remove-if
+                  #'(lambda (s) (string= s ""))
+                  (process-lines
                   "wmic" "cpu" "get" "NumberOfCores,NumberOfLogicalProcessors"
-                  "/format:List"))))))
+                  "/format:List")))))
     `((logical .
                ,(string-to-number (cadr (assoc "NumberOfLogicalProcessors" cpuinfo))))
       (physical .
@@ -289,15 +283,14 @@ Processors\".
 
   This function is a `system-cores' delegate."
   (let ((cpuinfo
-         (map 'list
+         (mapcar
               #'(lambda (s) (split-string s ": "))
-              (with-no-warnings
-                (remove-if 'null
-                           (map 'list #'(lambda (s)
+               (cl-remove-if 'null
+                            (mapcar #'(lambda (s)
                                           (when (string-match "^ +" s)
                                             (replace-match "" t t s)))
                                 (process-lines "system_profiler"
-                                               "SPHardwareDataType")))))))
+                                               "SPHardwareDataType"))))))
     `((logical .
                ,(let ((ht (string-equal "Enabled"
                                         (car (last (assoc "Hyper-Threading Technology" cpuinfo))))))
@@ -325,7 +318,7 @@ system's sysctl output and modify this function accordingly!]
 
   This function is a `system-cores' delegate."
   (let ((cpuinfo
-         (map 'list
+         (mapcar
               #'(lambda (s) (split-string s ": " t))
               (process-lines "sysctl" "hw.physicalcpu" "hw.logicalcpu"))))
     `((logical .

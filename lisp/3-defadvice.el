@@ -1,3 +1,7 @@
+;;; -*- lexical-binding: t; -*-
+
+(require 'cl-lib)
+
 ;;;;; kill-line, kill-region, kill-ring-save
 ;;
 ;; Originally found at:

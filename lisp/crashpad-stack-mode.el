@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t; -*-
+
 ;; Major mode to fontity Crashpad call stack files produced via minidump_stackwalk.
 
 (defvar crashpad-stack-highlights nil "Highlights of crashpad-stack-mode.")

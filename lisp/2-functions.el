@@ -1,3 +1,10 @@
+;;; -*- lexical-binding: t; -*-
+
+(defvar --lisp-dir)
+(declare-function dired-current-directory "dired")
+(declare-function clang-format-buffer "clang-format")
+(declare-function clang-format-region "clang-format")
+
 (defun byte-compile-confs ()
   "Byte-compiles all .el in ~/.emacs.d/lisp/ that are newer than
 .elc, and creates nonexistent .elc files."
@@ -119,7 +126,7 @@
       (clang-format-buffer))))
 
 (defun cleanup-region-or-buffer-clang ()
-  "Perform cleanup operations on the whitespace content of a region or buffer using clang-format."
+  "Cleanup whitespace of region or buffer using clang-format."
   (interactive)
   (indent-region-or-buffer)
   (untabify-region-or-buffer)
@@ -231,11 +238,6 @@ guard: #ifndef `(include-guard-header)`.."
   (declare (indent defun))
   `(when (eq system-type ',type)
      ,@body))
-
-(defun mkdir (dir)
-  "Make directory `dir' and don't signal error if it already exists."
-  (when (not (file-directory-p dir))
-    (make-directory dir)))
 
 (defun current-directory ()
   "Current directory of buffer or dired directory."

@@ -2,7 +2,7 @@
 
 # Takes program as argument.
 checkProgram() {
-  if hash $1 2> /dev/null; then
+  if hash $1 2>/dev/null; then
     echo "$1 is installed!"
   else
     echo "$1 is not installed!"
@@ -38,10 +38,10 @@ case "$(uname -s)" in
       DISTRO=$(ls -d /etc/[A-Za-z]*[_-][rv]e[lr]* | grep -v "lsb" | cut -d'/' -f3 | cut -d'-' -f1 | cut -d'_' -f1)
     fi
 
-    if [ "${DISTRO}" = "Ubuntu" ] || [ "${DISTRO}" = "Debian"]; then
-        writeBanner "APT"
-        checkProgram apt
-        sudo apt install curl git ripgrep silversearcher-ag cppcheck shellcheck aspell aspell-en aspell-da
+    if [ "${DISTRO}" = "Ubuntu" ] || [ "${DISTRO}" = "Debian" ]; then
+      writeBanner "APT"
+      checkProgram apt
+      sudo apt install curl git ripgrep silversearcher-ag cppcheck shellcheck aspell aspell-en aspell-da
     fi
     ;;
 esac

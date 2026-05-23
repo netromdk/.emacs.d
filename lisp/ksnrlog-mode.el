@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t; -*-
+
 ;; Major mode to fontity KeyShot Network Rendering log files.
 
 (defvar ksnrlog-highlights nil "Highlights of ksnrlog-mode.")

@@ -1,4 +1,13 @@
+;;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;; COMMON CONFIGURATIONS
+
+(defvar --misc-dir)
+(defvar --auto-save-dir)
+(defvar help-enable-symbol-autoload)
+(defvar warning-minimum-level)
+(declare-function tool-bar-mode "frame")
+(declare-function scroll-bar-mode "scroll-bar")
 
 (column-number-mode t)               ;; Show current column
 (size-indication-mode t)             ;; Show current buffer size
