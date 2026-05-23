@@ -383,7 +383,31 @@
 (use-package prescient
   :config
   (setq prescient-save-file (concat user-emacs-directory "prescient-save"))
-  (prescient-persist-mode +1))
+  (prescient-persist-mode +1)
+
+  (defun netrom-prescient--sanitize (s)
+    "Remove invalid Unicode codepoints from S."
+    (if (stringp s)
+        (apply #'string
+               (delq nil (mapcar (lambda (c) (and (<= c #x10FFFF) c)) s)))
+      s))
+
+  (advice-add 'prescient-remember :filter-args
+              (lambda (args)
+                (list (netrom-prescient--sanitize (car args)))))
+
+  (advice-add 'prescient--load :after
+              (lambda ()
+                (dolist (ht (list prescient--history prescient--frequency))
+                  (when (hash-table-p ht)
+                    (maphash
+                     (lambda (key val)
+                       (when (or (and (stringp key)
+                                      (not (equal key (netrom-prescient--sanitize key))))
+                                 (and (stringp val)
+                                      (not (equal val (netrom-prescient--sanitize val)))))
+                         (remhash key ht)))
+                     ht))))))
 
 (use-package marginalia
   :config
