@@ -1090,6 +1090,10 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 (use-package yaml-mode
   :mode ("\\.yml$" "\\.yaml$"))
 
+;; Dockerfile
+(use-package dockerfile-mode
+  :mode ("Dockerfile\\'" "\\.dockerfile\\'"))
+
 ;; Rust
 
 (use-package cargo)
