@@ -231,6 +231,10 @@
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
+(use-package eat
+  :ensure t
+  :hook (eshell-load . eat-eshell-mode))
+
 ;;;;; Bindings ;;;;;
 
 (use-package beacon
