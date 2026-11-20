@@ -248,6 +248,27 @@
  ;; eshell
  '(eshell-prompt ((t (:foreground "#b1d631" :weight bold))))
 
+ ;; ansi-color, used by eat, shell, and compilation buffers
+ '(ansi-color-black ((t (:foreground "#202020" :background "#202020"))))
+ '(ansi-color-red ((t (:foreground "#f34a4a" :background "#f34a4a"))))
+ '(ansi-color-green ((t (:foreground "#b1d631" :background "#b1d631"))))
+ '(ansi-color-yellow ((t (:foreground "#df9f2d" :background "#df9f2d"))))
+ '(ansi-color-blue ((t (:foreground "#7e8aa2" :background "#7e8aa2"))))
+ '(ansi-color-magenta ((t (:foreground "#808bed" :background "#808bed"))))
+ '(ansi-color-cyan ((t (:foreground "#4cb5f5" :background "#4cb5f5"))))
+ '(ansi-color-white ((t (:foreground "#e2e2e5" :background "#e2e2e5"))))
+ '(ansi-color-bright-black ((t (:foreground "#696969" :background "#696969"))))
+ '(ansi-color-bright-red ((t (:foreground "#ff6523" :background "#ff6523"))))
+ '(ansi-color-bright-green ((t (:foreground "#b3de81" :background "#b3de81"))))
+ '(ansi-color-bright-yellow ((t (:foreground "#ffdb45" :background "#ffdb45"))))
+ '(ansi-color-bright-blue ((t (:foreground "#d0e1f9" :background "#d0e1f9"))))
+ '(ansi-color-bright-magenta ((t (:foreground "#ff87ba" :background "#ff87ba"))))
+ '(ansi-color-bright-cyan ((t (:foreground "#9ad4f8" :background "#9ad4f8"))))
+ '(ansi-color-bright-white ((t (:foreground "#ffffff" :background "#ffffff"))))
+
+ ;; eat
+ '(eat-term-faint ((t (:foreground "#808080"))))
+
  ;; doom-modeline
  '(doom-modeline-bar ((t (:inherit highlight))))
  '(doom-modeline-buffer-file ((t (:foreground "#ff9800" :weight bold))))
