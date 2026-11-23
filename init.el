@@ -544,17 +544,6 @@ Command: %(netrom/compilation-command-string)
  '(emacs-lisp-mode-hook
    lisp-interaction-mode-hook))
 
-(use-package flx-ido
-  :requires flx
-  :config
-  (ido-mode 1)
-  (ido-everywhere 1)
-  (flx-ido-mode 1)
-
-  ;; Disable ido faces to see flx highlights.
-  (setq ido-enable-flex-matching t)
-  (setq ido-use-faces nil))
-
 (use-package company
   :config
   (setq company-idle-delay 0.3)
@@ -1188,7 +1177,6 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   (xref-find-apropos pattern))
 
 (use-package flycheck
-  :requires hydra flycheck-pycheckers flycheck-inline
   :config
   (progn
     ;; C++11
@@ -1215,8 +1203,8 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
     (add-hook 'prog-mode-hook 'flycheck-mode)
 
-    ;; Enable inline errors/warnings/info etc.
-    (flycheck-inline-mode)
+    ;; Enable inline errors/warnings/info etc. in every buffer using flycheck.
+    (add-hook 'flycheck-mode-hook #'flycheck-inline-mode)
 
     ;; Navigate flycheck errors more easily.
     (defhydra flycheck-hydra
@@ -1303,7 +1291,6 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
 
 (use-package lsp-mode
-  :requires hydra markdown-mode
   :config
   (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
         lsp-enable-xref t
@@ -1693,24 +1680,21 @@ don't want to fix with `SPC', and you can abort completely with
   (global-set-key (kbd "C-x C-i") 'endless/ispell-word-then-abbrev))
 
 (use-package flyspell
-  :requires ispell flyspell-lazy auto-dictionary
   :config
   ;; NOTE: Automatic spellchecking is disabled because it makes everything terribly slow if the
   ;; files is very long.
   (defun enable-spelling ()
-    "Enable spellchecking and automatic dictionary detection."
+    "Enable spellchecking."
     (interactive)
     (progn
       (flyspell-lazy-mode)
-      (flyspell-mode)
-      (auto-dictionary-mode)))
+      (flyspell-mode)))
 
   (defun disable-spelling ()
     (interactive)
     (progn
       (flyspell-lazy-mode -1)
-      (flyspell-mode -1)
-      (auto-dictionary-mode -1)))
+      (flyspell-mode -1)))
 
   ;; ;; Flyspell activation for text mode.
   ;; (add-hook 'text-mode-hook (lambda ()
