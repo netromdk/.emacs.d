@@ -1194,9 +1194,6 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
     (add-hook 'prog-mode-hook 'flycheck-mode)
 
-    ;; Enable inline errors/warnings/info etc. in every buffer using flycheck.
-    (add-hook 'flycheck-mode-hook #'flycheck-inline-mode)
-
     ;; Navigate flycheck errors more easily.
     (defhydra flycheck-hydra
       (:pre  (flycheck-list-errors)
@@ -1210,7 +1207,11 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
       ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
       ("q"  nil))))
 
-(use-package flycheck-inline)
+;; Show flycheck errors inline in every flycheck buffer. Keep the hook here instead of in the
+;; flycheck block where it ran while straight built flycheck-inline, before `flycheck-inline-mode'
+;; existed, and broke init.
+(use-package flycheck-inline
+  :hook (flycheck-mode . flycheck-inline-mode))
 
 ;; NOTE: On Windows, it is important to have `python3.exe' in PATH and not only `python.exe'!
 ;; Otherwise, flycheck will not detect pycheckers properly.
