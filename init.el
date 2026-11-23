@@ -591,8 +591,8 @@ Command: %(netrom/compilation-command-string)
 (add-hook 'compilation-mode-hook
           (lambda ()
             (setq old-split-height-threshold split-height-threshold
-                  split-height-threshold --global-fill-column)
-                  process-adaptive-read-buffering nil))
+                  split-height-threshold --global-fill-column
+                  process-adaptive-read-buffering nil)))
 
 ;; Turn it back on again when finished.
 (add-hook 'compilation-finish-functions
