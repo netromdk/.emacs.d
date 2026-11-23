@@ -203,8 +203,8 @@
       "Show current buffer-file, or directory if in Dired-mode, in Finder."
       (interactive)
       (if (eq 'dired-mode major-mode)
-          (shell-command "open .")
-        (shell-command (concat "open -R '" (concat buffer-file-name "'")))))
+          (call-process "open" nil 0 nil default-directory)
+        (call-process "open" nil 0 nil "-R" buffer-file-name)))
 
     (defun toggle-fullscreen ()
       "Toggle full screen."
@@ -610,8 +610,10 @@ Command: %(netrom/compilation-command-string)
   (interactive
    (list
     (read-shell-command "Compile command (pwd): ")))
-  (compile
-   (format "cd `dirname '%s'` && %s" (buffer-file-name) cmd)))
+  (let ((default-directory (if buffer-file-name
+                               (file-name-directory buffer-file-name)
+                             default-directory)))
+    (compile cmd)))
 
 (defun netrom/compilation-toggle-scroll ()
   "Toggle between not scrolling and scrolling until first error
