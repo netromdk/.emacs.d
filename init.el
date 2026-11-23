@@ -2454,6 +2454,7 @@ search when the prefix argument is defined."
 ;; Shows available key bindings in a completing, helpful way. It's very useful if one cannot
 ;; remember the entire command sequence or to discover what's possible.
 (use-package which-key
+  :straight nil                             ; Built into Emacs 30.
   :config
   (setq which-key-idle-delay 2              ; Don't show too fast.
         which-key-idle-secondary-delay 0.05 ; Show next possibilities immediately when shown.
