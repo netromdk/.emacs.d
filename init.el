@@ -1957,7 +1957,7 @@ T - tag prefix
          ("M-L" . consult-line-multi)
          ("M-h" . consult-isearch-history))
   :init
-  (setq consult-project-root-function #'projectile-project-root
+  (setq consult-project-function (lambda (_may-prompt) (projectile-project-root))
         consult-goto-line-numbers nil
 
         ;; Not using splitting due to how Orderless works.
