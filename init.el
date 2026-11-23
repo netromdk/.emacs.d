@@ -1249,8 +1249,8 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 ;; == C++ ==
 ;; Requires clangd is installed (comes with clang).
 ;;
-;; clangd tries to locate the "compile_commands.json" file in the root of the project, so it's
-;; useful to make a symlink in the project root and to where it's located in a build folder.
+;; clangd is pointed at the newest "build/*/compile_commands.json" in the project, unless the
+;; project root has its own "compile_commands.json". *Messages* shows which one is used.
 ;;
 ;; == Rust ==
 ;; Requires Rust Language Server (rls) to be installed.
@@ -1292,6 +1292,41 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   ;; clangd v8+! Enable clang-tidy checks, too.
   (setq lsp-clients-clangd-args `(,(format "-j=%d" (max 1 (/ (system-cores :logical t) 2)))
                                   "--background-index" "--clang-tidy" "--log=error"))
+
+  (defun netrom-clangd--newest-build-dir (root)
+    "Return the folder of the newest build/*/compile_commands.json under ROOT, or nil."
+    (when-let* ((files (file-expand-wildcards
+                        (expand-file-name "build/*/compile_commands.json" root))))
+      (file-name-directory
+       (car (sort files (lambda (a b)
+                          (time-less-p (file-attribute-modification-time (file-attributes b))
+                                       (file-attribute-modification-time (file-attributes a)))))))))
+
+  (defun netrom-clangd--start-workspace (start session client root &rest args)
+    "Start clangd with the newest build/*/compile_commands.json under ROOT, and log the choice.
+A compile_commands.json in ROOT itself wins, since clangd finds it without help."
+    (if (not (eq (lsp--client-server-id client) 'clangd))
+        (apply start session client root args)
+      (let* ((root-db (expand-file-name "compile_commands.json" root))
+             (build-dir (unless (file-exists-p root-db)
+                          (netrom-clangd--newest-build-dir root)))
+             (lsp-clients-clangd-args
+              (if build-dir
+                  (append lsp-clients-clangd-args
+                          (list (concat "--compile-commands-dir="
+                                        (file-local-name (directory-file-name build-dir)))))
+                lsp-clients-clangd-args)))
+        (message "clangd: %s"
+                 (cond (build-dir
+                        (format "using %scompile_commands.json (newest under build/)" build-dir))
+                       ((file-exists-p root-db)
+                        (format "using %s -> %s" root-db (file-truename root-db)))
+                       (t
+                        (format "no compile_commands.json in %s or build/*/, clangd searches alone"
+                                (file-name-as-directory root)))))
+        (apply start session client root args))))
+
+  (advice-add 'lsp--start-workspace :around #'netrom-clangd--start-workspace)
 
   (add-hook 'c++-mode-hook #'lsp)
   (add-hook 'rust-mode-hook #'lsp)
