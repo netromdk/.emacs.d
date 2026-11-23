@@ -2348,27 +2348,13 @@ search when the prefix argument is defined."
   (eval-after-load "beacon"
     '(diminish 'beacon-mode)))
 
-;; Line numbers. Is faster than the built-in linum mode.
-(require 'linum)
-(use-package nlinum
+;; Line numbers. Size the column for the whole buffer up front to avoid horizontal jumps on
+;; scrolling.
+(use-package display-line-numbers
   :config
-  ;; Precalculate the line number width to avoid horizontal jumps on scrolling. Or it disables the
-  ;; mode if there are too many lines (10000 currently) because it will make them look wrong, like
-  ;; having multiple lines with the same line number.
-  (add-hook 'nlinum-mode-hook
-            (lambda ()
-              (when nlinum-mode
-                (let ((lines (count-lines (point-min) (point-max))))
-                  (if (> lines 10000)
-                      (progn
-                        (message "Disabling nlinum-mode because there are too many lines.")
-                        (nlinum-mode -1))
-                    (progn
-                      (setq nlinum--width (length (number-to-string lines)))
-                      (nlinum--flush)))))))
-
+  (setq display-line-numbers-width-start t)
   (add-to-multiple-hooks
-   'nlinum-mode
+   'display-line-numbers-mode
    '(prog-mode-hook
      text-mode-hook)))
 
