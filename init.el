@@ -1279,10 +1279,14 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
 (use-package lsp-mode
   :config
-  (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
+  (setq lsp-diagnostics-provider :flycheck
         lsp-enable-xref t
+
         ;; Do not apply edits while typing. For instance when hitting return.
-        lsp-enable-on-type-formatting nil)
+        lsp-enable-on-type-formatting nil
+
+        ;; Read language server output in larger chunks.
+        read-process-output-max (* 1024 1024))
 
   ;; Let clangd use half of the logical cores but one as minimum. `--background-index' requires
   ;; clangd v8+! Enable clang-tidy checks, too.
@@ -1344,9 +1348,7 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
         ;; lsp-ui-doc-position 'top
         ;; lsp-ui-doc-include-signature t
         lsp-ui-sideline-enable nil
-        lsp-ui-flycheck-enable t
         lsp-ui-flycheck-list-position 'right
-        lsp-ui-flycheck-live-reporting t
         lsp-ui-peek-enable t
         lsp-ui-peek-list-width 60
         lsp-ui-peek-peek-height 25)
