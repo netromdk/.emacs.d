@@ -7,7 +7,7 @@
 ;; Originally found at:
 ;; https://www.reddit.com/r/emacs/comments/rlli0u/whats_your_favorite_defadvice/
 
-(defadvice kill-line (before kill-line-autoreindent activate)
+(defun netrom--kill-line-autoreindent (&rest _)
   "Kill excess whitespace when joining lines.
 If the next line is joined to the current line, kill the extra
 indent whitespace in front of the next line."
@@ -15,21 +15,24 @@ indent whitespace in front of the next line."
     (save-excursion
       (forward-char 1)
       (just-one-space 1))))
+(advice-add 'kill-line :before #'netrom--kill-line-autoreindent)
 
-(defadvice kill-ring-save (before slick-copy activate compile)
+(defun netrom--slick-copy (&rest _)
   "When called interactively with no active region, copy a single line instead."
   (interactive
    (if mark-active (list (region-beginning) (region-end))
-     (message "Single line killed")
+     (message "Single line copied")
      (list (line-beginning-position)
            (line-beginning-position 2)))))
+(advice-add 'kill-ring-save :before #'netrom--slick-copy)
 
-(defadvice kill-region (before slick-cut activate compile)
+(defun netrom--slick-cut (&rest _)
   "When called interactively with no active region, kill a single line instead."
   (interactive
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
            (line-beginning-position 2)))))
+(advice-add 'kill-region :before #'netrom--slick-cut)
 
 
 ;;;;;

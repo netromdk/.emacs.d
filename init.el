@@ -302,10 +302,11 @@
   (setq magit-diff-refine-hunk t)
 
   ;; Show status full screen.
-  (defadvice magit-status (around magit-fullscreen activate)
+  (defun netrom--magit-status-fullscreen (magit-status &rest args)
     (window-configuration-to-register :magit-fullscreen)
-    ad-do-it
+    (apply magit-status args)
     (delete-other-windows))
+  (advice-add 'magit-status :around #'netrom--magit-status-fullscreen)
 
   ;; Cycle between how much info is shown in the margin: author + date, date, none.
   (defun magit-cycle-margin ()
@@ -811,7 +812,7 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
   ;; Misc
   ("q" nil "Cancel" :column "Misc")
-  ("," pop-tag-mark "Back"))
+  ("," xref-go-back "Back"))
 
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
@@ -1368,7 +1369,7 @@ A compile_commands.json in ROOT itself wins, since clangd finds it without help.
         netrom--misc-lsp-hydra-heads
         '(;; Misc
           ("q" nil "Cancel" :column "Misc")
-          ("b" pop-tag-mark "Back")))
+          ("b" xref-go-back "Back")))
 
   ;; Create general hydra.
   (eval `(defhydra netrom/lsp-hydra (:color blue :hint nil)
