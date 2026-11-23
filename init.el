@@ -26,7 +26,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(mustang-netrom))
  '(custom-safe-themes
-   '("3522900f9aa175d3329fb709f303db769b4fbb23cc285017305303864e712d60" default)))
+   '("4ea8ffef6866ecf8eb29ba2702011e47b01b3de57259ca9b838c02bbb0e6ae73" default)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -352,7 +352,7 @@
     (interactive)
     (magit-log-other `(,(concat "origin/" (magit-get-current-branch))))))
 
-;;;;; Selectrum ;;;;;
+;;;;; Completion ;;;;;
 
 (use-package orderless
   :config
@@ -407,23 +407,19 @@
   :config
   (marginalia-mode +1))
 
-(use-package selectrum
-  :requires orderless
+(use-package vertico
   :config
-  (setq selectrum-refine-candidates-function #'orderless-filter
-        selectrum-highlight-candidates-function #'orderless-highlight-matches
-        selectrum-count-style 'current/matches
-        selectrum-max-window-height 15)
-  (selectrum-mode +1))
+  (setq vertico-count 15)
+  (vertico-mode +1))
 
-(use-package selectrum-prescient
-  :requires selectrum prescient
+(use-package vertico-prescient
+  :after (vertico prescient)
   :config
-  ;; Use filtring from only `completion-styles' and not selectrum.
-  (setq selectrum-prescient-enable-filtering nil)
+  ;; Filter with `completion-styles' (orderless) only, not prescient.
+  (setq vertico-prescient-enable-filtering nil)
 
-  ;; But enable frequency and recency ordering from selectrum.
-  (selectrum-prescient-mode +1))
+  ;; But sort candidates by frequency and recency with prescient.
+  (vertico-prescient-mode +1))
 
 ;;;;; Hydra ;;;;;
 
@@ -1962,7 +1958,7 @@ T - tag prefix
   :requires projectile)
 
 (use-package consult
-  :requires projectile selectrum
+  :requires projectile
   :bind (;; C-x bindings (ctl-x-map)
          ("C-x b" . consult-buffer)
          ("C-x r" . consult-recent-file)

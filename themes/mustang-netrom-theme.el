@@ -64,12 +64,9 @@
  '(helm-swoop-target-word-face ((t (:background "#b1d631" :foreground "#000000"))))
  '(helm-buffer-modified ((t (:inherit font-lock-comment-face :foreground "red" :underline t))))
 
- ;; Selectrum
- '(selectrum-current-candidate ((t (:inherit highlight :extend t :weight extra-bold))))
- '(selectrum-group-title ((t (:inherit shadow :foreground "#b1d631"))))
- '(selectrum-mouse-highlight ((t (:inherit selectrum-current-candidate :foreground "#b1d631" :underline t))))
- '(selectrum-quick-keys-highlight ((t (:foreground "#ff9800" :weight extra-bold))))
- '(selectrum-quick-keys-match ((t (:inherit isearch :weight extra-bold))))
+ ;; Vertico
+ '(vertico-current ((t (:inherit highlight :extend t :weight extra-bold))))
+ '(vertico-group-title ((t (:inherit shadow :foreground "#b1d631"))))
 
  ;; Marginalia
  '(marginalia-key ((t (:foreground "#b1d631"))))
