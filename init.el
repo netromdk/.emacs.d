@@ -704,7 +704,7 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   (global-set-key (kbd "M-;") 'comment-dwim-2))
 
 ;; Avoid escape nightmares by editing string in separate buffer.
-(use-package string-edit
+(use-package string-edit-at-point
   :bind ("C-c e" . string-edit-at-point))
 
 ;; Visualize certain like space at end of line and trailing characters after
