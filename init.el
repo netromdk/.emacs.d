@@ -803,11 +803,11 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
   ;; Buffer
   ("b" eval-buffer "Eval buffer" :column "Buffer")
-  ("r" eval-region "Eval region")
+  ("e" eval-region "Eval region")
 
   ;; Misc
   ("q" nil "Cancel" :column "Misc")
-  ("b" pop-tag-mark "Back"))
+  ("," pop-tag-mark "Back"))
 
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
@@ -1937,7 +1937,6 @@ T - tag prefix
          ("M-s L" . consult-line-multi)
          ("M-s k" . consult-keep-lines)
          ("M-s u" . consult-focus-lines)
-         ("M-s k" . consult-kmacro)
          ("M-s M" . consult-kmacro)
          :map isearch-mode-map
          ("M-l" . consult-line)
