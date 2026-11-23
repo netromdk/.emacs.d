@@ -57,8 +57,7 @@
 
 ;; These are read by the bootstrap, so they must be set before it. Detect package changes when a
 ;; file is saved in Emacs, or on `straight-check-all', instead of scanning every repo at startup.
-(setq straight-repository-branch "master"
-      straight-check-for-modifications '(check-on-save find-when-checking))
+(setq straight-check-for-modifications '(check-on-save find-when-checking))
 
 (defvar --straight-bootstrap-version)
 (let ((--straight-bootstrap-file
