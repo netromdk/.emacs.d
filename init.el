@@ -53,14 +53,6 @@
 
 (setq --initial-done-time (current-time))
 
-;; Speed up loading by removing handlers until finished. It contains a lot of regexps for matching
-;; handlers to file names but it is not necessary while loading.
-(setq file-name-handler-alist-old file-name-handler-alist
-      file-name-handler-alist nil)
-
-;; Speed up loading by disabling garbage collection until finished.
-(setq gc-cons-threshold most-positive-fixnum)
-
 ;;;;; Setup and Bootstrap straight.el ;;;;;
 
 (defvar --straight-bootstrap-version)
@@ -131,13 +123,6 @@
                  #'benchmark-init/show-durations-tabulated))
 
   (show-loading-info)
-
-  ;; Restore the file name handlers.
-  (setq file-name-handler-alist file-name-handler-alist-old)
-
-  ;; Garbage collect at every 20 MB allocated instead of the default 8 MB. This speeds up various
-  ;; things.
-  (setq gc-cons-threshold 20000000)
 
   ;; Start daemon server if not already running.
   (require 'server)
