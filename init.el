@@ -941,7 +941,7 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
                                                         (yas--field-end field))
                                       (yas--templates-for-key-at-point))
                                   (yas--templates-for-key-at-point))))
-      (and templates-and-pos (first templates-and-pos))))
+      (and templates-and-pos (car templates-and-pos))))
 
   (defun my/change-cursor-color-when-can-expand (&optional field)
     (interactive)

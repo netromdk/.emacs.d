@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
+(require 'cl-lib)
+
 (defvar --lisp-dir)
 (declare-function dired-current-directory "dired")
 (declare-function clang-format-buffer "clang-format")
@@ -144,8 +146,7 @@
   (interactive)
   (mapc 'kill-buffer
         (delq (current-buffer)
-              (with-no-warnings
-                (remove-if-not 'buffer-file-name (buffer-list))))))
+              (cl-remove-if-not 'buffer-file-name (buffer-list)))))
 
 (defun kill-all-buffers ()
   "Kill all buffers."
