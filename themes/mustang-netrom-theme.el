@@ -75,8 +75,8 @@
  '(marginalia-key ((t (:foreground "#b1d631"))))
 
  '(highlight-current-line-face ((t (:background "#2c2c2c"))))
- '(linum ((t (:inherit (shadow default) :foreground "#696969" :height 0.9))))
- '(linum-highlight-face ((t (:inherit linum :foreground "#b1d631"))))
+ '(line-number ((t (:inherit (shadow default) :foreground "#696969" :height 0.9))))
+ '(line-number-current-line ((t (:inherit line-number :foreground "#b1d631"))))
  '(anzu-mode-line ((t (:foreground "#b1d631" :weight bold))))
  '(anzu-replace-to ((t (:foreground "#ff9800" :slant italic :weight bold))))
  '(semantic-highlight-func-current-tag-face ((t (:background "#353535" :weight bold))))

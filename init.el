@@ -26,7 +26,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(mustang-netrom))
  '(custom-safe-themes
-   '("7ca740ed32123e991ea7d95b674ee91f3e66d8f01677988422a1e888b854fc21" default)))
+   '("3522900f9aa175d3329fb709f303db769b4fbb23cc285017305303864e712d60" default)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
