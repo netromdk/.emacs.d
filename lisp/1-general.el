@@ -17,7 +17,7 @@
 (auto-compression-mode t)            ;; Browse compressed archives
 (put 'upcase-region 'disabled nil)   ;; Enable ``upcase-region''
 (global-font-lock-mode t)            ;; Syntax highlight
-(fset 'yes-or-no-p 'y-or-n-p)        ;; Use 'y' instead of 'yes' etc.
+(setq use-short-answers t)           ;; Use 'y' instead of 'yes' etc.
 (setq message-log-max 10000)         ;; Extend message buffer
 (setq set-mark-command-repeat-pop t) ;; Pop repeat marks
 (setq kill-whole-line t)             ;; Kill whole line and move next line up.
