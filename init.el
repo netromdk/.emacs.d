@@ -1311,6 +1311,9 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
         ;; Do not apply edits while typing. For instance when hitting return.
         lsp-enable-on-type-formatting nil
 
+        ;; doom-modeline already shows flycheck's counts.
+        lsp-modeline-diagnostics-enable nil
+
         ;; Read language server output in larger chunks.
         read-process-output-max (* 1024 1024))
 
