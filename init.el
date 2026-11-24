@@ -1318,10 +1318,10 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
         ;; Read language server output in larger chunks.
         read-process-output-max (* 1024 1024))
 
-  ;; Let clangd use half of the logical cores but one as minimum. `--background-index' requires
-  ;; clangd v8+! Enable clang-tidy checks, too.
+  ;; Let clangd use half of the logical cores but one as minimum. Enable clang-tidy checks, too.
+  ;; Explicitly add `--header-insertion-decorators=0' which is lsp-mode's default.
   (setq lsp-clients-clangd-args `(,(format "-j=%d" (max 1 (/ (system-cores :logical t) 2)))
-                                  "--background-index" "--clang-tidy" "--log=error"))
+                                  "--clang-tidy" "--log=error" "--header-insertion-decorators=0"))
 
   (defun netrom-clangd--newest-build-dir (root)
     "Return the folder of the newest build/*/compile_commands.json under ROOT, or nil."
