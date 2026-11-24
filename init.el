@@ -539,13 +539,29 @@ Command: %(netrom/compilation-command-string)
 
 ;; Show icons in company completion UI.
 (use-package company-box
+  :init
+  ;; company-box cannot place its popup in the minibuffer, such as for `M-:', so leave the
+  ;; minibuffer to company's own child frame.
+  (defun netrom--company-box-mode-unless-minibuffer ()
+    (unless (minibufferp)
+      (company-box-mode (if company-mode 1 -1))))
+  (add-hook 'company-mode-hook #'netrom--company-box-mode-unless-minibuffer)
+
   :config
   (if (display-graphic-p)
       ;; Show font icons in windowed mode.
       (setq company-box-color-icon t)
     ;; Show compatible icons in terminal.
     (setq company-box-icons-alist 'company-box-icons-icons-in-terminal))
-  :hook (company-mode . company-box-mode))
+
+  ;; Since Emacs 31, company shows its own child frame popup by default, and company-box only
+  ;; removes the older tooltip frontends, so drop the child frame where company-box is on.
+  (defun netrom--company-box-single-popup ()
+    (when company-box-mode
+      (setq company-frontends
+            (remq 'company-childframe-frontend
+                  (remq 'company-childframe-unless-just-one-frontend company-frontends)))))
+  (add-hook 'company-box-mode-hook #'netrom--company-box-single-popup))
 
 (use-package company-flx
   :requires company
