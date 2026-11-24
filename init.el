@@ -1368,7 +1368,8 @@ A compile_commands.json in ROOT itself wins, since clangd finds it without help.
           ("C-c" lsp-describe-session "Describe session")
 
           ;; Flycheck
-          ("l" lsp-ui-flycheck-list "List errs/warns/notes" :column "Flycheck"))
+          ("l" flycheck-hydra/body "Errors (all checkers)" :column "Flycheck")
+          ("L" lsp-ui-flycheck-list "Workspace errors (LSP only)"))
 
         netrom--misc-lsp-hydra-heads
         '(;; Misc
