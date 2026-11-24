@@ -61,7 +61,7 @@
  ("highlight-thing.el" . "fd0309e72727e5332be3397e15edb035b426dd0b")
  ("ht.el" . "1c49aad1c820c86f7ee35bf9fff8429502f60fef")
  ("hydra" . "59a2a45a35027948476d1d7751b0f0215b1e61aa")
- ("indent-guide" . "1332f95d6f08afee35f62621793e2622b9f86f27")
+ ("indent-bars" . "a9caf6f84e59df6a76c03b58b6681dfb3a837f33")
  ("json-mode" . "466d5b563721bbeffac3f610aefaac15a39d90a9")
  ("json-snatcher" . "b28d1c0670636da6db508d03872d96ffddbc10f2")
  ("key-chord" . "cb646e815c61f253ad9fdfbe058049dda4e2b32b")
