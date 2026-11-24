@@ -30,6 +30,10 @@
 (setq describe-bindings-outline t)
 (setq warning-minimum-level :error)  ;; Set minimum severity to error instead of warning.
 
+;; Skip fontification while input is pending and keep font caches through GC.
+(setq redisplay-skip-fontification-on-input t
+      inhibit-compacting-font-caches t)
+
 ;; Abbreviations file.
 (setq abbrev-file-name (concat --misc-dir "abbrev_defs"))
 
