@@ -1166,20 +1166,22 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 (use-package flycheck
   :config
   (progn
-    ;; C++11
-    (add-hook 'c++-mode-hook
-              (lambda ()
-                (progn
-                  (setq flycheck-clang-language-standard "c++17"
-                        flycheck-clang-standard-library "libc++"
-                        flycheck-gcc-language-standard "c++17"
-                        flycheck-cppcheck-standards '("c++17")
-                        flycheck-cppcheck-inconclusive t
-                        flycheck-cppcheck-checks '("all")
+    (setq-default flycheck-cppcheck-standards '("c++20")
+                  flycheck-cppcheck-inconclusive t
+                  flycheck-cppcheck-checks '("warning" "style" "performance" "portability")
 
-                        ;; Ignore "no explicit constructor" because often you don't want it to be
-                        ;; explicit and in general it's annoying.
-                        flycheck-cppcheck-suppressions '("noExplicitConstructor")))))
+                  ;; Have knowledge of Qt to stop Qt macros from aborting the checks.
+                  flycheck-cppcheck-args '("--library=qt")
+
+                  ;; Ignore "no explicit constructor" because often you don't want it to be explicit
+                  ;; and in general it's annoying.
+                  flycheck-cppcheck-suppressions '("noExplicitConstructor"))
+
+    ;; lsp-mode makes its own `lsp' checker the only one in the buffer, so run cppcheck after it,
+    ;; but only when the language server reports no errors.
+    (with-eval-after-load 'lsp-diagnostics
+      (lsp-diagnostics-lsp-checker-if-needed)
+      (flycheck-add-next-checker 'lsp '(warning . c/c++-cppcheck) t))
 
     ;; Disable elisp checkdoc because it's annoying, and clang/gcc because they never know the
     ;; includes anyway!
