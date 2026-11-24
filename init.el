@@ -26,7 +26,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(mustang-netrom))
  '(custom-safe-themes
-   '("4ea8ffef6866ecf8eb29ba2702011e47b01b3de57259ca9b838c02bbb0e6ae73" default)))
+   '("6fbbf2bf1e6e08c047647dc172772e0b2ed4664322b5cfa66cb9d662dd163b5a" default)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -1029,12 +1029,13 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   :mode (("\\.nsi\\'" . conf-windows-mode)
          ("\\.nsis\\'" . conf-windows-mode)))
 
-;; Show vertical lines to guide indentation.
-(use-package indent-guide
-  :config
-  (setq indent-guide-char "|"
-        indent-guide-delay 0.5)
-  (add-hook 'prog-mode-hook 'indent-guide-mode))
+;; Show thin vertical bars to guide indentation.
+(use-package indent-bars
+  :custom
+  (indent-bars-width-frac 0.15)
+  (indent-bars-color-by-depth nil)
+  (indent-bars-display-on-blank-lines t)
+  :hook (prog-mode . indent-bars-mode))
 
 ;; ;; Jump to definition for multiple languages without configuration.
 ;; (use-package dumb-jump
@@ -2407,9 +2408,6 @@ search when the prefix argument is defined."
 
   (eval-after-load "auto-dim-other-buffers"
     '(diminish 'auto-dim-other-buffers-mode))
-
-  (eval-after-load "indent-guide"
-    '(diminish 'indent-guide-mode))
 
   (eval-after-load "beacon"
     '(diminish 'beacon-mode)))

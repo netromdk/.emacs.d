@@ -202,9 +202,6 @@
  '(hes-escape-sequence-face ((t (:inherit font-lock-regexp-grouping-construct
                                           :foreground "#908080" :weight bold))))
 
- ;; indent-guide
- '(indent-guide-face ((t (:foreground "gray27" :slant normal))))
-
  ;; auto-dim-other-buffers
  '(auto-dim-other-buffers-face ((t (:background "#191919"))))
 
