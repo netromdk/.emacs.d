@@ -1203,7 +1203,14 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
       ("k"  flycheck-previous-error                                   "Previous")
       ("gg" flycheck-first-error                                      "First")
       ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
-      ("q"  nil))))
+      ("e"  flycheck-explain-error-at-point                           "Explain")
+      ("c"  flycheck-buffer                                           "Check again")
+      ("w"  flycheck-copy-errors-as-kill                              "Copy message")
+      ("F"  flycheck-fix-all-errors                                   "Fix all")
+      ("v"  flycheck-verify-setup                                     "Verify setup" :color blue)
+      ("q"  nil))
+
+    (define-key flycheck-command-map "!" #'flycheck-hydra/body)))
 
 ;; Show flycheck errors inline in every flycheck buffer. Keep the hook here instead of in the
 ;; flycheck block where it ran while straight built flycheck-inline, before `flycheck-inline-mode'
