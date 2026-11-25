@@ -2344,6 +2344,27 @@ search when the prefix argument is defined."
 (use-package doom-modeline
   :requires (window-numbering anzu)
   :hook (after-init . doom-modeline-mode)
+
+  :init
+  ;; There is a bug in doom-modeline that returns the right-hand side already run through
+  ;; `format-mode-line', so redisplay eats its `%' a second time. For lsp-mode, it meant that the
+  ;; indexing progress "P% X/Y" was shown as "PX/Y". Re-escaping is required to fix showing
+  ;; percentages correctly. Note that this is only needed until it is fixed upstream.
+  ;; --- Fix start ---
+  (defun netrom--doom-modeline-escape-rhs (format)
+    (let ((rhs (car (last format))))
+      (if (stringp rhs)
+          (append (butlast format) (list (string-replace "%" "%%" rhs)))
+        format)))
+
+  (defun netrom--doom-modeline-advise-format (name &rest _)
+    (advice-add (intern (format "doom-modeline-format--%s" name))
+                :filter-return #'netrom--doom-modeline-escape-rhs))
+
+  (with-eval-after-load 'doom-modeline-core
+    (advice-add 'doom-modeline-def-modeline :after #'netrom--doom-modeline-advise-format))
+  ;; --- Fix end ---
+
   :config
   (window-numbering-mode t)
 
