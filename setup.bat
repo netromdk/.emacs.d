@@ -31,7 +31,7 @@ xcopy "%~dp0\dicts\*.dic" "C:\Hunspell\" /Y
 :: Install dependencies.
 :: llvm also contains clangd and clang-format.
 choco install -y ripgrep ag shellcheck cppcheck hunspell.portable llvm
-pip3 install python-lsp-server flake8 bandit
+pip3 install python-lsp-server flake8 pylint bandit vulture
 rustup component add rustfmt rust-analysis rust-src
 
 pause
