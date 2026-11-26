@@ -1264,7 +1264,7 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 ;; always wins, and the defaults below are only passed when the project has none for it.
 ;;
 ;; Requires local dependencies:
-;;   pip install flake8 pylint bandit
+;;   pip install flake8 pylint bandit vulture
 (defconst netrom-python-flake8-defaults
   '("--max-line-length=100"
     "--extend-ignore=E111,E114,E121,E126,E127,E221,E241,E302,E305,W503,W504")
@@ -1282,7 +1282,13 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 (defvar-local netrom-python--bandit-args nil
   "bandit arguments for the current buffer, set by `netrom-python--setup-linters'.")
 
-(defconst netrom-python--linters '(python-flake8 python-pylint python-bandit)
+(defconst netrom-python-vulture-defaults '("--min-confidence" "70")
+  "vulture arguments for projects without a vulture config.")
+
+(defvar-local netrom-python--vulture-config nil
+  "The project's pyproject.toml with a vulture section, set by `netrom-python--setup-linters'.")
+
+(defconst netrom-python--linters '(python-flake8 python-pylint python-bandit python-vulture)
   "Python checkers that are turned off in read-only buffers.")
 
 (defun netrom-python--project-config (candidates)
@@ -1335,7 +1341,10 @@ xref."
                   (cond ((null config) netrom-python-bandit-defaults)
                         ((string= (file-name-nondirectory config) ".bandit")
                          (list "--ini" config))
-                        (t (list "--configfile" config)))))))
+                        (t (list "--configfile" config)))))
+    (setq-local netrom-python--vulture-config
+                (netrom-python--project-config
+                 '(("pyproject.toml" . "^\\[tool\\.vulture\\]"))))))
 
 (add-hook 'python-base-mode-hook #'netrom-python--setup-linters)
 
@@ -1360,6 +1369,22 @@ xref."
   :modes (python-mode python-ts-mode))
 
 (flycheck-add-next-checker 'python-pylint '(t . python-bandit))
+
+(flycheck-define-checker python-vulture
+  "A Python dead code finder using vulture."
+  :command ("vulture"
+            (eval (unless netrom-python--vulture-config netrom-python-vulture-defaults))
+            source-original)
+  :predicate flycheck-buffer-saved-p
+  ;; vulture reads pyproject.toml from the folder it runs in.
+  :working-directory (lambda (checker)
+                       (if netrom-python--vulture-config
+                           (file-name-directory netrom-python--vulture-config)
+                         (flycheck-python-find-project-root checker)))
+  :error-patterns ((warning line-start (file-name) ":" line ": " (message) line-end))
+  :modes (python-mode python-ts-mode))
+
+(flycheck-add-next-checker 'python-bandit '(t . python-vulture))
 
 ;; Requires Rust to be installed locally: install rustup
 (use-package flycheck-rust
