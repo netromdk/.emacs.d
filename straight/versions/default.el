@@ -47,7 +47,6 @@
  ("flx" . "be738f439fa779c5a5def44569202d2d7c6b0547")
  ("flycheck" . "246857406d3f1b95fe96b8822928599b0295acca")
  ("flycheck-inline" . "ac651c6b3101c32eb615d454a4214c4fbd9e1260")
- ("flycheck-pycheckers" . "de546e52ceb3147da9688c428f7243e6d98af507")
  ("flycheck-rust" . "42a63a9ec969d77f5c56e101833546e1afb0d884")
  ("flyspell-lazy" . "0fc5996bcee20b46cbd227ae948d343c3bef7339")
  ("frame-local" . "7ee1106c3bcd4022f48421f8cb1ef4f995da816e")
