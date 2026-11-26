@@ -1264,7 +1264,7 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 ;; always wins, and the defaults below are only passed when the project has none for it.
 ;;
 ;; Requires local dependencies:
-;;   pip install flake8 pylint
+;;   pip install flake8 pylint bandit
 (defconst netrom-python-flake8-defaults
   '("--max-line-length=100"
     "--extend-ignore=E111,E114,E121,E126,E127,E221,E241,E302,E305,W503,W504")
@@ -1276,7 +1276,13 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
     "--disable=C0103,C0114,C0115,C0116,C0411,C0413,E1101,R0801,R0903,R0904,R0914,W0201,W0511")
   "pylint arguments for projects without a pylint config.")
 
-(defconst netrom-python--linters '(python-flake8 python-pylint)
+(defconst netrom-python-bandit-defaults '("--skip" "B101")
+  "bandit arguments for projects without a bandit config.")
+
+(defvar-local netrom-python--bandit-args nil
+  "bandit arguments for the current buffer, set by `netrom-python--setup-linters'.")
+
+(defconst netrom-python--linters '(python-flake8 python-pylint python-bandit)
   "Python checkers that are turned off in read-only buffers.")
 
 (defun netrom-python--project-config (candidates)
@@ -1321,7 +1327,15 @@ xref."
                          ("tox.ini" . "^\\[pylint")))))
         (setq-local flycheck-pylint-config config)
       (setq-local flycheck-pylint-config nil
-                  flycheck-pylint-args netrom-python-pylint-defaults))))
+                  flycheck-pylint-args netrom-python-pylint-defaults))
+    (let ((config (netrom-python--project-config
+                   '((".bandit")
+                     ("pyproject.toml" . "^\\[tool\\.bandit\\]")))))
+      (setq-local netrom-python--bandit-args
+                  (cond ((null config) netrom-python-bandit-defaults)
+                        ((string= (file-name-nondirectory config) ".bandit")
+                         (list "--ini" config))
+                        (t (list "--configfile" config)))))))
 
 (add-hook 'python-base-mode-hook #'netrom-python--setup-linters)
 
@@ -1330,6 +1344,22 @@ xref."
   (flycheck-add-next-checker 'lsp '(t . python-flake8) t))
 
 (flycheck-add-next-checker 'python-flake8 '(t . python-pylint))
+
+(flycheck-define-checker python-bandit
+  "A Python security checker using bandit."
+  :command ("bandit" "--quiet" "--format" "custom"
+            "--msg-template" "{line}: {test_id} {severity}: {msg}"
+            (eval netrom-python--bandit-args)
+            "-")
+  :standard-input t
+  :working-directory flycheck-python-find-project-root
+  :error-patterns
+  ((error line-start line ": " (id "B" (one-or-more digit)) " HIGH: " (message) line-end)
+   (warning line-start line ": " (id "B" (one-or-more digit)) " " (or "MEDIUM" "LOW") ": "
+            (message) line-end))
+  :modes (python-mode python-ts-mode))
+
+(flycheck-add-next-checker 'python-pylint '(t . python-bandit))
 
 ;; Requires Rust to be installed locally: install rustup
 (use-package flycheck-rust
