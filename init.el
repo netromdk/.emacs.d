@@ -1258,10 +1258,7 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
         flycheck-pycheckers-max-line-length 100
         flycheck-pycheckers-multi-thread "true")
 
-  (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup)
-
-  ;; Ensure that the correct python checker is chosen.
-  (add-hook 'python-mode-hook (lambda () (flycheck-select-checker 'python-pycheckers))))
+  (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 
 ;; Requires Rust to be installed locally: install rustup
 (use-package flycheck-rust
