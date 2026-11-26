@@ -1264,13 +1264,19 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 ;; always wins, and the defaults below are only passed when the project has none for it.
 ;;
 ;; Requires local dependencies:
-;;   pip install flake8
+;;   pip install flake8 pylint
 (defconst netrom-python-flake8-defaults
   '("--max-line-length=100"
     "--extend-ignore=E111,E114,E121,E126,E127,E221,E241,E302,E305,W503,W504")
   "flake8 arguments for projects without a flake8 config.")
 
-(defconst netrom-python--linters '(python-flake8)
+(defconst netrom-python-pylint-defaults
+  '("--max-line-length=100"
+    "--indent-string='  '"
+    "--disable=C0103,C0114,C0115,C0116,C0411,C0413,E1101,R0801,R0903,R0904,R0914,W0201,W0511")
+  "pylint arguments for projects without a pylint config.")
+
+(defconst netrom-python--linters '(python-flake8 python-pylint)
   "Python checkers that are turned off in read-only buffers.")
 
 (defun netrom-python--project-config (candidates)
@@ -1306,13 +1312,24 @@ xref."
              '((".flake8")
                ("setup.cfg" . "^\\[flake8\\]")
                ("tox.ini" . "^\\[flake8\\]")))
-      (setq-local flycheck-flake8-args netrom-python-flake8-defaults))))
+      (setq-local flycheck-flake8-args netrom-python-flake8-defaults))
+    (if-let* ((config (netrom-python--project-config
+                       '(("pylintrc")
+                         (".pylintrc")
+                         ("pyproject.toml" . "^\\[tool\\.pylint")
+                         ("setup.cfg" . "^\\[pylint\\.")
+                         ("tox.ini" . "^\\[pylint")))))
+        (setq-local flycheck-pylint-config config)
+      (setq-local flycheck-pylint-config nil
+                  flycheck-pylint-args netrom-python-pylint-defaults))))
 
 (add-hook 'python-base-mode-hook #'netrom-python--setup-linters)
 
 (with-eval-after-load 'lsp-diagnostics
   (lsp-diagnostics-lsp-checker-if-needed)
   (flycheck-add-next-checker 'lsp '(t . python-flake8) t))
+
+(flycheck-add-next-checker 'python-flake8 '(t . python-pylint))
 
 ;; Requires Rust to be installed locally: install rustup
 (use-package flycheck-rust
