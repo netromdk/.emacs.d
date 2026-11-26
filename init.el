@@ -1260,6 +1260,60 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
   (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 
+;; Python linters run one after the other, after the lsp checker. A project's own config for a tool
+;; always wins, and the defaults below are only passed when the project has none for it.
+;;
+;; Requires local dependencies:
+;;   pip install flake8
+(defconst netrom-python-flake8-defaults
+  '("--max-line-length=100"
+    "--extend-ignore=E111,E114,E121,E126,E127,E221,E241,E302,E305,W503,W504")
+  "flake8 arguments for projects without a flake8 config.")
+
+(defconst netrom-python--linters '(python-flake8)
+  "Python checkers that are turned off in read-only buffers.")
+
+(defun netrom-python--project-config (candidates)
+  "Return the nearest config file above the buffer's file that matches
+CANDIDATES, or nil. Each candidate is (FILE . SECTION). FILE matches
+when it exists and, if SECTION is a regexp, contains a match for it."
+  (when buffer-file-name
+    (let ((found nil))
+      (locate-dominating-file
+       buffer-file-name
+       (lambda (dir)
+         (setq found
+               (seq-some
+                (lambda (candidate)
+                  (let ((file (expand-file-name (car candidate) dir)))
+                    (and (file-regular-p file)
+                         (or (null (cdr candidate))
+                             (with-temp-buffer
+                               (insert-file-contents file)
+                               (re-search-forward (cdr candidate) nil t)))
+                         file)))
+                candidates))))
+      found)))
+
+(defun netrom-python--setup-linters ()
+  "Give each Python linter the project's config, or the defaults when the
+project has none. Do not fix read-only files, like those opened through
+xref."
+  (if (and buffer-file-name (not (file-writable-p buffer-file-name)))
+      (setq-local flycheck-disabled-checkers
+                  (append netrom-python--linters flycheck-disabled-checkers))
+    (unless (netrom-python--project-config
+             '((".flake8")
+               ("setup.cfg" . "^\\[flake8\\]")
+               ("tox.ini" . "^\\[flake8\\]")))
+      (setq-local flycheck-flake8-args netrom-python-flake8-defaults))))
+
+(add-hook 'python-base-mode-hook #'netrom-python--setup-linters)
+
+(with-eval-after-load 'lsp-diagnostics
+  (lsp-diagnostics-lsp-checker-if-needed)
+  (flycheck-add-next-checker 'lsp '(t . python-flake8) t))
+
 ;; Requires Rust to be installed locally: install rustup
 (use-package flycheck-rust
   :requires flycheck
@@ -1314,6 +1368,11 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
         ;; Black is not used, so pylsp must never format with it.
         lsp-pylsp-plugins-black-enabled nil
+
+        ;; flycheck runs flake8 after the lsp checker with the project's config, and mccabe is not
+        ;; wanted.
+        lsp-pylsp-plugins-flake8-enabled nil
+        lsp-pylsp-plugins-mccabe-enabled nil
 
         ;; Read language server output in larger chunks.
         read-process-output-max (* 1024 1024))
