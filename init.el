@@ -1392,8 +1392,8 @@ xref."
 ;; 2. rustup component add rls rust-analysis rust-src
 ;;
 ;; == Python ==
-;; Requires python-language-server:
-;;   pip install python-language-server
+;; Requires python-lsp-server (pylsp):
+;;   pip install python-lsp-server
 ;;
 ;; == PHP ==
 ;; Requires the php-language-server that is bundled with the emacs config, and was installed like
