@@ -1236,29 +1236,12 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
   :hook (flycheck-mode . flycheck-inline-mode))
 
 ;; NOTE: On Windows, it is important to have `python3.exe' in PATH and not only `python.exe'!
-;; Otherwise, flycheck will not detect pycheckers properly.
+;; Otherwise, flycheck cannot run flake8 and pylint, which it starts through python3.
 (when (eq window-system 'w32)
   (let ((p (executable-find "python"))
         (p3 (executable-find "python3")))
     (when (and p (not p3))
       (error "python.exe found but not python3.exe!\npython.exe is located at: %s" p))))
-
-;; Requires local dependencies:
-;;   pip install flake8 bandit
-(use-package flycheck-pycheckers
-  :config
-  (setq flycheck-pycheckers-checkers '(flake8 bandit)
-        flycheck-pycheckers-ignore-codes
-        '("C0411" "C0413" "C0103" "C0111" "W0142" "W0201" "W0232" "W0403" "W0511" "E1002" "E1101"
-          "E1103" "R0201" "R0801" "R0903" "R0904" "R0914" "W503" "W504"
-          ;; flake8
-          "E111" "E114" "E121" "E126" "E127" "E221" "E241" "E302" "E305"
-          ;; bandit
-          "B101" "B322")
-        flycheck-pycheckers-max-line-length 100
-        flycheck-pycheckers-multi-thread "true")
-
-  (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 
 ;; Python linters run one after the other, after the lsp checker. A project's own config for a tool
 ;; always wins, and the defaults below are only passed when the project has none for it.
