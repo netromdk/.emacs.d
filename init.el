@@ -903,7 +903,11 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
 
 ;; Python
 (require 'python)
-(setq python-indent-offset 2)
+(setq python-indent-offset 2
+
+      ;; Fall back to the offset above without showing the message:
+      ;;   "Can't guess python-indent-offset, using defaults: 2"
+      python-indent-guess-indent-offset-verbose nil)
 
 ;; Marks TODO, FIXME etc. clearly.
 (use-package fic-mode
