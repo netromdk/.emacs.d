@@ -1312,6 +1312,9 @@ wrong buffer. Here `compilation-find-buffer' uses non-nil
         ;; doom-modeline already shows flycheck's counts.
         lsp-modeline-diagnostics-enable nil
 
+        ;; Black is not used, so pylsp must never format with it.
+        lsp-pylsp-plugins-black-enabled nil
+
         ;; Read language server output in larger chunks.
         read-process-output-max (* 1024 1024))
 
@@ -1359,6 +1362,10 @@ A compile_commands.json in ROOT itself wins, since clangd finds it without help.
   (add-hook 'rust-mode-hook #'lsp)
   (add-hook 'python-mode-hook #'lsp)
   (add-hook 'php-mode-hook #'lsp)
+
+  ;; Let `python-mode' indent regions instead of pylsp, whose formatting runs any installed
+  ;; formatter, like Black that I do not use.
+  (add-hook 'python-base-mode-hook (lambda () (setq-local lsp-enable-indentation nil)))
 
   (setq netrom--general-lsp-hydra-heads
         '(;; Xref
