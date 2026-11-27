@@ -3,6 +3,10 @@
 ;; Prevent package.el loading packages prior to their init-file loading.
 (setq package-enable-at-startup nil)
 
+;; Makes lsp-mode parse server messages into plists instead of hash tables, which allocates less
+;; memory.
+(setenv "LSP_USE_PLISTS" "true")
+
 ;; Speed up loading by disabling garbage collection and removing file name handlers until
 ;; finished. The handlers hold a lot of regexps that are not needed while loading.
 (defvar --file-name-handler-alist-old file-name-handler-alist)
