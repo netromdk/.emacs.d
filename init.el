@@ -566,7 +566,15 @@ Command: %(netrom/compilation-command-string)
 (use-package company-flx
   :requires company
   :config
-  (company-flx-mode +1))
+  (company-flx-mode +1)
+
+  ;; clangd and pylsp rank their candidates already, so keep their order in LSP buffers.
+  (defun netrom--company-flx-off-in-lsp ()
+    (if lsp-completion-mode
+        (setq-local company-transformers
+                    (remq #'company-flx-transformer company-transformers))
+      (kill-local-variable 'company-transformers)))
+  (add-hook 'lsp-completion-mode-hook #'netrom--company-flx-off-in-lsp))
 
 ;;;;; Development ;;;;;
 
