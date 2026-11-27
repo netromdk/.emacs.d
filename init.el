@@ -1528,7 +1528,7 @@ A compile_commands.json in ROOT itself wins, since clangd finds it without help.
             (lambda () (local-set-key (kbd "C-c C-l") 'netrom/lsp-hydra/body))))
 
 (use-package lsp-ui
-  :requires lsp-mode flycheck
+  :after (lsp-mode flycheck)
   :config
 
   (setq lsp-ui-doc-enable nil
